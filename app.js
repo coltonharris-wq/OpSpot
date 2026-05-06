@@ -71,16 +71,6 @@ const ICONS = {
     });
   });
 
-  const netUrl = document.querySelector('#numbers .audit-chrome .url');
-  if (netUrl) {
-    const start = Date.now() - 2 * 60 * 1000;
-    const tick = () => {
-      const ago = Math.max(1, Math.round((Date.now() - start) / 60000));
-      netUrl.textContent = `opspot.ai/network · last updated ${ago} min ago`;
-    };
-    tick();
-    setInterval(tick, 30000);
-  }
 
   const backTop = document.querySelector('.back-top');
   if (backTop) {
@@ -309,17 +299,16 @@ const ICONS = {
 
 (function () {
   const items = [
-    { q: "We stopped losing leads at 6pm. Maya picks up everything that hits the website after-hours.", who: "Dana M.", role: "Owner · Northbeam HVAC", a: "DM", photo: "https://i.pravatar.cc/160?img=47", stat: "VERIFIED · $8,400/mo recovered · 8 mos" },
-    { q: "I used to chase quotes on Sundays. Theo just… does it. We closed three deals last week I'd have forgotten.", who: "Luis R.", role: "GM · Ridgeline Plumbing", a: "LR", photo: "https://i.pravatar.cc/160?img=53", stat: "VERIFIED · 3× close rate · 14 mos" },
-    { q: "August's Friday memo is the best management hire I've ever made and it's not a person.", who: "Priya K.", role: "Founder · Cedar & Stone", a: "PK", photo: "https://i.pravatar.cc/160?img=44", stat: "VERIFIED · 6.4 hrs/wk back · 6 mos" },
+    { q: "Maya picks up everything that hits the site after 6pm. Owner reads the morning summary in two minutes — no missed leads.", scenario: "After-hours intake", role: "HVAC / plumbing shop", stat: "EXAMPLE · what after-hours looks like once Maya's running" },
+    { q: "Theo runs the day-3 / day-7 / day-14 follow-up on every quote. Owner approves outliers, the rest go automatically.", scenario: "Quote follow-up loop", role: "Estimator-heavy shops", stat: "EXAMPLE · what quote chasing looks like with Theo" },
+    { q: "August reads the week and sends one page on Friday: dollars saved, hours back, what to fix next. Owner reads it over coffee.", scenario: "Friday memo", role: "Any service shop with leakage", stat: "EXAMPLE · what the Friday memo looks like" },
   ];
   document.getElementById('testiGrid').innerHTML = items.map(t => `
     <div class="testi">
       <div class="testi-stat">${t.stat}</div>
       <div class="quote">"${t.q}"</div>
       <div class="who">
-        <div class="ava" style="background-image:url('${t.photo}')" aria-label="${t.who}">${t.a}</div>
-        <div><strong>${t.who}</strong><small>${t.role}</small></div>
+        <div><strong>${t.scenario}</strong><small>${t.role}</small></div>
       </div>
     </div>
   `).join('');

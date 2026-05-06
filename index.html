@@ -850,30 +850,10 @@
       0 30px 70px -32px color-mix(in oklch, var(--accent) 35%, transparent);
   }
 
-  .testi {
-    --bg: #14110c;
-    --bg-2: #1a160f;
-    --bg-3: #2a2218;
-    --line: #2a2218;
-    --line-2: #3a3024;
-    --ink: #f5f0e6;
-    --ink-2: #cfc7b8;
-    --ink-3: #8b806b;
-    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
-    border-color: #2a2218;
-    color: var(--ink);
-    position: relative;
-  }
-  .testi .quote { color: var(--ink); }
-  .testi .who strong { color: var(--ink); }
-  .testi .who small { color: var(--ink-3); }
-  .testi .ava {
-    border-color: #2a2218;
-    background-color: var(--bg-3);
-  }
+  .testi { position: relative; }
   .testi .testi-stat {
-    font-family: var(--mono); font-size: 10px; color: var(--accent);
-    background: rgba(217,119,87,0.16);
+    font-family: var(--mono); font-size: 10px; color: var(--accent-ink);
+    background: var(--accent-soft);
     padding: 4px 9px; border-radius: 5px;
     letter-spacing: 0.12em;
     display: inline-flex; align-items: center; gap: 7px;
@@ -881,7 +861,7 @@
   }
   .testi .testi-stat::before {
     content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--accent);
-    box-shadow: 0 0 0 2px rgba(217,119,87,0.3);
+    box-shadow: 0 0 0 2px var(--accent-soft);
     flex-shrink: 0;
   }
   .emp-card .num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.1em; }
@@ -979,21 +959,9 @@
   .faq details[open] summary::after { content: "–"; color: var(--accent); }
   .faq .ans { padding: 0 0 1rem; color: var(--ink-2); font-size: 14.5px; max-width: 640px; }
 
-  .faq details {
-    --bg: #14110c;
-    --bg-2: #1a160f;
-    --line: #2a2218;
-    --ink: #f5f0e6;
-    --ink-2: #cfc7b8;
-    --ink-3: #8b806b;
-    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
-    border-color: #2a2218;
-    color: var(--ink);
-  }
-  .faq summary { color: var(--ink); }
   .faq summary .q-num {
-    font-family: var(--mono); font-size: 10px; color: var(--accent);
-    background: rgba(217,119,87,0.16);
+    font-family: var(--mono); font-size: 10px; color: var(--accent-ink);
+    background: var(--accent-soft);
     padding: 4px 9px; border-radius: 5px;
     letter-spacing: 0.12em;
     flex-shrink: 0;
@@ -1001,13 +969,11 @@
   }
   .faq summary .q-num::before {
     content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--accent);
-    box-shadow: 0 0 0 2px rgba(217,119,87,0.3);
+    box-shadow: 0 0 0 2px var(--accent-soft);
   }
   .faq details[open] {
-    border-color: rgba(217,119,87,0.35);
-    box-shadow:
-      0 18px 40px -22px rgba(20,15,5,0.5),
-      0 30px 70px -32px color-mix(in oklch, var(--accent) 28%, transparent);
+    border-color: color-mix(in oklch, var(--accent) 35%, transparent);
+    box-shadow: 0 18px 40px -22px rgba(20,30,50,.12);
   }
 
   .faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
@@ -1307,6 +1273,117 @@
   }
   .testi .ava.no-photo { color: var(--ink); text-shadow: none; }
 
+  .hiw-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 900px) { .hiw-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .hiw-grid { grid-template-columns: 1fr; } }
+  .hiw {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    position: relative;
+  }
+  .hiw:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-2);
+    box-shadow: 0 18px 40px -22px rgba(20,30,50,.15);
+  }
+  .hiw-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent-ink);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .hiw h3 {
+    font-family: var(--display); font-size: 26px;
+    margin: 0.4rem 0 0.5rem;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .hiw p { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+
+  .spine-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 0.85rem; align-items: stretch;
+  }
+  .spine-step {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.4rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .spine-step:hover { transform: translateY(-2px); border-color: var(--line-2); }
+  .spine-num {
+    font-family: var(--mono); font-size: 11px; color: var(--accent-ink);
+    letter-spacing: 0.14em;
+  }
+  .spine-step h4 {
+    font-family: var(--display); font-size: 24px;
+    margin: 0.3rem 0 0.4rem; line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .spine-step p { font-size: 14px; color: var(--ink-2); margin: 0; line-height: 1.5; }
+  .spine-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: var(--ink-3);
+    font-family: var(--mono);
+  }
+  @media (max-width: 900px) {
+    .spine-row { grid-template-columns: 1fr; gap: 0.6rem; }
+    .spine-arrow { transform: rotate(90deg); justify-self: center; padding: 0.2rem 0; }
+  }
+
+  .founder-card {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 2.8rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .founder-card::before {
+    content: ""; position: absolute;
+    inset: -25% -25% auto auto;
+    width: 460px; height: 460px;
+    background: radial-gradient(circle, color-mix(in oklch, var(--accent) 14%, transparent), transparent 65%);
+    pointer-events: none;
+  }
+  .founder-avatar {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: var(--ink); color: var(--bg);
+    display: grid; place-items: center;
+    font-family: var(--display); font-size: 44px;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+    border: 3px solid var(--bg);
+    box-shadow: 0 8px 24px -10px rgba(20,30,50,.18);
+  }
+  .founder-body { flex: 1; position: relative; z-index: 1; }
+  .founder-body h2 {
+    font-size: clamp(34px, 4.2vw, 50px);
+    margin: 0.5rem 0 1rem;
+    line-height: 1.05;
+  }
+  .founder-body p {
+    font-size: 17px; color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 580px;
+  }
+  @media (max-width: 700px) {
+    .founder-card { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; align-items: flex-start; }
+    .founder-avatar { width: 84px; height: 84px; font-size: 32px; }
+  }
+
   @media (max-width: 900px) {
     .nav .nav-inner > nav { display: none; }
     .nav .nav-inner > div:last-child .btn-ghost { display: none; }
@@ -1411,15 +1488,15 @@
       <span>OpSpot<span style="color:var(--ink-3)">.ai</span></span>
     </div>
     <nav style="display:flex; gap:0.25rem;">
+      <a class="link" href="#how">How it works</a>
       <a class="link" href="#employees">AI employees</a>
-      <a class="link" href="#features">Features</a>
       <a class="link" href="#audit">Friday memo</a>
-      <a class="link" href="#testimonials">Customers</a>
+      <a class="link" href="#founder">Founder</a>
       <a class="link" href="#faq">FAQ</a>
     </nav>
     <div style="display:flex; gap:0.5rem; align-items:center;">
       <a class="btn btn-ghost" href="#" style="padding:0.5rem 0.9rem;">Sign in</a>
-      <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener" style="padding:0.55rem 1rem;">Book a walkthrough →</a>
+      <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener" style="padding:0.55rem 1rem;">Book an AI ops audit →</a>
     </div>
   </div>
 </header>
@@ -1438,8 +1515,8 @@
       </h1>
       <p class="lede">OpSpot drops AI employees into your shop — answering customers, chasing leads, filing job docs, and finding what to automate next.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book a walkthrough <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#employees">Meet the team</a>
+        <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book an AI ops audit <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Or email Colton</a>
       </div>
       <div class="hero-meta">
         <span><strong>4.9★</strong> · ops teams running it</span>
@@ -1501,7 +1578,7 @@
 
 <section class="logos">
   <div class="container">
-    <div class="eyebrow" style="text-align:center; margin-bottom: 1.5rem;">Trusted by independent operators across North America</div>
+    <div class="eyebrow" style="text-align:center; margin-bottom: 1.5rem;">Built for shops like these — HVAC, plumbing, roofing, landscape, electric</div>
     <div class="logos-row">
       <div class="logo-pill">
         <div class="glyph-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M3 12h18M7 7l10 10M17 7L7 17"/></svg></div>
@@ -1526,6 +1603,38 @@
       <div class="logo-pill">
         <div class="glyph-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-3 3-6-6 3-3zM10 7L4 13l6 6 6-6"/></svg></div>
         Anvil &amp; Co.<small>hardware</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2 class="display">Spot → Build → Run → Report.</h2>
+      <p>One short loop. You stay in it.</p>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw">
+        <div class="hiw-num">01 · Spot</div>
+        <h3>30-min audit</h3>
+        <p>I pull up your phone logs, inbox, and calendar with you. We find what's leaking — calls missed at 6pm, quotes ghosting, photos lost in texts.</p>
+      </div>
+      <div class="hiw">
+        <div class="hiw-num">02 · Build</div>
+        <h3>One worker, one bottleneck</h3>
+        <p>I design the right AI employee for the leak. Trained on your services, your prices, the way your team actually talks. No template.</p>
+      </div>
+      <div class="hiw">
+        <div class="hiw-num">03 · Run</div>
+        <h3>Installed live</h3>
+        <p>Goes live alongside your team. You see every reply. Anger, ambiguity, dollars over a threshold — straight to your phone.</p>
+      </div>
+      <div class="hiw">
+        <div class="hiw-num">04 · Report</div>
+        <h3>Friday memo</h3>
+        <p>One page in your inbox each Friday: dollars saved, hours reclaimed, what's stuck, what to automate next.</p>
       </div>
     </div>
   </div>
@@ -1565,15 +1674,15 @@
   <div class="section-flare sf-aud-1"></div>
   <div class="container">
     <div class="section-head">
-      <div class="eyebrow">Friday memo</div>
+      <div class="eyebrow">Friday memo · example</div>
       <h2 class="display">Where your hours went.<br/>What to automate next.</h2>
-      <p>August reads every text, missed call, calendar slot, and invoice from the week, then writes you a one-page memo. No graphs. Just dollars and hours.</p>
+      <p>Every Friday, OpSpot reads the week — texts, missed calls, calendar slots, invoices — and writes a one-page memo. No graphs. Just dollars and hours. Sample below.</p>
     </div>
     <div class="audit-frame">
       <div class="audit-chrome">
         <div class="dots"><span></span><span></span><span></span></div>
-        <div class="url">opspot.ai/memo · Northbeam HVAC · week of Apr 28</div>
-        <div class="pill-live">LIVE SCAN</div>
+        <div class="url">opspot.ai/memo · example client · week of Apr 28</div>
+        <div class="pill-live">EXAMPLE</div>
       </div>
       <div class="audit-summary">
         <div class="metric">
@@ -1642,15 +1751,15 @@
   <div class="section-flare sf-num-1"></div>
   <div class="container">
     <div class="section-head">
-      <div class="eyebrow">Across the network</div>
-      <h2 class="display">Live, across every shop running it.</h2>
-      <p>Numbers pulled from teams who opted in. Refreshed every couple minutes.</p>
+      <div class="eyebrow">Example dashboard</div>
+      <h2 class="display">What your weekly view will look like.</h2>
+      <p>This is the network-level dashboard a few months in. Numbers below are example, not real customer data.</p>
     </div>
     <div class="audit-frame">
       <div class="audit-chrome">
         <div class="dots"><span></span><span></span><span></span></div>
-        <div class="url">opspot.ai/network · last updated 2 min ago</div>
-        <div class="pill-live">LIVE</div>
+        <div class="url">opspot.ai/network · example view</div>
+        <div class="pill-live">EXAMPLE</div>
       </div>
       <div class="audit-summary numbers-summary">
         <div class="metric">
@@ -1678,11 +1787,64 @@
   </div>
 </section>
 
+<section class="section" id="spine">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Command spine</div>
+      <h2 class="display">Every job runs through this loop.<br/>No black box.</h2>
+      <p>Lead → Brief → Approval → Receipt. Every step visible to you.</p>
+    </div>
+    <div class="spine-row">
+      <div class="spine-step">
+        <div class="spine-num">01 · Intake</div>
+        <h4>A customer pings</h4>
+        <p>Text, missed call, web form, email. OpSpot logs it the second it lands.</p>
+      </div>
+      <div class="spine-arrow" aria-hidden="true">→</div>
+      <div class="spine-step">
+        <div class="spine-num">02 · Brief</div>
+        <h4>Worker writes a plan</h4>
+        <p>One line: "Quote tankless install for Carter, propose Friday 2pm." You can read it before anything goes out.</p>
+      </div>
+      <div class="spine-arrow" aria-hidden="true">→</div>
+      <div class="spine-step">
+        <div class="spine-num">03 · Approval</div>
+        <h4>You tap yes</h4>
+        <p>Or auto-approve under rules you set — known customer, under $X, your standard scopes. Outliers always come to you.</p>
+      </div>
+      <div class="spine-arrow" aria-hidden="true">→</div>
+      <div class="spine-step">
+        <div class="spine-num">04 · Receipt</div>
+        <h4>Proof in your phone</h4>
+        <p>Reply goes out. Status pings your phone. File goes to the right job. Calendar updates. Nothing happens off-camera.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="founder">
+  <div class="container">
+    <div class="founder-card">
+      <div class="founder-avatar" aria-hidden="true">CH</div>
+      <div class="founder-body">
+        <div class="eyebrow">Founder-operated</div>
+        <h2 class="display">Built and run by Colton.</h2>
+        <p>OpSpot isn't a SaaS company — it's me, in Wilmington, NC. I do the audit, design the worker, install it, and watch every approval. Human gates, real handoffs, receipts in your inbox. If something breaks, you're texting me, not a help desk.</p>
+        <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:1.4rem;">
+          <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book the audit →</a>
+          <a class="btn btn-ghost" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Email me directly</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="testimonials">
   <div class="container">
     <div class="section-head">
-      <div class="eyebrow">Customers</div>
-      <h2 class="display">From "drowning in texts" to "I get my evenings back."</h2>
+      <div class="eyebrow">Example workflows</div>
+      <h2 class="display">What "employees that show up" looks like in a real shop.</h2>
+      <p style="color:var(--ink-2); font-size: 16px;">These are example scenarios from how typical builds run — not real customer quotes yet. We tell you what's real and what's not.</p>
     </div>
     <div class="testi-grid" id="testiGrid"></div>
   </div>
@@ -1705,16 +1867,16 @@
     <h2 class="display">Hire your first <em>AI employee</em><br/>before lunch.</h2>
     <p>30-minute walkthrough. We'll audit your ops, install one role on the spot, and you'll see your first reply go out before we hang up.</p>
     <div class="cta-live-strip">
-      <div class="live-tag">LIVE NOW</div>
+      <div class="live-tag">HOW IT WORKS</div>
       <div class="stats">
-        <div><span class="num">142</span>ops teams running</div>
-        <div><span class="num">31</span>onboarding this week</div>
-        <div><span class="num">4</span>walkthroughs in the next hour</div>
+        <div><span class="num">30</span>min audit on a Zoom</div>
+        <div><span class="num">1</span>worker live the same week</div>
+        <div><span class="num">0</span>black-box automation</div>
       </div>
     </div>
     <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
-      <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book a walkthrough →</a>
-      <a class="btn btn-ghost" href="#">Watch a 90-second tour</a>
+      <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book an AI ops audit →</a>
+      <a class="btn btn-ghost" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Or email Colton directly</a>
     </div>
     <div class="footer-row">
       <div>
@@ -1745,7 +1907,7 @@
 </section>
 
 <div class="mobile-cta-bar">
-  <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book a walkthrough →</a>
+  <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book an AI ops audit →</a>
 </div>
 <a class="back-top" href="#main" aria-label="Back to top">↑</a>
 
