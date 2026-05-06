@@ -58,7 +58,7 @@ const ICONS = {
     updateNav();
   }
 
-  document.querySelectorAll('.bento .tile').forEach(tile => {
+  document.querySelectorAll('.bento .tile, .hiw').forEach(tile => {
     let traf = 0;
     tile.addEventListener('pointermove', (e) => {
       if (traf) return;

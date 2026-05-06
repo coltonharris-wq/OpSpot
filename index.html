@@ -597,11 +597,18 @@
   }
   .logos-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; align-items: stretch; }
   .logo-pill {
+    --bg: #14110c;
+    --bg-2: #1a160f;
+    --line: #2a2218;
+    --line-2: #3a3024;
+    --ink: #f5f0e6;
+    --ink-2: #cfc7b8;
+    --ink-3: #8b806b;
     font-family: var(--display); font-size: 18px; color: var(--ink-2);
     text-align: center; letter-spacing: -0.01em;
     padding: 1.1rem 0.6rem 1rem;
-    background: var(--bg);
-    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
+    border: 1px solid #2a2218;
     border-radius: 14px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
@@ -611,15 +618,22 @@
   }
   .logo-pill::after {
     content: ""; position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 100%, color-mix(in oklch, var(--accent) 14%, transparent), transparent 60%);
+    background: radial-gradient(circle at 50% 100%, color-mix(in oklch, var(--accent) 22%, transparent), transparent 60%);
     opacity: 0; transition: opacity .3s ease; pointer-events: none;
   }
   .logo-pill:hover {
     transform: translateY(-2px);
-    border-color: var(--line-2);
-    box-shadow: 0 12px 28px -16px rgba(20,30,50,.18);
+    border-color: #3a3024;
+    box-shadow:
+      0 12px 28px -16px rgba(20,15,5,0.5),
+      0 30px 70px -32px color-mix(in oklch, var(--accent) 30%, transparent);
   }
   .logo-pill:hover::after { opacity: 1; }
+  .logo-pill .glyph-box {
+    background: rgba(255,255,255,0.04);
+    border-color: #2a2218;
+    color: var(--accent);
+  }
   .logo-pill small {
     font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em;
     display: block; text-transform: uppercase; color: var(--ink-3); margin-top: 0.3rem;
@@ -850,10 +864,26 @@
       0 30px 70px -32px color-mix(in oklch, var(--accent) 35%, transparent);
   }
 
-  .testi { position: relative; }
+  .testi {
+    --bg: #14110c;
+    --bg-2: #1a160f;
+    --bg-3: #2a2218;
+    --line: #2a2218;
+    --line-2: #3a3024;
+    --ink: #f5f0e6;
+    --ink-2: #cfc7b8;
+    --ink-3: #8b806b;
+    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
+    border-color: #2a2218;
+    color: var(--ink);
+    position: relative;
+  }
+  .testi .quote { color: var(--ink); }
+  .testi .who strong { color: var(--ink); }
+  .testi .who small { color: var(--ink-3); }
   .testi .testi-stat {
-    font-family: var(--mono); font-size: 10px; color: var(--accent-ink);
-    background: var(--accent-soft);
+    font-family: var(--mono); font-size: 10px; color: var(--accent);
+    background: rgba(217,119,87,0.16);
     padding: 4px 9px; border-radius: 5px;
     letter-spacing: 0.12em;
     display: inline-flex; align-items: center; gap: 7px;
@@ -861,7 +891,7 @@
   }
   .testi .testi-stat::before {
     content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-soft);
+    box-shadow: 0 0 0 2px rgba(217,119,87,0.3);
     flex-shrink: 0;
   }
   .emp-card .num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.1em; }
@@ -959,9 +989,21 @@
   .faq details[open] summary::after { content: "–"; color: var(--accent); }
   .faq .ans { padding: 0 0 1rem; color: var(--ink-2); font-size: 14.5px; max-width: 640px; }
 
+  .faq details {
+    --bg: #14110c;
+    --bg-2: #1a160f;
+    --line: #2a2218;
+    --ink: #f5f0e6;
+    --ink-2: #cfc7b8;
+    --ink-3: #8b806b;
+    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
+    border-color: #2a2218;
+    color: var(--ink);
+  }
+  .faq summary { color: var(--ink); }
   .faq summary .q-num {
-    font-family: var(--mono); font-size: 10px; color: var(--accent-ink);
-    background: var(--accent-soft);
+    font-family: var(--mono); font-size: 10px; color: var(--accent);
+    background: rgba(217,119,87,0.16);
     padding: 4px 9px; border-radius: 5px;
     letter-spacing: 0.12em;
     flex-shrink: 0;
@@ -969,11 +1011,13 @@
   }
   .faq summary .q-num::before {
     content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-soft);
+    box-shadow: 0 0 0 2px rgba(217,119,87,0.3);
   }
   .faq details[open] {
-    border-color: color-mix(in oklch, var(--accent) 35%, transparent);
-    box-shadow: 0 18px 40px -22px rgba(20,30,50,.12);
+    border-color: rgba(217,119,87,0.35);
+    box-shadow:
+      0 18px 40px -22px rgba(20,15,5,0.5),
+      0 30px 70px -32px color-mix(in oklch, var(--accent) 28%, transparent);
   }
 
   .faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
@@ -1277,33 +1321,56 @@
   @media (max-width: 900px) { .hiw-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 540px) { .hiw-grid { grid-template-columns: 1fr; } }
   .hiw {
-    background: var(--bg);
-    border: 1px solid var(--line);
+    --bg: #14110c;
+    --bg-2: #1a160f;
+    --bg-3: #2a2218;
+    --line: #2a2218;
+    --line-2: #3a3024;
+    --ink: #f5f0e6;
+    --ink-2: #cfc7b8;
+    --ink-3: #8b806b;
+    --tx: 50%; --ty: 50%;
+    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
+    border: 1px solid #2a2218;
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     display: flex; flex-direction: column; gap: 0.4rem;
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
     position: relative;
+    color: var(--ink);
+    overflow: hidden;
   }
+  .hiw::before {
+    content: ""; position: absolute; inset: 0;
+    pointer-events: none; border-radius: inherit;
+    background: radial-gradient(320px circle at var(--tx) var(--ty), rgba(217, 119, 87, 0.20), transparent 50%);
+    mix-blend-mode: overlay; opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .hiw:hover::before { opacity: 1; }
   .hiw:hover {
     transform: translateY(-2px);
-    border-color: var(--line-2);
-    box-shadow: 0 18px 40px -22px rgba(20,30,50,.15);
+    border-color: #3a3024;
+    box-shadow:
+      0 18px 40px -22px rgba(20,15,5,0.5),
+      0 30px 70px -32px color-mix(in oklch, var(--accent) 32%, transparent);
   }
   .hiw-num {
     font-family: var(--mono); font-size: 11px;
-    color: var(--accent-ink);
+    color: var(--accent);
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    position: relative; z-index: 1;
   }
   .hiw h3 {
     font-family: var(--display); font-size: 26px;
     margin: 0.4rem 0 0.5rem;
     letter-spacing: -0.01em;
     line-height: 1.05;
-    color: var(--ink);
+    color: #fff;
+    position: relative; z-index: 1;
   }
-  .hiw p { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+  .hiw p { font-size: 14.5px; color: var(--ink-2); margin: 0; position: relative; z-index: 1; }
 
   .spine-row {
     display: grid;
@@ -1311,27 +1378,42 @@
     gap: 0.85rem; align-items: stretch;
   }
   .spine-step {
-    background: var(--bg);
-    border: 1px solid var(--line);
+    --bg: #14110c;
+    --bg-2: #1a160f;
+    --line: #2a2218;
+    --line-2: #3a3024;
+    --ink: #f5f0e6;
+    --ink-2: #cfc7b8;
+    --ink-3: #8b806b;
+    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
+    border: 1px solid #2a2218;
     border-radius: var(--radius-lg);
     padding: 1.4rem;
     display: flex; flex-direction: column; gap: 0.4rem;
-    transition: transform .25s ease, border-color .25s ease;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    color: var(--ink);
   }
-  .spine-step:hover { transform: translateY(-2px); border-color: var(--line-2); }
+  .spine-step:hover {
+    transform: translateY(-2px);
+    border-color: #3a3024;
+    box-shadow:
+      0 18px 40px -22px rgba(20,15,5,0.5),
+      0 30px 70px -32px color-mix(in oklch, var(--accent) 32%, transparent);
+  }
   .spine-num {
-    font-family: var(--mono); font-size: 11px; color: var(--accent-ink);
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
     letter-spacing: 0.14em;
   }
   .spine-step h4 {
     font-family: var(--display); font-size: 24px;
     margin: 0.3rem 0 0.4rem; line-height: 1.05;
     letter-spacing: -0.01em;
+    color: #fff;
   }
   .spine-step p { font-size: 14px; color: var(--ink-2); margin: 0; line-height: 1.5; }
   .spine-arrow {
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px; color: var(--ink-3);
+    font-size: 22px; color: var(--accent);
     font-family: var(--mono);
   }
   @media (max-width: 900px) {
@@ -1340,39 +1422,52 @@
   }
 
   .founder-card {
+    --bg: #14110c;
+    --bg-2: #1a160f;
+    --line: #2a2218;
+    --ink: #f5f0e6;
+    --ink-2: #cfc7b8;
+    --ink-3: #8b806b;
     display: flex;
     gap: 2.5rem;
     align-items: center;
-    background: var(--bg);
-    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #1a160f 0%, #14110c 100%);
+    border: 1px solid #2a2218;
     border-radius: var(--radius-lg);
     padding: 2.8rem 3rem;
     position: relative;
     overflow: hidden;
+    color: var(--ink);
+    box-shadow:
+      0 30px 80px -20px rgba(20,15,5,0.45),
+      0 60px 140px -40px color-mix(in oklch, var(--accent) 25%, transparent);
   }
   .founder-card::before {
     content: ""; position: absolute;
     inset: -25% -25% auto auto;
-    width: 460px; height: 460px;
-    background: radial-gradient(circle, color-mix(in oklch, var(--accent) 14%, transparent), transparent 65%);
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, color-mix(in oklch, var(--accent) 26%, transparent), transparent 65%);
     pointer-events: none;
+    filter: blur(20px);
   }
   .founder-avatar {
     width: 120px; height: 120px;
     border-radius: 50%;
-    background: var(--ink); color: var(--bg);
+    background: #000; color: var(--accent);
     display: grid; place-items: center;
     font-family: var(--display); font-size: 44px;
     flex-shrink: 0;
     position: relative; z-index: 1;
-    border: 3px solid var(--bg);
-    box-shadow: 0 8px 24px -10px rgba(20,30,50,.18);
+    border: 1px solid #2a2218;
+    box-shadow: 0 8px 24px -10px rgba(20,15,5,0.5);
   }
   .founder-body { flex: 1; position: relative; z-index: 1; }
+  .founder-body .eyebrow { color: var(--accent); }
   .founder-body h2 {
     font-size: clamp(34px, 4.2vw, 50px);
     margin: 0.5rem 0 1rem;
     line-height: 1.05;
+    color: #fff;
   }
   .founder-body p {
     font-size: 17px; color: var(--ink-2);
