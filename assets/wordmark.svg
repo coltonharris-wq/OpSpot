@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 56" width="320" height="56" role="img" aria-label="Automio">
+  <defs>
+    <linearGradient id="wmG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#bd8aff"/>
+      <stop offset="50%" stop-color="#ff5d8f"/>
+      <stop offset="100%" stop-color="#ffa040"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="40" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="40" letter-spacing="-1.4" fill="#ffffff">automio</text>
+  <circle cx="252" cy="14" r="5" fill="url(#wmG)"/>
+</svg>

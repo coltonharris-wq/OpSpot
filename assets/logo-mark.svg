@@ -1,5 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="OpSpot mark">
-  <rect width="80" height="80" rx="18" fill="#0a0a0a"></rect>
-  <text x="40" y="58" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-weight="400" font-size="48" fill="#fffaf5">o</text>
-  <circle cx="62" cy="20" r="6" fill="#d97757"></circle>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Automio mark">
+  <defs>
+    <linearGradient id="amG" x1="6%" y1="6%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a06bff"/>
+      <stop offset="55%" stop-color="#ff4f8b"/>
+      <stop offset="100%" stop-color="#ff8a3d"/>
+    </linearGradient>
+    <radialGradient id="amSpark" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd9b8" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ff8a3d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="80" height="80" rx="20" fill="#0a0a12"/>
+  <circle cx="58" cy="22" r="22" fill="url(#amSpark)"/>
+  <path d="M40 16 L62 64 L52.6 64 L48.6 54.6 L31.4 54.6 L27.4 64 L18 64 L40 16 Z M35.2 46.4 L44.8 46.4 L40 35.2 Z"
+        fill="url(#amG)"/>
+  <circle cx="62" cy="20" r="3.2" fill="#ffd9b8"/>
 </svg>
