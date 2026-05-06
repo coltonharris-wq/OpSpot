@@ -165,22 +165,43 @@
     .nav-cta .btn-ghost { display: none; }
   }
 
-  /* Hero */
+  /* Hero — Huly aurora */
   .hero {
-    padding: 5rem 0 4.5rem;
+    padding: 6.5rem 0 5rem;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
   }
-  .hero::before {
-    content: ""; position: absolute;
-    top: -10%; right: -8%;
-    width: 540px; height: 540px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(196, 93, 44, 0.10), transparent 65%);
+  .hero-aurora {
+    position: absolute;
+    inset: -25% -15% auto -15%;
+    height: 110%;
+    z-index: 0;
     pointer-events: none;
-    filter: blur(40px);
+    filter: blur(70px);
   }
-  .hero-grid { display: grid; gap: 4rem; align-items: center; grid-template-columns: 1.05fr 0.95fr; position: relative; z-index: 1; }
+  .hero-aurora::before, .hero-aurora::after {
+    content: ""; position: absolute; inset: 0;
+  }
+  .hero-aurora::before {
+    background:
+      radial-gradient(ellipse 600px 360px at 22% 8%, rgba(217, 119, 87, 0.55), transparent 60%),
+      radial-gradient(ellipse 540px 380px at 72% 4%, rgba(196, 93, 44, 0.42), transparent 65%);
+    animation: aurora-shift 18s ease-in-out infinite alternate;
+  }
+  .hero-aurora::after {
+    background:
+      radial-gradient(ellipse 480px 300px at 50% 0%, rgba(255, 210, 160, 0.45), transparent 65%),
+      radial-gradient(ellipse 380px 340px at 12% 0%, rgba(255, 150, 100, 0.38), transparent 70%);
+    animation: aurora-shift 22s ease-in-out infinite alternate-reverse;
+    mix-blend-mode: screen;
+  }
+  @keyframes aurora-shift {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0.92; }
+    50%  { transform: translate(40px, 30px) scale(1.06); opacity: 1; }
+    100% { transform: translate(-30px, 50px) scale(1); opacity: 0.95; }
+  }
+  .hero-grid { display: grid; gap: 4rem; align-items: center; grid-template-columns: 1.05fr 0.95fr; position: relative; z-index: 2; }
   @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 3rem; } }
 
   .hero .chip {
@@ -200,13 +221,52 @@
   }
 
   .hero h1 {
-    font-size: clamp(48px, 7vw, 88px);
+    font-size: clamp(48px, 7vw, 92px);
     line-height: 1.0;
     letter-spacing: -0.02em;
     margin: 1.5rem 0 1.6rem;
     color: var(--ink);
+    background: linear-gradient(180deg, var(--ink) 0%, #2a2620 60%, #4a4035 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-  .hero h1 em { font-style: italic; color: var(--accent-ink); }
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(110deg, #b04a26 0%, #d97757 30%, #f4a07b 50%, #d97757 70%, #b04a26 100%);
+    background-size: 220% 220%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hero-em-shimmer 8s ease-in-out infinite;
+  }
+  @keyframes hero-em-shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Sliding halo on primary CTAs */
+  .btn-primary { position: relative; isolation: isolate; }
+  .btn-primary::before {
+    content: ""; position: absolute; inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent) 0%, #f4c4a8 30%, #d97757 50%, #f4a07b 75%, var(--accent) 100%);
+    background-size: 220% 100%;
+    z-index: -2;
+    filter: blur(7px);
+    opacity: 0;
+    animation: halo-slide 3.5s linear infinite;
+    transition: opacity 0.3s ease;
+  }
+  .btn-primary:hover::before { opacity: 0.7; }
+  .hero-cta .btn-primary::before,
+  .cta-cta-row .btn-primary::before { opacity: 0.55; }
+  .hero-cta .btn-primary:hover::before,
+  .cta-cta-row .btn-primary:hover::before { opacity: 0.95; filter: blur(11px); }
+  @keyframes halo-slide {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 220% 0%; }
+  }
   .hero p.lede {
     font-size: 19px; line-height: 1.55;
     color: var(--ink-2); max-width: 540px;
@@ -221,14 +281,37 @@
   .hero-trust strong { color: var(--ink); font-weight: 600; }
   .hero-trust span { display: inline-flex; align-items: center; gap: 0.5rem; }
 
-  /* Hero visual — single calm sample */
+  /* Hero visual — frosted glass + cursor reveal */
   .hero-visual {
-    background: var(--bg-2);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
+    --mx: 50%; --my: 50%;
+    background:
+      linear-gradient(180deg, rgba(255, 250, 245, 0.85), rgba(248, 241, 231, 0.65));
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(231, 221, 201, 0.6);
+    border-radius: 20px;
     padding: 1.6rem;
     position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 60px -28px rgba(20, 15, 5, 0.15),
+      0 60px 140px -40px rgba(217, 119, 87, 0.18);
   }
+  .hero-visual::after {
+    content: ""; position: absolute; inset: 0;
+    pointer-events: none; border-radius: inherit;
+    background: radial-gradient(
+      300px circle at var(--mx) var(--my),
+      rgba(255, 200, 140, 0.25),
+      rgba(217, 119, 87, 0.10) 30%,
+      transparent 60%
+    );
+    mix-blend-mode: overlay;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .hero-visual:hover::after { opacity: 1; }
   .hero-visual .label {
     font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
     letter-spacing: 0.14em; text-transform: uppercase;
@@ -312,6 +395,7 @@
     border-top: 1px solid var(--line);
   }
   .install-row {
+    --mx: 50%;
     display: grid;
     grid-template-columns: 80px 220px 1fr auto;
     gap: 2rem;
@@ -319,8 +403,21 @@
     padding: 1.8rem 0;
     border-bottom: 1px solid var(--line);
     transition: background 0.2s ease;
+    position: relative;
   }
-  .install-row:hover { background: var(--bg-2); }
+  .install-row::before {
+    content: ""; position: absolute; inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      500px circle at var(--mx) 50%,
+      rgba(217, 119, 87, 0.08),
+      transparent 35%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .install-row:hover::before { opacity: 1; }
+  .install-row > * { position: relative; z-index: 1; }
   .install-num {
     font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); letter-spacing: 0.1em;
@@ -358,81 +455,159 @@
     .install-tag { justify-self: start; margin-top: 0.4rem; }
   }
 
-  /* How we work — 4 steps */
+  /* How we work — bento with varied sizes */
   .how-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 14px;
   }
-  @media (max-width: 900px) { .how-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 540px) { .how-grid { grid-template-columns: 1fr; } }
   .how-step {
     background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
     padding: 2rem 1.8rem;
-    display: flex; flex-direction: column; gap: 0.6rem;
-    transition: background 0.2s ease;
+    display: flex; flex-direction: column;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative; overflow: hidden;
   }
-  .how-step:hover { background: var(--bg-2); }
+  .how-step:hover {
+    border-color: var(--line-2);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -22px rgba(20, 30, 50, 0.15);
+  }
+  .how-step.tall { grid-column: span 2; grid-row: span 2; padding: 2.4rem 2rem; }
+  .how-step.tall h3 { font-size: 36px; }
+  .how-step.wide { grid-column: span 4; }
+  .how-step.sq { grid-column: span 2; }
+  .how-step.med { grid-column: span 3; }
+  @media (max-width: 900px) {
+    .how-grid { grid-template-columns: repeat(2, 1fr); }
+    .how-step.tall, .how-step.wide, .how-step.sq, .how-step.med { grid-column: span 2; grid-row: auto; }
+  }
+  @media (max-width: 540px) { .how-grid { grid-template-columns: 1fr; } .how-step { grid-column: span 1 !important; } }
   .how-step .step-num {
-    font-family: var(--mono); font-size: 11.5px;
+    font-family: var(--mono); font-size: 11px;
     color: var(--accent-ink);
     letter-spacing: 0.16em;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
   }
   .how-step h3 {
     font-family: var(--display); font-size: 28px;
-    margin: 0 0 0.4rem; letter-spacing: -0.01em;
+    margin: 0 0 0.6rem; letter-spacing: -0.01em;
     line-height: 1.05; color: var(--ink);
   }
   .how-step p {
     color: var(--ink-2); font-size: 15px;
-    line-height: 1.55; margin: 0;
+    line-height: 1.55; margin: 0; max-width: 380px;
+  }
+  .how-step .deco {
+    margin-top: auto; padding-top: 1.4rem;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-3); letter-spacing: 0.06em;
+  }
+  .how-step.tall .deco {
+    font-size: 13px; color: var(--accent-ink);
   }
 
-  /* Where humans stay involved — 3 commitments */
-  .humans-grid {
+  /* Where humans stay involved — editorial column, no boxes */
+  .humans-rail {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 5rem;
+    align-items: start;
+    padding: 1rem 0;
   }
-  @media (max-width: 820px) { .humans-grid { grid-template-columns: 1fr; } }
-  .humans-card {
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 2rem 1.8rem;
-    display: flex; flex-direction: column; gap: 0.5rem;
-    transition: border-color 0.25s ease, transform 0.25s ease;
-  }
-  .humans-card:hover { border-color: var(--ink); transform: translateY(-2px); }
-  .humans-card .num {
-    font-family: var(--display); font-size: 48px;
-    color: var(--accent-ink); line-height: 1;
-    margin-bottom: 0.4rem; letter-spacing: -0.02em;
-  }
-  .humans-card h3 {
-    font-family: var(--display); font-size: 26px;
-    margin: 0 0 0.4rem; letter-spacing: -0.01em;
+  @media (max-width: 900px) { .humans-rail { grid-template-columns: 1fr; gap: 2rem; } }
+  .humans-rail .lead {
+    position: sticky; top: 100px;
+    font-family: var(--display);
+    font-size: clamp(28px, 3.4vw, 44px);
     line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.01em;
   }
-  .humans-card p {
-    color: var(--ink-2); font-size: 15px;
-    line-height: 1.55; margin: 0;
+  .humans-rail .lead em { color: var(--accent-ink); font-style: italic; }
+  @media (max-width: 900px) { .humans-rail .lead { position: relative; top: 0; font-size: 26px; } }
+  .humans-list {
+    display: flex; flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+  .humans-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1.5rem;
+    padding: 2.2rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .humans-item .nu {
+    font-family: var(--display);
+    font-size: 72px; line-height: 0.85;
+    color: var(--accent-ink);
+    letter-spacing: -0.04em;
+  }
+  .humans-item h3 {
+    font-family: var(--display); font-size: 30px;
+    margin: 0 0 0.5rem; letter-spacing: -0.01em;
+    line-height: 1.05; color: var(--ink);
+  }
+  .humans-item p {
+    color: var(--ink-2); font-size: 16px;
+    line-height: 1.55; margin: 0; max-width: 540px;
+  }
+  @media (max-width: 540px) {
+    .humans-item { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.6rem 0; }
+    .humans-item .nu { font-size: 48px; }
   }
 
-  /* Friday memo — one product preview, dark dashboard */
+  /* Friday memo — dashboard with cursor mask reveal */
   .memo-wrap { position: relative; }
   .memo-frame {
+    --mx: 50%; --my: 50%;
     background: #14110c; color: #f5f0e6;
     border-radius: var(--radius-lg);
     border: 1px solid #2a2218;
     box-shadow: 0 30px 80px -30px rgba(20, 15, 5, 0.35);
     overflow: hidden;
+    position: relative;
   }
+  .memo-frame::after {
+    content: ""; position: absolute; inset: 0;
+    pointer-events: none; border-radius: inherit;
+    background:
+      radial-gradient(
+        360px circle at var(--mx) var(--my),
+        rgba(255, 200, 140, 0.45),
+        rgba(217, 119, 87, 0.20) 28%,
+        rgba(217, 119, 87, 0.06) 50%,
+        transparent 65%
+      );
+    mix-blend-mode: overlay;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 4;
+  }
+  .memo-frame:hover::after { opacity: 1; }
+  .memo-frame::before {
+    content: ""; position: absolute; inset: -1px;
+    pointer-events: none; border-radius: inherit;
+    background: radial-gradient(
+      400px circle at var(--mx) var(--my),
+      rgba(255, 180, 120, 0.7),
+      transparent 55%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 5;
+  }
+  .memo-frame:hover::before { opacity: 1; }
   .memo-chrome {
     height: 42px;
     background: #1a160f;
@@ -571,6 +746,42 @@
     overflow: hidden;
     align-self: stretch;
   }
+  .wilmington-team-video {
+    position: relative; z-index: 1;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    aspect-ratio: 16/10;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .wilmington-team-video video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .wilmington-team-video .play-sm {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--ink); color: var(--accent);
+    display: grid; place-items: center;
+    font-size: 20px; position: relative; z-index: 1;
+    transition: transform 0.2s ease;
+  }
+  .wilmington-team-video:hover .play-sm { transform: scale(1.06); }
+  .wilmington-team-video .ph {
+    margin-top: 0.8rem;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-3); letter-spacing: 0.08em;
+    position: relative; z-index: 1;
+    text-align: center; padding: 0 1rem;
+  }
+  .wilmington-team-video .ph code {
+    color: var(--accent-ink); background: var(--accent-soft);
+    padding: 1px 6px; border-radius: 4px;
+    font-family: inherit;
+  }
   .wilmington-stat {
     background: var(--bg);
     padding: 1.4rem 1.2rem;
@@ -590,38 +801,115 @@
     .wilmington-card { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
   }
 
-  /* Example workflows */
-  .work-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+  /* Editorial pull-quote section */
+  .pull-quote {
+    padding: var(--section-y) 0;
+    position: relative;
   }
-  @media (max-width: 900px) { .work-grid { grid-template-columns: 1fr; } }
-  .work-card {
-    background: var(--bg); border: 1px solid var(--line);
-    border-radius: var(--radius-lg); padding: 1.8rem;
-    display: flex; flex-direction: column; gap: 1rem;
-    transition: border-color 0.25s ease, transform 0.25s ease;
+  .pull-quote::before {
+    content: ""; position: absolute;
+    inset: -5% -10% auto -10%;
+    height: 60%;
+    background: radial-gradient(ellipse 50% 70% at 50% 50%, rgba(217, 119, 87, 0.10), transparent 65%);
+    filter: blur(60px); pointer-events: none;
   }
-  .work-card:hover { border-color: var(--ink); transform: translateY(-2px); }
-  .work-tag {
-    font-family: var(--mono); font-size: 10px;
-    color: var(--accent-ink);
-    background: var(--accent-soft);
-    padding: 4px 10px; border-radius: 4px;
-    letter-spacing: 0.1em;
-    align-self: flex-start;
+  .pull-quote .container { position: relative; z-index: 1; }
+  .pull-quote blockquote {
+    font-family: var(--display);
+    font-size: clamp(36px, 5.2vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0; max-width: 1000px;
   }
-  .work-card .quote {
-    font-family: var(--display); font-size: 21px;
-    line-height: 1.3; color: var(--ink);
-    letter-spacing: -0.005em;
+  .pull-quote blockquote em { color: var(--accent-ink); font-style: italic; }
+  .pull-quote .signature {
+    margin-top: 2rem;
+    display: flex; gap: 0.7rem; align-items: center;
+    color: var(--ink-3); font-size: 14px;
+    font-family: var(--mono); letter-spacing: 0.04em;
   }
-  .work-card .who {
-    margin-top: auto; padding-top: 1rem;
-    border-top: 1px solid var(--line);
-    font-size: 14px;
+  .pull-quote .signature::before {
+    content: ""; width: 40px; height: 1px; background: var(--ink-3);
   }
-  .work-card .who strong { display: block; color: var(--ink); font-weight: 600; }
-  .work-card .who small { color: var(--ink-3); font-size: 12.5px; display: block; margin-top: 2px; }
+
+  /* Video reel — full-width feature */
+  .video-section {
+    padding: var(--section-y) 0;
+    background: #14110c; color: #f5f0e6;
+    border-radius: 28px; margin: 2rem 1.5rem;
+    position: relative; overflow: hidden;
+  }
+  .video-section::before {
+    content: ""; position: absolute;
+    top: -10%; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 500px;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(217, 119, 87, 0.35), transparent 65%),
+      radial-gradient(ellipse 50% 50% at 30% 10%, rgba(196, 93, 44, 0.30), transparent 65%);
+    filter: blur(70px); pointer-events: none;
+  }
+  .video-section .container { position: relative; z-index: 1; }
+  .video-section .eyebrow { color: var(--accent); }
+  .video-section h2 { color: #fff; }
+  .video-section .section-head p { color: rgba(245, 240, 230, 0.7); }
+
+  .video-grid {
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem; align-items: center;
+  }
+  @media (max-width: 900px) { .video-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .video-slot {
+    background: #0e0c08; border: 1px solid #2a2218;
+    border-radius: 18px; aspect-ratio: 16 / 10;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .video-slot video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .video-slot .play {
+    position: relative; z-index: 1;
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--accent); color: #1a0d00;
+    display: grid; place-items: center;
+    font-size: 26px;
+    box-shadow: 0 16px 40px -10px rgba(217, 119, 87, 0.5);
+    transition: transform 0.2s ease;
+  }
+  .video-slot:hover .play { transform: scale(1.06); }
+  .video-slot .placeholder {
+    margin-top: 1rem; font-family: var(--mono);
+    font-size: 12px; color: #8b806b; letter-spacing: 0.08em;
+    text-align: center; padding: 0 1rem;
+  }
+  .video-slot .placeholder code {
+    color: var(--accent); font-family: inherit;
+    background: rgba(217, 119, 87, 0.12);
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .video-side h3 {
+    font-family: var(--display); font-size: clamp(28px, 3.5vw, 40px);
+    color: #fff; line-height: 1.1; margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+  .video-side p {
+    color: rgba(245, 240, 230, 0.7); font-size: 17px;
+    line-height: 1.55; margin: 0 0 1rem;
+  }
+  .video-side .meta {
+    margin-top: 1.5rem;
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+    font-size: 13px; color: rgba(245, 240, 230, 0.5);
+    font-family: var(--mono); letter-spacing: 0.06em;
+  }
+  .video-side .meta span { display: flex; gap: 0.5rem; align-items: center; }
+  .video-side .meta strong { color: var(--accent); font-weight: 500; }
 
   /* FAQ */
   .faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
@@ -666,12 +954,23 @@
   }
   .cta-section::before {
     content: ""; position: absolute;
-    top: -100px; right: -100px;
-    width: 480px; height: 480px;
-    background: radial-gradient(circle, rgba(196, 93, 44, 0.32), transparent 60%);
+    inset: -10% -10% auto -10%;
+    height: 80%;
+    background:
+      radial-gradient(ellipse 60% 40% at 30% 0%, rgba(217, 119, 87, 0.55), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 75% 5%, rgba(196, 93, 44, 0.45), transparent 65%),
+      radial-gradient(ellipse 80% 30% at 50% 0%, rgba(255, 200, 140, 0.32), transparent 65%);
     pointer-events: none;
-    filter: blur(40px);
+    filter: blur(75px);
+    animation: aurora-shift 22s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
   }
+  .cta-section::after {
+    content: ""; position: absolute;
+    inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 230, 200, 0.05), transparent 50%);
+  }
+  .cta-section .container { position: relative; z-index: 1; }
   .cta-section h2 {
     font-family: var(--display); font-size: clamp(40px, 5.5vw, 72px);
     line-height: 1; letter-spacing: -0.02em;
@@ -790,13 +1089,23 @@
   }
 
   /* Tweaks */
+  @media (max-width: 700px) {
+    .video-section { margin: 1rem 0.6rem; padding: 4rem 0; }
+    .video-side .meta { gap: 0.8rem 1.2rem; font-size: 12px; }
+    .pull-quote blockquote { font-size: clamp(28px, 6vw, 44px); }
+  }
   @media (max-width: 540px) {
     .container { padding: 0 1rem; }
     .section { padding: 5rem 0; }
-    .hero { padding: 3rem 0 3.5rem; }
+    .hero { padding: 4rem 0 3rem; }
+    .hero h1 { font-size: clamp(40px, 9vw, 56px); }
     .wilmington-card { padding: 1.6rem; }
     .wilmington-stats { grid-template-columns: 1fr 1fr; }
     .wilmington-stat .v { font-size: 28px; }
+    .video-section { margin: 0.6rem 0.4rem; border-radius: 18px; padding: 3rem 0; }
+    .video-slot .placeholder { font-size: 11px; }
+    .humans-rail .lead { font-size: 22px; }
+    .install-name { font-size: 26px; }
   }
 </style>
 </head>
@@ -812,7 +1121,8 @@
     <nav class="nav-links">
       <a href="#install">What we install</a>
       <a href="#how">How we work</a>
-      <a href="#humans">Human oversight</a>
+      <a href="#humans">Oversight</a>
+      <a href="#watch">Watch</a>
       <a href="#wilmington">Wilmington</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -824,6 +1134,7 @@
 </header>
 
 <section class="hero" id="main">
+  <div class="hero-aurora" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div>
       <span class="chip"><span class="dot"></span> Wilmington, NC · operating since 2025</span>
@@ -918,25 +1229,27 @@
       <p>One short loop. Hands-on through every step, with you in the seat.</p>
     </div>
     <div class="how-grid">
-      <div class="how-step">
+      <div class="how-step tall">
         <div class="step-num">01 · SPOT</div>
         <h3>30-min audit</h3>
         <p>We sit with you and pull up your phone logs, inbox, and calendar. Together we find what's leaking — calls missed at 6pm, quotes ghosting, photos lost in texts.</p>
+        <div class="deco">→ Pulled from your real ops, not a survey</div>
       </div>
-      <div class="how-step">
+      <div class="how-step wide">
         <div class="step-num">02 · BUILD</div>
         <h3>One worker, one bottleneck</h3>
         <p>Our team designs the right AI employee for the leak. Trained on your services, your prices, the way your crew actually talks. No template.</p>
+        <div class="deco">~ 3 days from audit to first draft</div>
       </div>
-      <div class="how-step">
+      <div class="how-step med">
         <div class="step-num">03 · RUN</div>
         <h3>Installed live</h3>
-        <p>Goes live alongside your team. You see every reply. Anger, ambiguity, dollars over a threshold — escalates to a human on our side and yours.</p>
+        <p>Goes live alongside your team. Anger, ambiguity, dollars over a threshold — escalates to a human on our side and yours.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step med">
         <div class="step-num">04 · REPORT</div>
         <h3>Friday memo</h3>
-        <p>One page in your inbox each Friday: dollars saved, hours reclaimed, what's stuck, what to automate next. No graphs. Just numbers.</p>
+        <p>One page in your inbox: dollars saved, hours reclaimed, what's stuck, what to automate next.</p>
       </div>
     </div>
   </div>
@@ -947,23 +1260,31 @@
     <div class="section-head">
       <div class="eyebrow">Where humans stay involved</div>
       <h2 class="display">No black-box automation. Ever.</h2>
-      <p>Three commitments that make this an operations company, not a chatbot vendor.</p>
     </div>
-    <div class="humans-grid">
-      <div class="humans-card">
-        <div class="num">01</div>
-        <h3>Approval gates</h3>
-        <p>Every escalation routes to a human — anger, ambiguity, dollar amounts over a threshold you set. AI handles the loop; you handle judgment.</p>
-      </div>
-      <div class="humans-card">
-        <div class="num">02</div>
-        <h3>Live receipts</h3>
-        <p>Every reply, file, status, and approval is visible. We don't hide anything in a model. You can read every line that goes out under your name.</p>
-      </div>
-      <div class="humans-card">
-        <div class="num">03</div>
-        <h3>Local accountability</h3>
-        <p>The Wilmington team installs, monitors, and tunes — by name. If something breaks, you're texting a person, not a help-desk queue.</p>
+    <div class="humans-rail">
+      <div class="lead">We're an operations company, not a <em>chatbot vendor</em>. Three things stay true on every install.</div>
+      <div class="humans-list">
+        <div class="humans-item">
+          <div class="nu">01</div>
+          <div>
+            <h3>Approval gates</h3>
+            <p>Every escalation routes to a human — anger, ambiguity, dollar amounts over a threshold you set. AI handles the loop; you handle judgment.</p>
+          </div>
+        </div>
+        <div class="humans-item">
+          <div class="nu">02</div>
+          <div>
+            <h3>Live receipts</h3>
+            <p>Every reply, file, status, and approval is visible. We don't hide anything in a model. You can read every line that goes out under your name.</p>
+          </div>
+        </div>
+        <div class="humans-item">
+          <div class="nu">03</div>
+          <div>
+            <h3>Local accountability</h3>
+            <p>The Wilmington team installs, monitors, and tunes — by name. If something breaks, you're texting a person, not a help-desk queue.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1033,37 +1354,60 @@
           <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book the audit →</a>
           <a class="btn btn-ghost" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Email the team</a>
         </div>
+        <div class="hero-trust" style="margin-top: 1.6rem;">
+          <span><strong>Wilmington, NC</strong> · home base</span>
+          <span><strong>In-person</strong> · onsite for installs</span>
+          <span><strong>Same week</strong> · audit to live</span>
+        </div>
       </div>
-      <div class="wilmington-stats">
-        <div class="wilmington-stat">
-          <div class="v">Wilmington, NC</div>
-          <div class="l">Where we're based</div>
-        </div>
-        <div class="wilmington-stat">
-          <div class="v">In-person</div>
-          <div class="l">Onsite for installs</div>
-        </div>
-        <div class="wilmington-stat">
-          <div class="v">Same week</div>
-          <div class="l">From audit to first worker live</div>
-        </div>
-        <div class="wilmington-stat">
-          <div class="v">By name</div>
-          <div class="l">Real people on the line</div>
-        </div>
+      <div class="wilmington-team-video">
+        <video preload="none" playsinline muted loop poster="">
+          <!-- Drop your file at /assets/videos/team.mp4 and uncomment: -->
+          <!-- <source src="/assets/videos/team.mp4" type="video/mp4"> -->
+        </video>
+        <div class="play-sm" aria-hidden="true">▶</div>
+        <div class="ph">Meet the team — drop video at <code>/assets/videos/team.mp4</code></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="workflows">
+<section class="pull-quote">
+  <div class="container">
+    <blockquote>
+      "Most AI tools ship a chatbot and disappear. <em>We ship a worker</em> — and stay in the seat with you while it runs."
+    </blockquote>
+    <div class="signature">The OpSpot team · Wilmington, NC</div>
+  </div>
+</section>
+
+<section class="video-section" id="watch">
   <div class="container">
     <div class="section-head">
-      <div class="eyebrow">Example workflows</div>
-      <h2 class="display">What "employees that show up" looks like in a real shop.</h2>
-      <p>These are example scenarios from how typical builds run — written from the operator's seat. Not real customer quotes yet; we'll mark those when they're real.</p>
+      <div class="eyebrow">In the field</div>
+      <h2 class="display">Watch a build go live.</h2>
+      <p>30 seconds inside a real install — from the audit call to the first live reply. No deck, no demo, just the work.</p>
     </div>
-    <div class="work-grid" id="workGrid"></div>
+    <div class="video-grid">
+      <div class="video-slot" id="videoSlot1">
+        <video preload="none" playsinline muted loop poster="">
+          <!-- Drop your file at /assets/videos/install.mp4 and uncomment: -->
+          <!-- <source src="/assets/videos/install.mp4" type="video/mp4"> -->
+        </video>
+        <div class="play" aria-hidden="true">▶</div>
+        <div class="placeholder">Drop a video at <code>/assets/videos/install.mp4</code></div>
+      </div>
+      <div class="video-side">
+        <h3>From audit to live in the same week.</h3>
+        <p>Most installs run end-to-end inside seven days. We sit with the owner, map the leak, build the worker, and watch it go live before we hand it off.</p>
+        <p>You don't need to learn a new system. You read replies, tap approvals on outliers, and read one page on Friday.</p>
+        <div class="meta">
+          <span><strong>Wilmington, NC</strong> · home base</span>
+          <span><strong>30 min</strong> · audit call</span>
+          <span><strong>Same week</strong> · first worker live</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

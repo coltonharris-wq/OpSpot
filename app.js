@@ -1,20 +1,3 @@
-(function () {
-  const items = [
-    { tag: 'AFTER-HOURS', q: "Maya picks up everything that hits the site after 6pm. Owner reads the morning summary in two minutes — no missed leads.", scenario: "After-hours intake", role: "HVAC / plumbing shop" },
-    { tag: 'QUOTE FOLLOW-UP', q: "Theo runs the day-3 / day-7 / day-14 follow-up on every quote. Owner approves outliers, the rest go automatically.", scenario: "Quote follow-up loop", role: "Estimator-heavy shops" },
-    { tag: 'WEEKLY MEMO', q: "August reads the week and sends one page on Friday: dollars saved, hours back, what to fix next. Owner reads it over coffee.", scenario: "Friday memo", role: "Any service shop" },
-  ];
-  const grid = document.getElementById('workGrid');
-  if (grid) {
-    grid.innerHTML = items.map(t => `
-      <div class="work-card">
-        <span class="work-tag">EXAMPLE · ${t.tag}</span>
-        <div class="quote">“${t.q}”</div>
-        <div class="who"><strong>${t.scenario}</strong><small>${t.role}</small></div>
-      </div>
-    `).join('');
-  }
-})();
 
 (function () {
   const items = [
@@ -108,5 +91,20 @@
 (function () {
   document.querySelectorAll('[data-year]').forEach(el => {
     el.textContent = new Date().getFullYear();
+  });
+})();
+
+(function () {
+  document.querySelectorAll('.memo-frame, .hero-visual, .install-row, .reveal-card').forEach(el => {
+    let raf = 0;
+    el.addEventListener('pointermove', (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+        raf = 0;
+      });
+    });
   });
 })();
