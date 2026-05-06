@@ -3,1467 +3,772 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>OpSpot.ai — AI employees, installed by a Wilmington operations team</title>
-<meta name="description" content="OpSpot is a hands-on operations team in Wilmington, NC. We install AI employees inside local service businesses, stay close during rollout, and keep humans in the loop where judgment matters." />
-<meta name="theme-color" content="#fffaf5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#14110c" media="(prefers-color-scheme: dark)">
+<title>Automio — AI employees for small business</title>
+<meta name="description" content="Automio installs AI employees inside small businesses — receptionist, missed-call follow-up, lead capture, booking, reviews, reactivation, social, CRM tasks. The busywork runs itself." />
+<meta name="theme-color" content="#0a0a0e" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="OpSpot.ai — AI employees, installed by a Wilmington operations team" />
-<meta property="og:description" content="A hands-on operations team in Wilmington that installs AI employees inside real businesses, stays close during rollout, and keeps humans in the loop." />
-<meta property="og:url" content="https://opspot.ai" />
-<meta property="og:site_name" content="OpSpot.ai" />
+<meta property="og:title" content="Automio — AI employees for small business" />
+<meta property="og:description" content="AI employees that answer the phone, follow up, book jobs, request reviews, reactivate customers, post content, and clear your CRM. Installed in days." />
+<meta property="og:url" content="https://automio.ai" />
+<meta property="og:site_name" content="Automio" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="OpSpot.ai — AI employees, installed by a Wilmington operations team" />
-<meta name="twitter:description" content="A hands-on operations team in Wilmington that installs AI employees inside real businesses." />
+<meta name="twitter:title" content="Automio — AI employees for small business" />
+<meta name="twitter:description" content="The busywork runs itself. AI employees, installed for small business." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
 <link rel="apple-touch-icon" href="assets/logo-mark.svg">
+<link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "OpSpot.ai",
-  "url": "https://opspot.ai",
-  "logo": "https://opspot.ai/assets/logo-mark.svg",
-  "description": "A Wilmington, NC operations team that installs AI employees inside local service businesses with hands-on rollout and human approval gates.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Wilmington",
-    "addressRegion": "NC",
-    "addressCountry": "US"
-  }
+  "name": "Automio",
+  "url": "https://automio.ai",
+  "logo": "https://automio.ai/assets/logo-mark.svg",
+  "description": "AI employees for small business — receptionist, missed-call follow-up, lead capture, booking, reviews, reactivation, social, and CRM follow-through."
 }
 </script>
-<style>
-  :root {
-    --bg: #fffaf5;
-    --bg-2: #f8f1e7;
-    --bg-3: #ece2d2;
-    --ink: #1a1814;
-    --ink-2: #4a4641;
-    --ink-3: #7a7269;
-    --line: #e7ddc9;
-    --line-2: #d9cdb4;
-    --accent: #c45d2c;
-    --accent-soft: rgba(196, 93, 44, 0.10);
-    --accent-ink: #8d3f17;
-    --display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
-    --sans: 'Inter', system-ui, -apple-system, sans-serif;
-    --mono: 'JetBrains Mono', ui-monospace, monospace;
-    --max-w: 1180px;
-    --pad: 1.5rem;
-    --section-y: 7rem;
-    --radius: 12px;
-    --radius-lg: 18px;
-  }
-
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    font-family: var(--sans);
-    color: var(--ink);
-    background: var(--bg);
-    font-size: 17px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  a { color: inherit; }
-  img, svg { display: block; max-width: 100%; }
-
-  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad); }
-  .display {
-    font-family: var(--display);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.02;
-  }
-  .mono { font-family: var(--mono); }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--ink-3);
-    font-weight: 500;
-  }
-  .accent { color: var(--accent-ink); }
-
-  /* Buttons */
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.55rem;
-    padding: 0.85rem 1.3rem;
-    border-radius: 999px;
-    font-weight: 500; font-size: 15px;
-    text-decoration: none;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
-    white-space: nowrap;
-  }
-  .btn-primary {
-    background: var(--ink); color: var(--bg);
-  }
-  .btn-primary:hover { transform: translateY(-1px); background: #000; }
-  .btn-ghost {
-    background: transparent; color: var(--ink); border-color: var(--line-2);
-  }
-  .btn-ghost:hover { background: var(--bg-2); border-color: var(--ink); }
-  .btn-sm { padding: 0.55rem 1rem; font-size: 14px; }
-
-  /* Skip link */
-  .skip-link {
-    position: absolute; left: 0; top: 0;
-    padding: 0.5rem 1rem;
-    background: var(--ink); color: var(--bg);
-    border-radius: 0 0 8px 0;
-    font-size: 14px; font-weight: 500;
-    text-decoration: none; z-index: 100;
-    transform: translateY(-100%);
-    transition: transform 0.2s ease;
-  }
-  .skip-link:focus { transform: translateY(0); outline: 2px solid var(--accent); }
-
-  /* Nav */
-  .nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(255, 250, 245, 0.85);
-    backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.25s ease, background 0.25s ease;
-  }
-  .nav.scrolled {
-    background: rgba(255, 250, 245, 0.94);
-    border-bottom-color: var(--line);
-  }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
-  .brand {
-    display: inline-flex; align-items: center; gap: 0.65rem;
-    font-weight: 600; letter-spacing: -0.01em; font-size: 17px;
-    text-decoration: none; color: var(--ink);
-  }
-  .brand-mark {
-    width: 28px; height: 28px; border-radius: 8px;
-    background: var(--ink); color: var(--bg);
-    display: grid; place-items: center;
-    font-family: var(--display); font-size: 18px; line-height: 1;
-  }
-  .brand .dot-tld { color: var(--ink-3); }
-  .nav-links { display: flex; gap: 0.25rem; }
-  .nav-links a {
-    color: var(--ink-2); text-decoration: none; font-size: 14.5px;
-    padding: 0.45rem 0.85rem; border-radius: 8px;
-    transition: color .2s ease, background .2s ease;
-  }
-  .nav-links a:hover { color: var(--ink); background: var(--bg-2); }
-  .nav-links a.active { color: var(--ink); }
-  .nav-cta { display: flex; gap: 0.6rem; align-items: center; }
-  @media (max-width: 820px) {
-    .nav-links { display: none; }
-    .nav-cta .btn-ghost { display: none; }
-  }
-
-  /* Hero — Huly aurora */
-  .hero {
-    padding: 6.5rem 0 5rem;
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .hero-aurora {
-    position: absolute;
-    inset: -25% -15% auto -15%;
-    height: 110%;
-    z-index: 0;
-    pointer-events: none;
-    filter: blur(70px);
-  }
-  .hero-aurora::before, .hero-aurora::after {
-    content: ""; position: absolute; inset: 0;
-  }
-  .hero-aurora::before {
-    background:
-      radial-gradient(ellipse 600px 360px at 22% 8%, rgba(217, 119, 87, 0.55), transparent 60%),
-      radial-gradient(ellipse 540px 380px at 72% 4%, rgba(196, 93, 44, 0.42), transparent 65%);
-    animation: aurora-shift 18s ease-in-out infinite alternate;
-  }
-  .hero-aurora::after {
-    background:
-      radial-gradient(ellipse 480px 300px at 50% 0%, rgba(255, 210, 160, 0.45), transparent 65%),
-      radial-gradient(ellipse 380px 340px at 12% 0%, rgba(255, 150, 100, 0.38), transparent 70%);
-    animation: aurora-shift 22s ease-in-out infinite alternate-reverse;
-    mix-blend-mode: screen;
-  }
-  @keyframes aurora-shift {
-    0%   { transform: translate(0, 0) scale(1); opacity: 0.92; }
-    50%  { transform: translate(40px, 30px) scale(1.06); opacity: 1; }
-    100% { transform: translate(-30px, 50px) scale(1); opacity: 0.95; }
-  }
-  .hero-grid { display: grid; gap: 4rem; align-items: center; grid-template-columns: 1.05fr 0.95fr; position: relative; z-index: 2; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 3rem; } }
-
-  .hero .chip {
-    display: inline-flex; align-items: center; gap: 0.55rem;
-    padding: 0.4rem 0.8rem 0.4rem 0.55rem;
-    border-radius: 999px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    font-size: 12.5px; color: var(--ink-2);
-    font-family: var(--mono);
-    letter-spacing: 0.04em;
-  }
-  .hero .chip .dot {
-    width: 6px; height: 6px; border-radius: 999px;
-    background: #2c8f5b;
-    box-shadow: 0 0 0 3px rgba(44, 143, 91, 0.18);
-  }
-
-  .hero h1 {
-    font-size: clamp(48px, 7vw, 92px);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin: 1.5rem 0 1.6rem;
-    color: var(--ink);
-    background: linear-gradient(180deg, var(--ink) 0%, #2a2620 60%, #4a4035 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .hero h1 em {
-    font-style: italic;
-    background: linear-gradient(110deg, #b04a26 0%, #d97757 30%, #f4a07b 50%, #d97757 70%, #b04a26 100%);
-    background-size: 220% 220%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: hero-em-shimmer 8s ease-in-out infinite;
-  }
-  @keyframes hero-em-shimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  /* Sliding halo on primary CTAs */
-  .btn-primary { position: relative; isolation: isolate; }
-  .btn-primary::before {
-    content: ""; position: absolute; inset: -2px;
-    border-radius: inherit;
-    background: linear-gradient(90deg, var(--accent) 0%, #f4c4a8 30%, #d97757 50%, #f4a07b 75%, var(--accent) 100%);
-    background-size: 220% 100%;
-    z-index: -2;
-    filter: blur(7px);
-    opacity: 0;
-    animation: halo-slide 3.5s linear infinite;
-    transition: opacity 0.3s ease;
-  }
-  .btn-primary:hover::before { opacity: 0.7; }
-  .hero-cta .btn-primary::before,
-  .cta-cta-row .btn-primary::before { opacity: 0.55; }
-  .hero-cta .btn-primary:hover::before,
-  .cta-cta-row .btn-primary:hover::before { opacity: 0.95; filter: blur(11px); }
-  @keyframes halo-slide {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 220% 0%; }
-  }
-  .hero p.lede {
-    font-size: 19px; line-height: 1.55;
-    color: var(--ink-2); max-width: 540px;
-    margin: 0 0 2rem;
-  }
-  .hero-cta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .hero-trust {
-    margin-top: 2.5rem;
-    display: flex; gap: 1.5rem 2rem; flex-wrap: wrap;
-    color: var(--ink-3); font-size: 13.5px;
-  }
-  .hero-trust strong { color: var(--ink); font-weight: 600; }
-  .hero-trust span { display: inline-flex; align-items: center; gap: 0.5rem; }
-
-  /* Hero visual — frosted glass + cursor reveal */
-  .hero-visual {
-    --mx: 50%; --my: 50%;
-    background:
-      linear-gradient(180deg, rgba(255, 250, 245, 0.85), rgba(248, 241, 231, 0.65));
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
-    border: 1px solid rgba(231, 221, 201, 0.6);
-    border-radius: 20px;
-    padding: 1.6rem;
-    position: relative;
-    overflow: hidden;
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.6) inset,
-      0 30px 60px -28px rgba(20, 15, 5, 0.15),
-      0 60px 140px -40px rgba(217, 119, 87, 0.18);
-  }
-  .hero-visual::after {
-    content: ""; position: absolute; inset: 0;
-    pointer-events: none; border-radius: inherit;
-    background: radial-gradient(
-      300px circle at var(--mx) var(--my),
-      rgba(255, 200, 140, 0.25),
-      rgba(217, 119, 87, 0.10) 30%,
-      transparent 60%
-    );
-    mix-blend-mode: overlay;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .hero-visual:hover::after { opacity: 1; }
-  .hero-visual .label {
-    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
-    letter-spacing: 0.14em; text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-  .hv-thread {
-    display: flex; flex-direction: column; gap: 0.8rem;
-  }
-  .hv-msg {
-    padding: 0.75rem 1rem; border-radius: 14px;
-    font-size: 14.5px; line-height: 1.5; max-width: 88%;
-  }
-  .hv-msg.them {
-    background: var(--bg); border: 1px solid var(--line);
-    align-self: flex-start; border-bottom-left-radius: 4px;
-  }
-  .hv-msg.us {
-    background: var(--ink); color: var(--bg);
-    align-self: flex-end; border-bottom-right-radius: 4px;
-  }
-  .hv-msg .who {
-    font-family: var(--mono); font-size: 10px; opacity: 0.7;
-    letter-spacing: 0.06em; margin-bottom: 4px;
-  }
-  .hv-foot {
-    margin-top: 1rem; padding-top: 1rem;
-    border-top: 1px solid var(--line);
-    font-size: 13px; color: var(--ink-3);
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 0.6rem;
-  }
-  .hv-foot strong { color: var(--ink); font-weight: 600; }
-  .hv-foot .ok {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    color: #2c8f5b;
-  }
-  .hv-foot .ok::before {
-    content: ""; width: 6px; height: 6px; border-radius: 50%;
-    background: #2c8f5b;
-  }
-
-  /* Logo strip */
-  .logos {
-    padding: 2.5rem 0 4rem;
-    border-top: 1px solid var(--line);
-  }
-  .logos-label {
-    font-family: var(--mono); font-size: 11px;
-    color: var(--ink-3); letter-spacing: 0.14em;
-    text-transform: uppercase; text-align: center;
-    margin-bottom: 1.6rem;
-  }
-  .logos-row {
-    display: flex; flex-wrap: wrap; gap: 2rem 3rem;
-    align-items: center; justify-content: center;
-  }
-  .logos-row span {
-    font-family: var(--display);
-    font-size: 22px; color: var(--ink-2);
-    letter-spacing: -0.01em; opacity: 0.75;
-  }
-
-  /* Section base */
-  .section { padding: var(--section-y) 0; position: relative; }
-  .section-head { max-width: 760px; margin-bottom: 3.5rem; }
-  .section-head h2 {
-    font-size: clamp(36px, 5.5vw, 60px);
-    margin: 0.75rem 0 1rem;
-    line-height: 1.02;
-  }
-  .section-head p {
-    color: var(--ink-2); font-size: 18px;
-    max-width: 600px; line-height: 1.55;
-  }
-
-  /* What we install — editorial list of 5 employees */
-  .install-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border-top: 1px solid var(--line);
-  }
-  .install-row {
-    --mx: 50%;
-    display: grid;
-    grid-template-columns: 80px 220px 1fr auto;
-    gap: 2rem;
-    align-items: baseline;
-    padding: 1.8rem 0;
-    border-bottom: 1px solid var(--line);
-    transition: background 0.2s ease;
-    position: relative;
-  }
-  .install-row::before {
-    content: ""; position: absolute; inset: 0;
-    pointer-events: none;
-    background: radial-gradient(
-      500px circle at var(--mx) 50%,
-      rgba(217, 119, 87, 0.08),
-      transparent 35%
-    );
-    opacity: 0;
-    transition: opacity 0.35s ease;
-  }
-  .install-row:hover::before { opacity: 1; }
-  .install-row > * { position: relative; z-index: 1; }
-  .install-num {
-    font-family: var(--mono); font-size: 12px;
-    color: var(--ink-3); letter-spacing: 0.1em;
-  }
-  .install-name {
-    font-family: var(--display); font-size: 32px;
-    letter-spacing: -0.01em; color: var(--ink);
-    line-height: 1.05;
-  }
-  .install-name small {
-    display: block;
-    font-family: var(--mono); font-size: 11px;
-    color: var(--ink-3); letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: 6px; font-weight: 500;
-  }
-  .install-desc {
-    color: var(--ink-2); font-size: 16px;
-    line-height: 1.55; max-width: 520px;
-  }
-  .install-tag {
-    font-family: var(--mono); font-size: 11px;
-    color: var(--accent-ink); background: var(--accent-soft);
-    padding: 4px 10px; border-radius: 999px;
-    letter-spacing: 0.06em;
-    align-self: center;
-  }
-  @media (max-width: 820px) {
-    .install-row {
-      grid-template-columns: 1fr;
-      gap: 0.5rem; padding: 1.6rem 0;
-    }
-    .install-num { display: inline; font-size: 11px; }
-    .install-name { font-size: 28px; }
-    .install-tag { justify-self: start; margin-top: 0.4rem; }
-  }
-
-  /* How we work — bento with varied sizes */
-  .how-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: minmax(180px, auto);
-    gap: 14px;
-  }
-  .how-step {
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 2rem 1.8rem;
-    display: flex; flex-direction: column;
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-    position: relative; overflow: hidden;
-  }
-  .how-step:hover {
-    border-color: var(--line-2);
-    transform: translateY(-2px);
-    box-shadow: 0 18px 40px -22px rgba(20, 30, 50, 0.15);
-  }
-  .how-step.tall { grid-column: span 2; grid-row: span 2; padding: 2.4rem 2rem; }
-  .how-step.tall h3 { font-size: 36px; }
-  .how-step.wide { grid-column: span 4; }
-  .how-step.sq { grid-column: span 2; }
-  .how-step.med { grid-column: span 3; }
-  @media (max-width: 900px) {
-    .how-grid { grid-template-columns: repeat(2, 1fr); }
-    .how-step.tall, .how-step.wide, .how-step.sq, .how-step.med { grid-column: span 2; grid-row: auto; }
-  }
-  @media (max-width: 540px) { .how-grid { grid-template-columns: 1fr; } .how-step { grid-column: span 1 !important; } }
-  .how-step .step-num {
-    font-family: var(--mono); font-size: 11px;
-    color: var(--accent-ink);
-    letter-spacing: 0.16em;
-    margin-bottom: 0.6rem;
-  }
-  .how-step h3 {
-    font-family: var(--display); font-size: 28px;
-    margin: 0 0 0.6rem; letter-spacing: -0.01em;
-    line-height: 1.05; color: var(--ink);
-  }
-  .how-step p {
-    color: var(--ink-2); font-size: 15px;
-    line-height: 1.55; margin: 0; max-width: 380px;
-  }
-  .how-step .deco {
-    margin-top: auto; padding-top: 1.4rem;
-    font-family: var(--mono); font-size: 11px;
-    color: var(--ink-3); letter-spacing: 0.06em;
-  }
-  .how-step.tall .deco {
-    font-size: 13px; color: var(--accent-ink);
-  }
-
-  /* Where humans stay involved — editorial column, no boxes */
-  .humans-rail {
-    display: grid;
-    grid-template-columns: 1.2fr 2fr;
-    gap: 5rem;
-    align-items: start;
-    padding: 1rem 0;
-  }
-  @media (max-width: 900px) { .humans-rail { grid-template-columns: 1fr; gap: 2rem; } }
-  .humans-rail .lead {
-    position: sticky; top: 100px;
-    font-family: var(--display);
-    font-size: clamp(28px, 3.4vw, 44px);
-    line-height: 1.1;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .humans-rail .lead em { color: var(--accent-ink); font-style: italic; }
-  @media (max-width: 900px) { .humans-rail .lead { position: relative; top: 0; font-size: 26px; } }
-  .humans-list {
-    display: flex; flex-direction: column;
-    border-top: 1px solid var(--line);
-  }
-  .humans-item {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 1.5rem;
-    padding: 2.2rem 0;
-    border-bottom: 1px solid var(--line);
-    align-items: baseline;
-  }
-  .humans-item .nu {
-    font-family: var(--display);
-    font-size: 72px; line-height: 0.85;
-    color: var(--accent-ink);
-    letter-spacing: -0.04em;
-  }
-  .humans-item h3 {
-    font-family: var(--display); font-size: 30px;
-    margin: 0 0 0.5rem; letter-spacing: -0.01em;
-    line-height: 1.05; color: var(--ink);
-  }
-  .humans-item p {
-    color: var(--ink-2); font-size: 16px;
-    line-height: 1.55; margin: 0; max-width: 540px;
-  }
-  @media (max-width: 540px) {
-    .humans-item { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.6rem 0; }
-    .humans-item .nu { font-size: 48px; }
-  }
-
-  /* Friday memo — dashboard with cursor mask reveal */
-  .memo-wrap { position: relative; }
-  .memo-frame {
-    --mx: 50%; --my: 50%;
-    background: #14110c; color: #f5f0e6;
-    border-radius: var(--radius-lg);
-    border: 1px solid #2a2218;
-    box-shadow: 0 30px 80px -30px rgba(20, 15, 5, 0.35);
-    overflow: hidden;
-    position: relative;
-  }
-  .memo-frame::after {
-    content: ""; position: absolute; inset: 0;
-    pointer-events: none; border-radius: inherit;
-    background:
-      radial-gradient(
-        360px circle at var(--mx) var(--my),
-        rgba(255, 200, 140, 0.45),
-        rgba(217, 119, 87, 0.20) 28%,
-        rgba(217, 119, 87, 0.06) 50%,
-        transparent 65%
-      );
-    mix-blend-mode: overlay;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 4;
-  }
-  .memo-frame:hover::after { opacity: 1; }
-  .memo-frame::before {
-    content: ""; position: absolute; inset: -1px;
-    pointer-events: none; border-radius: inherit;
-    background: radial-gradient(
-      400px circle at var(--mx) var(--my),
-      rgba(255, 180, 120, 0.7),
-      transparent 55%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    padding: 1px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 5;
-  }
-  .memo-frame:hover::before { opacity: 1; }
-  .memo-chrome {
-    height: 42px;
-    background: #1a160f;
-    border-bottom: 1px solid #2a2218;
-    display: flex; align-items: center; padding: 0 16px; gap: 12px;
-  }
-  .memo-chrome .dots { display: flex; gap: 6px; }
-  .memo-chrome .dots span {
-    width: 10px; height: 10px; border-radius: 999px; background: #3a3024;
-  }
-  .memo-chrome .url {
-    flex: 1; text-align: center;
-    font-family: var(--mono); font-size: 11px; color: #8b806b;
-    letter-spacing: 0.04em;
-  }
-  .memo-chrome .tag {
-    font-family: var(--mono); font-size: 9.5px;
-    color: var(--accent); letter-spacing: 0.16em;
-    background: rgba(196, 93, 44, 0.16);
-    padding: 3px 8px; border-radius: 4px;
-  }
-  .memo-summary {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: #2a2218;
-  }
-  .memo-summary .metric {
-    background: #14110c; padding: 1.6rem 1.4rem;
-  }
-  .memo-summary .metric .big {
-    font-family: var(--display); font-size: 38px;
-    color: #fff; letter-spacing: -0.02em; line-height: 1;
-  }
-  .memo-summary .metric:first-child .big { color: var(--accent); }
-  .memo-summary .metric .lbl {
-    font-size: 11px; color: #8b806b; margin-top: 0.5rem;
-    font-family: var(--mono); text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .memo-body {
-    padding: 1.6rem;
-    display: flex; flex-direction: column; gap: 0.85rem;
-  }
-  .memo-finding {
-    background: #1a160f; border: 1px solid #2a2218;
-    border-radius: 12px; padding: 1.1rem 1.2rem;
-    display: flex; gap: 1rem; position: relative;
-  }
-  .memo-finding::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; border-radius: 12px 0 0 12px;
-  }
-  .memo-finding.good { border-color: rgba(44, 143, 91, 0.3); }
-  .memo-finding.good::before { background: #2c8f5b; }
-  .memo-finding.warn { border-color: rgba(196, 93, 44, 0.3); }
-  .memo-finding.warn::before { background: var(--accent); }
-  .memo-finding .ic {
-    width: 36px; height: 36px; border-radius: 9px;
-    display: grid; place-items: center;
-    flex-shrink: 0; font-weight: 600; font-size: 16px;
-  }
-  .memo-finding.good .ic { background: rgba(44, 143, 91, 0.16); color: #6abd80; }
-  .memo-finding.warn .ic { background: rgba(196, 93, 44, 0.16); color: var(--accent); }
-  .memo-finding h4 {
-    margin: 0 0 0.25rem; color: #fff; font-size: 16px;
-    font-weight: 600; letter-spacing: -0.005em;
-  }
-  .memo-finding p {
-    margin: 0; font-size: 13.5px; color: #b8ad99;
-    line-height: 1.5;
-  }
-  .memo-finding .num {
-    margin-top: 0.5rem; display: inline-flex; align-items: baseline; gap: 0.5rem;
-  }
-  .memo-finding .num .v {
-    font-family: var(--display); font-size: 22px;
-    color: var(--accent); line-height: 1;
-  }
-  .memo-finding.good .num .v { color: #6abd80; }
-  .memo-finding .num .l {
-    font-family: var(--mono); font-size: 10.5px;
-    color: #8b806b; letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .memo-caption {
-    margin-top: 1.4rem;
-    color: var(--ink-3); font-size: 13.5px;
-    text-align: center;
-  }
-  @media (max-width: 700px) {
-    .memo-summary { grid-template-columns: 1fr; }
-    .memo-summary .metric .big { font-size: 32px; }
-  }
-
-  /* Wilmington — team section */
-  .wilmington-card {
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .wilmington-card::before {
-    content: ""; position: absolute;
-    inset: -25% -20% auto auto;
-    width: 480px; height: 480px;
-    background: radial-gradient(circle, rgba(196, 93, 44, 0.10), transparent 65%);
-    pointer-events: none;
-    filter: blur(40px);
-  }
-  .wilmington-body { position: relative; z-index: 1; }
-  .wilmington-body h2 {
-    font-size: clamp(34px, 4.5vw, 50px);
-    margin: 0.6rem 0 1.2rem;
-    line-height: 1.05;
-  }
-  .wilmington-body p {
-    color: var(--ink-2); font-size: 17px;
-    line-height: 1.6; max-width: 460px;
-    margin: 0 0 1rem;
-  }
-  .wilmington-body p + p { margin-top: 1rem; }
-  .wilmington-cta {
-    display: flex; gap: 0.6rem; flex-wrap: wrap;
-    margin-top: 1.6rem;
-  }
-  .wilmington-stats {
-    position: relative; z-index: 1;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    align-self: stretch;
-  }
-  .wilmington-team-video {
-    position: relative; z-index: 1;
-    background: var(--bg-2);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    aspect-ratio: 16/10;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  .wilmington-team-video video {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; object-fit: cover;
-  }
-  .wilmington-team-video .play-sm {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: var(--ink); color: var(--accent);
-    display: grid; place-items: center;
-    font-size: 20px; position: relative; z-index: 1;
-    transition: transform 0.2s ease;
-  }
-  .wilmington-team-video:hover .play-sm { transform: scale(1.06); }
-  .wilmington-team-video .ph {
-    margin-top: 0.8rem;
-    font-family: var(--mono); font-size: 11px;
-    color: var(--ink-3); letter-spacing: 0.08em;
-    position: relative; z-index: 1;
-    text-align: center; padding: 0 1rem;
-  }
-  .wilmington-team-video .ph code {
-    color: var(--accent-ink); background: var(--accent-soft);
-    padding: 1px 6px; border-radius: 4px;
-    font-family: inherit;
-  }
-  .wilmington-stat {
-    background: var(--bg);
-    padding: 1.4rem 1.2rem;
-    display: flex; flex-direction: column; gap: 0.4rem;
-  }
-  .wilmington-stat .v {
-    font-family: var(--display); font-size: 36px;
-    color: var(--ink); letter-spacing: -0.02em;
-    line-height: 1;
-  }
-  .wilmington-stat .l {
-    font-family: var(--mono); font-size: 10.5px;
-    color: var(--ink-3); letter-spacing: 0.12em;
-    text-transform: uppercase; margin-top: 0.4rem;
-  }
-  @media (max-width: 820px) {
-    .wilmington-card { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
-  }
-
-  /* Editorial pull-quote section */
-  .pull-quote {
-    padding: var(--section-y) 0;
-    position: relative;
-  }
-  .pull-quote::before {
-    content: ""; position: absolute;
-    inset: -5% -10% auto -10%;
-    height: 60%;
-    background: radial-gradient(ellipse 50% 70% at 50% 50%, rgba(217, 119, 87, 0.10), transparent 65%);
-    filter: blur(60px); pointer-events: none;
-  }
-  .pull-quote .container { position: relative; z-index: 1; }
-  .pull-quote blockquote {
-    font-family: var(--display);
-    font-size: clamp(36px, 5.2vw, 68px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin: 0; max-width: 1000px;
-  }
-  .pull-quote blockquote em { color: var(--accent-ink); font-style: italic; }
-  .pull-quote .signature {
-    margin-top: 2rem;
-    display: flex; gap: 0.7rem; align-items: center;
-    color: var(--ink-3); font-size: 14px;
-    font-family: var(--mono); letter-spacing: 0.04em;
-  }
-  .pull-quote .signature::before {
-    content: ""; width: 40px; height: 1px; background: var(--ink-3);
-  }
-
-  /* Video reel — full-width feature */
-  .video-section {
-    padding: var(--section-y) 0;
-    background: #14110c; color: #f5f0e6;
-    border-radius: 28px; margin: 2rem 1.5rem;
-    position: relative; overflow: hidden;
-  }
-  .video-section::before {
-    content: ""; position: absolute;
-    top: -10%; left: 50%; transform: translateX(-50%);
-    width: 800px; height: 500px;
-    background:
-      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(217, 119, 87, 0.35), transparent 65%),
-      radial-gradient(ellipse 50% 50% at 30% 10%, rgba(196, 93, 44, 0.30), transparent 65%);
-    filter: blur(70px); pointer-events: none;
-  }
-  .video-section .container { position: relative; z-index: 1; }
-  .video-section .eyebrow { color: var(--accent); }
-  .video-section h2 { color: #fff; }
-  .video-section .section-head p { color: rgba(245, 240, 230, 0.7); }
-
-  .video-grid {
-    display: grid; grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem; align-items: center;
-  }
-  @media (max-width: 900px) { .video-grid { grid-template-columns: 1fr; gap: 2rem; } }
-
-  .video-slot {
-    background: #0e0c08; border: 1px solid #2a2218;
-    border-radius: 18px; aspect-ratio: 16 / 10;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    cursor: pointer;
-  }
-  .video-slot video {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; object-fit: cover;
-  }
-  .video-slot .play {
-    position: relative; z-index: 1;
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    background: var(--accent); color: #1a0d00;
-    display: grid; place-items: center;
-    font-size: 26px;
-    box-shadow: 0 16px 40px -10px rgba(217, 119, 87, 0.5);
-    transition: transform 0.2s ease;
-  }
-  .video-slot:hover .play { transform: scale(1.06); }
-  .video-slot .placeholder {
-    margin-top: 1rem; font-family: var(--mono);
-    font-size: 12px; color: #8b806b; letter-spacing: 0.08em;
-    text-align: center; padding: 0 1rem;
-  }
-  .video-slot .placeholder code {
-    color: var(--accent); font-family: inherit;
-    background: rgba(217, 119, 87, 0.12);
-    padding: 2px 6px; border-radius: 4px;
-  }
-  .video-side h3 {
-    font-family: var(--display); font-size: clamp(28px, 3.5vw, 40px);
-    color: #fff; line-height: 1.1; margin: 0 0 1rem;
-    letter-spacing: -0.01em;
-  }
-  .video-side p {
-    color: rgba(245, 240, 230, 0.7); font-size: 17px;
-    line-height: 1.55; margin: 0 0 1rem;
-  }
-  .video-side .meta {
-    margin-top: 1.5rem;
-    display: flex; gap: 1.5rem; flex-wrap: wrap;
-    font-size: 13px; color: rgba(245, 240, 230, 0.5);
-    font-family: var(--mono); letter-spacing: 0.06em;
-  }
-  .video-side .meta span { display: flex; gap: 0.5rem; align-items: center; }
-  .video-side .meta strong { color: var(--accent); font-weight: 500; }
-
-  /* FAQ */
-  .faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
-  @media (max-width: 820px) { .faq-grid { grid-template-columns: 1fr; gap: 2rem; } }
-  .faq-list {
-    display: flex; flex-direction: column; gap: 0.5rem;
-  }
-  .faq-list details {
-    border: 1px solid var(--line); border-radius: 12px;
-    background: var(--bg);
-    transition: border-color 0.25s ease;
-  }
-  .faq-list details[open] { border-color: var(--line-2); }
-  .faq-list summary {
-    cursor: pointer; padding: 1.1rem 1.4rem;
-    list-style: none;
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 1rem;
-    font-weight: 500; font-size: 16px;
-    color: var(--ink);
-  }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after {
-    content: "+"; font-family: var(--mono); font-size: 20px;
-    color: var(--ink-3); transition: transform 0.2s ease;
-    flex-shrink: 0;
-  }
-  .faq-list details[open] summary::after { content: "–"; color: var(--accent-ink); }
-  .faq-list .ans {
-    padding: 0 1.4rem 1.2rem;
-    color: var(--ink-2); font-size: 15px; line-height: 1.6;
-    max-width: 640px;
-  }
-
-  /* CTA */
-  .cta-section {
-    margin: var(--section-y) 0 0;
-    background: var(--ink); color: var(--bg);
-    border-radius: 28px 28px 0 0;
-    padding: 5.5rem 0 3rem;
-    position: relative; overflow: hidden;
-  }
-  .cta-section::before {
-    content: ""; position: absolute;
-    inset: -10% -10% auto -10%;
-    height: 80%;
-    background:
-      radial-gradient(ellipse 60% 40% at 30% 0%, rgba(217, 119, 87, 0.55), transparent 60%),
-      radial-gradient(ellipse 55% 45% at 75% 5%, rgba(196, 93, 44, 0.45), transparent 65%),
-      radial-gradient(ellipse 80% 30% at 50% 0%, rgba(255, 200, 140, 0.32), transparent 65%);
-    pointer-events: none;
-    filter: blur(75px);
-    animation: aurora-shift 22s ease-in-out infinite alternate;
-    mix-blend-mode: screen;
-  }
-  .cta-section::after {
-    content: ""; position: absolute;
-    inset: 0; pointer-events: none;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 230, 200, 0.05), transparent 50%);
-  }
-  .cta-section .container { position: relative; z-index: 1; }
-  .cta-section h2 {
-    font-family: var(--display); font-size: clamp(40px, 5.5vw, 72px);
-    line-height: 1; letter-spacing: -0.02em;
-    max-width: 720px; margin: 0 0 1.2rem;
-  }
-  .cta-section h2 em {
-    font-style: italic;
-    color: color-mix(in oklch, var(--accent) 80%, white);
-  }
-  .cta-section p {
-    color: rgba(255, 250, 245, 0.7);
-    font-size: 18px; max-width: 540px;
-    margin: 0 0 1.8rem; line-height: 1.55;
-  }
-  .cta-section .btn-primary {
-    background: var(--accent); color: #1a0d00;
-  }
-  .cta-section .btn-primary:hover { background: #d97757; }
-  .cta-section .btn-ghost {
-    color: var(--bg);
-    border-color: rgba(255, 250, 245, 0.25);
-  }
-  .cta-section .btn-ghost:hover {
-    background: rgba(255, 250, 245, 0.08);
-    border-color: rgba(255, 250, 245, 0.5);
-  }
-  .cta-cta-row { display: flex; gap: 0.6rem; flex-wrap: wrap; position: relative; z-index: 1; }
-  .cta-foot {
-    margin-top: 4rem; padding-top: 2rem;
-    border-top: 1px solid rgba(255, 250, 245, 0.12);
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem;
-    color: rgba(255, 250, 245, 0.65);
-    font-size: 13.5px;
-    position: relative; z-index: 1;
-  }
-  .cta-foot h5 {
-    color: var(--bg); margin: 0 0 0.8rem;
-    font-family: var(--mono); font-size: 11px;
-    text-transform: uppercase; letter-spacing: 0.14em;
-    font-weight: 500;
-  }
-  .cta-foot a {
-    color: inherit; text-decoration: none;
-    display: block; padding: 0.25rem 0;
-    transition: color 0.2s ease;
-  }
-  .cta-foot a:hover { color: var(--bg); }
-  .cta-foot p { margin: 1rem 0 0; max-width: 320px; }
-  .cta-bottom {
-    margin-top: 2.5rem; padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 250, 245, 0.1);
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 0.6rem;
-    font-family: var(--mono); font-size: 12px;
-    color: rgba(255, 250, 245, 0.55);
-  }
-  @media (max-width: 700px) {
-    .cta-foot { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 420px) {
-    .cta-foot { grid-template-columns: 1fr; gap: 1.5rem; }
-  }
-
-  /* Mobile sticky CTA + back-to-top */
-  .mobile-cta-bar { display: none; }
-  @media (max-width: 700px) {
-    .mobile-cta-bar {
-      display: flex;
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: rgba(255, 250, 245, 0.95);
-      backdrop-filter: blur(14px) saturate(140%);
-      border-top: 1px solid var(--line);
-      padding: 0.75rem 1rem;
-      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
-      z-index: 40;
-    }
-    .mobile-cta-bar .btn-primary { flex: 1; justify-content: center; height: 48px; }
-    body { padding-bottom: 78px; }
-  }
-  .back-top {
-    position: fixed; bottom: 20px; right: 20px;
-    width: 42px; height: 42px;
-    border-radius: 999px;
-    background: var(--ink); color: var(--bg);
-    display: grid; place-items: center;
-    font-size: 18px; line-height: 1;
-    text-decoration: none;
-    z-index: 39;
-    opacity: 0; pointer-events: none;
-    transform: translateY(8px);
-    transition: opacity .2s ease, transform .2s ease, background .2s ease;
-  }
-  .back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  .back-top:hover { background: var(--accent); color: #1a0d00; }
-  @media (max-width: 700px) { .back-top { bottom: 86px; right: 14px; } }
-
-  /* Reveal on scroll */
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .65s ease, transform .65s cubic-bezier(.4,0,.2,1); }
-  .reveal.in { opacity: 1; transform: none; }
-
-  /* Focus */
-  a:focus-visible, button:focus-visible, summary:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 6px;
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-    .reveal { opacity: 1; transform: none; }
-  }
-
-  /* Tweaks */
-  @media (max-width: 700px) {
-    .video-section { margin: 1rem 0.6rem; padding: 4rem 0; }
-    .video-side .meta { gap: 0.8rem 1.2rem; font-size: 12px; }
-    .pull-quote blockquote { font-size: clamp(28px, 6vw, 44px); }
-  }
-  @media (max-width: 540px) {
-    .container { padding: 0 1rem; }
-    .section { padding: 5rem 0; }
-    .hero { padding: 4rem 0 3rem; }
-    .hero h1 { font-size: clamp(40px, 9vw, 56px); }
-    .wilmington-card { padding: 1.6rem; }
-    .wilmington-stats { grid-template-columns: 1fr 1fr; }
-    .wilmington-stat .v { font-size: 28px; }
-    .video-section { margin: 0.6rem 0.4rem; border-radius: 18px; padding: 3rem 0; }
-    .video-slot .placeholder { font-size: 11px; }
-    .humans-rail .lead { font-size: 22px; }
-    .install-name { font-size: 26px; }
-  }
-</style>
 </head>
 <body>
-<a href="#main" class="skip-link">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<header class="nav">
-  <div class="container nav-inner">
-    <a href="#" class="brand">
-      <div class="brand-mark">o</div>
-      <span>OpSpot<span class="dot-tld">.ai</span></span>
+<!-- Background plasma layer applied to entire page top -->
+<div class="page-plasma" aria-hidden="true">
+  <span class="plasma-blob b1"></span>
+  <span class="plasma-blob b2"></span>
+  <span class="plasma-blob b3"></span>
+  <span class="plasma-blob b4"></span>
+  <span class="plasma-grain"></span>
+</div>
+
+<header class="nav" id="nav">
+  <div class="nav-inner container">
+    <a class="brand" href="#top" aria-label="Automio home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22"><defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ff7a3d"/><stop offset="1" stop-color="#ff3da1"/></linearGradient></defs><circle cx="16" cy="16" r="13" fill="url(#bg)"/><path d="M10 21 L16 9 L22 21 M12.5 17 H19.5" stroke="#0a0a0e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </span>
+      <span class="brand-name">Automio</span>
     </a>
-    <nav class="nav-links">
-      <a href="#install">What we install</a>
-      <a href="#how">How we work</a>
-      <a href="#humans">Oversight</a>
-      <a href="#watch">Watch</a>
-      <a href="#wilmington">Wilmington</a>
-      <a href="#faq">FAQ</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#employees">AI Employees</a>
+      <a href="#how">How it works</a>
+      <a href="#reveal">Demo</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#pricing">Pricing</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-ghost btn-sm" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Email the team</a>
-      <a class="btn btn-primary btn-sm" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book an AI ops audit →</a>
+      <a class="nav-link-btn" href="#login">Sign in</a>
+      <a class="btn btn-primary btn-sm" href="#start">
+        Start free
+        <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobile-menu" hidden>
+    <a href="#employees">AI Employees</a>
+    <a href="#how">How it works</a>
+    <a href="#reveal">Demo</a>
+    <a href="#integrations">Integrations</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#login">Sign in</a>
+    <a class="btn btn-primary" href="#start">Start free</a>
   </div>
 </header>
 
-<section class="hero" id="main">
-  <div class="hero-aurora" aria-hidden="true"></div>
-  <div class="container hero-grid">
-    <div>
-      <span class="chip"><span class="dot"></span> Wilmington, NC · operating since 2025</span>
-      <h1 class="display">Hire AI employees that <em>actually show up</em> for work.</h1>
-      <p class="lede">OpSpot is a hands-on operations team in Wilmington. We install AI employees inside real businesses, stay close during rollout, and keep humans in the loop where judgment matters.</p>
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero-aurora" aria-hidden="true">
+      <span class="aurora a1"></span>
+      <span class="aurora a2"></span>
+      <span class="aurora a3"></span>
+      <span class="aurora-sheen"></span>
+    </div>
+    <div class="container hero-inner">
+      <a class="hero-pill" href="#whatsnew">
+        <span class="pill-dot"></span>
+        <span class="pill-text">New — Automio Voice 2.0 is live</span>
+        <svg width="12" height="12" viewBox="0 0 16 16"><path d="M5 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <h1 class="hero-title">
+        <span class="line">The busywork</span>
+        <span class="line">runs <em>itself</em>.</span>
+      </h1>
+      <p class="hero-lede">Automio installs AI employees inside your business — answering calls, booking jobs, chasing reviews, reactivating quiet customers, and clearing your CRM. So you stop doing the work that doesn't grow you.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book an AI ops audit →</a>
-        <a class="btn btn-ghost" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Talk to the Wilmington team</a>
-      </div>
-      <div class="hero-trust">
-        <span><strong>Hands-on installs</strong> · in-person where you are</span>
-        <span><strong>Wilmington, NC</strong> · local team you can call</span>
-        <span><strong>Human approvals</strong> · no black-box automation</span>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="label">Sample · what your front desk reads like</div>
-      <div class="hv-thread">
-        <div class="hv-msg them"><div class="who">Jorge R · 8:42 AM</div>What does a tankless install run for a 3-bed?</div>
-        <div class="hv-msg us"><div class="who">Maya · Front desk · 8:42 AM</div>Typically $3,400–$4,200 installed in your area, plus permits. Want me to pencil in a free site walk?</div>
-        <div class="hv-msg them"><div class="who">Jorge R · 8:43 AM</div>Friday afternoon if you have it.</div>
-      </div>
-      <div class="hv-foot">
-        <span><strong>Booked</strong> · Friday 2:00 PM</span>
-        <span class="ok">Synced to ServiceTitan</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="logos">
-  <div class="container">
-    <div class="logos-label">Built for shops like these — HVAC, plumbing, roofing, landscape, electric</div>
-    <div class="logos-row">
-      <span>Northbeam HVAC</span>
-      <span>Cedar &amp; Stone</span>
-      <span>Ridgeline Plumb</span>
-      <span>Halsted Electric</span>
-      <span>Birch Roofing</span>
-      <span>Anvil &amp; Co.</span>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="install">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">What we install</div>
-      <h2 class="display">One AI employee per bottleneck.<br/>Trained on your services, not a template.</h2>
-      <p>Each role is purpose-built for one part of the day. Your services, your prices, the way your crew actually talks. We sit with you and tune until it sounds right.</p>
-    </div>
-    <div class="install-list">
-      <div class="install-row">
-        <div class="install-num">01</div>
-        <div class="install-name">Maya<small>Front desk</small></div>
-        <div class="install-desc">Picks up texts, DMs, missed calls. Answers FAQs, gives ballpark pricing, books site visits. Replies in your tone, not "I'm a bot."</div>
-        <div class="install-tag">Customer-facing</div>
-      </div>
-      <div class="install-row">
-        <div class="install-num">02</div>
-        <div class="install-name">Theo<small>Estimator</small></div>
-        <div class="install-desc">Drafts proposals, runs the day-3, day-7, day-14 follow-up cadence on every quote. Knows your scopes and add-ons cold.</div>
-        <div class="install-tag">Revenue</div>
-      </div>
-      <div class="install-row">
-        <div class="install-num">03</div>
-        <div class="install-name">Robin<small>Dispatch</small></div>
-        <div class="install-desc">Routes jobs, handles reschedules, keeps techs and customers in sync without the phone tag. Auto-reshuffles when the morning runs long.</div>
-        <div class="install-tag">Operations</div>
-      </div>
-      <div class="install-row">
-        <div class="install-num">04</div>
-        <div class="install-name">Iris<small>Records</small></div>
-        <div class="install-desc">Files photos, signed forms, parts receipts to the right job. Builds the invoice draft while the truck is still rolling home.</div>
-        <div class="install-tag">Operations</div>
-      </div>
-      <div class="install-row">
-        <div class="install-num">05</div>
-        <div class="install-name">August<small>Ops auditor</small></div>
-        <div class="install-desc">Watches the whole team. Writes a one-page Friday memo: dollars saved, hours back, what's stuck, what to automate next. Plain English.</div>
-        <div class="install-tag">Strategy</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="how">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">How we work</div>
-      <h2 class="display">Spot. Build. Run. Report.</h2>
-      <p>One short loop. Hands-on through every step, with you in the seat.</p>
-    </div>
-    <div class="how-grid">
-      <div class="how-step tall">
-        <div class="step-num">01 · SPOT</div>
-        <h3>30-min audit</h3>
-        <p>We sit with you and pull up your phone logs, inbox, and calendar. Together we find what's leaking — calls missed at 6pm, quotes ghosting, photos lost in texts.</p>
-        <div class="deco">→ Pulled from your real ops, not a survey</div>
-      </div>
-      <div class="how-step wide">
-        <div class="step-num">02 · BUILD</div>
-        <h3>One worker, one bottleneck</h3>
-        <p>Our team designs the right AI employee for the leak. Trained on your services, your prices, the way your crew actually talks. No template.</p>
-        <div class="deco">~ 3 days from audit to first draft</div>
-      </div>
-      <div class="how-step med">
-        <div class="step-num">03 · RUN</div>
-        <h3>Installed live</h3>
-        <p>Goes live alongside your team. Anger, ambiguity, dollars over a threshold — escalates to a human on our side and yours.</p>
-      </div>
-      <div class="how-step med">
-        <div class="step-num">04 · REPORT</div>
-        <h3>Friday memo</h3>
-        <p>One page in your inbox: dollars saved, hours reclaimed, what's stuck, what to automate next.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="humans">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Where humans stay involved</div>
-      <h2 class="display">No black-box automation. Ever.</h2>
-    </div>
-    <div class="humans-rail">
-      <div class="lead">We're an operations company, not a <em>chatbot vendor</em>. Three things stay true on every install.</div>
-      <div class="humans-list">
-        <div class="humans-item">
-          <div class="nu">01</div>
-          <div>
-            <h3>Approval gates</h3>
-            <p>Every escalation routes to a human — anger, ambiguity, dollar amounts over a threshold you set. AI handles the loop; you handle judgment.</p>
-          </div>
-        </div>
-        <div class="humans-item">
-          <div class="nu">02</div>
-          <div>
-            <h3>Live receipts</h3>
-            <p>Every reply, file, status, and approval is visible. We don't hide anything in a model. You can read every line that goes out under your name.</p>
-          </div>
-        </div>
-        <div class="humans-item">
-          <div class="nu">03</div>
-          <div>
-            <h3>Local accountability</h3>
-            <p>The Wilmington team installs, monitors, and tunes — by name. If something breaks, you're texting a person, not a help-desk queue.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="memo">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Friday memo · sample</div>
-      <h2 class="display">One page. Dollars and hours.</h2>
-      <p>What our ops auditor writes for a working shop on a typical week. Numbers below are an example, not a real customer.</p>
-    </div>
-    <div class="memo-wrap">
-      <div class="memo-frame">
-        <div class="memo-chrome">
-          <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url">opspot.ai/memo · sample shop · week of Apr 28</div>
-          <div class="tag">SAMPLE</div>
-        </div>
-        <div class="memo-summary">
-          <div class="metric">
-            <div class="big">$9,318</div>
-            <div class="lbl">Saved this month</div>
-          </div>
-          <div class="metric">
-            <div class="big">47 hrs</div>
-            <div class="lbl">Hours reclaimed</div>
-          </div>
-          <div class="metric">
-            <div class="big">12 leads</div>
-            <div class="lbl">Caught after-hours</div>
-          </div>
-        </div>
-        <div class="memo-body">
-          <div class="memo-finding good">
-            <div class="ic">↑</div>
-            <div>
-              <h4>After-hours leads now caught</h4>
-              <p>12 leads landed after 6pm. Maya replied to all 12 within 4 minutes — 7 booked site visits.</p>
-              <div class="num"><span class="v">+$6,864</span><span class="l">est. recovered revenue</span></div>
-            </div>
-          </div>
-          <div class="memo-finding warn">
-            <div class="ic">!</div>
-            <div>
-              <h4>3 invoices over 30 days late</h4>
-              <p>Three accounts at 28d, 32d, and 41d. Theo can run a polite reminder cadence — say the word.</p>
-              <div class="num"><span class="v">$3,100</span><span class="l">at risk</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="memo-caption">Every Friday, in your inbox. Plain English. No dashboard you have to log into.</div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="wilmington">
-  <div class="container">
-    <div class="wilmington-card">
-      <div class="wilmington-body">
-        <div class="eyebrow">Built and run from Wilmington</div>
-        <h2 class="display">A human-built, human-run operations company.</h2>
-        <p>OpSpot isn't a chatbot vendor. We're a hands-on operations team based in Wilmington, NC. We meet with the business owner, map the workflows, install the AI employees, and stay in the seat while they run.</p>
-        <p>Local team. Real implementation. Human accountability. If something breaks at 6pm, you're texting a person on the team — not opening a help-desk ticket.</p>
-        <div class="wilmington-cta">
-          <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book the audit →</a>
-          <a class="btn btn-ghost" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Email the team</a>
-        </div>
-        <div class="hero-trust" style="margin-top: 1.6rem;">
-          <span><strong>Wilmington, NC</strong> · home base</span>
-          <span><strong>In-person</strong> · onsite for installs</span>
-          <span><strong>Same week</strong> · audit to live</span>
-        </div>
-      </div>
-      <div class="wilmington-team-video">
-        <video preload="none" playsinline muted loop poster="">
-          <!-- Drop your file at /assets/videos/team.mp4 and uncomment: -->
-          <!-- <source src="/assets/videos/team.mp4" type="video/mp4"> -->
-        </video>
-        <div class="play-sm" aria-hidden="true">▶</div>
-        <div class="ph">Meet the team — drop video at <code>/assets/videos/team.mp4</code></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="pull-quote">
-  <div class="container">
-    <blockquote>
-      "Most AI tools ship a chatbot and disappear. <em>We ship a worker</em> — and stay in the seat with you while it runs."
-    </blockquote>
-    <div class="signature">The OpSpot team · Wilmington, NC</div>
-  </div>
-</section>
-
-<section class="video-section" id="watch">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">In the field</div>
-      <h2 class="display">Watch a build go live.</h2>
-      <p>30 seconds inside a real install — from the audit call to the first live reply. No deck, no demo, just the work.</p>
-    </div>
-    <div class="video-grid">
-      <div class="video-slot" id="videoSlot1">
-        <video preload="none" playsinline muted loop poster="">
-          <!-- Drop your file at /assets/videos/install.mp4 and uncomment: -->
-          <!-- <source src="/assets/videos/install.mp4" type="video/mp4"> -->
-        </video>
-        <div class="play" aria-hidden="true">▶</div>
-        <div class="placeholder">Drop a video at <code>/assets/videos/install.mp4</code></div>
-      </div>
-      <div class="video-side">
-        <h3>From audit to live in the same week.</h3>
-        <p>Most installs run end-to-end inside seven days. We sit with the owner, map the leak, build the worker, and watch it go live before we hand it off.</p>
-        <p>You don't need to learn a new system. You read replies, tap approvals on outliers, and read one page on Friday.</p>
-        <div class="meta">
-          <span><strong>Wilmington, NC</strong> · home base</span>
-          <span><strong>30 min</strong> · audit call</span>
-          <span><strong>Same week</strong> · first worker live</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="faq">
-  <div class="container faq-grid">
-    <div>
-      <div class="eyebrow">FAQ</div>
-      <h2 class="display" style="font-size: clamp(32px, 4vw, 46px); margin-top: 0.6rem;">Common questions from owners.</h2>
-      <p style="color:var(--ink-2);">Still curious? Ask us anything on the audit — no slides, just your phones and inbox.</p>
-    </div>
-    <div class="faq-list" id="faqList"></div>
-  </div>
-</section>
-
-<section class="cta-section" id="cta">
-  <div class="container">
-    <div class="eyebrow" style="color: rgba(255, 250, 245, 0.6);">Talk to us</div>
-    <h2 class="display">Talk to the<br/><em>Wilmington team.</em></h2>
-    <p>30-minute audit on a Zoom or in-person. We'll walk through your phones, inbox, and ops, then propose one AI employee for one bottleneck. No deck.</p>
-    <div class="cta-cta-row">
-      <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book an AI ops audit →</a>
-      <a class="btn btn-ghost" href="mailto:Colton.Harris@automioapp.com?subject=OpSpot%20—%20want%20to%20chat">Or email the team</a>
-    </div>
-    <div class="cta-foot">
-      <div>
-        <a class="brand" href="#" style="color:var(--bg);">
-          <div class="brand-mark" style="background: var(--bg); color: var(--ink);">o</div>
-          <span>OpSpot.ai</span>
+        <a class="btn btn-primary btn-lg" href="#start">
+          Start free
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <p>A Wilmington, NC operations company. We install AI employees inside local service businesses and stay accountable for what they do.</p>
+        <a class="btn btn-glass btn-lg" href="#reveal">
+          <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></svg>
+          Watch 90s demo
+        </a>
       </div>
-      <div>
-        <h5>Product</h5>
-        <a>What we install</a><a>How we work</a><a>Friday memo</a><a>Pricing</a>
-      </div>
-      <div>
-        <h5>Company</h5>
-        <a>Wilmington team</a><a>Customers</a><a>Contact</a>
-      </div>
-      <div>
-        <h5>Trust</h5>
-        <a>Security</a><a>Privacy</a><a>SOC 2</a>
+      <ul class="hero-meta">
+        <li><span class="dot ok"></span> Goes live in 5 days</li>
+        <li><span class="dot warn"></span> Works with your phone, CRM, calendar</li>
+        <li><span class="dot brand"></span> Cancel anytime</li>
+      </ul>
+
+      <!-- Dashboard rising from bottom -->
+      <div class="hero-stage">
+        <div class="hero-stage-glow" aria-hidden="true"></div>
+        <div class="hero-dash" data-tilt>
+          <div class="dash-bar">
+            <span class="dash-dot r"></span>
+            <span class="dash-dot y"></span>
+            <span class="dash-dot g"></span>
+            <span class="dash-url">automio.app/inbox</span>
+            <span class="dash-pill">Live</span>
+          </div>
+          <div class="dash-body">
+            <aside class="dash-side">
+              <div class="dash-brand">
+                <span class="brand-mark sm" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="14" height="14"><circle cx="16" cy="16" r="13" fill="#ff7a3d"/><path d="M10 21 L16 9 L22 21 M12.5 17 H19.5" stroke="#0a0a0e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                </span>
+                <span>Automio</span>
+              </div>
+              <div class="dash-nav">
+                <span class="dn active"><i class="dn-i ico-inbox"></i> Inbox <em>14</em></span>
+                <span class="dn"><i class="dn-i ico-calls"></i> Calls</span>
+                <span class="dn"><i class="dn-i ico-book"></i> Bookings</span>
+                <span class="dn"><i class="dn-i ico-rev"></i> Reviews</span>
+                <span class="dn"><i class="dn-i ico-camp"></i> Reactivation</span>
+                <span class="dn"><i class="dn-i ico-task"></i> CRM tasks</span>
+              </div>
+              <div class="dash-team">
+                <p class="dn-label">AI EMPLOYEES</p>
+                <span class="emp-row"><i class="emp-pulse"></i> Receptionist</span>
+                <span class="emp-row"><i class="emp-pulse"></i> Booker</span>
+                <span class="emp-row"><i class="emp-pulse"></i> Reviewer</span>
+                <span class="emp-row"><i class="emp-pulse off"></i> Reactivator</span>
+              </div>
+            </aside>
+            <section class="dash-main">
+              <header class="dash-h">
+                <h3>Inbox</h3>
+                <span class="dash-h-meta">Today · 14 conversations · 3 booked</span>
+              </header>
+              <ul class="dash-thread">
+                <li class="thr active">
+                  <span class="thr-av" style="background:linear-gradient(135deg,#ff7a3d,#ff3da1)">JM</span>
+                  <span class="thr-name">Jamie Mendoza</span>
+                  <span class="thr-snip">Yes please, Tuesday at 3 works…</span>
+                  <span class="thr-tag tag-book">Booked</span>
+                </li>
+                <li class="thr">
+                  <span class="thr-av" style="background:linear-gradient(135deg,#7d6cff,#3dc9ff)">RP</span>
+                  <span class="thr-name">Rae Park</span>
+                  <span class="thr-snip">missed call · responded in 38s</span>
+                  <span class="thr-tag tag-call">Recovered</span>
+                </li>
+                <li class="thr">
+                  <span class="thr-av" style="background:linear-gradient(135deg,#3dffb5,#3dc9ff)">DS</span>
+                  <span class="thr-name">Devon Singh</span>
+                  <span class="thr-snip">Loved the work — happy to leave a review!</span>
+                  <span class="thr-tag tag-rev">5★ left</span>
+                </li>
+                <li class="thr">
+                  <span class="thr-av" style="background:linear-gradient(135deg,#ffb83d,#ff3d6e)">AK</span>
+                  <span class="thr-name">Alex Kowal</span>
+                  <span class="thr-snip">Quote sent for porch refinish</span>
+                  <span class="thr-tag">Quote</span>
+                </li>
+                <li class="thr">
+                  <span class="thr-av" style="background:linear-gradient(135deg,#9bff3d,#3dc9ff)">TC</span>
+                  <span class="thr-name">Toni Chen</span>
+                  <span class="thr-snip">Reactivation drip · last visit 7 mo ago</span>
+                  <span class="thr-tag tag-camp">Drip</span>
+                </li>
+              </ul>
+            </section>
+            <section class="dash-aside">
+              <div class="dash-card">
+                <p class="dn-label">Now talking</p>
+                <div class="conv">
+                  <p class="bub them">Hi! Do you guys do same-day water heater installs?</p>
+                  <p class="bub us">Yes — we have a 2pm and 4:30pm slot today. Which works better?</p>
+                  <p class="bub them">2pm please.</p>
+                  <p class="bub us">Booked. Confirmation text sent.</p>
+                </div>
+                <p class="conv-meta"><span class="dot ok sm"></span> Receptionist · 38s response</p>
+              </div>
+              <div class="dash-card stats">
+                <p class="dn-label">Today</p>
+                <div class="stat-row"><span>Calls answered</span><strong>27</strong></div>
+                <div class="stat-row"><span>Jobs booked</span><strong>9</strong></div>
+                <div class="stat-row"><span>Reviews requested</span><strong>14</strong></div>
+                <div class="stat-row"><span>Reactivations</span><strong>3</strong></div>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="cta-bottom">
-      <span>© <span data-year>2026</span> OpSpot, Inc. · Wilmington, NC</span>
-      <span>SOC 2 Type II · HIPAA-ready</span>
+  </section>
+
+  <!-- ============ Logos strip ============ -->
+  <section class="logos">
+    <div class="container">
+      <p class="logos-label">Installed in 1,200+ small businesses</p>
+      <div class="logos-row">
+        <span class="logo-word">RIVERSIDE&nbsp;HVAC</span>
+        <span class="logo-word">Sunset Plumbing</span>
+        <span class="logo-word italic">Bayou Detail Co.</span>
+        <span class="logo-word">CASTLE LAW</span>
+        <span class="logo-word">Lakeshore Med Spa</span>
+        <span class="logo-word italic">north star roofing</span>
+        <span class="logo-word">PAWS &amp; CLAWS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURSOR REVEAL DASHBOARD (mouse mask) ============ -->
+  <section class="reveal" id="reveal">
+    <div class="container">
+      <header class="section-head center">
+        <span class="eyebrow">live demo</span>
+        <h2>Move your cursor.<br><em>See the work disappear.</em></h2>
+        <p>The left side is your business now — calls dropped, leads cold, reviews not asked. The right side is a week after Automio. Same business. Different output.</p>
+      </header>
+    </div>
+    <div class="reveal-stage container-wide" data-cursor-reveal>
+      <div class="reveal-glow" aria-hidden="true"></div>
+
+      <!-- BASE LAYER: "before" -->
+      <div class="reveal-layer base">
+        <div class="rev-bar">
+          <span class="dash-dot r"></span><span class="dash-dot y"></span><span class="dash-dot g"></span>
+          <span class="dash-url"><span class="off">Without Automio</span></span>
+        </div>
+        <div class="rev-grid">
+          <div class="rev-tile lg">
+            <span class="dn-label">Missed calls</span>
+            <p class="rev-big huge">41<small>%</small></p>
+            <p class="rev-sub">Of inbound calls go to voicemail. Most never call back.</p>
+            <div class="rev-spark sad"></div>
+          </div>
+          <div class="rev-tile">
+            <span class="dn-label">Lead response</span>
+            <p class="rev-big">7h 22m</p>
+            <p class="rev-sub">Average time to first reply.</p>
+          </div>
+          <div class="rev-tile">
+            <span class="dn-label">Reviews / month</span>
+            <p class="rev-big">2.3</p>
+            <p class="rev-sub">From a base of ~120 jobs.</p>
+          </div>
+          <div class="rev-tile wide">
+            <span class="dn-label">CRM</span>
+            <p class="rev-big sm">307 untouched leads</p>
+            <p class="rev-sub">Sitting in your CRM, unread, going cold.</p>
+            <div class="rev-bars">
+              <i style="--h:30%"></i><i style="--h:46%"></i><i style="--h:60%"></i><i style="--h:74%"></i><i style="--h:78%"></i><i style="--h:82%"></i><i style="--h:88%"></i>
+            </div>
+          </div>
+          <div class="rev-tile">
+            <span class="dn-label">Customer reactivation</span>
+            <p class="rev-big">—</p>
+            <p class="rev-sub">Not happening.</p>
+          </div>
+          <div class="rev-tile">
+            <span class="dn-label">Social posts</span>
+            <p class="rev-big">1 / wk</p>
+            <p class="rev-sub">When you remember.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP LAYER: "after", masked by cursor -->
+      <div class="reveal-layer top" aria-hidden="true">
+        <div class="rev-bar">
+          <span class="dash-dot r"></span><span class="dash-dot y"></span><span class="dash-dot g"></span>
+          <span class="dash-url on">With Automio · live</span>
+          <span class="rev-pill">Today</span>
+        </div>
+        <div class="rev-grid">
+          <div class="rev-tile lg pos">
+            <span class="dn-label">Calls answered</span>
+            <p class="rev-big huge">100<small>%</small></p>
+            <p class="rev-sub">AI receptionist + missed-call SMS in &lt;30s.</p>
+            <div class="rev-spark up"></div>
+          </div>
+          <div class="rev-tile pos">
+            <span class="dn-label">Lead response</span>
+            <p class="rev-big">38s</p>
+            <p class="rev-sub">First reply, every time, day or night.</p>
+          </div>
+          <div class="rev-tile pos">
+            <span class="dn-label">Reviews / month</span>
+            <p class="rev-big">38</p>
+            <p class="rev-sub">From the same ~120 jobs.</p>
+          </div>
+          <div class="rev-tile wide pos">
+            <span class="dn-label">CRM</span>
+            <p class="rev-big sm">Inbox zero, daily</p>
+            <p class="rev-sub">Tasks closed, follow-ups sent, notes logged.</p>
+            <div class="rev-bars up">
+              <i style="--h:88%"></i><i style="--h:74%"></i><i style="--h:62%"></i><i style="--h:48%"></i><i style="--h:34%"></i><i style="--h:22%"></i><i style="--h:10%"></i>
+            </div>
+          </div>
+          <div class="rev-tile pos">
+            <span class="dn-label">Reactivations</span>
+            <p class="rev-big">+11.4k</p>
+            <p class="rev-sub">Recovered revenue this quarter.</p>
+          </div>
+          <div class="rev-tile pos">
+            <span class="dn-label">Social posts</span>
+            <p class="rev-big">5 / wk</p>
+            <p class="rev-sub">Drafted, scheduled, on brand.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="reveal-hint"><span class="hint-cursor"></span> Hover anywhere to reveal</p>
+    </div>
+  </section>
+
+  <!-- ============ AI EMPLOYEES (bento) ============ -->
+  <section class="employees" id="employees">
+    <div class="container">
+      <header class="section-head">
+        <span class="eyebrow">AI employees</span>
+        <h2>Hire one. Or hire <em>the whole team</em>.</h2>
+        <p>Each employee is its own workflow — installed, trained on your business, and accountable to a number. Mix and match.</p>
+      </header>
+
+      <div class="emp-grid">
+        <article class="emp-card lg" style="--accent:#ff7a3d">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8a3 3 0 0 1 3-3h2l1 4-2 1.5a11 11 0 0 0 5 5L15.5 13l4 1v2a3 3 0 0 1-3 3h-1A12 12 0 0 1 5 9z"/><path d="M17 4l4 4M21 4l-4 4"/></svg>
+          </div>
+          <h3>AI Receptionist</h3>
+          <p>Answers every call, in your voice, 24/7. Books jobs, qualifies leads, escalates the rare ones to you.</p>
+          <div class="emp-foot">
+            <span class="emp-stat">↑ 41% answer rate</span>
+            <span class="emp-go">View →</span>
+          </div>
+          <div class="emp-mock">
+            <div class="mini-call">
+              <div class="mc-bar"><span class="mc-dot"></span><span>Inbound · Sarah K.</span><span class="mc-time">0:38</span></div>
+              <div class="mc-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="mc-meta"><span class="dot ok sm"></span> Booked · Tue 3pm</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="emp-card" style="--accent:#ff3da1">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h20v14H4z"/><path d="M4 6l10 7 10-7"/><path d="M9 22l5-3 5 3"/></svg>
+          </div>
+          <h3>Missed-call follow-up</h3>
+          <p>If a call goes to voicemail, an SMS hits in 30 seconds — natural, not robotic.</p>
+          <div class="emp-foot"><span class="emp-stat">38s avg</span><span class="emp-go">View →</span></div>
+        </article>
+
+        <article class="emp-card" style="--accent:#7d6cff">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="9"/><path d="M14 8v6l4 2"/></svg>
+          </div>
+          <h3>Lead capture</h3>
+          <p>Forms, DMs, calls, paid ads — every lead gets a response in under a minute.</p>
+          <div class="emp-foot"><span class="emp-stat">&lt;1m response</span><span class="emp-go">View →</span></div>
+        </article>
+
+        <article class="emp-card" style="--accent:#3dc9ff">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="20" height="18" rx="2"/><path d="M4 11h20M9 3v6M19 3v6"/></svg>
+          </div>
+          <h3>Appointment booking</h3>
+          <p>Reads your calendar, holds slots, sends confirmations + reminders. Reschedules on its own.</p>
+          <div class="emp-foot"><span class="emp-stat">↓ 62% no-shows</span><span class="emp-go">View →</span></div>
+        </article>
+
+        <article class="emp-card" style="--accent:#ffb83d">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l3 7h7l-5.5 4.5L20 22l-6-4-6 4 1.5-7.5L4 10h7z"/></svg>
+          </div>
+          <h3>Review requests</h3>
+          <p>Texts every happy customer at the perfect moment. Pre-screens unhappy ones quietly.</p>
+          <div class="emp-foot"><span class="emp-stat">16× more reviews</span><span class="emp-go">View →</span></div>
+        </article>
+
+        <article class="emp-card wide" style="--accent:#3dffb5">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a10 10 0 1 0 10-10"/><path d="M4 14h6m-6 0v6"/></svg>
+          </div>
+          <h3>Customer reactivation</h3>
+          <p>Quietly walks back through your CRM, finds the customers who went silent, and brings them home.</p>
+          <div class="emp-mock side">
+            <div class="reactivate-rail">
+              <span class="rr-step">CRM scan</span>
+              <span class="rr-arrow">→</span>
+              <span class="rr-step">Segment by gap</span>
+              <span class="rr-arrow">→</span>
+              <span class="rr-step">SMS / email</span>
+              <span class="rr-arrow">→</span>
+              <span class="rr-step on">Booked: 3</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="emp-card" style="--accent:#ff5b5b">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="20" height="20" rx="3"/><circle cx="14" cy="14" r="4"/><circle cx="20" cy="8" r="1.2" fill="currentColor"/></svg>
+          </div>
+          <h3>Social &amp; content</h3>
+          <p>Drafts on-brand posts, captions, and replies — scheduled, queued, ready for one-tap approval.</p>
+          <div class="emp-foot"><span class="emp-stat">5 posts / wk</span><span class="emp-go">View →</span></div>
+        </article>
+
+        <article class="emp-card" style="--accent:#b285ff">
+          <div class="emp-icon">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h18M5 14h18M5 21h12"/><circle cx="22" cy="21" r="2.4"/></svg>
+          </div>
+          <h3>CRM &amp; task follow-up</h3>
+          <p>Closes loops you forget. Logs notes, updates statuses, nudges stuck deals.</p>
+          <div class="emp-foot"><span class="emp-stat">Inbox zero · daily</span><span class="emp-go">View →</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO VIDEO SECTION ============ -->
+  <section class="demo">
+    <div class="container demo-grid">
+      <div class="demo-text">
+        <span class="eyebrow">a real shift, in real time</span>
+        <h2>Watch <em>30 seconds</em> of one Tuesday morning.</h2>
+        <p>A cold lead, a missed call, and a customer who hadn't booked in 8 months — all handled before your second coffee. No one on your team touched a thing.</p>
+        <ul class="check-list">
+          <li><span class="ck"></span> Inbound call answered, qualified, booked</li>
+          <li><span class="ck"></span> Missed call → SMS in 38 seconds</li>
+          <li><span class="ck"></span> Reactivation drip recovers a $1,840 job</li>
+          <li><span class="ck"></span> Notes logged in your CRM, you get the digest</li>
+        </ul>
+        <a class="btn btn-primary" href="#start">Get the same Tuesday <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="demo-video">
+        <div class="demo-glow" aria-hidden="true"></div>
+        <div class="demo-frame" data-tilt>
+          <div class="dv-bar">
+            <span class="dash-dot r"></span><span class="dash-dot y"></span><span class="dash-dot g"></span>
+            <span class="dv-meta">Tue 9:14am · live capture</span>
+          </div>
+          <div class="dv-canvas">
+            <!-- animated faux-video: a small story unfolds via CSS -->
+            <div class="dv-scene scene-1">
+              <div class="phone-ring">
+                <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+                <span class="ring-core">📞</span>
+              </div>
+              <p class="dv-cap">Inbound · 910-555-0144</p>
+            </div>
+            <div class="dv-scene scene-2">
+              <div class="bub-stack">
+                <p class="bub them sm">Hey is anyone there?</p>
+                <p class="bub us sm">Hi! This is Automio for Riverside HVAC — Sarah's tied up but I can help.</p>
+                <p class="bub them sm">My AC just died, can someone come today?</p>
+                <p class="bub us sm">Yes — 1pm or 4pm?</p>
+                <p class="bub them sm">1pm 🙏</p>
+                <p class="bub us sm">Booked. Confirmation on its way.</p>
+              </div>
+            </div>
+            <div class="dv-scene scene-3">
+              <div class="dv-card">
+                <p class="dn-label">Reactivation</p>
+                <h4>Marie Lambert · 8 mo since last visit</h4>
+                <p class="dv-line">"Hi Marie — it's been a minute! Want me to book your annual tune-up?"</p>
+                <p class="dv-line reply">"Yes please — Friday?"</p>
+                <span class="rev-pill ok">$1,840 booked</span>
+              </div>
+            </div>
+            <div class="dv-progress"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS — staged timeline rail ============ -->
+  <section class="how" id="how">
+    <div class="container">
+      <header class="section-head">
+        <span class="eyebrow">how it works</span>
+        <h2>Five days to a quieter <em>Monday morning.</em></h2>
+        <p>We don't sell software, hand you a login, and disappear. We install the team, train them on your business, and stay close until they're earning their keep.</p>
+      </header>
+
+      <ol class="how-rail">
+        <li class="how-step">
+          <span class="how-num">01</span>
+          <h3>Audit</h3>
+          <p>30-min call. We map your phone, calendar, CRM, and the moments where leads slip.</p>
+          <span class="how-day">Day 1</span>
+        </li>
+        <li class="how-step">
+          <span class="how-num">02</span>
+          <h3>Install</h3>
+          <p>We hook into your existing tools. No rip-and-replace, no new dashboards to memorize.</p>
+          <span class="how-day">Day 2</span>
+        </li>
+        <li class="how-step">
+          <span class="how-num">03</span>
+          <h3>Train</h3>
+          <p>Each employee learns your services, prices, voice, and the things you say "yes" or "no" to.</p>
+          <span class="how-day">Day 3</span>
+        </li>
+        <li class="how-step">
+          <span class="how-num">04</span>
+          <h3>Soft launch</h3>
+          <p>One employee live, with you watching. We tune the edges. You approve the tone.</p>
+          <span class="how-day">Day 4</span>
+        </li>
+        <li class="how-step on">
+          <span class="how-num">05</span>
+          <h3>Live</h3>
+          <p>The whole team's working. You get a daily digest. We check in weekly for the first month.</p>
+          <span class="how-day">Day 5</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ GLASS PANEL SHOWCASE — review request flow ============ -->
+  <section class="glass-show">
+    <div class="container">
+      <header class="section-head">
+        <span class="eyebrow">a closer look</span>
+        <h2>How a <em>5-star review</em> happens<br>without you asking.</h2>
+      </header>
+    </div>
+    <div class="container-wide gs-stage">
+      <div class="gs-glow" aria-hidden="true"></div>
+
+      <div class="gs-panel p1" data-float>
+        <p class="dn-label">CRM signal</p>
+        <p class="gs-big">Job #4127 closed</p>
+        <p class="gs-meta">Devon Singh · gutter clean · paid</p>
+        <span class="gs-pulse"><i></i><i></i><i></i></span>
+      </div>
+
+      <div class="gs-panel p2" data-float style="--delay:.4s">
+        <p class="dn-label">Reviewer · drafting</p>
+        <div class="gs-msg">
+          <p>Hi Devon! Glad we got those gutters cleared before the storm. Two seconds — would you mind dropping us a quick review?</p>
+          <a class="gs-link">google.com/review/r…</a>
+        </div>
+        <p class="gs-meta">Tone: warm · Timing: T+3h</p>
+      </div>
+
+      <div class="gs-panel p3" data-float style="--delay:.8s">
+        <p class="dn-label">Result</p>
+        <div class="stars">★★★★★</div>
+        <p class="gs-quote">"Showed up on time, did clean work, didn't try to upsell us. Will use again."</p>
+        <p class="gs-meta">Posted to Google · Maps + GBP</p>
+      </div>
+
+      <svg class="gs-wires" viewBox="0 0 1200 500" aria-hidden="true">
+        <defs>
+          <linearGradient id="wire" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff7a3d" stop-opacity="0"/>
+            <stop offset=".5" stop-color="#ff3da1"/>
+            <stop offset="1" stop-color="#7d6cff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M210 130 C 380 160, 460 280, 600 280" stroke="url(#wire)" stroke-width="1.5" fill="none"/>
+        <path d="M780 280 C 880 280, 950 360, 1010 380" stroke="url(#wire)" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ METRICS GLOW ============ -->
+  <section class="metrics">
+    <div class="container">
+      <div class="metrics-grid">
+        <div class="metric">
+          <p class="metric-num">41<small>%</small></p>
+          <p class="metric-label">More calls answered</p>
+          <p class="metric-sub">vs. before Automio install</p>
+        </div>
+        <div class="metric">
+          <p class="metric-num">38<small>s</small></p>
+          <p class="metric-label">Average lead response</p>
+          <p class="metric-sub">around the clock</p>
+        </div>
+        <div class="metric">
+          <p class="metric-num">16<small>×</small></p>
+          <p class="metric-label">More reviews per month</p>
+          <p class="metric-sub">automated, never pushy</p>
+        </div>
+        <div class="metric">
+          <p class="metric-num">$11<small>k</small></p>
+          <p class="metric-label">Reactivated revenue</p>
+          <p class="metric-sub">avg. quarter, per location</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTEGRATIONS RAIL ============ -->
+  <section class="integrations" id="integrations">
+    <div class="container">
+      <header class="section-head center">
+        <span class="eyebrow">integrations</span>
+        <h2>Plays nicely with the tools<br><em>you already pay for.</em></h2>
+        <p>If we don't have a built-in integration, we'll build one for you in a week.</p>
+      </header>
+      <div class="int-rail">
+        <ul class="int-track" data-marquee>
+          <li><span class="int-dot" style="background:#34a853"></span> Google Voice</li>
+          <li><span class="int-dot" style="background:#0084ff"></span> OpenPhone</li>
+          <li><span class="int-dot" style="background:#ea4335"></span> Gmail</li>
+          <li><span class="int-dot" style="background:#0a66c2"></span> HubSpot</li>
+          <li><span class="int-dot" style="background:#ff7a59"></span> ServiceTitan</li>
+          <li><span class="int-dot" style="background:#222"></span> Jobber</li>
+          <li><span class="int-dot" style="background:#fab005"></span> Housecall Pro</li>
+          <li><span class="int-dot" style="background:#1da1f2"></span> Twilio</li>
+          <li><span class="int-dot" style="background:#5865f2"></span> Slack</li>
+          <li><span class="int-dot" style="background:#000"></span> Stripe</li>
+          <li><span class="int-dot" style="background:#7d6cff"></span> Calendly</li>
+          <li><span class="int-dot" style="background:#3dc9ff"></span> Square</li>
+          <!-- duplicate for marquee loop -->
+          <li><span class="int-dot" style="background:#34a853"></span> Google Voice</li>
+          <li><span class="int-dot" style="background:#0084ff"></span> OpenPhone</li>
+          <li><span class="int-dot" style="background:#ea4335"></span> Gmail</li>
+          <li><span class="int-dot" style="background:#0a66c2"></span> HubSpot</li>
+          <li><span class="int-dot" style="background:#ff7a59"></span> ServiceTitan</li>
+          <li><span class="int-dot" style="background:#222"></span> Jobber</li>
+          <li><span class="int-dot" style="background:#fab005"></span> Housecall Pro</li>
+          <li><span class="int-dot" style="background:#1da1f2"></span> Twilio</li>
+          <li><span class="int-dot" style="background:#5865f2"></span> Slack</li>
+          <li><span class="int-dot" style="background:#000"></span> Stripe</li>
+          <li><span class="int-dot" style="background:#7d6cff"></span> Calendly</li>
+          <li><span class="int-dot" style="background:#3dc9ff"></span> Square</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS GLASS ============ -->
+  <section class="testimonials">
+    <div class="container">
+      <header class="section-head">
+        <span class="eyebrow">small-business operators</span>
+        <h2>What 1,200 owners <em>actually said.</em></h2>
+      </header>
+      <div class="quotes-grid">
+        <figure class="quote-card">
+          <blockquote>"We were missing 4 calls a day on average. After Automio, we miss zero. The receptionist is, somehow, nicer than the person we replaced."</blockquote>
+          <figcaption>
+            <span class="qa-name">Marisol P.</span>
+            <span class="qa-role">Owner · Riverside HVAC, NC</span>
+          </figcaption>
+        </figure>
+        <figure class="quote-card">
+          <blockquote>"I had 300 dead leads in my CRM. Two weeks of reactivation got us $9,400 back. I will never run a business without this again."</blockquote>
+          <figcaption>
+            <span class="qa-name">Devon C.</span>
+            <span class="qa-role">Co-founder · Bayou Detail Co.</span>
+          </figcaption>
+        </figure>
+        <figure class="quote-card">
+          <blockquote>"My team thanks Automio every Friday. It quietly does the stuff none of us wanted to do but all of us were getting in trouble for."</blockquote>
+          <figcaption>
+            <span class="qa-name">Anita R.</span>
+            <span class="qa-role">GM · Lakeshore Med Spa</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq" id="faq">
+    <div class="container faq-wrap">
+      <header class="section-head">
+        <span class="eyebrow">questions</span>
+        <h2>The fine print, in <em>plain English.</em></h2>
+      </header>
+      <div class="faq-list" id="faqList"><!-- populated by JS --></div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="cta-final" id="start">
+    <div class="cta-aurora" aria-hidden="true">
+      <span class="aurora a1"></span>
+      <span class="aurora a2"></span>
+    </div>
+    <div class="container cta-inner">
+      <h2 class="cta-h">Stop being the bottleneck<br>of your own business.</h2>
+      <p class="cta-p">Free 30-minute audit. We'll map exactly where Automio earns its keep — and show you the receipts before you spend a dollar.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg halo" href="#book">
+          Book my free audit
+          <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-glass btn-lg" href="#pricing">See pricing</a>
+      </div>
+      <p class="cta-meta">No credit card · No 30-page contract · Cancel anytime</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="foot-brand">
+      <a class="brand" href="#top">
+        <span class="brand-mark sm" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="20" height="20"><circle cx="16" cy="16" r="13" fill="#ff7a3d"/><path d="M10 21 L16 9 L22 21 M12.5 17 H19.5" stroke="#0a0a0e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </span>
+        <span class="brand-name">Automio</span>
+      </a>
+      <p class="foot-tag">AI employees for small business.<br>Wilmington, NC.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <p class="foot-h">Product</p>
+        <a href="#employees">AI Employees</a>
+        <a href="#how">How it works</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="foot-col">
+        <p class="foot-h">Company</p>
+        <a href="#about">About</a>
+        <a href="#careers">Careers</a>
+        <a href="#blog">Field notes</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-col">
+        <p class="foot-h">Legal</p>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="#dpa">DPA</a>
+        <a href="#security">Security</a>
+      </div>
     </div>
   </div>
-</section>
+  <div class="container foot-bottom">
+    <span>© <span data-year>2026</span> Automio, Inc.</span>
+    <span class="foot-status"><span class="dot ok sm"></span> All systems operational</span>
+  </div>
+</footer>
 
-<a class="back-top" href="#main" aria-label="Back to top">↑</a>
-<div class="mobile-cta-bar">
-  <a class="btn btn-primary" href="https://calendly.com/harriscolton29/30min" target="_blank" rel="noopener">Book an AI ops audit →</a>
-</div>
+<button class="back-top" aria-label="Back to top">
+  <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 
-<script src="app.js"></script>
+<script src="app.js" defer></script>
 </body>
 </html>
