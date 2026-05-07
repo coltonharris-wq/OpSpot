@@ -1,856 +1,263 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>OpSpot.ai — AI employees for home services</title>
-<meta name="description" content="We build, install, and run AI workers inside roofing, HVAC, and solar shops. From a hands-on Wilmington team that's done it." />
-<meta name="theme-color" content="#090A0C">
-<meta property="og:type" content="website" />
-<meta property="og:title" content="OpSpot.ai — AI employees for home services" />
-<meta property="og:description" content="AI workers installed inside home-services businesses by a hands-on Wilmington team." />
-<meta property="og:url" content="https://opspot.ai" />
-<meta property="og:site_name" content="OpSpot.ai" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
-<style>
-  :root {
-    --bg-dark: #090a0c;
-    --bg-light: #f6f6f6;
-    --bg-band: #111111;
-    --ink-dark: #0b0d10;
-    --ink-light: #ffffff;
-    --ink-mute: #a8a8b0;
-    --ink-mute-light: #525258;
-    --accent-orange: #ff7e3a;
-    --accent-orange-glow: rgba(255, 126, 58, 0.55);
-    --accent-blue: #6e7bff;
-    --accent-purple: #a094ff;
-    --sans: 'Inter', system-ui, -apple-system, sans-serif;
-    --max-w: 1280px;
-    --pad: 24px;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--sans);
-    background: var(--bg-dark);
-    color: var(--ink-light);
-    font-size: 16px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  a { color: inherit; text-decoration: none; }
-  img, video, svg { display: block; max-width: 100%; }
-
-  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad); }
-
-  /* ---------- nav ---------- */
-  header.nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    height: 64px;
-    display: flex; align-items: center;
-    backdrop-filter: blur(0);
-    -webkit-backdrop-filter: blur(0);
-    background: rgba(9, 10, 12, 0);
-    border-bottom: 1px solid transparent;
-    transition: background 200ms ease, backdrop-filter 200ms ease, border-color 200ms ease;
-  }
-  header.nav.scrolled {
-    background: rgba(9, 10, 12, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom-color: rgba(255,255,255,0.04);
-  }
-  .nav-inner {
-    width: 100%; max-width: var(--max-w); margin: 0 auto;
-    padding: 0 var(--pad);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-brand { font-weight: 700; font-size: 18px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
-  .nav-brand-mark {
-    width: 26px; height: 26px;
-    background: linear-gradient(135deg, #fff, #d5d8f6);
-    border-radius: 7px;
-  }
-  .nav-links {
-    display: flex; align-items: center; gap: 32px;
-    font-size: 14px; color: rgba(255,255,255,0.78);
-  }
-  .nav-links a:hover { color: #fff; }
-  @media (max-width: 768px) { .nav-links { display: none; } }
-  .nav-cta { display: flex; align-items: center; gap: 8px; }
-  .nav-btn {
-    padding: 0 18px; height: 34px;
-    display: inline-flex; align-items: center;
-    border-radius: 9999px;
-    font-size: 12px; font-weight: 600; letter-spacing: -0.18px;
-    border: 1px solid rgba(255,255,255,0.16);
-    transition: background 120ms ease, border-color 120ms ease;
-  }
-  .nav-btn:hover { background: rgba(255,255,255,0.08); }
-  .nav-btn--solid { background: #fff; color: #0b0d10; border-color: #fff; }
-  .nav-btn--solid:hover { background: #f0f0f0; }
-
-  /* ---------- hero ---------- */
-  section.hero {
-    position: relative;
-    height: 1078px;
-    background: var(--bg-dark);
-    padding-top: 184px;
-    overflow: hidden;
-  }
-  @media (max-width: 1024px) { section.hero { height: 920px; padding-top: 140px; } }
-  @media (max-width: 640px)  { section.hero { height: 760px; padding-top: 110px; } }
-
-  .hero-video-wrap {
-    position: absolute; inset: 0; z-index: 0;
-    overflow: hidden;
-    background: #060709;
-  }
-  .hero-video-wrap video,
-  .hero-video-wrap canvas#lava {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  /* central beam — sharp white core wrapped by a soft halo */
-  .hero-beam {
-    position: absolute; left: 50%; top: 8%;
-    width: 3px; height: 70%;
-    transform: translateX(-50%) scaleY(var(--beam-y, 1));
-    background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.95) 70%, transparent 100%);
-    filter: blur(0.6px);
-    opacity: var(--beam-o, 0.95);
-    pointer-events: none;
-    will-change: transform, opacity;
-    z-index: 2;
-  }
-  .hero-beam::before {
-    /* soft outer halo around the core */
-    content: ''; position: absolute; left: 50%; top: 0;
-    width: 60px; height: 100%;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, transparent, rgba(220,230,255,0.55) 40%, rgba(180,200,255,0.55) 70%, transparent);
-    filter: blur(8px);
-  }
-  .hero-beam::after {
-    /* very wide ambient bloom */
-    content: ''; position: absolute; left: 50%; top: 0;
-    width: 360px; height: 100%;
-    transform: translateX(-50%);
-    background: radial-gradient(ellipse 50% 70% at 50% 50%, rgba(150, 170, 245, 0.30), transparent 75%);
-    filter: blur(40px);
-  }
-  /* base color wash behind the canvas */
-  .hero-wash {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 35% 65% at 50% 95%, rgba(160, 175, 255, 0.45), transparent 65%),
-      radial-gradient(ellipse 70% 35% at 50% 100%, rgba(120, 135, 240, 0.35), transparent 70%),
-      linear-gradient(180deg, #060709 0%, #0a0c14 55%, #07080c 100%);
-    pointer-events: none;
-  }
-  /* animated grain via canvas filter — subtle dot grid overlay */
-  .hero-grain {
-    position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
-    background-size: 3px 3px;
-    mix-blend-mode: overlay;
-    opacity: 0.55;
-    pointer-events: none;
-    animation: grainShift 12s linear infinite;
-  }
-  @keyframes grainShift {
-    0%   { background-position: 0 0; }
-    100% { background-position: 60px 60px; }
-  }
-
-  .hero-overlay {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: linear-gradient(180deg, rgba(9,10,12,0) 50%, rgba(9,10,12,0.45) 100%);
-  }
-
-  .hero-inner {
-    position: relative; z-index: 2;
-    max-width: var(--max-w); margin: 0 auto;
-    padding: 0 var(--pad);
-  }
-  .hero-h1 {
-    font-size: clamp(48px, 8vw, 112px);
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    font-weight: 600;
-    margin: 0 0 24px;
-    background: linear-gradient(160deg, #ffffff 30%, #d5d8f6 80%, #fdf7fe);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    max-width: 920px;
-  }
-  .hero-sub {
-    font-size: clamp(15px, 1.3vw, 18px);
-    line-height: 1.5;
-    color: rgba(255,255,255,0.72);
-    max-width: 540px;
-    margin: 0 0 40px;
-  }
-
-  /* glow pill CTA */
-  .cta-pill {
-    position: relative;
-    display: inline-flex; align-items: center; gap: 10px;
-    height: 48px;
-    padding: 0 28px;
-    border-radius: 9999px;
-    background: linear-gradient(180deg, #fff 0%, #d8d8d8 100%);
-    color: #0b0d10;
-    font-size: 13px; font-weight: 700; letter-spacing: -0.18px;
-    text-transform: uppercase;
-    z-index: 1;
-    transition: transform 160ms ease;
-  }
-  .cta-pill::before {
-    content: '';
-    position: absolute; inset: -28px -56px;
-    background: radial-gradient(ellipse at center, var(--accent-orange-glow) 0%, rgba(255,126,58,0.18) 35%, transparent 70%);
-    filter: blur(18px);
-    z-index: -1;
-    border-radius: 9999px;
-  }
-  .cta-pill:hover { transform: translateY(-1px); }
-  .cta-pill svg { width: 14px; height: 14px; }
-
-  /* dashboard peek under the hero copy */
-  .hero-dash-peek {
-    position: absolute; left: 50%; bottom: -1px;
-    width: min(1200px, 92vw);
-    transform: translateX(-50%);
-    z-index: 3;
-  }
-  .hero-dash-peek .dash-frame {
-    aspect-ratio: 16 / 7;
-    background: #0b0d10;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -20px 80px rgba(120, 135, 240, 0.35), 0 -4px 30px rgba(0,0,0,0.6);
-    overflow: hidden;
-    position: relative;
-  }
-  /* fake dashboard mock that scroll-reveals row by row */
-  .dash-mock {
-    display: grid;
-    grid-template-columns: 200px 1fr 280px;
-    gap: 1px;
-    height: 100%;
-    background: rgba(255,255,255,0.06);
-  }
-  @media (max-width: 768px) { .dash-mock { grid-template-columns: 1fr; } .dash-side, .dash-aside { display: none; } }
-  .dash-side, .dash-main, .dash-aside {
-    background: #0b0d10;
-    padding: 20px 18px;
-    display: flex; flex-direction: column; gap: 12px;
-  }
-  .dash-side { background: #08090c; }
-  .dash-logo { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #fff, #d5d8f6); margin-bottom: 8px; }
-  .dash-pill { height: 28px; border-radius: 8px; background: rgba(255,255,255,0.04); }
-  .dash-pill.short { width: 60%; }
-  .dash-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 14px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.025);
-  }
-  .dash-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .dash-dot.orange { background: var(--accent-orange); box-shadow: 0 0 12px rgba(255,126,58,0.7); }
-  .dash-dot.blue   { background: var(--accent-blue);   box-shadow: 0 0 12px rgba(110,123,255,0.7); }
-  .dash-dot.purple { background: var(--accent-purple); box-shadow: 0 0 12px rgba(160,148,255,0.7); }
-  .dash-bar { flex: 1; height: 10px; border-radius: 5px; background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)); }
-  .dash-bar.w90 { max-width: 90%; }
-  .dash-bar.w80 { max-width: 80%; }
-  .dash-bar.w70 { max-width: 70%; }
-  .dash-bar.w60 { max-width: 60%; }
-  .dash-tag {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
-    color: var(--accent-orange);
-    padding: 4px 8px; border-radius: 999px;
-    background: rgba(255,126,58,0.12);
-  }
-  .dash-tag.mute { color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); }
-  .dash-card { padding: 14px; border-radius: 10px; background: rgba(255,255,255,0.025); display: flex; flex-direction: column; gap: 8px; }
-  .dash-card-h { height: 12px; width: 60%; border-radius: 4px; background: rgba(255,255,255,0.18); }
-  .dash-card-l { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.06); }
-  .dash-card-l.short { width: 50%; }
-
-  .reveal-row {
-    opacity: 0; transform: translateX(-12px);
-    transition: opacity 600ms ease, transform 600ms ease;
-    transition-delay: calc(var(--stagger, 0) * 90ms);
-  }
-  .reveal-row.in { opacity: 1; transform: translateX(0); }
-
-  /* ---------- generic section header ---------- */
-  .sec-head { max-width: 720px; margin: 0 0 64px; }
-  .sec-head--center { margin-left: auto; margin-right: auto; text-align: center; }
-  .sec-h2 {
-    font-size: clamp(36px, 5.5vw, 80px);
-    line-height: 1;
-    letter-spacing: -0.035em;
-    font-weight: 600;
-    margin: 0 0 20px;
-  }
-  .sec-sub {
-    font-size: clamp(15px, 1.2vw, 18px);
-    line-height: 1.5;
-    color: var(--ink-mute-light);
-    max-width: 560px;
-    margin: 0;
-  }
-  .sec-sub--light { color: rgba(255,255,255,0.7); }
-
-  /* ---------- light sections ---------- */
-  section.light { background: var(--bg-light); color: var(--ink-dark); padding: 160px 0; }
-  section.light .sec-h2 { color: #0b0d10; }
-  @media (max-width: 768px) { section.light { padding: 96px 0; } }
-
-  /* ---------- productivity bento ---------- */
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 64px;
-  }
-  @media (max-width: 768px) { .bento-grid { grid-template-columns: 1fr; } }
-
-  .bento-card {
-    position: relative;
-    background: #0b0d10;
-    color: #fff;
-    border-radius: 24px;
-    overflow: hidden;
-    min-height: 420px;
-    display: flex; flex-direction: column;
-    border: 1px solid rgba(255,255,255,0.04);
-    transition: transform 200ms ease, border-color 200ms ease;
-  }
-  .bento-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.12); }
-  .bento-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(380px circle at var(--mx, -50%) var(--my, -50%), rgba(255,255,255,0.07), transparent 60%);
-    opacity: 0; transition: opacity 200ms ease;
-    pointer-events: none; z-index: 2;
-  }
-  .bento-card:hover::after { opacity: 1; }
-  .bento-media {
-    flex: 1; position: relative; overflow: hidden;
-    background: #0b0d10;
-  }
-  .bento-media::before {
-    content: 'video slot 1280×720';
-    position: absolute; inset: 0;
-    display: grid; place-items: center;
-    color: rgba(255,255,255,0.16);
-    font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .bento-media-glow {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 126, 58, 0.25), transparent 60%);
-    pointer-events: none;
-  }
-  .bento-media-glow.blue   { background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(110, 123, 255, 0.30), transparent 60%); }
-  .bento-media-glow.purple { background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(160, 148, 255, 0.30), transparent 60%); }
-  .bento-foot {
-    padding: 28px 32px 32px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
-  .bento-foot p { margin: 0; font-size: 15px; line-height: 1.5; }
-  .bento-foot strong { font-weight: 600; color: #fff; }
-  .bento-foot span { color: rgba(255,255,255,0.6); }
-
-  /* ---------- connect / perspective ---------- */
-  section.connect { background: var(--bg-light); color: var(--ink-dark); padding: 200px 0; }
-  @media (max-width: 768px) { section.connect { padding: 96px 0; } }
-  .perspective-stage {
-    position: relative;
-    margin: 80px auto 0;
-    aspect-ratio: 16 / 9;
-    perspective: 2000px;
-    transform-style: preserve-3d;
-    max-width: 1080px;
-  }
-  .perspective-stage .center-frame {
-    position: absolute; inset: 5% 18% 0 18%;
-    background: #0b0d10;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.18);
-    z-index: 3;
-  }
-  .perspective-stage .center-frame::before {
-    content: 'main video slot 1280×720';
-    position: absolute; inset: 0;
-    display: grid; place-items: center;
-    color: rgba(255,255,255,0.2);
-    font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .perspective-stage .side {
-    position: absolute; top: 10%; bottom: 0;
-    width: 28%;
-    background: linear-gradient(180deg, rgba(110,123,255,0.12), rgba(160,148,255,0.04));
-    border-radius: 14px;
-  }
-  .perspective-stage .side.left  { left: 0;  transform: rotateY( 22deg) translateZ(-30px); transform-origin: right center; }
-  .perspective-stage .side.right { right: 0; transform: rotateY(-22deg) translateZ(-30px); transform-origin: left center; }
-
-  /* ---------- demo dark band ---------- */
-  section.demo {
-    background: var(--bg-band);
-    color: #fff;
-    padding: 200px 0;
-    position: relative; overflow: hidden;
-  }
-  @media (max-width: 768px) { section.demo { padding: 96px 0; } }
-  .demo-frame {
-    position: relative;
-    aspect-ratio: 16 / 10;
-    max-width: 1100px;
-    margin: 80px auto 0;
-    background: #0b0d10;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
-    overflow: hidden;
-    z-index: 2;
-  }
-  .demo-frame::before {
-    content: 'dashboard demo video slot — 1920×1200';
-    position: absolute; inset: 0;
-    display: grid; place-items: center;
-    color: rgba(255,255,255,0.18);
-    font-size: 12px; font-weight: 500; letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .demo-glow {
-    position: absolute; left: 50%; bottom: -20%;
-    width: 80%; height: 80%;
-    transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(110, 123, 255, 0.45), transparent 60%);
-    filter: blur(60px);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .demo-glow.right {
-    left: 100%; transform: translateX(-100%);
-    width: 30%; bottom: 30%;
-    background: radial-gradient(ellipse at center, rgba(255,126,58,0.35), transparent 60%);
-  }
-
-  /* ---------- brain (asymmetric bento) ---------- */
-  section.brain { padding: 200px 0; }
-  @media (max-width: 768px) { section.brain { padding: 96px 0; } }
-  .brain-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 0.9fr 1.4fr;
-    grid-auto-rows: 280px;
-    gap: 16px;
-    margin-top: 64px;
-  }
-  @media (max-width: 1024px) { .brain-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 640px)  { .brain-grid { grid-template-columns: 1fr; } }
-
-  .brain-card {
-    position: relative;
-    background: #0b0d10;
-    color: #fff;
-    border-radius: 22px;
-    padding: 28px 28px 24px;
-    overflow: hidden;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-  .brain-card.span-2 { grid-column: span 2; }
-  @media (max-width: 1024px) { .brain-card.span-2 { grid-column: span 2; } }
-  @media (max-width: 640px)  { .brain-card.span-2 { grid-column: span 1; } }
-  .brain-card .brain-visual {
-    position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(110,123,255,0.18), transparent 60%);
-  }
-  .brain-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(280px circle at var(--mx, -50%) var(--my, -50%), rgba(255,255,255,0.07), transparent 60%);
-    opacity: 0; transition: opacity 200ms ease;
-    pointer-events: none; z-index: 2;
-  }
-  .brain-card:hover::after { opacity: 1; }
-  .brain-card .inner { position: relative; z-index: 1; }
-  .brain-label { font-size: 15px; font-weight: 600; }
-  .brain-desc  { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 6px; line-height: 1.45; }
-
-  /* ---------- team (light, two-col) ---------- */
-  section.team { background: var(--bg-light); color: var(--ink-dark); padding: 200px 0; }
-  @media (max-width: 768px) { section.team { padding: 96px 0; } }
-  .team-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  @media (max-width: 900px) { .team-grid { grid-template-columns: 1fr; gap: 40px; } }
-  .team-photo {
-    aspect-ratio: 4 / 5;
-    background: #0b0d10;
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .team-photo::before {
-    content: 'team photo slot 1200×1500';
-    position: absolute; inset: 0;
-    display: grid; place-items: center;
-    color: rgba(255,255,255,0.2);
-    font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .team-text p { color: var(--ink-mute-light); font-size: 17px; line-height: 1.55; margin: 0 0 18px; }
-  .team-text strong { color: var(--ink-dark); font-weight: 600; }
-
-  /* ---------- final CTA ---------- */
-  section.final-cta {
-    background: var(--bg-band);
-    color: #fff;
-    padding: 160px 0;
-    position: relative; overflow: hidden;
-  }
-  @media (max-width: 768px) { section.final-cta { padding: 96px 0; } }
-  .final-grid {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 64px;
-    align-items: center;
-  }
-  @media (max-width: 900px) { .final-grid { grid-template-columns: 1fr; gap: 40px; } }
-  .final-graphic {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    background: radial-gradient(circle at 50% 50%, #1c1c20 0%, #0b0d10 70%);
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow:
-      0 0 80px rgba(110, 123, 255, 0.25),
-      inset 0 0 60px rgba(255,126,58,0.18);
-    max-width: 480px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  .final-graphic::before {
-    content: 'graphic / video slot 800×800';
-    position: absolute; inset: 0;
-    display: grid; place-items: center;
-    color: rgba(255,255,255,0.25);
-    font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-  .cta-pill--ghost {
-    background: rgba(255,255,255,0.04);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.18);
-  }
-  .cta-pill--ghost::before { display: none; }
-  .cta-pill--ghost:hover { background: rgba(255,255,255,0.08); }
-
-  /* ---------- footer ---------- */
-  footer {
-    background: var(--bg-band);
-    color: rgba(255,255,255,0.5);
-    padding: 32px 0 48px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    font-size: 13px;
-  }
-  .foot-inner {
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .foot-inner nav { display: flex; gap: 24px; }
-  .foot-inner nav a:hover { color: #fff; }
-
-  /* ---------- scroll reveal ---------- */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 700ms ease, transform 700ms ease; }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-
-  /* dot grid on dark sections */
-  section.demo::after,
-  section.final-cta::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 3px 3px;
-    pointer-events: none;
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpSpot.ai - AI employees for SMB sales</title>
+  <meta name="description" content="OpSpot installs AI employees that answer leads, follow up, book appointments, and keep SMB sales teams moving." />
+  <meta name="theme-color" content="#080a0d" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="OpSpot.ai - AI employees for SMB sales" />
+  <meta property="og:description" content="AI employees that answer, qualify, follow up, and book for service businesses." />
+  <meta property="og:url" content="https://opspot.ai" />
+  <meta property="og:site_name" content="OpSpot.ai" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-brand">
-      <span class="nav-brand-mark"></span>
-      OpSpot
+  <header class="site-nav" data-nav>
+    <a href="#top" class="brand" aria-label="OpSpot home">
+      <img src="assets/logo-mark.svg" alt="" />
+      <span>OpSpot</span>
     </a>
-    <nav class="nav-links">
-      <a href="#what">What it does</a>
-      <a href="#brain">How it works</a>
-      <a href="#team">Team</a>
-      <a href="#cta">Pricing</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#work">AI employees</a>
+      <a href="#systems">Systems</a>
+      <a href="#brain">OpsBrain</a>
+      <a href="#demo">Demo</a>
     </nav>
-    <div class="nav-cta">
-      <a href="#cta" class="nav-btn">Sign in</a>
-      <a href="#cta" class="nav-btn nav-btn--solid">Get started</a>
+    <div class="nav-actions">
+      <a href="#demo" class="ghost-btn">Sign in</a>
+      <a href="#demo" class="solid-btn">Get started</a>
     </div>
-  </div>
-</header>
+  </header>
 
-<section class="hero">
-  <div class="hero-video-wrap">
-    <div class="hero-wash" aria-hidden="true"></div>
-    <canvas id="lava" aria-hidden="true"></canvas>
-    <div class="hero-beam" aria-hidden="true"></div>
-    <div class="hero-grain" aria-hidden="true"></div>
-    <!-- to use a real video, drop assets/hero.mp4 in and uncomment:
-    <video autoplay loop muted playsinline>
-      <source src="assets/hero.webm" type="video/webm" />
-      <source src="assets/hero.mp4"  type="video/mp4" />
-    </video>
-    -->
-  </div>
-  <div class="hero-overlay"></div>
-
-  <div class="hero-inner" data-parallax-root>
-    <h1 class="hero-h1" data-parallax="0.18">AI employees<br/>for home services.</h1>
-    <p class="hero-sub" data-parallax="0.12">We build, install, and run AI workers inside roofing, HVAC, and solar shops — from a hands-on Wilmington team that's actually done it.</p>
-    <a href="#cta" class="cta-pill" data-parallax="0.08">
-      See it work
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-    </a>
-  </div>
-
-  <div class="hero-dash-peek" aria-hidden="true">
-    <div class="dash-frame">
-      <div class="dash-mock">
-        <div class="dash-side">
-          <div class="dash-logo"></div>
-          <div class="dash-pill"></div>
-          <div class="dash-pill short"></div>
-          <div class="dash-pill"></div>
-          <div class="dash-pill short"></div>
-          <div class="dash-pill"></div>
+  <main id="top">
+    <section class="hero scene-dark" data-hero>
+      <div class="hero-water" aria-hidden="true">
+        <canvas id="water-field"></canvas>
+        <div class="water-beam"></div>
+        <div class="water-grain"></div>
+      </div>
+      <div class="hero-copy" data-parallax-root>
+        <h1 data-parallax="0.18">AI employees<br>for SMB sales.</h1>
+        <p data-parallax="0.1">OpSpot installs AI workers that answer leads, qualify buyers, follow up, book meetings, and hand your team the moments that need a human.</p>
+        <a href="#demo" class="glow-cta" data-parallax="0.06">
+          See it work
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="hero-console" aria-label="OpSpot sales console preview">
+        <div class="console-shell">
+          <aside class="console-rail">
+            <span class="rail-logo"></span>
+            <span class="rail-meter">64%</span>
+            <span></span><span></span><span></span><span></span>
+          </aside>
+          <section class="console-main">
+            <div class="console-top">
+              <span>Revenue desk</span>
+              <span>Live lead board</span>
+              <span>Follow-up queue</span>
+            </div>
+            <div class="pipeline">
+              <article class="deal-card hot">
+                <span class="deal-status">New lead</span>
+                <strong>Roof leak after storm</strong>
+                <p>AI replied in 18s, confirmed address, asked for photos.</p>
+              </article>
+              <article class="deal-card booked">
+                <span class="deal-status">Booked</span>
+                <strong>HVAC replacement</strong>
+                <p>Estimate placed on Tuesday route. Owner notified.</p>
+              </article>
+              <article class="deal-card nurture">
+                <span class="deal-status">Follow-up</span>
+                <strong>Solar quote revive</strong>
+                <p>Touch 7 of 14. Buyer opened financing link.</p>
+              </article>
+            </div>
+          </section>
+          <aside class="console-inbox">
+            <div class="inbox-tabs"><span>Inbox</span><span>Tasks</span><span>Calls</span></div>
+            <div class="inbox-item active"><strong>Maya asked for pricing</strong><span>12 sec ago</span></div>
+            <div class="inbox-item"><strong>Estimator paged</strong><span>2 min ago</span></div>
+            <div class="inbox-item"><strong>CRM updated</strong><span>5 min ago</span></div>
+          </aside>
         </div>
-        <div class="dash-main">
-          <div class="dash-row reveal-row" data-stagger="0">
-            <span class="dash-dot orange"></span><span class="dash-bar"></span><span class="dash-tag">NEW</span>
-          </div>
-          <div class="dash-row reveal-row" data-stagger="1">
-            <span class="dash-dot blue"></span><span class="dash-bar w70"></span><span class="dash-tag mute">2m</span>
-          </div>
-          <div class="dash-row reveal-row" data-stagger="2">
-            <span class="dash-dot purple"></span><span class="dash-bar w90"></span><span class="dash-tag mute">5m</span>
-          </div>
-          <div class="dash-row reveal-row" data-stagger="3">
-            <span class="dash-dot orange"></span><span class="dash-bar w60"></span><span class="dash-tag">BOOKED</span>
-          </div>
-          <div class="dash-row reveal-row" data-stagger="4">
-            <span class="dash-dot blue"></span><span class="dash-bar w80"></span><span class="dash-tag mute">12m</span>
+      </div>
+    </section>
+
+    <section class="productivity section-light" id="work">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Unmatched sales velocity</h2>
+          <p>Every module below replaces a real piece of manual SMB sales work: speed-to-lead, qualification, follow-up, scheduling, handoff, and CRM hygiene.</p>
+        </header>
+        <div class="feature-grid reveal">
+          <article class="media-card command-card">
+            <div class="card-visual">
+              <div class="command-menu">
+                <span>Run command...</span>
+                <button>Reply to lead</button>
+                <button>Book estimate</button>
+                <button>Send financing link</button>
+              </div>
+            </div>
+            <p><strong>Lead command center.</strong> One place to see every conversation, action, and next best move.</p>
+          </article>
+          <article class="media-card planner-card wide">
+            <div class="card-visual">
+              <div class="floating-phone">
+                <span>Today</span>
+                <strong>2:30 PM roof inspection</strong>
+                <small>Qualified, routed, confirmed</small>
+              </div>
+              <div class="ghost-panel left"></div>
+              <div class="ghost-panel right"></div>
+            </div>
+            <p><strong>Auto-scheduled appointments.</strong> The AI checks availability, books, confirms, and keeps the owner in the loop.</p>
+          </article>
+          <article class="media-card follow-card">
+            <div class="card-visual">
+              <div class="chat-bubble white">Can you send pricing?</div>
+              <div class="chat-bubble blue">Yes. I can also hold a Tuesday estimate.</div>
+              <div class="chat-bubble amber">Booked</div>
+            </div>
+            <p><strong>Follow-up that does not quit.</strong> Fourteen-touch sequences for leads that would normally disappear.</p>
+          </article>
+          <article class="media-card signal-card">
+            <div class="card-visual">
+              <div class="signal-orbit"><span></span><span></span><span></span></div>
+            </div>
+            <p><strong>Priority signals.</strong> Hot jobs surface immediately: emergency, high-ticket, ready-to-buy, angry customer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="office section-light">
+      <div class="office-grid" aria-hidden="true"></div>
+      <div class="container">
+        <header class="office-head reveal">
+          <h2>Sell together.<br>Like your best rep is awake.</h2>
+          <p>AI handles the front line. Your team joins when the deal becomes nuanced, expensive, or worth a human touch.</p>
+        </header>
+        <div class="call-stage reveal">
+          <div class="room-label room-left">Lead intake</div>
+          <div class="room-label room-right">Owner desk</div>
+          <div class="call-window">
+            <div class="lead-video">
+              <span class="lead-avatar">SMB</span>
+              <strong>Inbound buyer</strong>
+              <small>Asked for quote after hours</small>
+            </div>
+            <aside class="call-stack">
+              <div><span></span><strong>AI closer</strong></div>
+              <div><span></span><strong>Estimator</strong></div>
+              <div><span></span><strong>Owner</strong></div>
+            </aside>
+            <div class="call-controls"><span></span><span></span><span class="end"></span><span></span></div>
           </div>
         </div>
-        <div class="dash-aside">
-          <div class="dash-card reveal-row" data-stagger="2">
-            <div class="dash-card-h"></div>
-            <div class="dash-card-l"></div>
-            <div class="dash-card-l short"></div>
+        <div class="office-points reveal">
+          <article><span></span><strong>Customize workflow</strong><p>Each AI employee follows your offers, route rules, service area, and tone.</p></article>
+          <article><span></span><strong>Audio and SMS</strong><p>Calls, texts, emails, and CRM notes stay attached to one customer thread.</p></article>
+          <article><span></span><strong>Invite humans</strong><p>Escalation rules bring in a real person before trust breaks.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="systems scene-dark" id="systems">
+      <div class="container">
+        <header class="dark-head reveal">
+          <h2>Sync with every system.<br>Both ways.</h2>
+          <p>OpSpot sits between your phone, forms, CRM, calendar, and inbox so the sales motion keeps moving without copy-paste.</p>
+        </header>
+        <div class="sync-frame reveal">
+          <div class="sync-toolbar"><span></span><span></span><span></span><button>View</button><button>Show</button></div>
+          <div class="sync-rows">
+            <div><span>CRM-104</span><strong>Storm lead qualified</strong><em>Booked</em></div>
+            <div><span>CRM-099</span><strong>Estimate confirmation sent</strong><em>Tuesday</em></div>
+            <div><span>CRM-088</span><strong>Financing objection handled</strong><em>Warm</em></div>
+            <div><span>CRM-072</span><strong>Owner approval requested</strong><em>Human</em></div>
           </div>
-          <div class="dash-card reveal-row" data-stagger="3">
-            <div class="dash-card-h"></div>
-            <div class="dash-card-l"></div>
-            <div class="dash-card-l short"></div>
+        </div>
+        <div class="integration-grid reveal">
+          <article><span></span><strong>Two-way CRM sync</strong><p>Every status, note, and booked action returns to the source of truth.</p></article>
+          <article><span></span><strong>Private tasks</strong><p>Internal follow-ups stay private while customer messages stay clean.</p></article>
+          <article><span></span><strong>Multiple channels</strong><p>Phone, forms, SMS, email, and calendar run through one queue.</p></article>
+          <article><span></span><strong>Milestone migration</strong><p>Move old lead stages into AI-ready workflows without losing context.</p></article>
+          <article><span></span><strong>Track progress</strong><p>See what the AI did, what it tried, and where humans stepped in.</p></article>
+          <article><span></span><strong>Advanced filtering</strong><p>Find deals by value, urgency, source, owner, campaign, and next action.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="opsbrain section-light" id="brain">
+      <div class="container">
+        <header class="brain-head reveal">
+          <h2>OpSpot OpsBrain</h2>
+          <p>Connect every sales touch to a living memory layer. The AI knows the buyer, the offer, the owner rules, and the next move.</p>
+        </header>
+        <div class="brain-grid reveal">
+          <article><strong>Create tasks.</strong><span>Schedule callbacks, estimate prep, and owner approvals.</span><div class="mini-task"></div></article>
+          <article><strong>Plan your day.</strong><span>Visualize reps, routes, jobs, and capacity.</span><div class="mini-plan"></div></article>
+          <article class="date-orb"><b>08</b><span>May</span><i>+</i></article>
+          <article><strong>Chat with team.</strong><span>Send handoffs without losing customer context.</span><div class="mini-chat"></div></article>
+          <article class="wide"><strong>Sync in real time.</strong><span>Connect owner, AI closer, estimator, and CRM in one shared loop.</span><div class="voice-orbit"><span></span><span></span><span></span><span></span></div></article>
+          <article class="wide"><strong>Manage revenue.</strong><span>Customize pipelines around how your SMB actually sells.</span><div class="mini-board"></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="knowledge section-light">
+      <div class="knowledge-card reveal">
+        <div class="select-box">Team</div>
+        <span class="tag tag-one">owner</span>
+        <span class="tag tag-two">rep</span>
+        <strong>Collaborate</strong>
+        <p>Keep live scripts, objections, offers, and playbooks in one place.</p>
+      </div>
+      <div class="container knowledge-layout">
+        <div class="knowledge-copy reveal">
+          <h2>Every sales rule<br>at your fingertips</h2>
+          <p>OpSpot stores how your company sells: offers, territories, pricing rules, escalation patterns, objection handling, and customer history.</p>
+          <p><strong>Documents in OpSpot</strong> become executable memory for the AI employee, not forgotten SOPs in a folder.</p>
+          <div class="billboard">
+            <div class="building"></div>
+            <div class="sign"><span>OpSpot</span><strong>Any lead</strong><em>answered, routed, booked</em></div>
+          </div>
+          <div class="doc-block">
+            <code>const lead = await opspot.qualify(inbound)</code>
+            <code>if (lead.intent === "ready") bookEstimate()</code>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="light productivity" id="what">
-  <div class="container">
-    <header class="sec-head reveal">
-      <h2 class="sec-h2">What an AI employee actually does.</h2>
-      <p class="sec-sub">Six things your AI worker does the moment you turn it on. No prompts to write. No setup to learn. No babysitting.</p>
-    </header>
-    <div class="bento-grid reveal">
-      <article class="bento-card">
-        <div class="bento-media"><div class="bento-media-glow"></div></div>
-        <footer class="bento-foot"><p><strong>Answers leads in 30 seconds.</strong> <span>Every form, missed call, and inbound text gets a real reply before the lead can shop the next contractor.</span></p></footer>
-      </article>
-      <article class="bento-card">
-        <div class="bento-media"><div class="bento-media-glow blue"></div></div>
-        <footer class="bento-foot"><p><strong>Books estimates straight to your calendar.</strong> <span>Pulls live availability, drops the appointment, sends the confirmation, adds the address to the route.</span></p></footer>
-      </article>
-      <article class="bento-card">
-        <div class="bento-media"><div class="bento-media-glow purple"></div></div>
-        <footer class="bento-foot"><p><strong>Texts homeowners back forever.</strong> <span>Fourteen follow-up touches deep. Knows when to ease off and when to push for the close.</span></p></footer>
-      </article>
-      <article class="bento-card">
-        <div class="bento-media"><div class="bento-media-glow"></div></div>
-        <footer class="bento-foot"><p><strong>Logs everything to your CRM.</strong> <span>CompanyCam, JobNimbus, AccuLynx, ServiceTitan — wired once, you never copy-paste a lead again.</span></p></footer>
-      </article>
-      <article class="bento-card">
-        <div class="bento-media"><div class="bento-media-glow blue"></div></div>
-        <footer class="bento-foot"><p><strong>Flags storm and emergency jobs.</strong> <span>Priority leads — active leak, hail event, no AC — get a human paged the moment they come in.</span></p></footer>
-      </article>
-      <article class="bento-card">
-        <div class="bento-media"><div class="bento-media-glow purple"></div></div>
-        <footer class="bento-foot"><p><strong>Gets sharper every week.</strong> <span>Reviews its own calls. Learns which lines closed and which lost. Compounds inside your business.</span></p></footer>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="connect">
-  <div class="container">
-    <header class="sec-head sec-head--center reveal">
-      <h2 class="sec-h2">Lives inside the<br/>tools you already use.</h2>
-      <p class="sec-sub">Plugs into your phone system, your CRM, your calendar, and the apps your crew already opens every morning. No new logins.</p>
-    </header>
-    <div class="perspective-stage reveal">
-      <div class="side left"></div>
-      <div class="side right"></div>
-      <div class="center-frame"></div>
-    </div>
-  </div>
-</section>
-
-<section class="demo">
-  <div class="container">
-    <header class="sec-head reveal">
-      <h2 class="sec-h2">Watch one work a roof lead at 11pm.</h2>
-      <p class="sec-sub sec-sub--light">Real lead. Real text thread. Real booked estimate. No actor, no demo data, no edits.</p>
-    </header>
-    <div class="demo-frame reveal"></div>
-    <div class="demo-glow"></div>
-    <div class="demo-glow right"></div>
-  </div>
-</section>
-
-<section class="light brain" id="brain">
-  <div class="container">
-    <header class="sec-head sec-head--center reveal">
-      <h2 class="sec-h2">What's under the hood.</h2>
-      <p class="sec-sub">The pieces that make an AI employee actually employable — not a cute demo that breaks on the second call.</p>
-    </header>
-    <div class="brain-grid reveal">
-      <article class="brain-card">
-        <div class="brain-visual"></div>
-        <div class="inner">
-          <div class="brain-label">Voice that sounds like your office.</div>
-          <p class="brain-desc">Not a robot. Trained on your real recorded calls.</p>
-        </div>
-      </article>
-      <article class="brain-card">
-        <div class="brain-visual" style="background: radial-gradient(ellipse at 50% 30%, rgba(255,126,58,0.18), transparent 60%);"></div>
-        <div class="inner">
-          <div class="brain-label">Memory of every customer.</div>
-          <p class="brain-desc">Knows what they said in May 2024 when you bid the gutter job.</p>
-        </div>
-      </article>
-      <article class="brain-card">
-        <div class="brain-visual" style="background: radial-gradient(ellipse at 50% 30%, rgba(160,148,255,0.18), transparent 60%);"></div>
-        <div class="inner">
-          <div class="brain-label">SMS bridge.</div>
-          <p class="brain-desc">Same number you already give out.</p>
-        </div>
-      </article>
-      <article class="brain-card span-2">
-        <div class="brain-visual"></div>
-        <div class="inner">
-          <div class="brain-label">Dispatch that knows the crew schedule.</div>
-          <p class="brain-desc">Pulls who's free, who's near the address, what they're roofing tomorrow. Books with intent, not by guessing.</p>
-        </div>
-      </article>
-      <article class="brain-card">
-        <div class="brain-visual" style="background: radial-gradient(ellipse at 50% 30%, rgba(110,123,255,0.18), transparent 60%);"></div>
-        <div class="inner">
-          <div class="brain-label">ROI math, live.</div>
-          <p class="brain-desc">Tells you what each booked job is worth before you write the bid.</p>
-        </div>
-      </article>
-      <article class="brain-card">
-        <div class="brain-visual" style="background: radial-gradient(ellipse at 50% 30%, rgba(255,126,58,0.18), transparent 60%);"></div>
-        <div class="inner">
-          <div class="brain-label">Audit log of every decision.</div>
-          <p class="brain-desc">Replay any conversation, any quote, any decision the AI made.</p>
-        </div>
-      </article>
-      <article class="brain-card span-2">
-        <div class="brain-visual" style="background: radial-gradient(ellipse at 50% 30%, rgba(160,148,255,0.18), transparent 60%);"></div>
-        <div class="inner">
-          <div class="brain-label">Knows when to call you in.</div>
-          <p class="brain-desc">Edge cases get a human, not a hallucinated reply. Big checks, weird requests, angry homeowners — straight to your phone.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="team" id="team">
-  <div class="container">
-    <div class="team-grid">
-      <div class="team-photo reveal" aria-hidden="true"></div>
-      <div class="team-text reveal">
-        <h2 class="sec-h2">Built by closers, not coders.</h2>
-        <p>We're a small team in <strong>Wilmington, NC.</strong> We sat in the trucks. Knocked the doors. Sold the roofs. We know the difference between a lead worth chasing and a lead worth dropping.</p>
-        <p>That's why our AI employees actually close — they were trained on the call patterns of people who do this work for a living, not on a generic LLM script.</p>
-        <p>You get an installation, a phone number to text, and a team that sits in the rollouts you're running.</p>
-        <a href="#cta" class="cta-pill" style="margin-top: 24px;">Meet the team</a>
+    <section class="final-cta scene-dark" id="demo">
+      <div class="final-orb" aria-hidden="true">
+        <div class="dial"><span></span><span></span><span></span></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="final-cta" id="cta">
-  <div class="container">
-    <div class="final-grid">
-      <div class="final-graphic reveal" aria-hidden="true"></div>
-      <div class="reveal">
-        <h2 class="sec-h2">See it text you live.</h2>
-        <p class="sec-sub sec-sub--light" style="max-width:420px;">Drop your number. Get a real text from an AI employee within 60 seconds. Then book 15 minutes with us if you like what you see.</p>
+      <div class="final-copy reveal">
+        <h2>See it sell live.</h2>
+        <p>Drop into a live demo and watch an AI employee qualify a lead, send the follow-up, book the meeting, and update the CRM.</p>
         <div class="cta-row">
-          <a href="#" class="cta-pill">Text me a demo</a>
-          <a href="#" class="cta-pill cta-pill--ghost">Book 15 min</a>
+          <a href="mailto:colton@opspot.ai?subject=OpSpot%20demo" class="glow-cta">See in action</a>
+          <a href="mailto:colton@opspot.ai?subject=Book%2015%20minutes%20with%20OpSpot" class="dark-pill">Book 15 min</a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+      <footer class="site-footer">
+        <span>&copy; 2026 OpSpot.ai. Wilmington, NC.</span>
+        <nav><a href="#work">AI employees</a><a href="#systems">Systems</a><a href="#brain">OpsBrain</a><a href="mailto:colton@opspot.ai">Email</a></nav>
+      </footer>
+    </section>
+  </main>
 
-<footer>
-  <div class="container foot-inner">
-    <div>© 2026 OpSpot.ai · Wilmington, NC</div>
-    <nav>
-      <a href="#">X</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
-      <a href="#">Email</a>
-    </nav>
-  </div>
-</footer>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

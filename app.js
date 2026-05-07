@@ -1,221 +1,188 @@
-// =============================================================
-// OpSpot landing — interactivity bundle
-// =============================================================
+// OpSpot landing interactions and canvas motion.
 
-// ---------- 1. canvas lava ----------
-//
-// layered light field rendered on canvas:
-//   • base concentrated near center-bottom (cone source)
-//   • cone of light fanning down + out from the central beam top
-//   • soft drifting "smoke" blobs in the upper area
-//   • bright hot core right where the beam meets the dashboard
-//
-(function () {
-  const canvas = document.getElementById('lava');
+(function drawWaterField() {
+  const canvas = document.getElementById("water-field");
   if (!canvas) return;
-  const ctx = canvas.getContext('2d', { alpha: true });
+  const ctx = canvas.getContext("2d", { alpha: true });
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let width = 0;
+  let height = 0;
+  let raf = 0;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let w = 0, h = 0, raf = 0, t0 = performance.now();
+  const start = performance.now();
 
-  // bottom blobs (concentrated around center-bottom, fanning slightly)
-  const baseBlobs = [
-    { color: '155, 170, 255', amp: 0.55, ox: 0.00, oy: 0.96, drift: 0.10, rk: 0.30 },
-    { color: '125, 140, 240', amp: 0.50, ox: 0.00, oy: 0.92, drift: 0.18, rk: 0.40 },
-    { color: '180, 160, 255', amp: 0.42, ox: 0.00, oy: 0.94, drift: 0.22, rk: 0.36 },
-    { color: '110, 130, 230', amp: 0.45, ox: 0.00, oy: 0.98, drift: 0.30, rk: 0.42 },
-    { color: '200, 210, 255', amp: 0.32, ox: 0.00, oy: 0.86, drift: 0.14, rk: 0.24 },
-  ];
-
-  // upper smoke (very subtle, dim, slow)
-  const smokeBlobs = [
-    { color: '90, 100, 160',  amp: 0.10, ox: -0.30, oy: 0.20, drift: 0.04, rk: 0.45 },
-    { color: '80, 90, 150',   amp: 0.08, ox:  0.30, oy: 0.16, drift: 0.05, rk: 0.40 },
-    { color: '120, 130, 200', amp: 0.06, ox:  0.10, oy: 0.30, drift: 0.06, rk: 0.50 },
+  const clouds = [
+    { x: 0.22, y: 0.18, r: 0.34, c: "54,78,126", a: 0.2, s: 0.18 },
+    { x: 0.73, y: 0.23, r: 0.42, c: "58,85,158", a: 0.28, s: 0.14 },
+    { x: 0.83, y: 0.55, r: 0.32, c: "44,112,220", a: 0.32, s: 0.22 },
+    { x: 0.53, y: 0.76, r: 0.46, c: "92,104,255", a: 0.28, s: 0.16 },
+    { x: 0.42, y: 0.8, r: 0.36, c: "76,210,255", a: 0.34, s: 0.2 },
   ];
 
   function resize() {
-    const rect = canvas.getBoundingClientRect();
-    w = canvas.width  = Math.max(1, Math.floor(rect.width  * dpr));
-    h = canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+    const box = canvas.getBoundingClientRect();
+    width = Math.max(1, Math.floor(box.width * dpr));
+    height = Math.max(1, Math.floor(box.height * dpr));
+    canvas.width = width;
+    canvas.height = height;
   }
 
-  function paintBlob(b, t, freqX, freqY, freqR) {
-    const x = w / 2 + (b.ox * w) + Math.sin(t * freqX + b.amp * 7) * w * b.drift;
-    const y = h * b.oy + Math.cos(t * freqY + b.amp * 9) * h * 0.04;
-    const r = w * (b.rk + Math.sin(t * freqR + b.amp) * 0.04);
-    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0,    `rgba(${b.color}, ${b.amp})`);
-    g.addColorStop(0.45, `rgba(${b.color}, ${b.amp * 0.4})`);
-    g.addColorStop(1,    `rgba(${b.color}, 0)`);
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
+  function radial(x, y, r, color, alpha) {
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, r);
+    gradient.addColorStop(0, `rgba(${color}, ${alpha})`);
+    gradient.addColorStop(0.45, `rgba(${color}, ${alpha * 0.38})`);
+    gradient.addColorStop(1, `rgba(${color}, 0)`);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
   }
 
-  function paintCone(t) {
-    // Cone of light from beam apex (top center) fanning down + out
-    const ax = w / 2;
-    const ay = h * 0.10;
-    const grow = 1 + Math.sin(t * 0.0009) * 0.03;
-    const conePts = [
-      [ax,                                  ay],
-      [ax - w * 0.55 * grow,                h],
-      [ax + w * 0.55 * grow,                h],
-    ];
-    const g = ctx.createLinearGradient(ax, ay, ax, h);
-    g.addColorStop(0,    'rgba(220, 225, 255, 0.22)');
-    g.addColorStop(0.5,  'rgba(150, 165, 245, 0.12)');
-    g.addColorStop(1,    'rgba(110, 130, 230, 0)');
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.moveTo(conePts[0][0], conePts[0][1]);
-    ctx.lineTo(conePts[1][0], conePts[1][1]);
-    ctx.lineTo(conePts[2][0], conePts[2][1]);
-    ctx.closePath();
-    ctx.fill();
-  }
-
-  function paintHotCore(t) {
-    // Bright hot core at the beam base (where it meets the dashboard).
-    const x = w / 2;
-    const y = h * 0.78;
-    const pulse = 1 + Math.sin(t * 0.0022) * 0.12;
-    const r = w * 0.10 * pulse;
-    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0,   'rgba(255, 255, 255, 0.85)');
-    g.addColorStop(0.3, 'rgba(220, 230, 255, 0.40)');
-    g.addColorStop(1,   'rgba(180, 200, 255, 0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
+  function beamBase(t) {
+    const beamX = window.innerWidth <= 900 ? 0.92 : 0.555;
+    const x = width * beamX;
+    const y = height * 0.63;
+    const pulse = 1 + Math.sin(t * 1.7) * 0.08;
+    radial(x, y, width * 0.18 * pulse, "255,255,255", 0.62);
+    radial(x, y, width * 0.34 * pulse, "74,200,255", 0.2);
   }
 
   function frame(now) {
-    const t = now - t0;
-    ctx.clearRect(0, 0, w, h);
-    ctx.globalCompositeOperation = 'lighter';
+    const t = (now - start) / 1000;
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#05070a";
+    ctx.fillRect(0, 0, width, height);
+    ctx.globalCompositeOperation = "lighter";
 
-    // upper soft smoke (slow, dim)
-    smokeBlobs.forEach((b) => paintBlob(b, t, 0.00010, 0.00012, 0.00009));
+    clouds.forEach((cloud, index) => {
+      const driftX = Math.sin(t * cloud.s + index * 1.8) * width * 0.035;
+      const driftY = Math.cos(t * cloud.s * 0.7 + index) * height * 0.025;
+      radial(
+        width * cloud.x + driftX,
+        height * cloud.y + driftY,
+        width * cloud.r,
+        cloud.c,
+        cloud.a
+      );
+    });
 
-    // cone of beam light
-    paintCone(t);
+    const beamX = window.innerWidth <= 900 ? 0.92 : 0.555;
+    const cone = ctx.createLinearGradient(width * beamX, height * 0.1, width * beamX, height);
+    cone.addColorStop(0, "rgba(255,255,255,0.08)");
+    cone.addColorStop(0.52, "rgba(80,200,255,0.09)");
+    cone.addColorStop(1, "rgba(80,105,255,0)");
+    ctx.filter = "blur(38px)";
+    ctx.fillStyle = cone;
+    ctx.beginPath();
+    ctx.moveTo(width * beamX, height * 0.08);
+    ctx.lineTo(width * (beamX - 0.38), height);
+    ctx.lineTo(width * 0.96, height);
+    ctx.closePath();
+    ctx.fill();
+    ctx.filter = "none";
 
-    // dense base blobs
-    baseBlobs.forEach((b) => paintBlob(b, t, 0.00030, 0.00045, 0.00020));
-
-    // bright hot core
-    paintHotCore(t);
-
-    ctx.globalCompositeOperation = 'source-over';
+    beamBase(t);
+    ctx.globalCompositeOperation = "source-over";
     raf = requestAnimationFrame(frame);
   }
 
   resize();
-  raf = requestAnimationFrame(frame);
-  window.addEventListener('resize', () => {
-    cancelAnimationFrame(raf);
-    resize();
-    raf = requestAnimationFrame(frame);
-  }, { passive: true });
+  window.addEventListener("resize", resize, { passive: true });
+  if (!reduce) raf = requestAnimationFrame(frame);
+  else frame(start);
+  window.addEventListener("pagehide", () => cancelAnimationFrame(raf));
 })();
 
-// ---------- 2. hero beam pulse ----------
-(function () {
-  const beam = document.querySelector('.hero-beam');
-  if (!beam) return;
-  let raf = 0, t0 = performance.now();
+(function pulseBeam() {
+  const beam = document.querySelector(".water-beam");
+  if (!beam || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const start = performance.now();
+
   function tick(now) {
-    const t = (now - t0) / 1000;
-    const o = 0.7 + Math.sin(t * 1.4) * 0.18;
-    const y = 1 + Math.sin(t * 0.9) * 0.06;
-    beam.style.setProperty('--beam-o', o.toFixed(3));
-    beam.style.setProperty('--beam-y', y.toFixed(3));
-    raf = requestAnimationFrame(tick);
+    const t = (now - start) / 1000;
+    beam.style.setProperty("--beam-alpha", String(0.82 + Math.sin(t * 1.45) * 0.16));
+    beam.style.setProperty("--beam-scale", String(0.98 + Math.sin(t * 0.9) * 0.035));
+    requestAnimationFrame(tick);
   }
-  raf = requestAnimationFrame(tick);
+
+  requestAnimationFrame(tick);
 })();
 
-// ---------- 3. mouse parallax on hero copy ----------
-(function () {
-  const root = document.querySelector('[data-parallax-root]');
-  if (!root) return;
-  const targets = Array.from(document.querySelectorAll('[data-parallax]'));
-  let raf = 0;
-  let tx = 0, ty = 0, cx = 0, cy = 0;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return;
+(function revealOnScroll() {
+  const elements = Array.from(document.querySelectorAll(".reveal"));
+  if (!elements.length) return;
 
-  function loop() {
-    cx += (tx - cx) * 0.08;
-    cy += (ty - cy) * 0.08;
-    targets.forEach((el) => {
-      const k = parseFloat(el.dataset.parallax) || 0.1;
-      el.style.transform = `translate(${cx * k * 12}px, ${cy * k * 12}px)`;
-    });
-    raf = requestAnimationFrame(loop);
-  }
-  window.addEventListener('mousemove', (e) => {
-    const r = root.getBoundingClientRect();
-    tx = (e.clientX - r.left) / r.width  - 0.5;
-    ty = (e.clientY - r.top)  / r.height - 0.5;
-  }, { passive: true });
-  raf = requestAnimationFrame(loop);
-})();
-
-// ---------- 4. scroll reveals (.reveal + staggered .reveal-row) ----------
-(function () {
-  const reveals = document.querySelectorAll('.reveal, .reveal-row');
-  if (!('IntersectionObserver' in window)) {
-    reveals.forEach((el) => el.classList.add('in'));
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach((element) => element.classList.add("in"));
     return;
   }
-  reveals.forEach((el) => {
-    const s = el.dataset.stagger;
-    if (s) el.style.setProperty('--stagger', s);
-  });
-  const io = new IntersectionObserver(
+
+  const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          io.unobserve(e.target);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
         }
       });
     },
-    { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
+    { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
   );
-  reveals.forEach((el) => io.observe(el));
+
+  elements.forEach((element) => observer.observe(element));
 })();
 
-// ---------- 5. cursor spotlight on dark cards ----------
-(function () {
-  const cards = document.querySelectorAll('.bento-card, .brain-card');
-  cards.forEach((card) => {
-    let raf = 0;
-    card.addEventListener('pointermove', (e) => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top)  + 'px');
-        raf = 0;
-      });
-    });
-    card.addEventListener('pointerleave', () => {
-      card.style.setProperty('--mx', '-50%');
-      card.style.setProperty('--my', '-50%');
-    });
-  });
-})();
-
-// ---------- 6. nav background on scroll ----------
-(function () {
-  const nav = document.querySelector('header.nav');
+(function navState() {
+  const nav = document.querySelector("[data-nav]");
   if (!nav) return;
-  let s = false;
-  function update() { nav.classList.toggle('scrolled', window.scrollY > 24); }
-  window.addEventListener('scroll', () => {
-    if (s) return; s = true;
-    requestAnimationFrame(() => { update(); s = false; });
-  }, { passive: true });
+  let busy = false;
+
+  function update() {
+    nav.classList.toggle("scrolled", window.scrollY > 24);
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (busy) return;
+      busy = true;
+      requestAnimationFrame(() => {
+        update();
+        busy = false;
+      });
+    },
+    { passive: true }
+  );
   update();
+})();
+
+(function parallaxHero() {
+  const root = document.querySelector("[data-parallax-root]");
+  const targets = Array.from(document.querySelectorAll("[data-parallax]"));
+  if (!root || !targets.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      const box = root.getBoundingClientRect();
+      targetX = (event.clientX - box.left) / box.width - 0.5;
+      targetY = (event.clientY - box.top) / box.height - 0.5;
+    },
+    { passive: true }
+  );
+
+  function loop() {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+    targets.forEach((element) => {
+      const power = Number(element.dataset.parallax || 0.1);
+      element.style.transform = `translate3d(${currentX * power * 26}px, ${currentY * power * 20}px, 0)`;
+    });
+    requestAnimationFrame(loop);
+  }
+
+  loop();
 })();
