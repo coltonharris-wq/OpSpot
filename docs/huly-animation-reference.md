@@ -13,7 +13,17 @@ Date: 2026-05-06
 ## Huly Motion Findings
 
 - Hero background is a 4s looping muted MP4 at `1920x1438` in the viewport. It supplies the beam, bloom, smoke, grain, and dashboard reveal feel.
-- Playwright did not report active DOM animations for the captured elements; most movement is video playback, scroll position, and reveal timing.
+- Public runtime inspection shows the page is a Next.js app using Framer Motion, Rive canvas files, HLS/MP4 video gates, and IntersectionObserver-driven play/pause.
+- Huly preloads `rive.b8b719dae3c2060a.wasm` and mounts `.riv` files for the card/interface animations:
+  - `/animations/pages/home/stay-productive/hotkeys.riv`
+  - `/animations/pages/home/stay-productive/notifications.riv`
+  - `/animations/pages/home/stay-productive/team-planner.riv`
+  - `/animations/pages/home/stay-productive/time-blocking.riv`
+  - `/animations/pages/home/sync-with-github/interface-github.riv`
+  - `/animations/pages/home/knowledge/cards.riv`
+- Video layers are mounted only near viewport and played/paused around `threshold: .05`, including hero, work-together call/waves, and sync glow videos.
+- The hero mask is not just CSS decoration. It has a JavaScript autopilot that moves CSS variables `--hero-mask-x` and `--hero-mask-y` through three path segments over ~6s, repeats every ~7s, and hands control to pointer movement.
+- Knowledge text uses timed typewriter arrays, delayed Framer Motion CSS variables `--highlight-position` and `--cursor-position`, and draggable pin components.
 - Scroll rhythm at `1470x956`:
   - Hero dashboard peeks around the first viewport bottom.
   - Productivity cards fill the next two viewports.
@@ -37,10 +47,16 @@ Date: 2026-05-06
   - OpsBrain card float/grain movement
   - knowledge annotation cursor/tag motion
   - final dial halos and moving blue/orange beams
+- Added the deeper Huly-pattern pass in `assets/motion-director.js`:
+  - hero mask autopilot plus pointer takeover
+  - canvas-driven card animation layers as a Rive-style substitute
+  - viewport-gated sync glow and call wave canvas layers
+  - typewriter heading, document highlight, and pin annotation motion
 - Files are split to stay under 500 lines:
   - `index.html`
   - `assets/styles.css`
   - `assets/motion.css`
+  - `assets/motion-director.js`
   - `app.js`
 
 ## Boundaries
