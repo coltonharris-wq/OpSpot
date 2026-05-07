@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/motion.css">
 </head>
 <body>
   <header class="site-nav" data-nav>
@@ -41,6 +42,9 @@
         <canvas id="water-field"></canvas>
         <div class="water-beam"></div>
         <div class="water-grain"></div>
+        <div class="hero-float hero-float-one"></div>
+        <div class="hero-float hero-float-two"></div>
+        <div class="hero-float hero-float-three"></div>
       </div>
       <div class="hero-copy" data-parallax-root>
         <h1 data-parallax="0.18">AI employees<br>for SMB sales.</h1>
@@ -50,7 +54,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-6-6 6 6-6 6"/></svg>
         </a>
       </div>
-      <div class="hero-console" aria-label="OpSpot sales console preview">
+      <div class="hero-console" data-motion="hero-console" aria-label="OpSpot sales console preview">
         <div class="console-shell">
           <aside class="console-rail">
             <span class="rail-logo"></span>
@@ -98,7 +102,7 @@
           <p>Every module below replaces a real piece of manual SMB sales work: speed-to-lead, qualification, follow-up, scheduling, handoff, and CRM hygiene.</p>
         </header>
         <div class="feature-grid reveal">
-          <article class="media-card command-card">
+          <article class="media-card command-card" data-motion="card">
             <div class="card-visual">
               <div class="command-menu">
                 <span>Run command...</span>
@@ -109,7 +113,7 @@
             </div>
             <p><strong>Lead command center.</strong> One place to see every conversation, action, and next best move.</p>
           </article>
-          <article class="media-card planner-card wide">
+          <article class="media-card planner-card wide" data-motion="card">
             <div class="card-visual">
               <div class="floating-phone">
                 <span>Today</span>
@@ -121,7 +125,7 @@
             </div>
             <p><strong>Auto-scheduled appointments.</strong> The AI checks availability, books, confirms, and keeps the owner in the loop.</p>
           </article>
-          <article class="media-card follow-card">
+          <article class="media-card follow-card" data-motion="card">
             <div class="card-visual">
               <div class="chat-bubble white">Can you send pricing?</div>
               <div class="chat-bubble blue">Yes. I can also hold a Tuesday estimate.</div>
@@ -129,7 +133,7 @@
             </div>
             <p><strong>Follow-up that does not quit.</strong> Fourteen-touch sequences for leads that would normally disappear.</p>
           </article>
-          <article class="media-card signal-card">
+          <article class="media-card signal-card" data-motion="card">
             <div class="card-visual">
               <div class="signal-orbit"><span></span><span></span><span></span></div>
             </div>
@@ -146,7 +150,7 @@
           <h2>Sell together.<br>Like your best rep is awake.</h2>
           <p>AI handles the front line. Your team joins when the deal becomes nuanced, expensive, or worth a human touch.</p>
         </header>
-        <div class="call-stage reveal">
+        <div class="call-stage reveal" data-motion="office">
           <div class="room-label room-left">Lead intake</div>
           <div class="room-label room-right">Owner desk</div>
           <div class="call-window">
@@ -177,7 +181,7 @@
           <h2>Sync with every system.<br>Both ways.</h2>
           <p>OpSpot sits between your phone, forms, CRM, calendar, and inbox so the sales motion keeps moving without copy-paste.</p>
         </header>
-        <div class="sync-frame reveal">
+        <div class="sync-frame reveal" data-motion="sync">
           <div class="sync-toolbar"><span></span><span></span><span></span><button>View</button><button>Show</button></div>
           <div class="sync-rows">
             <div><span>CRM-104</span><strong>Storm lead qualified</strong><em>Booked</em></div>
@@ -204,18 +208,18 @@
           <p>Connect every sales touch to a living memory layer. The AI knows the buyer, the offer, the owner rules, and the next move.</p>
         </header>
         <div class="brain-grid reveal">
-          <article><strong>Create tasks.</strong><span>Schedule callbacks, estimate prep, and owner approvals.</span><div class="mini-task"></div></article>
-          <article><strong>Plan your day.</strong><span>Visualize reps, routes, jobs, and capacity.</span><div class="mini-plan"></div></article>
-          <article class="date-orb"><b>08</b><span>May</span><i>+</i></article>
-          <article><strong>Chat with team.</strong><span>Send handoffs without losing customer context.</span><div class="mini-chat"></div></article>
-          <article class="wide"><strong>Sync in real time.</strong><span>Connect owner, AI closer, estimator, and CRM in one shared loop.</span><div class="voice-orbit"><span></span><span></span><span></span><span></span></div></article>
-          <article class="wide"><strong>Manage revenue.</strong><span>Customize pipelines around how your SMB actually sells.</span><div class="mini-board"></div></article>
+          <article data-motion="brain-card"><strong>Create tasks.</strong><span>Schedule callbacks, estimate prep, and owner approvals.</span><div class="mini-task"></div></article>
+          <article data-motion="brain-card"><strong>Plan your day.</strong><span>Visualize reps, routes, jobs, and capacity.</span><div class="mini-plan"></div></article>
+          <article class="date-orb" data-motion="brain-card"><b>08</b><span>May</span><i>+</i></article>
+          <article data-motion="brain-card"><strong>Chat with team.</strong><span>Send handoffs without losing customer context.</span><div class="mini-chat"></div></article>
+          <article class="wide" data-motion="brain-card"><strong>Sync in real time.</strong><span>Connect owner, AI closer, estimator, and CRM in one shared loop.</span><div class="voice-orbit"><span></span><span></span><span></span><span></span></div></article>
+          <article class="wide" data-motion="brain-card"><strong>Manage revenue.</strong><span>Customize pipelines around how your SMB actually sells.</span><div class="mini-board"></div></article>
         </div>
       </div>
     </section>
 
     <section class="knowledge section-light">
-      <div class="knowledge-card reveal">
+      <div class="knowledge-card reveal" data-motion="knowledge-card">
         <div class="select-box">Team</div>
         <span class="tag tag-one">owner</span>
         <span class="tag tag-two">rep</span>
@@ -240,7 +244,7 @@
     </section>
 
     <section class="final-cta scene-dark" id="demo">
-      <div class="final-orb" aria-hidden="true">
+      <div class="final-orb" data-motion="final-orb" aria-hidden="true">
         <div class="dial"><span></span><span></span><span></span></div>
       </div>
       <div class="final-copy reveal">

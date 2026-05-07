@@ -186,3 +186,51 @@
 
   loop();
 })();
+
+(function sectionMotion() {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+
+  const moving = Array.from(document.querySelectorAll("[data-motion]"));
+  const hoverCards = Array.from(document.querySelectorAll("[data-motion='card']"));
+  let busy = false;
+
+  function clamp(value) {
+    return Math.max(0, Math.min(1, value));
+  }
+
+  function update() {
+    const viewport = window.innerHeight || 1;
+    moving.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const progress = clamp((viewport - rect.top) / (viewport + rect.height));
+      element.style.setProperty("--motion-progress", progress.toFixed(3));
+    });
+    busy = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (busy) return;
+      busy = true;
+      requestAnimationFrame(update);
+    },
+    { passive: true }
+  );
+  window.addEventListener("resize", update, { passive: true });
+
+  hoverCards.forEach((card) => {
+    card.addEventListener(
+      "pointermove",
+      (event) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+        card.style.setProperty("--my", `${event.clientY - rect.top}px`);
+      },
+      { passive: true }
+    );
+  });
+
+  update();
+})();

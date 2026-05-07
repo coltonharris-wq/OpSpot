@@ -28,9 +28,19 @@ Date: 2026-05-06
 - Replaced placeholder "video slot" blocks with code-native animated modules.
 - Hero uses a canvas water field plus CSS beam instead of Huly lava/video assets.
 - Cards, office call panel, CRM sync frame, OpsBrain bento, document annotation, and final dial are original OpSpot assets built in HTML/CSS.
+- Added a second motion pass in `assets/motion.css`:
+  - faint hero UI float panels
+  - dashboard scan sweep and breathing glow
+  - card hover spotlights and internal visual drift
+  - office call float, avatar pulse, and participant wake sequence
+  - CRM frame edge glow and row reveal loop
+  - OpsBrain card float/grain movement
+  - knowledge annotation cursor/tag motion
+  - final dial halos and moving blue/orange beams
 - Files are split to stay under 500 lines:
   - `index.html`
   - `assets/styles.css`
+  - `assets/motion.css`
   - `app.js`
 
 ## Boundaries
