@@ -5,3 +5,6 @@ node_modules
 .env.local
 *.log
 .tmp
+.playwright-mcp
+huly-*.jpeg
+huly-*.png
