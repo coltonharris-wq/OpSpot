@@ -23,4 +23,9 @@
     body: JSON.stringify({ id, action, meta }),
   });
   window.mcReceipts = () => json('/__mc/receipts');
+
+  window.mcColdCallOutcome = (leadId, action, meta = {}) => json('/__mc/coldcall/outcome', {
+    method: 'POST',
+    body: JSON.stringify({ leadId, action, meta }),
+  });
 })();

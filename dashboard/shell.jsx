@@ -41,6 +41,7 @@ function Sidebar({ active, onNav, counts }) {
   const items = [
     { id: 'cmd', label: 'Command', Icon: Icons.Radar },
     { id: 'queue', label: 'Mission Queue', Icon: Icons.Layers, badge: counts.queue },
+    { id: 'coldcall', label: 'Cold Call', Icon: Icons.Phone, badge: counts.coldcall, badgeTone: 'success' },
     { id: 'crons', label: 'Crons', Icon: Icons.Refresh, badge: counts.crons },
     { id: 'fleet', label: 'Fleet', Icon: Icons.Bot, badge: counts.fleet, badgeTone: 'success' },
     { id: 'swipe', label: 'Swipe Deck', Icon: Icons.Cards, badge: counts.swipe, badgePulse: true },

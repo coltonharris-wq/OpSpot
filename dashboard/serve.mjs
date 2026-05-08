@@ -283,6 +283,57 @@ function readSeedState() {
   return ctx.globalThis.__MC_SEED__ || { SEED_TASKS: [], SEED_DEALS: [], SEED_IDEAS: [], SEED_PRODUCTS: [], SEED_AGENTS: [] };
 }
 
+
+function seedColdCallLeads() {
+  return [
+    {
+      id: 'lead-sues-roofing',
+      business: "Sue's Roofing",
+      phone: '(910) 555-0198',
+      score: 92,
+      stage: 'researched',
+      status: 'ready_to_call',
+      lastTouch: 'Demo email drafted, not sent',
+      nextAsk: 'Book 15-min AI receptionist/audit call',
+      why: 'Roofing companies lose money when missed calls and slow follow-up turn into lost estimates. This is an easy OpSpot wedge.',
+      angle: 'Lead with missed calls + estimate follow-up: “If I could show you 3 calls answered, 2 estimates booked, and follow-ups sent without hiring, would you look at it?”',
+      opener: 'Hey, this is Colton with OpSpot. Quick one — are you the right person for how Sue’s Roofing handles missed calls and estimate follow-up?',
+      objections: ['Already have someone answering phones', 'Busy season / call me later', 'Does AI sound weird?', 'Need to talk to owner'],
+      touches: [{ channel: 'email', status: 'drafted', summary: 'AI receptionist / follow-up angle prepared; send requires approval.' }],
+    },
+    {
+      id: 'lead-george-preferred-appliance',
+      business: 'George / Preferred Appliance',
+      phone: '(910) 555-0144',
+      score: 84,
+      stage: 'waiting_reply',
+      status: 'ready_to_call',
+      lastTouch: 'Prior nudge; no active escalation',
+      nextAsk: 'Ask if appliance service follow-up is still a pain',
+      why: 'Existing relationship/context. Good fit for appointment handling, reminders, and post-service follow-up.',
+      angle: 'Keep it warm and simple: missed calls, service reminders, estimate follow-up, and fewer dropped customers.',
+      opener: 'George, it’s Colton. I’m building OpSpot around AI employees for local businesses — wanted to ask if missed calls or follow-ups are still a problem over there.',
+      objections: ['Not ready', 'Already has CRM', 'Wants proof first'],
+      touches: [{ channel: 'iMessage', status: 'sent earlier', summary: 'Binary nudge sent; no reply logged.' }],
+    },
+    {
+      id: 'lead-aaron-roofco',
+      business: 'Aaron / RoofCo',
+      phone: '(910) 555-0171',
+      score: 81,
+      stage: 'waiting_reply',
+      status: 'ready_to_call',
+      lastTouch: 'Personal nudge sent earlier',
+      nextAsk: 'Clarify GHL status and offer 1-hour pilot',
+      why: 'Roofing + possible GHL workflow pain. Strong vertical match for outbound/follow-up AI employee.',
+      angle: 'Position as an AI worker that makes the existing system useful instead of replacing everything.',
+      opener: 'Aaron, it’s Colton. Quick question — are you still using GHL for RoofCo follow-up, or did that get dropped?',
+      objections: ['Too much setup', 'Already paying for GHL', 'Need examples'],
+      touches: [{ channel: 'iMessage', status: 'sent earlier', summary: 'Personal GHL/status nudge already sent.' }],
+    }
+  ];
+}
+
 function ensureState() {
   fs.mkdirSync(STATE_DIR, { recursive: true });
   if (!fs.existsSync(STATE_FILE)) {
@@ -295,6 +346,7 @@ function ensureState() {
       ideas: seed.SEED_IDEAS || [],
       products: seed.SEED_PRODUCTS || [],
       agents: seed.SEED_AGENTS || [],
+      coldCallLeads: seedColdCallLeads(),
     };
     fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
   }
@@ -303,7 +355,12 @@ function ensureState() {
 
 function readMcState() {
   ensureState();
-  return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+  const state = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+  if (!state.coldCallLeads) {
+    state.coldCallLeads = seedColdCallLeads();
+    writeMcState(state);
+  }
+  return state;
 }
 
 function writeMcState(state) {
@@ -364,6 +421,29 @@ const server = http.createServer(async (req, res) => {
       writeMcState(state);
       const receipt = appendReceipt({ type: 'task.create', taskId: task.id, task, meta: body.meta || {} });
       return sendJson(res, { ok: true, task, receipt });
+    } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
+  }
+  if (req.method === 'POST' && req.url === '/__mc/coldcall/outcome') {
+    try {
+      const body = await safeJsonBody(req);
+      const state = readMcState();
+      const idx = (state.coldCallLeads || []).findIndex(l => l.id === body.leadId);
+      if (idx < 0) return sendJson(res, { ok: false, error: 'lead not found' }, 404);
+      const lead = state.coldCallLeads[idx];
+      const action = body.action || 'note';
+      lead.lastOutcome = action;
+      lead.lastTouch = `${action} · ${nowIso()}`;
+      lead.updatedAt = nowIso();
+      if (action === 'meeting_booked') { lead.stage = 'call_booked'; lead.status = 'meeting_booked'; }
+      if (action === 'not_fit') { lead.stage = 'closed_lost'; lead.status = 'closed_lost'; }
+      if (action === 'interested') { lead.stage = 'replied'; lead.status = 'follow_up'; }
+      if (action === 'no_answer') { lead.stage = 'contacted'; lead.status = 'follow_up'; }
+      if (action === 'called') { lead.stage = 'contacted'; lead.status = 'called'; }
+      lead.touches = lead.touches || [];
+      lead.touches.push({ channel: 'call', status: action, summary: body.meta?.note || (body.meta?.recording ? 'Recording started placeholder; transcript not wired yet.' : 'Outcome logged from Cold Call tab.') });
+      writeMcState(state);
+      const receipt = appendReceipt({ type: 'coldcall.outcome', leadId: body.leadId, action, meta: body.meta || {} });
+      return sendJson(res, { ok: true, lead, receipt });
     } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
   }
   if (req.method === 'POST' && req.url === '/__mc/action') {

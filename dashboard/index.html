@@ -15,10 +15,11 @@
   <script src="/__boot.js"></script>
   <script type="text/babel" src="primitives.jsx?v=1778213025"></script>
   <script type="text/babel" src="data.jsx?v=1778213025"></script>
-  <script src="api-client.js?v=1778213900"></script>
+  <script src="api-client.js?v=1778222008"></script>
   <script type="text/babel" src="live.jsx?v=1778213025"></script>
-  <script type="text/babel" src="shell.jsx?v=1778216860"></script>
-  <script type="text/babel" src="queue.jsx?v=1778219557"></script>
+  <script type="text/babel" src="shell.jsx?v=1778222008"></script>
+  <script type="text/babel" src="queue.jsx?v=1778222008"></script>
+  <script type="text/babel" src="coldcall.jsx?v=1778222008"></script>
   <script type="text/babel" src="crons.jsx?v=1778213025"></script>
   <script type="text/babel" src="command.jsx?v=1778213025"></script>
   <script type="text/babel" src="fleet.jsx?v=1778213025"></script>
@@ -120,12 +121,14 @@
         fleet: SEED_AGENTS.filter(a=>a.health==='working').length,
         swipe: ideas.length,
         pipeline: deals.filter(d=>d.heat==='hot').length,
+        coldcall: 1,
       };
 
       const titles = {
         cmd: { title: 'Command', breadcrumb: 'Mission Control' },
         chat: { title: 'Chat', breadcrumb: 'Mission Control' },
         queue: { title: 'Mission Queue', breadcrumb: 'Mission Control' },
+        coldcall: { title: 'Cold Call', breadcrumb: 'Sales Flow' },
         crons: { title: 'Crons', breadcrumb: 'Mission Control' },
         fleet: { title: 'Fleet', breadcrumb: 'Mission Control' },
         swipe: { title: 'Swipe Deck', breadcrumb: 'Inbox' },
@@ -164,6 +167,7 @@
                 {view === 'cmd' && <CommandCenter tasks={tasks} onNav={setView} onOpenTask={setOpenTask}/>}
                 {view === 'chat' && <ChatScreen/>}
                 {view === 'queue' && <MissionQueueScreen tasks={tasks} setTasks={setTasks} onOpenTask={setOpenTask}/>}
+                {view === 'coldcall' && <ColdCallScreen/>}
                 {view === 'crons' && <CronsScreen tasks={tasks} onOpenTask={setOpenTask}/>}
                 {view === 'fleet' && <FleetScreen tasks={tasks} onOpenAgent={setOpenAgent}/>}
                 {view === 'swipe' && <SwipeDeck ideas={ideas} setIdeas={setIdeas} onPushTask={onPushIdeaToTask}/>}
