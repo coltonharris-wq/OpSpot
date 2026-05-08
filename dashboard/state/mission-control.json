@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-08T13:57:39.503Z",
+  "updatedAt": "2026-05-08T14:20:00Z",
   "tasks": [
     {
       "id": "t10",
@@ -275,7 +275,7 @@
       "progress": 72,
       "pr": null,
       "queueRank": 80,
-      "notes": "Merged from 'Jarid — verify Telegram bot/group + save setup': Confirm bot/group works when mentioned; record full setup to Business OS."
+      "notes": "Merged from 'Jarid \u2014 verify Telegram bot/group + save setup': Confirm bot/group works when mentioned; record full setup to Business OS."
     },
     {
       "id": "t18",
@@ -347,7 +347,7 @@
     },
     {
       "id": "smoke-1778214772",
-      "title": "API smoke test — safe to ignore",
+      "title": "API smoke test \u2014 safe to ignore",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -366,7 +366,7 @@
     },
     {
       "id": "auto-content-v1",
-      "title": "Content automation v1 — orchestrator-led specialist skeleton",
+      "title": "Content automation v1 \u2014 orchestrator-led specialist skeleton",
       "product": "p2",
       "status": "review",
       "agent": null,
@@ -378,13 +378,13 @@
       "complexity": "L",
       "age": "0m",
       "progress": 65,
-      "notes": "Mission Control content module added: idea intake → hooks/scripts → platform drafts/stream plans → approval/autopost placeholder → receipts. External publishing remains disabled pending Colton policy approval.",
+      "notes": "Mission Control content module added: idea intake \u2192 hooks/scripts \u2192 platform drafts/stream plans \u2192 approval/autopost placeholder \u2192 receipts. External publishing remains disabled pending Colton policy approval.",
       "createdAt": "2026-05-08T04:33:46.067Z",
       "queueRank": 35
     },
     {
       "id": "auto-customer-setup-v1",
-      "title": "Customer setup automation v1 — Jarid template provisioning",
+      "title": "Customer setup automation v1 \u2014 Jarid template provisioning",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -396,13 +396,13 @@
       "complexity": "L",
       "age": "0m",
       "progress": 0,
-      "notes": "Automation build track. Drafts/run outputs must land in queue; external sends/posts need approval.\n\nMerged from 'Customer onboarding visuals — welcome/checklist/worker/receipts': Customers need visual onboarding like Colton: clear status, checklist, first win.",
+      "notes": "Automation build track. Drafts/run outputs must land in queue; external sends/posts need approval.\n\nMerged from 'Customer onboarding visuals \u2014 welcome/checklist/worker/receipts': Customers need visual onboarding like Colton: clear status, checklist, first win.",
       "createdAt": "2026-05-08T04:33:46.078Z",
       "queueRank": 10
     },
     {
       "id": "bo-llc-path",
-      "title": "LLC path — decide/file clean company setup",
+      "title": "LLC path \u2014 decide/file clean company setup",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -495,7 +495,7 @@
     },
     {
       "id": "bo-jarid-telegram",
-      "title": "Jarid — verify Telegram bot/group + save setup",
+      "title": "Jarid \u2014 verify Telegram bot/group + save setup",
       "product": "p2",
       "status": "assigned",
       "agent": null,
@@ -516,7 +516,7 @@
     },
     {
       "id": "bo-customer-visual-onboarding",
-      "title": "Customer onboarding visuals — welcome/checklist/worker/receipts",
+      "title": "Customer onboarding visuals \u2014 welcome/checklist/worker/receipts",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -558,7 +558,7 @@
     },
     {
       "id": "bo-inbound-support-feed",
-      "title": "Inbound/support feed → queue cards",
+      "title": "Inbound/support feed \u2192 queue cards",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -579,7 +579,7 @@
     },
     {
       "id": "t-sales-onboarding-flow-v1",
-      "title": "Sales → onboarding flow v1",
+      "title": "Sales \u2192 onboarding flow v1",
       "product": "p2",
       "status": "planning",
       "agent": "mouse-ceo",
@@ -593,7 +593,7 @@
       "progress": 65,
       "pr": null,
       "queueRank": 25,
-      "notes": "Lead reply → booked call → audit packet → proposal → onboarding → customer setup. Business OS spec ready; external sends still disabled until Colton enables policy/run."
+      "notes": "Lead reply \u2192 booked call \u2192 audit packet \u2192 proposal \u2192 onboarding \u2192 customer setup. Business OS spec ready; external sends still disabled until Colton enables policy/run."
     },
     {
       "id": "brief-opspot-morning-2026-05-08",
@@ -613,6 +613,24 @@
       "queueRank": 5,
       "notes": "Morning brief artifact is ready in Business OS. Decision needed: conservative, manual first 10, or policy-live outbound; external sends remain disabled until approved.",
       "artifact": "/Users/coltonharris/colton-brain-vault/Business-OS/Morning-Briefs/OPSPOT-MORNING-BRIEF-2026-05-08.md"
+    },
+    {
+      "id": "auto-instagram-hitl-v1",
+      "title": "Instagram HITL workflow \u2014 orchestrator \u2192 specialists",
+      "product": "p2",
+      "status": "planning",
+      "agent": "parent-orchestrator",
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "automation",
+      "impact": 86,
+      "complexity": "L",
+      "age": "0m",
+      "progress": 42,
+      "pr": null,
+      "queueRank": 135,
+      "notes": "Local-only plan/state wiring. No live posts/account changes/spend. After Colton approves swipe cards, specialists continue automatically until next human gate."
     }
   ],
   "deals": [
@@ -638,7 +656,7 @@
       "value": 197,
       "mrr": true,
       "source": "referral",
-      "next": "follow up — proposal sent",
+      "next": "follow up \u2014 proposal sent",
       "heat": "hot",
       "lastTouch": "2h",
       "agent": "a7",
@@ -731,9 +749,145 @@
   ],
   "ideas": [
     {
+      "id": "ig-card-cadence",
+      "product": "p2",
+      "title": "Approve draft cadence",
+      "desc": "Choose cadence: draft 1-3/day; proposed public cadence 3 Reels/week + 1 carousel/week only after posting policy approval.",
+      "category": "cadence",
+      "impact": 76,
+      "feasibility": 84,
+      "complexity": "S",
+      "tags": [
+        "cadence",
+        "instagram",
+        "approval"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
+      "id": "ig-card-proof",
+      "product": "p2",
+      "title": "Approve customer-proof rules",
+      "desc": "Set rule for customer names/logos/results. Default: no customer proof unless explicitly approved and sanitized.",
+      "category": "policy",
+      "impact": 81,
+      "feasibility": 90,
+      "complexity": "S",
+      "tags": [
+        "proof",
+        "privacy",
+        "approval"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
+      "id": "ig-card-brand",
+      "product": "p2",
+      "title": "Choose visual/voice direction",
+      "desc": "Pick batch-1 style: clean operator cockpit, local trust, founder-led, or bold direct-response.",
+      "category": "brand",
+      "impact": 78,
+      "feasibility": 82,
+      "complexity": "S",
+      "tags": [
+        "brand",
+        "voice",
+        "visuals"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
+      "id": "ig-card-recording",
+      "product": "p2",
+      "title": "Confirm camera/mic setup + recording inputs",
+      "desc": "Confirm camera/mic are ready and provide 1-3 raw inputs: clip, screenshot, voice note, demo, or customer pain.",
+      "category": "setup",
+      "impact": 83,
+      "feasibility": 86,
+      "complexity": "S",
+      "tags": [
+        "camera",
+        "mic",
+        "samples"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
+      "id": "ig-card-money",
+      "product": "p2",
+      "title": "Money gate: no boosts/tools by default",
+      "desc": "Confirm no-spend policy, or approve a specific editing/scheduling tool budget. Default: $0, local drafts only.",
+      "category": "money",
+      "impact": 82,
+      "feasibility": 95,
+      "complexity": "S",
+      "tags": [
+        "spend",
+        "approval",
+        "tools"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
+      "id": "ig-card-login",
+      "product": "p2",
+      "title": "Human click: Instagram login/tool path",
+      "desc": "Need the account/login path and decision on scheduler/plugin. No account connection, profile mutation, or post until approved.",
+      "category": "access",
+      "impact": 84,
+      "feasibility": 80,
+      "complexity": "S",
+      "tags": [
+        "login",
+        "permission",
+        "no-live-posts"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
+      "id": "ig-card-pillars",
+      "product": "p2",
+      "title": "Approve first 3 Instagram pillars",
+      "desc": "Approve/steer the first batch pillars: dropped follow-up, CRM truth, customer-document chase; or replace with better pains.",
+      "category": "decision",
+      "impact": 86,
+      "feasibility": 88,
+      "complexity": "S",
+      "tags": [
+        "instagram",
+        "hormozi",
+        "pains"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
+      "id": "ig-card-lane",
+      "product": "p2",
+      "title": "Choose Instagram lane",
+      "desc": "Decision: should first Instagram content publish from OpSpot brand, Colton founder, or stay parked until account strategy is cleaner?",
+      "category": "decision",
+      "impact": 88,
+      "feasibility": 92,
+      "complexity": "S",
+      "tags": [
+        "instagram",
+        "human-gate",
+        "account"
+      ],
+      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "source": "manual"
+    },
+    {
       "id": "i1",
       "product": "p1",
-      "title": "Add monthly digest email — show MoM growth %",
+      "title": "Add monthly digest email \u2014 show MoM growth %",
       "desc": "Customer churn is high in months 2-3. A digest showing their numbers improving creates a \"loss aversion\" moment that retains 30%+ in similar SaaS plays.",
       "category": "growth",
       "impact": 86,
@@ -744,13 +898,13 @@
         "email",
         "growth"
       ],
-      "research": "Stripe blog · 2024 SaaS retention study",
+      "research": "Stripe blog \u00b7 2024 SaaS retention study",
       "source": "research"
     },
     {
       "id": "i2",
       "product": "p1",
-      "title": "Inline error explainer — \"what does this mean for me?\"",
+      "title": "Inline error explainer \u2014 \"what does this mean for me?\"",
       "desc": "Power users skip past technical errors. A one-line plain-language translation under each error reduces support tickets ~20%.",
       "category": "ux",
       "impact": 72,
@@ -761,7 +915,7 @@
         "copy",
         "support"
       ],
-      "research": "Linear changelog · \"humanized errors\" pattern",
+      "research": "Linear changelog \u00b7 \"humanized errors\" pattern",
       "source": "research"
     },
     {
@@ -778,7 +932,7 @@
         "parallel",
         "build"
       ],
-      "research": "Karpathy AutoResearch · 2025 paper",
+      "research": "Karpathy AutoResearch \u00b7 2025 paper",
       "source": "research"
     },
     {
@@ -812,7 +966,7 @@
         "roi",
         "solar"
       ],
-      "research": "Internal — last 90d outreach data",
+      "research": "Internal \u2014 last 90d outreach data",
       "source": "research"
     }
   ],
@@ -852,7 +1006,7 @@
     {
       "id": "p2",
       "name": "Mouse",
-      "desc": "AI ops runtime · OpenClaw fork",
+      "desc": "AI ops runtime \u00b7 OpenClaw fork",
       "repo": "mouse-platform",
       "live": "mice.ink",
       "icon": "M",
@@ -1133,12 +1287,12 @@
       "rankReason": "Rank #1 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo eligible_pending_approval.",
       "stage": "outbound_prepared",
       "status": "ready_to_call",
-      "lastTouch": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:00 AM ET. No send executed.",
+      "lastTouch": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 8:00 AM ET. No send executed.",
       "nextAsk": "Approve Apollo enrichment or call owner/main line with audit angle",
       "why": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "whyColtonShouldCall": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
-      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington roofing contractor placeholder's missed calls, booking, and follow-up?",
+      "opener": "Hey, this is Colton with OpSpot. Quick one \u2014 are you the right person for Wilmington roofing contractor placeholder's missed calls, booking, and follow-up?",
       "objections": [
         "Already has someone answering phones",
         "Not interested in AI",
@@ -1155,7 +1309,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 10:07 AM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 10:07 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1175,7 +1329,7 @@
           "scheduledFor": "May 8, 10:07 AM ET",
           "draft": {
             "subject": "Quick roofing follow-up audit idea",
-            "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+            "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
           },
           "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
         }
@@ -1198,12 +1352,12 @@
       "rankReason": "Rank #2 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo eligible_pending_approval.",
       "stage": "outbound_prepared",
       "status": "ready_to_call",
-      "lastTouch": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 8:12 AM ET. No send executed.",
+      "lastTouch": "iMessage draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 8:12 AM ET. No send executed.",
       "nextAsk": "Approve Apollo enrichment or call owner/main line with audit angle",
       "why": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "whyColtonShouldCall": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
-      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington HVAC company placeholder's missed calls, booking, and follow-up?",
+      "opener": "Hey, this is Colton with OpSpot. Quick one \u2014 are you the right person for Wilmington HVAC company placeholder's missed calls, booking, and follow-up?",
       "objections": [
         "Already has someone answering phones",
         "Not interested in AI",
@@ -1220,7 +1374,7 @@
         {
           "channel": "iMessage",
           "status": "prepared-not-sent",
-          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 10:19 AM ET. No send executed.",
+          "summary": "iMessage draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 10:19 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1240,7 +1394,7 @@
           "scheduledFor": "May 8, 10:19 AM ET",
           "draft": {
             "subject": "",
-            "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
+            "body": "Quick question \u2014 are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast \u2014 just wanted to see if it is worth showing you."
           },
           "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
         }
@@ -1263,12 +1417,12 @@
       "rankReason": "Rank #3 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo hold_after_audit_rank.",
       "stage": "outbound_prepared",
       "status": "ready_to_call",
-      "lastTouch": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:24 AM ET. No send executed.",
+      "lastTouch": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 8:24 AM ET. No send executed.",
       "nextAsk": "Call main line / verify owner fit before Apollo spend",
       "why": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "whyColtonShouldCall": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
-      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington plumbing company placeholder's missed calls, booking, and follow-up?",
+      "opener": "Hey, this is Colton with OpSpot. Quick one \u2014 are you the right person for Wilmington plumbing company placeholder's missed calls, booking, and follow-up?",
       "objections": [
         "Already has someone answering phones",
         "Not interested in AI",
@@ -1285,7 +1439,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 10:31 AM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 10:31 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1305,7 +1459,7 @@
           "scheduledFor": "May 8, 10:31 AM ET",
           "draft": {
             "subject": "Quick plumbing follow-up audit idea",
-            "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+            "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
           },
           "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
         }
@@ -1346,7 +1500,7 @@
       "end": 8,
       "tz": "America/New_York"
     },
-    "coldCallTarget": "100–200/day",
+    "coldCallTarget": "100\u2013200/day",
     "mode": "policy-approved-autopilot"
   },
   "automationRuns": [
@@ -1426,7 +1580,7 @@
     },
     {
       "id": "run-sales-onboarding-flow-v1",
-      "name": "Sales → onboarding flow prep",
+      "name": "Sales \u2192 onboarding flow prep",
       "status": "prepared",
       "summary": "V1 path mapped: reply classification, booking prep, audit packet, proposal draft, onboarding checklist, customer setup receipt. No external sends/replies performed.",
       "lastRun": "2026-05-08 06:50 ET overnight prep",
@@ -1457,7 +1611,7 @@
       "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
       "draft": {
         "subject": "Quick roofing follow-up audit idea",
-        "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+        "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
       },
       "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
     },
@@ -1483,7 +1637,7 @@
       "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
       "draft": {
         "subject": "",
-        "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
+        "body": "Quick question \u2014 are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast \u2014 just wanted to see if it is worth showing you."
       },
       "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
     },
@@ -1509,7 +1663,7 @@
       "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
       "draft": {
         "subject": "Quick plumbing follow-up audit idea",
-        "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+        "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
       },
       "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
     }
@@ -1520,8 +1674,8 @@
       "business": "Wilmington roofing contractor placeholder",
       "vertical": "roofing",
       "city": "Wilmington, NC",
-      "distance": "0–25 mi",
-      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
+      "distance": "0\u201325 mi",
+      "source": "Lead Source v1 seed \u2014 Wilmington + 25mi construction/home-services",
       "website": "",
       "phone": "",
       "email": "",
@@ -1565,8 +1719,8 @@
       "business": "Wilmington HVAC company placeholder",
       "vertical": "HVAC",
       "city": "Wilmington, NC",
-      "distance": "0–25 mi",
-      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
+      "distance": "0\u201325 mi",
+      "source": "Lead Source v1 seed \u2014 Wilmington + 25mi construction/home-services",
       "website": "",
       "phone": "",
       "email": "",
@@ -1610,8 +1764,8 @@
       "business": "Wilmington plumbing company placeholder",
       "vertical": "plumbing",
       "city": "Wilmington, NC",
-      "distance": "0–25 mi",
-      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
+      "distance": "0\u201325 mi",
+      "source": "Lead Source v1 seed \u2014 Wilmington + 25mi construction/home-services",
       "website": "",
       "phone": "",
       "email": "",
@@ -1654,7 +1808,7 @@
   "workflowMetadata": [
     {
       "id": "lead-source-v1-wilmington",
-      "workflow": "Lead Source v1 — Wilmington construction/home-services",
+      "workflow": "Lead Source v1 \u2014 Wilmington construction/home-services",
       "orchestratorRole": "parent orchestrator routes each stage; does not become a 50-tool mega-agent",
       "specialistAgent": "research-agent-marley / lead-hunt specialist for sourcing; auditor specialist for scoring; lead-enrich specialist for contact data; outreach-compose specialist for drafts",
       "requiredTools": [
@@ -1669,15 +1823,15 @@
         "dashboard state API",
         "receipts.jsonl"
       ],
-      "approvalPolicy": "Local research/audit/enrich only overnight. External sends, replies, calls, customer-visible changes, private/financial access, and purchases require explicit human approval; quiet hours freeze 8pm–8am ET.",
+      "approvalPolicy": "Local research/audit/enrich only overnight. External sends, replies, calls, customer-visible changes, private/financial access, and purchases require explicit human approval; quiet hours freeze 8pm\u20138am ET.",
       "receiptPath": "dashboard/state/receipts.jsonl",
       "status": "foundation_seeded"
     },
     {
       "id": "sales-onboarding-flow-v1-2026-05-08",
-      "workflow": "Sales → Onboarding Flow v1 — lead reply to customer setup",
+      "workflow": "Sales \u2192 Onboarding Flow v1 \u2014 lead reply to customer setup",
       "orchestratorRole": "Parent orchestrator routes each handoff, writes receipts, and keeps external actions disabled unless Colton/policy explicitly enables the run.",
-      "specialistAgent": "reply handler → meeting-booker/notetaker → auditor → sales specialist → customer setup specialist → implementation specialist",
+      "specialistAgent": "reply handler \u2192 meeting-booker/notetaker \u2192 auditor \u2192 sales specialist \u2192 customer setup specialist \u2192 implementation specialist",
       "requiredTools": [
         "Mission Control state",
         "Business OS spec/checklist",
@@ -1918,7 +2072,7 @@
       "icon": "imessage",
       "name": "iMessage queue generator",
       "status": "ready",
-      "summary": "Drafts iMessage queue items for Colton’s approval, respecting quiet hours and daily caps.",
+      "summary": "Drafts iMessage queue items for Colton\u2019s approval, respecting quiet hours and daily caps.",
       "specialistAgent": "outreach-compose specialist + iMessage queue specialist",
       "tools": [
         "template library",
@@ -2087,7 +2241,7 @@
       "icon": "brief",
       "name": "Morning / evening brief",
       "status": "queued",
-      "summary": "Summarizes runs, output counts, cost/credit risks, blockers, and next 1–3 decisions for Colton.",
+      "summary": "Summarizes runs, output counts, cost/credit risks, blockers, and next 1\u20133 decisions for Colton.",
       "specialistAgent": "briefing specialist / Adriana decision surface",
       "tools": [
         "local state reader",
@@ -2127,7 +2281,7 @@
   "tellMeWhatYouWantBuilder": {
     "id": "intent-builder-v1",
     "status": "ready_spec",
-    "principle": "rough intent → proposed workflow/policy → Colton steers/approves → specialist agents execute with receipts",
+    "principle": "rough intent \u2192 proposed workflow/policy \u2192 Colton steers/approves \u2192 specialist agents execute with receipts",
     "fiveCommandDraft": [
       "build this",
       "show queue",
@@ -2147,7 +2301,7 @@
       "kill switch",
       "definition of done"
     ],
-    "example": "“Find roofing leads around Wilmington and get me the best calls” becomes: source specialist → auditor → enrich gate → outbound queue → cold-call ranker → swipe deck approval."
+    "example": "\u201cFind roofing leads around Wilmington and get me the best calls\u201d becomes: source specialist \u2192 auditor \u2192 enrich gate \u2192 outbound queue \u2192 cold-call ranker \u2192 swipe deck approval."
   },
   "replyHandler": {
     "status": "sales_onboarding_flow_ready",
@@ -2278,7 +2432,7 @@
         "approval to post/schedule",
         "any spend/tools"
       ],
-      "afterApproval": "generate scripts/captions → create post package → queue approval → publish only after explicit gate"
+      "afterApproval": "generate scripts/captions \u2192 create post package \u2192 queue approval \u2192 publish only after explicit gate"
     },
     {
       "id": "youtube",
@@ -2303,7 +2457,7 @@
         "thumbnail direction",
         "upload approval"
       ],
-      "afterApproval": "script/metadata package → clip/shorts plan → upload draft or publish only after gate"
+      "afterApproval": "script/metadata package \u2192 clip/shorts plan \u2192 upload draft or publish only after gate"
     },
     {
       "id": "twitch",
@@ -2326,7 +2480,7 @@
         "moderation rules",
         "go-live approval"
       ],
-      "afterApproval": "run-of-show → OBS checklist → stream card → no go-live without explicit click"
+      "afterApproval": "run-of-show \u2192 OBS checklist \u2192 stream card \u2192 no go-live without explicit click"
     }
   ],
   "contextWallArchitecture": {
@@ -2353,169 +2507,215 @@
     "updatedAt": "2026-05-08T09:32:25.777283+00:00"
   },
   "contentAutomationV1": {
-    "status": "ready_for_colton_review",
-    "policyMode": "placeholder_only_no_external_posts",
-    "criticalArchitecturePrinciple": "Content automation is orchestrator-led and specialist-agent executed, not one mega-agent.",
+    "status": "instagram_hitl_ready_for_colton_review",
+    "policyMode": "local_draft_only_no_live_posts_no_account_changes_no_spend",
+    "criticalArchitecturePrinciple": "Parent orchestrator routes to Instagram/content specialists. No mega-agent with broad tools.",
     "workflow": [
-      "idea_intake",
-      "script_hooks",
-      "draft_assets",
-      "human_approval",
-      "publish_placeholder",
+      "tell_me_what_you_want_intake",
+      "parent_workflow_policy_proposal",
+      "colton_swipe_approval",
+      "instagram_strategy_packet",
+      "hooks_scripts_packet",
+      "recording_inputs",
+      "editing_repurpose_packet",
+      "approval_publishing_placeholder",
       "receipts"
     ],
     "specialists": [
       {
         "id": "parent-orchestrator",
         "name": "Parent content orchestrator",
-        "role": "Turns rough intent into policy, task graph, approval gates, and specialist handoffs.",
+        "role": "Turns rough intent into policy, task graph, approval gates, receipts, and specialist handoffs. Does not draft/publish everything itself.",
         "tools": [
           "Mission Control state",
+          "Business OS/vault",
           "Tell Me What You Want builder",
+          "swipe deck",
           "approval queue",
-          "receipts ledger"
+          "receipts ledger",
+          "OpenClaw session routing"
         ],
         "canDo": [
           "classify intent",
-          "ask clarifiers",
-          "route specialists",
-          "freeze local policy draft"
+          "propose workflow/policy",
+          "route bounded specialists",
+          "track blockers",
+          "log receipts"
         ],
         "needsApproval": [
           "publishing policy",
-          "external account/plugin connection"
+          "account/plugin connection",
+          "specialist scope expansion"
         ]
       },
       {
-        "id": "instagram",
-        "name": "Instagram specialist",
-        "role": "Drafts Reels/carousels/captions from approved hooks and visual direction.",
+        "id": "instagram-strategy",
+        "name": "Instagram strategy specialist",
+        "role": "Defines Hormozi-style offer/avatar/pains/proof/CTA/cadence before production.",
+        "tools": [
+          "OPSPOT-PROFILE-KIT",
+          "content socials spec",
+          "Hormozi reference note",
+          "avatar/pain bank",
+          "brand guide"
+        ],
+        "canDo": [
+          "draft content pillars",
+          "select pain/offer angle",
+          "propose cadence",
+          "write CTA bank"
+        ],
+        "needsApproval": [
+          "brand positioning change",
+          "booking/public CTA",
+          "customer proof"
+        ]
+      },
+      {
+        "id": "hook-script",
+        "name": "Hook + script specialist",
+        "role": "Creates hooks, Reel scripts, captions, and carousel outlines from approved strategy.",
         "tools": [
           "hook bank",
-          "caption drafts",
-          "asset checklist",
-          "Instagram plugin placeholder"
+          "copy-review",
+          "non-ai-slop checklist",
+          "reference transcript/extractor placeholder"
         ],
         "canDo": [
+          "draft hooks",
+          "draft scripts",
           "draft captions",
-          "draft Reel beats",
-          "suggest hashtags"
+          "rewrite generic copy"
         ],
         "needsApproval": [
-          "post, DM, comment, account/profile changes"
+          "claims",
+          "customer specifics",
+          "final public caption"
         ]
       },
       {
-        "id": "youtube",
-        "name": "YouTube specialist",
-        "role": "Drafts Shorts scripts, titles, descriptions, thumbnail notes, and long-form outlines.",
+        "id": "recording-producer",
+        "name": "Recording / producer specialist",
+        "role": "Creates shot lists, camera/mic prompts, sample requests, and recording checklists.",
         "tools": [
-          "YouTube reference log",
-          "Shorts template",
-          "title/description draft",
-          "YouTube plugin placeholder"
+          "camera/mic checklist",
+          "local media folder",
+          "screenshot/Peekaboo/browser placeholder"
         ],
         "canDo": [
-          "draft Shorts",
-          "repurpose demos",
-          "title variants"
+          "draft shot list",
+          "request raw clips",
+          "define b-roll/screenshots"
         ],
         "needsApproval": [
-          "upload, schedule, public metadata changes"
+          "human recording setup decisions",
+          "use of private/customer screens"
         ]
       },
       {
-        "id": "twitch-streaming",
-        "name": "Twitch / streaming specialist",
-        "role": "Drafts stream plans, run-of-show, segments, clips-to-capture, and post-stream checklist.",
+        "id": "editor-repurpose",
+        "name": "Editor / repurpose specialist",
+        "role": "Turns raw clips/scripts into Reel beat sheets, captions, carousel and cross-post variants.",
         "tools": [
-          "stream runbook",
-          "OBS/Twitch placeholder",
-          "clip marker sheet"
-        ],
-        "canDo": [
-          "draft stream plan",
-          "prep talking points",
-          "mark clip opportunities"
-        ],
-        "needsApproval": [
-          "go live, account changes, public chat actions"
-        ]
-      },
-      {
-        "id": "clip-repurpose",
-        "name": "Clip / repurpose specialist",
-        "role": "Turns one recording or idea into platform-specific variants.",
-        "tools": [
-          "transcript/clip input",
-          "Hook-Meat-CTA template",
+          "video frames/extraction",
+          "transcript tool",
           "caption formatter",
-          "asset export checklist"
+          "local export folder"
         ],
         "canDo": [
-          "cutdown plan",
-          "caption variants",
-          "cross-platform package"
+          "prepare edit plan",
+          "draft captions/subtitles",
+          "make repurpose map"
         ],
         "needsApproval": [
-          "publish/export to external tools with account access"
+          "external editor/tool spend",
+          "publishing exports to connected accounts"
         ]
       },
       {
         "id": "approval-publishing",
         "name": "Approval / publishing specialist",
-        "role": "Maintains human gates, autopost policy placeholder, receipts, and kill switch.",
+        "role": "Creates approval cards, tracks policy, prepares schedule placeholders, and enforces kill switch.",
         "tools": [
           "approval queue",
           "policy ledger",
           "receipts.jsonl",
-          "platform plugin placeholders"
+          "Instagram plugin placeholder"
         ],
         "canDo": [
           "package approval cards",
           "log decisions",
-          "prepare upload checklist"
+          "prepare upload/schedule checklist"
         ],
         "needsApproval": [
-          "enable autopost, publish, spend/boost, use customer proof"
+          "post/schedule/go-live",
+          "account/profile changes",
+          "spend/boosts",
+          "comments/DMs"
+        ]
+      },
+      {
+        "id": "compliance-proof",
+        "name": "Compliance / proof checker",
+        "role": "Checks claims, customer permissions, privacy, and sourced proof before approval cards.",
+        "tools": [
+          "source file lookup",
+          "customer permission ledger placeholder",
+          "claim checklist"
+        ],
+        "canDo": [
+          "flag unsupported claims",
+          "sanitize examples",
+          "label mock workflows"
+        ],
+        "needsApproval": [
+          "customer names/logos/results",
+          "private data use"
         ]
       }
     ],
     "queueCards": [
       {
-        "id": "intake",
-        "label": "Idea intake",
-        "status": "ready",
-        "output": "structured content brief",
-        "owner": "Parent content orchestrator"
-      },
-      {
-        "id": "hooks",
-        "label": "Script + hooks",
-        "status": "ready",
-        "output": "5 hooks + Hook/Meat/CTA draft",
-        "owner": "YouTube or Instagram specialist"
-      },
-      {
-        "id": "drafts",
-        "label": "Draft captions/video/stream plan",
-        "status": "ready",
-        "output": "platform draft packet",
-        "owner": "channel specialist"
-      },
-      {
-        "id": "approval",
-        "label": "Approval / autopost policy placeholder",
+        "id": "ig-lane",
+        "label": "Choose Instagram lane",
         "status": "human_gate",
-        "output": "approve/reject/send-back card",
+        "output": "OpSpot brand vs Colton founder vs parked",
+        "owner": "Colton"
+      },
+      {
+        "id": "ig-pillars",
+        "label": "Approve first pillars",
+        "status": "human_gate",
+        "output": "offer/avatar/pains/hooks/CTA locked for batch 1",
+        "owner": "Instagram strategy specialist"
+      },
+      {
+        "id": "ig-login-tool",
+        "label": "Login/tool path",
+        "status": "human_gate",
+        "output": "account/login/plugin/scheduler decision; no connection until approved",
         "owner": "Approval / publishing specialist"
       },
       {
-        "id": "receipts",
-        "label": "Receipts",
+        "id": "ig-recording",
+        "label": "Camera/mic + samples",
+        "status": "human_gate",
+        "output": "setup confirmed + 1-3 raw clips/screens/voice notes",
+        "owner": "Recording / producer specialist"
+      },
+      {
+        "id": "ig-drafts",
+        "label": "Draft first post packets",
+        "status": "ready_after_approval",
+        "output": "3 Reels + 1 carousel local-only draft package",
+        "owner": "Hook + script + editor specialists"
+      },
+      {
+        "id": "ig-receipts",
+        "label": "Receipts + continuation",
         "status": "ready",
-        "output": "local run log + artifact links",
-        "owner": "Receipt clerk"
+        "output": "specialists/tools/gates/blockers logged; continue after approvals",
+        "owner": "Parent content orchestrator"
       }
     ],
     "intakeQuestions": [
@@ -2524,12 +2724,94 @@
       "What should the AI draft versus what must wait for Colton?",
       "What proof/receipt should make this safe to publish?"
     ],
-    "approvalPolicy": "Local intake, hooks, scripts, captions, stream plans, repurpose packets, checklists, and receipts may run alone. External posting, account connection, comments/DMs, boosts/spend, customer-visible claims, profile changes, or autopost policy activation require explicit Colton approval.",
+    "approvalPolicy": {
+      "canDoAlone": [
+        "draft strategy/hooks/scripts/captions/carousel outlines",
+        "create recording prompts/checklists",
+        "prepare local post packets and approval cards",
+        "log receipts",
+        "continue from approved prior decisions until gated"
+      ],
+      "needsApproval": [
+        "public posts/stories/reels",
+        "profile/account changes",
+        "posting calendar/schedule",
+        "tool/plugin account connection",
+        "customer proof",
+        "comments/DMs",
+        "booking CTA path"
+      ],
+      "neverWithoutExplicitApproval": [
+        "live posts/sends/comments/DMs/follows",
+        "account creation/login mutation",
+        "spend/boosts/billing/paid tools",
+        "private/customer data exposure",
+        "irreversible destructive actions"
+      ]
+    },
     "receipts": [
       "dashboard/state/receipts.jsonl",
-      "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-CONTENT-AUTOMATION-V1-SKELETON-2026-05-08.md"
+      "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-CONTENT-AUTOMATION-V1-SKELETON-2026-05-08.md",
+      "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-INSTAGRAM-HITL-WORKFLOW-2026-05-08.md",
+      "/Users/coltonharris/colton-brain-vault/Business-OS/Specs/Canonical-Command-Center/OPSPOT-CONTENT-SYSTEM-SWIPE-DECK-NEEDS-2026-05-08.md"
     ],
-    "updatedAt": "2026-05-08T13:22:00Z"
+    "updatedAt": "2026-05-08T14:20:00Z",
+    "instagramHITLSpec": "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-INSTAGRAM-HITL-WORKFLOW-2026-05-08.md",
+    "tellMeWhatYouWantFlow": {
+      "input": "Colton gives rough intent, clip, voice note, reference, demo, screenshot, or pain.",
+      "parentOutput": "Workflow + policy proposal with specialists, tools/plugins, gates, receipts, public/private/spend risk, artifacts, and next blocked decision.",
+      "humanSteering": "Colton approves, revises, defers, or chooses assumptions from swipe-deck cards.",
+      "automationContinuation": "After approval/info/clicks, specialist agents continue automatically until the next human gate."
+    },
+    "instagramHormoziSetup": {
+      "offer": "AI employees that do dropped business work: follow-up, intake, docs, CRM updates, customer updates, and ops receipts.",
+      "avatar": "Local SMB owners/operators who know work is slipping but do not know what AI should actually own first.",
+      "pains": [
+        "missed follow-ups",
+        "slow lead response",
+        "CRM lies because it is updated late",
+        "customer docs scattered across inbox/text/drive",
+        "owner bottleneck",
+        "AI tools that never become operations"
+      ],
+      "hooks": [
+        "You do not need another dashboard. You need the follow-up sent before the lead forgets you.",
+        "Most businesses do not have an AI problem. They have a dropped-work problem.",
+        "If your CRM only gets updated after you remember, it is already lying to you.",
+        "The first AI employee I would install for a local business is not a chatbot.",
+        "The point of AI is not fewer people. It is fewer dropped balls."
+      ],
+      "proofRules": [
+        "screen/demo receipts allowed",
+        "mock workflows must be labeled examples",
+        "customer names/logos/results require explicit permission",
+        "no revenue/time-saved claims without source"
+      ],
+      "ctaOptions": [
+        "Comment audit and I will show what I would automate first.",
+        "DM AI employee if your follow-up is leaking.",
+        "Follow for real examples of AI employees inside small businesses.",
+        "Book an OpSpot audit after booking path approval."
+      ],
+      "formats": [
+        "talking-head Reel",
+        "screen/demo Reel",
+        "carousel",
+        "proof/receipt post"
+      ],
+      "cadenceProposal": "Draft 1-3 local Instagram packages/day; publish proposal 3 Reels/week + 1 carousel/week only after approval."
+    },
+    "escalationTriggers": [
+      "login/account/2FA/human click needed",
+      "live post/schedule/DM/comment/profile mutation requested",
+      "claim lacks proof",
+      "customer data/proof/brand involved",
+      "money/spend/tool subscription required",
+      "brand voice/visual direction ambiguous",
+      "camera/mic/raw sample missing",
+      "brand vs founder account undecided",
+      "specialist asks for broad tools outside scope"
+    ]
   },
   "customerIntake": {
     "version": 2,
