@@ -1,7 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-08T15:43:16.826Z",
+  "updatedAt": "2026-05-08T19:43:55.145Z",
   "tasks": [
+    {
+      "id": "t-tomorrow-close-onboarding",
+      "title": "Tomorrow booked lead: close + onboard on the spot",
+      "product": "p2",
+      "status": "planning",
+      "agent": "a3",
+      "priority": "urgent",
+      "cost": 0,
+      "estCost": 0,
+      "source": "Digital Wave ads / booked calendar meeting",
+      "impact": 95,
+      "complexity": "M",
+      "age": "now",
+      "progress": 70,
+      "pr": null,
+      "queueRank": 1,
+      "notes": "Use OpSpot Tomorrow Close → Onboarding System. Goal: diagnose one money leak, sell first AI employee, collect minimum onboarding fields, no external account changes without approval.",
+      "receipt": "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-TOMORROW-CLOSE-ONBOARDING-SYSTEM-2026-05-08.md"
+    },
     {
       "id": "t10",
       "title": "Twitch livestream",
@@ -1735,7 +1754,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 11:53 AM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 3:53 PM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1752,7 +1771,7 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 11:53 AM ET",
+          "scheduledFor": "May 8, 3:53 PM ET",
           "draft": {
             "subject": "Quick roofing follow-up audit idea",
             "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
@@ -1800,7 +1819,7 @@
         {
           "channel": "iMessage",
           "status": "prepared-not-sent",
-          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 12:05 PM ET. No send executed.",
+          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 4:05 PM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1817,7 +1836,7 @@
           "channel": "iMessage",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 12:05 PM ET",
+          "scheduledFor": "May 8, 4:05 PM ET",
           "draft": {
             "subject": "",
             "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
@@ -1865,7 +1884,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 12:17 PM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 4:17 PM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1882,7 +1901,7 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 12:17 PM ET",
+          "scheduledFor": "May 8, 4:17 PM ET",
           "draft": {
             "subject": "Quick plumbing follow-up audit idea",
             "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
@@ -2023,7 +2042,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 11:53 AM ET",
+      "scheduledFor": "May 8, 3:53 PM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -2049,7 +2068,7 @@
       "channel": "iMessage",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 12:05 PM ET",
+      "scheduledFor": "May 8, 4:05 PM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -2075,7 +2094,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 12:17 PM ET",
+      "scheduledFor": "May 8, 4:17 PM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -2768,6 +2787,28 @@
   },
   "salesOnboardingFlow": [
     {
+      "id": "tomorrow-booked-lead-close",
+      "stage": "meeting-booked",
+      "title": "Tomorrow booked lead close/onboarding path",
+      "status": "ready",
+      "owner": "Colton + Adriana",
+      "primaryGoal": "Close one first AI employee and complete onboarding on the spot.",
+      "source": "Digital Wave ads likely generated the booked meeting.",
+      "recommendedWedges": [
+        "AI Receptionist / Lead Capture",
+        "AI Follow-Up Employee",
+        "AI Admin / Onboarding Helper"
+      ],
+      "pricingOptions": [
+        "Starter: $1,000 setup + $500/mo",
+        "Standard: $1,500 setup + $1,000/mo",
+        "Partner/custom: $2,500+ setup + $1,500+/mo"
+      ],
+      "scriptPath": "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-TOMORROW-CLOSE-ONBOARDING-SYSTEM-2026-05-08.md",
+      "approvalPolicy": "Colton controls price, payment, customer-visible promises, sends, and account connections.",
+      "updatedAt": "2026-05-08T19:43:43.794968Z"
+    },
+    {
       "stage": "lead reply",
       "owner": "reply handler",
       "input": "Inbound reply + lead record + prior touch",
@@ -3316,10 +3357,49 @@
   },
   "customerIntake": {
     "version": 2,
-    "updatedAt": "2026-05-08T13:50:00.000Z",
+    "updatedAt": "2026-05-08T19:43:43.794968Z",
     "mode": "local-placeholder-only",
     "approvalPolicy": "draft_only_until_customer_consent_and_colton_approval",
     "customers": [
+      {
+        "id": "tomorrow-booked-lead",
+        "name": "Tomorrow booked lead",
+        "stage": "meeting-booked",
+        "priority": "urgent",
+        "consent": "meeting booked / no account access yet",
+        "sourceLinks": [
+          "Digital Wave ads running ~1 month",
+          "Calendar meeting tomorrow",
+          "OPSPOT-TOMORROW-CLOSE-ONBOARDING-SYSTEM-2026-05-08.md"
+        ],
+        "docs": [
+          "Tomorrow close/onboarding system"
+        ],
+        "extracted": {
+          "company": "TBD in meeting",
+          "contact": "TBD",
+          "services": "First AI employee: missed lead capture, follow-up, or admin/onboarding helper",
+          "currentTools": "TBD",
+          "accessNeeded": "Only after explicit approval",
+          "offerPricing": "Starter/Standard/Custom options pending Colton choice",
+          "approvalBlockers": "Need business details, first workflow, payment/commitment, approved channels/tools"
+        },
+        "missing": [
+          "Business name",
+          "Website",
+          "Owner/contact",
+          "Main service",
+          "Lead sources",
+          "Current CRM/tools",
+          "First workflow",
+          "Approved channels",
+          "Payment/price decision"
+        ],
+        "nextAgentAction": "Prepare audit card and fill onboarding checklist during/after meeting. Do not send, connect accounts, or mutate customer systems without approval.",
+        "receipts": [
+          "tomorrow-close-onboarding-system-2026-05-08"
+        ]
+      },
       {
         "id": "jarid-paperclip",
         "name": "Jarid / Paperclip",
@@ -3475,5 +3555,29 @@
         "createdAt": "2026-05-08T13:50:00.000Z"
       }
     ]
-  }
+  },
+  "swipeDeck": [
+    {
+      "id": "swipe-tomorrow-lead-price",
+      "title": "Pick default offer for tomorrow lead",
+      "type": "decision",
+      "priority": "urgent",
+      "body": "Starter $1k+$500/mo, Standard $1.5k+$1k/mo, or Custom $2.5k+$1.5k+. Recommendation: Standard unless scope is tiny.",
+      "actions": [
+        "choose-standard",
+        "choose-starter",
+        "customize"
+      ]
+    },
+    {
+      "id": "swipe-tomorrow-lead-onboard",
+      "title": "Use on-the-spot onboarding checklist",
+      "type": "action",
+      "priority": "urgent",
+      "body": "Collect company, owner, website, lead sources, tools, first AI employee, access needed, approval rules, payment status, first-session win.",
+      "actions": [
+        "open-checklist"
+      ]
+    }
+  ]
 }
