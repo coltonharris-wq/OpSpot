@@ -286,6 +286,7 @@ function readSeedState() {
 
 
 function seedAutopilotState() {
+  const leadSources = seedLeadSourceState();
   return {
     policy: {
       radius: 'Wilmington, NC + 25 miles',
@@ -304,7 +305,7 @@ function seedAutopilotState() {
       mode: 'policy-approved-autopilot',
     },
     runs: [
-      { id: 'run-research', name: 'Lead research', status: 'queued', summary: 'Find construction/home-service businesses in Wilmington + 25 miles.', lastRun: 'seeded', nextRun: '8:05am ET', outputCount: 0 },
+      { id: 'run-research', name: 'Lead research', status: 'queued', summary: 'Find construction/home-service businesses in Wilmington + 25 miles.', lastRun: 'seeded', nextRun: '8:05am ET', outputCount: leadSources.length, receiptPath: 'dashboard/state/receipts.jsonl' },
       { id: 'run-audit', name: 'Website + GBP audit', status: 'queued', summary: 'Score missed-call, follow-up, review, and website leaks.', lastRun: 'seeded', nextRun: 'after research', outputCount: 0 },
       { id: 'run-enrich', name: 'Contact enrichment', status: 'queued', summary: 'Find owner/contact, phone, email, website, and source notes.', lastRun: 'seeded', nextRun: 'after audit', outputCount: 0 },
       { id: 'run-email', name: 'Outbound email', status: 'blocked', summary: 'Prepared only. Live send path not enabled tonight.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
@@ -318,7 +319,82 @@ function seedAutopilotState() {
       { id: 'q-imsg-plumber-1', lead: 'Sample Wilmington plumber', channel: 'iMessage', angle: 'Missed calls + booked estimates', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
       { id: 'q-email-appliance-1', lead: 'Sample appliance repair shop', channel: 'email', angle: 'Service reminders + follow-up employee', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
     ],
+    leadSources,
+    workflowMetadata: seedWorkflowMetadata(),
   };
+}
+
+function seedLeadSourceState() {
+  const baseReceipt = 'dashboard/state/receipts.jsonl';
+  return [
+    {
+      id: 'lead-source-wilmington-roofing-001',
+      business: 'Wilmington roofing contractor placeholder',
+      vertical: 'roofing',
+      city: 'Wilmington, NC',
+      distance: '0–25 mi',
+      source: 'Lead Source v1 seed — Wilmington + 25mi construction/home-services',
+      website: '',
+      phone: '',
+      email: '',
+      researchNotes: 'Seed row for research-agent/lead-hunt output. Needs live source verification before enrichment or outreach.',
+      auditScore: null,
+      apolloEligible: false,
+      ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
+      status: 'sourced_needs_research',
+      receipts: [{ type: 'lead-source.seeded', path: baseReceipt }],
+    },
+    {
+      id: 'lead-source-wilmington-hvac-001',
+      business: 'Wilmington HVAC company placeholder',
+      vertical: 'HVAC',
+      city: 'Wilmington, NC',
+      distance: '0–25 mi',
+      source: 'Lead Source v1 seed — Wilmington + 25mi construction/home-services',
+      website: '',
+      phone: '',
+      email: '',
+      researchNotes: 'Seed row for specialist sourcing. Prioritize service-area fit, missed-call pain, reviews, and appointment-booking leak.',
+      auditScore: null,
+      apolloEligible: false,
+      ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
+      status: 'sourced_needs_research',
+      receipts: [{ type: 'lead-source.seeded', path: baseReceipt }],
+    },
+    {
+      id: 'lead-source-wilmington-plumbing-001',
+      business: 'Wilmington plumbing company placeholder',
+      vertical: 'plumbing',
+      city: 'Wilmington, NC',
+      distance: '0–25 mi',
+      source: 'Lead Source v1 seed — Wilmington + 25mi construction/home-services',
+      website: '',
+      phone: '',
+      email: '',
+      researchNotes: 'Seed row only. No outbound until source verified, audit scored, suppression checked, and Colton approval gate passes.',
+      auditScore: null,
+      apolloEligible: false,
+      ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
+      status: 'sourced_needs_research',
+      receipts: [{ type: 'lead-source.seeded', path: baseReceipt }],
+    },
+  ];
+}
+
+function seedWorkflowMetadata() {
+  return [
+    {
+      id: 'lead-source-v1-wilmington',
+      workflow: 'Lead Source v1 — Wilmington construction/home-services',
+      orchestratorRole: 'parent orchestrator routes each stage; does not become a 50-tool mega-agent',
+      specialistAgent: 'research-agent-marley / lead-hunt specialist for sourcing; auditor specialist for scoring; lead-enrich specialist for contact data; outreach-compose specialist for drafts',
+      requiredTools: ['web/local source research', 'business listing source notes', 'website audit', 'contact enrichment', 'receipt writer'],
+      requiredPlugins: ['OpenClaw sessions/delegation', 'dashboard state API', 'receipts.jsonl'],
+      approvalPolicy: 'Local research/audit/enrich only overnight. External sends, replies, calls, customer-visible changes, private/financial access, and purchases require explicit human approval; quiet hours freeze 8pm–8am ET.',
+      receiptPath: 'dashboard/state/receipts.jsonl',
+      status: 'foundation_seeded',
+    },
+  ];
 }
 
 function seedColdCallLeads() {
@@ -387,6 +463,8 @@ function ensureState() {
       autopilotPolicy: seedAutopilotState().policy,
       automationRuns: seedAutopilotState().runs,
       outboundQueue: seedAutopilotState().queue,
+      leadSources: seedAutopilotState().leadSources,
+      workflowMetadata: seedAutopilotState().workflowMetadata,
     };
     fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
   }
@@ -405,6 +483,11 @@ function readMcState() {
   if (!state.autopilotPolicy) { state.autopilotPolicy = auto.policy; changed = true; }
   if (!state.automationRuns) { state.automationRuns = auto.runs; changed = true; }
   if (!state.outboundQueue) { state.outboundQueue = auto.queue; changed = true; }
+  if (!state.leadSources) { state.leadSources = auto.leadSources; changed = true; }
+  if (!state.workflowMetadata) { state.workflowMetadata = auto.workflowMetadata; changed = true; }
+  const researchRun = (state.automationRuns || []).find(r => r.id === 'run-research');
+  if (researchRun && !researchRun.receiptPath) { researchRun.receiptPath = 'dashboard/state/receipts.jsonl'; changed = true; }
+  if (researchRun && Number(researchRun.outputCount || 0) < (state.leadSources || []).length) { researchRun.outputCount = (state.leadSources || []).length; changed = true; }
   if (changed) writeMcState(state);
   return state;
 }
