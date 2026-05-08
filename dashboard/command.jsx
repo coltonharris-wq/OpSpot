@@ -57,6 +57,8 @@ function CommandCenter({ tasks, onNav, onOpenTask }) {
           </div>
         </div>
 
+        <ContentAutomationCommandCard onNav={onNav}/>
+
         {/* Fleet strip — every agent, status at a glance */}
         <SectionHeader label="Fleet — live" count={SEED_AGENTS.length} action={<Button variant="ghost" size="xs" icon={<Icons.ArrowR size={11}/>} onClick={()=>onNav('fleet')}>All agents</Button>}/>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 18 }}>
@@ -102,6 +104,25 @@ function CommandCenter({ tasks, onNav, onOpenTask }) {
         <ActivityRail/>
       </div>
     </div>
+  );
+}
+
+function ContentAutomationCommandCard({ onNav }) {
+  return (
+    <Card padding={16} radius={14} style={{ marginBottom: 18, borderColor: 'rgba(249,115,22,.35)', background: 'linear-gradient(135deg, rgba(249,115,22,.10), var(--surface))' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 14, alignItems: 'center' }}>
+        <div>
+          <div className="term" style={{ color: 'var(--accent)', fontSize: 11, fontWeight: 900, letterSpacing: '.08em' }}>CONTENT AUTOMATION V1 · LOCAL ONLY</div>
+          <div style={{ fontSize: 21, fontWeight: 950, letterSpacing: '-.035em', marginTop: 4 }}>Idea intake → hooks/scripts → channel drafts → approval placeholder → receipts.</div>
+          <div style={{ color: 'var(--fg-secondary)', fontSize: 13.5, lineHeight: 1.45, marginTop: 5 }}>Orchestrator-led and specialist-executed: Instagram, YouTube, Twitch/streaming, clip/repurpose, and approval/publishing lanes stay separate. No external posts wired.</div>
+        </div>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          <Pill tone="success">5 specialists</Pill>
+          <Pill tone="warning">human gate</Pill>
+          <Button variant="primary" icon={<Icons.Wand size={14}/>} onClick={()=>onNav('content')}>Open content module</Button>
+        </div>
+      </div>
+    </Card>
   );
 }
 

@@ -23,6 +23,7 @@
   <script type="text/babel" src="ops.jsx?v=1778225644"></script>
   <script type="text/babel" src="action-catalog.jsx?v=1778241000"></script>
   <script type="text/babel" src="agent-builder.jsx?v=1778241600"></script>
+  <script type="text/babel" src="content-automation.jsx?v=1778242800"></script>
   <script type="text/babel" src="inbound.jsx?v=1778242200"></script>
   <script type="text/babel" src="crons.jsx?v=1778213025"></script>
   <script type="text/babel" src="command.jsx?v=1778213025"></script>
@@ -129,6 +130,7 @@
         ops: 8,
         actions: 10,
         builder: 1,
+        content: 5,
         inbound: (window.INBOUND_CATEGORIES ? 8 : 0),
       };
 
@@ -140,6 +142,7 @@
         ops: { title: 'Ops + Autopilot', breadcrumb: 'Mission Control' },
         actions: { title: 'Agent Action Catalog', breadcrumb: 'OpSpot' },
         builder: { title: 'Agent Builder', breadcrumb: 'OpSpot' },
+        content: { title: 'Content Automation', breadcrumb: 'OpSpot' },
         crons: { title: 'Crons', breadcrumb: 'Mission Control' },
         fleet: { title: 'Fleet', breadcrumb: 'Mission Control' },
         swipe: { title: 'Swipe Deck', breadcrumb: 'Inbox' },
@@ -182,6 +185,7 @@
                 {view === 'ops' && <OpsAutopilotScreen/>}
                 {view === 'actions' && <AgentActionCatalogScreen/>}
                 {view === 'builder' && <AgentBuilderScreen/>}
+                {view === 'content' && <ContentAutomationScreen/>}
                 {view === 'crons' && <CronsScreen tasks={tasks} onOpenTask={setOpenTask}/>}
                 {view === 'fleet' && <FleetScreen tasks={tasks} onOpenAgent={setOpenAgent}/>}
                 {view === 'swipe' && <SwipeDeck ideas={ideas} setIdeas={setIdeas} onPushTask={onPushIdeaToTask}/>}

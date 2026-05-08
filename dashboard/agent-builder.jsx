@@ -3,6 +3,7 @@ const AGENT_BUILDER_EXAMPLES = [
   'Find HVAC companies that miss calls after hours and draft outreach, but do not send anything.',
   'Build a customer onboarding workflow for roofers from intake to first automation live.',
   'Audit local med spas for appointment leaks and prepare proposal packets for approval.',
+  'Turn my rough OpSpot idea into Instagram/YouTube/Twitch drafts with approval gates and receipts.',
 ];
 
 const ORCHESTRATOR_POLICIES = {
@@ -54,10 +55,27 @@ const ORCHESTRATOR_POLICIES = {
     ],
     outputs: ['audit-card.md', 'proof-screenshots/', 'roi-notes.md', 'proposal-draft.md', 'receipts/audit-log.jsonl'],
   },
+  content: {
+    segment: 'OpSpot founder-led content from rough ideas, demos, clips, streams, and customer pain points',
+    sources: ['OpSpot profile kit', 'YouTube/Shorts reference log', 'Content build spec', 'Approved raw idea/voice note/demo', 'Local draft artifacts'],
+    audit: ['Classify rough intent', 'Pick channel specialist', 'Generate Hook/Meat/CTA drafts', 'Create approval card', 'Log receipts'],
+    enrichmentGate: 'No public posting, account connection, customer proof, comments/DMs, boosts, or profile changes until Colton approves channel policy and asset.',
+    channels: ['Instagram/Reels draft', 'YouTube/Shorts draft', 'Twitch/stream plan', 'Clip/repurpose packet', 'Approval/publishing placeholder'],
+    agents: [
+      ['Parent Content Orchestrator', 'Turns rough intent into workflow, policy, gates, and specialist handoff'],
+      ['Instagram Specialist', 'Drafts Reels/carousels/captions within approved brand rules'],
+      ['YouTube Specialist', 'Drafts Shorts scripts, titles, descriptions, and thumbnail notes'],
+      ['Twitch/Streaming Specialist', 'Drafts run-of-show, clip markers, and post-stream checklist'],
+      ['Clip/Repurpose Specialist', 'Creates platform variants from one idea/clip/transcript'],
+      ['Approval/Publishing Specialist', 'Packages human approval cards, autopost placeholder, kill switch, and receipts'],
+    ],
+    outputs: ['content-brief.md', 'hook-bank.md', 'platform-draft-packet.md', 'approval-card.md', 'receipts/content-run.jsonl'],
+  },
 };
 
 function inferBuilderPolicy(intent) {
   const text = (intent || '').toLowerCase();
+  if (/content|short|reel|youtube|instagram|tiktok|twitch|stream|clip|caption|post|social/.test(text)) return 'content';
   if (/onboard|setup|implementation|customer|handoff/.test(text)) return 'onboarding';
   if (/audit|leak|proposal|roi|proof/.test(text)) return 'audit';
   return 'outbound';
