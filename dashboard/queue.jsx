@@ -262,7 +262,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
     }
   };
 
-  const dropListItem = (targetId) => {
+  const dropListItem = (targetId, sideOverride = null) => {
     if (!listDragId || listDragId === targetId) { setListDragId(null); setListDropId(null); return; }
     const reordered = orderedVisible.slice();
     const from = reordered.findIndex(t => t.id === listDragId);
@@ -270,7 +270,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
     if (from < 0 || to < 0) { setListDragId(null); setListDropId(null); return; }
     const [moved] = reordered.splice(from, 1);
     if (from < to) to -= 1;
-    const insertAt = listDropSide === 'after' ? to + 1 : to;
+    const insertAt = (sideOverride || listDropSide) === 'after' ? to + 1 : to;
     reordered.splice(insertAt, 0, moved);
     persistListOrder(reordered);
     setListDragId(null); setListDropId(null); setListDropSide('before');
@@ -294,8 +294,12 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
               const status = STATUSES.find(s => s.id === t.status);
               const showBeforeSlot = listDropId===t.id && listDropSide==='before' && listDragId && listDragId!==t.id;
               const showAfterSlot = listDropId===t.id && listDropSide==='after' && listDragId && listDragId!==t.id;
-              const DropSlot = () => (
-                <div className="queue-drop-mini-slot">
+              const DropSlot = ({ side }) => (
+                <div
+                  className="queue-drop-mini-slot"
+                  onDragOver={(e)=>{ e.preventDefault(); if (listDropId !== t.id) setListDropId(t.id); if (listDropSide !== side) setListDropSide(side); }}
+                  onDrop={(e)=>{ e.preventDefault(); dropListItem(t.id, side); }}
+                >
                   <span className="queue-drop-mini-line"/>
                   <span className="queue-drop-mini-label">lands here</span>
                   <span className="queue-drop-mini-line"/>
@@ -303,7 +307,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
               );
               return (
                 <React.Fragment key={t.id}>
-                {showBeforeSlot && <DropSlot/>}
+                {showBeforeSlot && <DropSlot side="before"/>}
                 <div
                   draggable
                   onDragStart={(e)=>{ setListDragId(t.id); e.dataTransfer.effectAllowed = 'move'; }}
@@ -343,7 +347,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
                     <div className="term" style={{ fontSize: 12, color: 'var(--fg-tertiary)', textAlign: 'right' }}>{t.age || '0m'} · {t.complexity}</div>
                   </div>
                 </div>
-                {showAfterSlot && <DropSlot/>}
+                {showAfterSlot && <DropSlot side="after"/>}
                 </React.Fragment>
               );
             })}

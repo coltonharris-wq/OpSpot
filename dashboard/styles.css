@@ -76,7 +76,7 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
   content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
   background: linear-gradient(90deg, transparent, rgba(249,115,22,0.18), transparent);
   animation: scan-bar 2.4s linear infinite;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 /* Drag styles */
@@ -235,7 +235,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 10px;
-  pointer-events: none;
+  pointer-events: auto;
 }
 .queue-drop-mini-line {
   flex: 1;
