@@ -267,6 +267,11 @@ const AUDIT_HIGH_RANK_LIMIT = 2;
 const AUDIT_APOLLO_CREDITS_ESTIMATE = '1-3 credits if approved';
 const AUDIT_INDUSTRY_FIT = new Set(['roofing', 'solar', 'construction', 'appliance', 'plumbing', 'hvac', 'electrical', 'landscaping', 'remodeling']);
 
+const OUTBOUND_QUEUE_VERSION = 'outbound-queue-v1';
+const OUTBOUND_CHANNELS = ['email', 'iMessage'];
+const OUTBOUND_STAGGER_MINUTES = 12;
+const OUTBOUND_MIN_SCORE = 70;
+
 function auditScoreLead(lead) {
   const vertical = String(lead.vertical || '').toLowerCase();
   const websitePresent = Boolean(String(lead.website || '').trim());
@@ -317,6 +322,98 @@ function rankAuditLeads(leads = []) {
     });
 }
 
+function etDateParts(date = new Date(), timeZone = 'America/New_York') {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone, year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,
+  }).formatToParts(date).reduce((acc, p) => ({ ...acc, [p.type]: p.value }), {});
+  return { year: Number(parts.year), month: parts.month, day: Number(parts.day), hour: Number(parts.hour), minute: Number(parts.minute) };
+}
+
+function scheduledSlotLabel(index, policy = {}) {
+  const q = policy.quietHours || { start: 20, end: 8, tz: 'America/New_York' };
+  const p = etDateParts(new Date(), q.tz || 'America/New_York');
+  const startHour = Number(q.end ?? 8);
+  const nowMinutes = p.hour * 60 + p.minute;
+  const firstMinutes = Math.max(startHour * 60, nowMinutes < startHour * 60 ? startHour * 60 : nowMinutes + 10);
+  const total = firstMinutes + index * OUTBOUND_STAGGER_MINUTES;
+  const dayBump = Math.floor(total / 1440);
+  const minutes = total % 1440;
+  const hour24 = Math.floor(minutes / 60);
+  const minute = minutes % 60;
+  const hour12 = ((hour24 + 11) % 12) + 1;
+  const ampm = hour24 >= 12 ? 'PM' : 'AM';
+  const dayLabel = dayBump ? `${p.month} ${p.day + dayBump}` : `${p.month} ${p.day}`;
+  return `${dayLabel}, ${hour12}:${String(minute).padStart(2, '0')} ${ampm} ET`;
+}
+
+function chooseOutboundChannel(lead, counts, caps) {
+  const hasPhone = Boolean(String(lead.decisionMakerPhone || lead.ownerContact?.phone || lead.phone || '').trim());
+  const hasEmail = Boolean(String(lead.decisionMakerEmail || lead.ownerContact?.email || lead.email || '').trim());
+  const preferred = hasPhone ? 'iMessage' : hasEmail ? 'email' : (Number(lead.auditRank || 0) % 2 === 0 ? 'iMessage' : 'email');
+  const fallback = preferred === 'email' ? 'iMessage' : 'email';
+  if (counts[preferred] < caps[preferred]) return preferred;
+  if (counts[fallback] < caps[fallback]) return fallback;
+  return null;
+}
+
+function outboundContactFor(lead, channel) {
+  if (channel === 'email') return lead.decisionMakerEmail || lead.ownerContact?.email || lead.email || '';
+  return lead.decisionMakerPhone || lead.ownerContact?.phone || lead.phone || '';
+}
+
+function composeOutboundDraft(lead, channel) {
+  const vertical = String(lead.vertical || 'business').toLowerCase();
+  const auditHook = lead.reasonWhy || lead.angle || 'missed calls, slow response, and follow-up leakage are likely costing booked jobs';
+  const opener = channel === 'email'
+    ? `Quick ${vertical} follow-up audit idea`
+    : `Quick question — are missed calls or estimate follow-up still a headache at ${lead.business}? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you.`;
+  const body = channel === 'email'
+    ? `Hey ${lead.decisionMakerName || 'there'},\n\nI was looking at ${lead.business} and noticed a likely OpSpot fit: ${auditHook}\n\nThe angle I would test is simple: ${lead.angle}\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton`
+    : opener;
+  return { subject: channel === 'email' ? opener : '', body };
+}
+
+function generateOutboundQueue(leads = [], policy = {}) {
+  const caps = {
+    email: Number(policy.dailyCaps?.email?.limit ?? 50),
+    iMessage: Number(policy.dailyCaps?.imessage?.limit ?? policy.dailyCaps?.iMessage?.limit ?? 50),
+  };
+  const counts = { email: 0, iMessage: 0 };
+  const ranked = rankAuditLeads(leads).filter(lead => Number(lead.auditScore || 0) >= OUTBOUND_MIN_SCORE);
+  const queue = [];
+  for (const lead of ranked) {
+    const channel = chooseOutboundChannel(lead, counts, caps);
+    if (!channel) break;
+    const contact = outboundContactFor(lead, channel);
+    const draft = composeOutboundDraft(lead, channel);
+    counts[channel] += 1;
+    queue.push({
+      id: `oq-${OUTBOUND_QUEUE_VERSION}-${lead.id}-${channel.toLowerCase()}`,
+      version: OUTBOUND_QUEUE_VERSION,
+      leadId: lead.id,
+      lead: lead.business,
+      channel,
+      contact,
+      contactStatus: contact ? 'ready' : 'missing_contact_pending_enrichment',
+      scheduledFor: scheduledSlotLabel(queue.length, policy),
+      staggerMinutes: OUTBOUND_STAGGER_MINUTES,
+      status: 'prepared-not-sent',
+      sendEnabled: false,
+      quietHoursSafe: true,
+      auditScore: lead.auditScore,
+      auditRank: lead.auditRank,
+      auditVersion: lead.auditVersion || AUDIT_SCORE_VERSION,
+      auditBackedAngle: lead.angle,
+      angle: lead.angle,
+      reasonWhy: lead.reasonWhy,
+      recommendedFirstTouch: lead.recommendedFirstTouch,
+      draft,
+      guardrail: 'Prepared locally only. No live send integration; human approval and send runner required.',
+    });
+  }
+  return { queue, counts, caps, version: OUTBOUND_QUEUE_VERSION };
+}
+
 function safeJsonBody(req, max = 128 * 1024) {
   return new Promise((resolve, reject) => {
     let raw = '';
@@ -345,42 +442,36 @@ function readSeedState() {
 function seedAutopilotState() {
   const leadSources = rankAuditLeads(seedLeadSourceState());
   const apolloQueue = leadSources.filter(l => l.apolloEligible);
-  return {
-    policy: {
-      radius: 'Wilmington, NC + 25 miles',
-      verticals: ['roofing', 'solar', 'construction', 'appliance', 'plumbing', 'HVAC', 'electrical', 'landscaping', 'remodeling'],
-      senders: {
-        email: 'colton.harris@automioapp.com',
-        imessage: 'Colton personal iPhone / iMessage for now',
-        future: 'Dedicated business iPhone on M5 Max',
-      },
-      dailyCaps: {
-        email: { limit: 50, used: 0 },
-        imessage: { limit: 50, used: 0 },
-      },
-      quietHours: { start: 20, end: 8, tz: 'America/New_York' },
-      coldCallTarget: '100–200/day',
-      mode: 'policy-approved-autopilot',
+  const policy = {
+    radius: 'Wilmington, NC + 25 miles',
+    verticals: ['roofing', 'solar', 'construction', 'appliance', 'plumbing', 'HVAC', 'electrical', 'landscaping', 'remodeling'],
+    senders: {
+      email: 'colton.harris@automioapp.com',
+      imessage: 'Colton personal iPhone / iMessage for now',
+      future: 'Dedicated business iPhone on M5 Max',
     },
+    dailyCaps: {
+      email: { limit: 50, used: 0 },
+      imessage: { limit: 50, used: 0 },
+    },
+    quietHours: { start: 20, end: 8, tz: 'America/New_York' },
+    coldCallTarget: '100–200/day',
+    mode: 'policy-approved-autopilot',
+  };
+  const outbound = generateOutboundQueue(leadSources, policy);
+  return {
+    policy,
     runs: [
       { id: 'run-research', name: 'Lead research', status: 'queued', summary: 'Find construction/home-service businesses in Wilmington + 25 miles.', lastRun: 'seeded', nextRun: '8:05am ET', outputCount: leadSources.length, receiptPath: 'dashboard/state/receipts.jsonl' },
       { id: 'run-audit', name: 'Audit Score v1', status: 'complete', summary: 'Ranks local leads by website presence, GBP/review placeholder, missed-call/follow-up fit, industry fit, reason, angle, and first-touch recommendation.', lastRun: 'seeded', nextRun: 'refresh after verified research', outputCount: leadSources.length, receiptPath: 'dashboard/state/receipts.jsonl' },
       { id: 'run-enrich', name: 'Apollo-last contact enrichment gate', status: 'queued', summary: 'Apollo runs only after cheap research/audit ranking. This UI marks eligible rows only; no Apollo call or credit spend happens here.', lastRun: 'seeded', nextRun: 'after audit + suppression check + human approval', outputCount: apolloQueue.length },
-      { id: 'run-email', name: 'Outbound email', status: 'blocked', summary: 'Prepared only. Live send path not enabled tonight.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
-      { id: 'run-imessage', name: 'Outbound iMessage', status: 'blocked', summary: 'Prepared only. No personal iPhone sends until send runner is deliberately enabled.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
+      { id: 'run-email', name: 'Outbound email', status: 'prepared', summary: 'Queue generator drafted email items only; no live send path enabled.', lastRun: 'seeded', nextRun: 'after 8:00am ET + approval', outputCount: outbound.counts.email },
+      { id: 'run-imessage', name: 'Outbound iMessage', status: 'prepared', summary: 'Queue generator drafted iMessage items only; no personal iPhone sends until runner is deliberately enabled.', lastRun: 'seeded', nextRun: 'after 8:00am ET + approval', outputCount: outbound.counts.iMessage },
       { id: 'run-replies', name: 'Reply handler', status: 'idle', summary: 'Classify replies, opt-outs, interest, angry replies, and escalation.', lastRun: 'not run', nextRun: 'after first sends', outputCount: 0 },
       { id: 'run-cold-rank', name: 'Cold-call ranker', status: 'queued', summary: 'Rank warmest 100–200/day for Colton from outbound + audit signal.', lastRun: 'seeded', nextRun: 'after first replies/touches', outputCount: 3 },
       { id: 'run-briefs', name: 'Morning/evening briefs', status: 'queued', summary: 'Summarize overnight/day receipts, blockers, and next best moves.', lastRun: 'seeded', nextRun: 'next scheduled brief', outputCount: 0 },
     ],
-    queue: apolloQueue.map(lead => ({
-      id: `q-audit-${lead.id}`,
-      lead: lead.business,
-      channel: 'draft-only',
-      angle: lead.angle,
-      scheduledFor: 'after 8:00am ET + human approval',
-      status: 'audit-ranked-prepared-not-sent',
-      auditScore: lead.auditScore,
-    })),
+    queue: outbound.queue,
     leadSources,
     workflowMetadata: seedWorkflowMetadata(),
   };
@@ -612,16 +703,24 @@ function readMcState() {
     enrichRun.outputCount = apolloQueue.length;
     changed = true;
   }
-  const auditQueue = apolloQueue.map(lead => ({
-    id: `q-audit-${lead.id}`,
-    lead: lead.business,
-    channel: 'draft-only',
-    angle: lead.angle,
-    scheduledFor: 'after 8:00am ET + human approval',
-    status: 'audit-ranked-prepared-not-sent',
-    auditScore: lead.auditScore,
-  }));
-  if (JSON.stringify(state.outboundQueue || []) !== JSON.stringify(auditQueue)) { state.outboundQueue = auditQueue; changed = true; }
+  const outbound = generateOutboundQueue(state.leadSources || [], state.autopilotPolicy || auto.policy);
+  const emailRun = (state.automationRuns || []).find(r => r.id === 'run-email');
+  if (emailRun) {
+    emailRun.status = 'prepared';
+    emailRun.summary = 'Queue generator drafted email items only; no live send path enabled.';
+    emailRun.nextRun = 'after 8:00am ET + approval';
+    emailRun.outputCount = outbound.counts.email;
+    changed = true;
+  }
+  const imessageRun = (state.automationRuns || []).find(r => r.id === 'run-imessage');
+  if (imessageRun) {
+    imessageRun.status = 'prepared';
+    imessageRun.summary = 'Queue generator drafted iMessage items only; no personal iPhone sends until runner is deliberately enabled.';
+    imessageRun.nextRun = 'after 8:00am ET + approval';
+    imessageRun.outputCount = outbound.counts.iMessage;
+    changed = true;
+  }
+  if (JSON.stringify(state.outboundQueue || []) !== JSON.stringify(outbound.queue)) { state.outboundQueue = outbound.queue; changed = true; }
   if (changed) writeMcState(state);
   return state;
 }
@@ -655,6 +754,16 @@ function actionPatch(action) {
 const server = http.createServer(async (req, res) => {
   if (req.url === '/__boot.js') return serveBootstrap(req, res);
   if (req.url === '/__mc/state') return sendJson(res, readMcState());
+  if (req.method === 'POST' && req.url === '/__mc/outbound/generate') {
+    try {
+      const state = readMcState();
+      const outbound = generateOutboundQueue(state.leadSources || [], state.autopilotPolicy || {});
+      state.outboundQueue = outbound.queue;
+      writeMcState(state);
+      const receipt = appendReceipt({ type: 'outbound.queue.generated', action: 'prepared_not_sent', meta: { version: outbound.version, email: outbound.counts.email, iMessage: outbound.counts.iMessage, summary: `${outbound.queue.length} prepared-not-sent outbound queue items generated; no live sends.` } });
+      return sendJson(res, { ok: true, outbound, receipt });
+    } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
+  }
   if (req.url === '/__mc/receipts') {
     ensureState();
     const receipts = fs.readFileSync(RECEIPTS_FILE, 'utf8').split('\n').filter(Boolean).slice(-200).map(line => JSON.parse(line));
