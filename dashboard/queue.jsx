@@ -145,7 +145,7 @@ function Column({ status, tasks, onDrop, onDragOver, dropTarget, onCardDragStart
 }
 
 // ---------------- Filters Bar ----------------
-function FiltersBar({ filter, setFilter, productFilter, setProductFilter, agentFilter, setAgentFilter, dense, setDense, onAdd }) {
+function FiltersBar({ filter, setFilter, productFilter, setProductFilter, agentFilter, setAgentFilter, dense, setDense, viewMode, setViewMode, onAdd }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 18px', borderBottom: '1px solid var(--border)', background: 'var(--canvas)', overflowX: 'auto' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -168,6 +168,9 @@ function FiltersBar({ filter, setFilter, productFilter, setProductFilter, agentF
         {SEED_AGENTS.map(a => <option key={a.id} value={a.id}>{a.name} · {a.role}</option>)}
       </select>
       <div style={{ flex: 1 }}/>
+      <Button variant="ghost" size="xs" active={viewMode==='kanban'} onClick={()=>setViewMode('kanban')}>Kanban</Button>
+      <Button variant="ghost" size="xs" active={viewMode==='list'} onClick={()=>setViewMode('list')}>List</Button>
+      <div style={{ width: 1, height: 18, background: 'var(--border)' }}/>
       <Button variant="ghost" size="xs" active={!dense} onClick={()=>setDense(false)}>Cozy</Button>
       <Button variant="ghost" size="xs" active={dense} onClick={()=>setDense(true)}>Dense</Button>
       <div style={{ width: 1, height: 18, background: 'var(--border)' }}/>
@@ -182,6 +185,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
   const [productFilter, setProductFilter] = uSt_Q('all');
   const [agentFilter, setAgentFilter] = uSt_Q('all');
   const [dense, setDense] = uSt_Q(false);
+  const [viewMode, setViewMode] = uSt_Q('kanban');
   const [dragId, setDragId] = uSt_Q(null);
   const [hoverCol, setHoverCol] = uSt_Q(null);
 
@@ -206,32 +210,87 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
   };
 
   const onAddTask = (statusId) => {
+    const title = prompt('Add queue item');
+    if (title === null) return;
+    const cleanTitle = title.trim() || 'New task — describe it';
     const id = 't' + Date.now();
-    const t = { id, title: 'New task — describe it', product: SEED_PRODUCTS[0]?.id || 'p1', status: statusId, agent: null, priority: 'normal', cost: 0, estCost: 0, source: 'manual', impact: 50, complexity: 'M', age: '0m', progress: 0, pr: null };
+    const nextRank = Math.max(0, ...tasks.map(t => Number(t.queueRank || 0))) + 10;
+    const t = { id, title: cleanTitle, product: SEED_PRODUCTS[0]?.id || 'p1', status: statusId, agent: null, priority: 'normal', cost: 0, estCost: 0, source: 'manual', impact: 50, complexity: 'M', age: '0m', progress: 0, pr: null, queueRank: nextRank };
     setTasks(prev => [...prev, t]);
     writeAddedTask(t);
   };
 
+  const priorityWeight = { urgent: 0, high: 1, normal: 2, low: 3 };
+  const orderedVisible = uMe_Q(() => visible.slice().sort((a, b) => {
+    const ar = Number.isFinite(Number(a.queueRank)) ? Number(a.queueRank) : 9999 + (priorityWeight[a.priority] || 9) * 100 - (a.impact || 0);
+    const br = Number.isFinite(Number(b.queueRank)) ? Number(b.queueRank) : 9999 + (priorityWeight[b.priority] || 9) * 100 - (b.impact || 0);
+    return ar - br;
+  }), [visible]);
+
+  const moveListItem = (taskId, dir) => {
+    const ids = orderedVisible.map(t => t.id);
+    const idx = ids.indexOf(taskId);
+    const nextIdx = idx + dir;
+    if (idx < 0 || nextIdx < 0 || nextIdx >= ids.length) return;
+    const reordered = orderedVisible.slice();
+    [reordered[idx], reordered[nextIdx]] = [reordered[nextIdx], reordered[idx]];
+    const rankMap = new Map(reordered.map((t, i) => [t.id, (i + 1) * 10]));
+    setTasks(prev => prev.map(t => rankMap.has(t.id) ? { ...t, queueRank: rankMap.get(t.id) } : t));
+    for (const [id, rank] of rankMap) writeTaskPatch(id, 'queueRank', rank);
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-      <FiltersBar filter={filter} setFilter={setFilter} productFilter={productFilter} setProductFilter={setProductFilter} agentFilter={agentFilter} setAgentFilter={setAgentFilter} dense={dense} setDense={setDense} onAdd={onAddTask}/>
+      <FiltersBar filter={filter} setFilter={setFilter} productFilter={productFilter} setProductFilter={setProductFilter} agentFilter={agentFilter} setAgentFilter={setAgentFilter} dense={dense} setDense={setDense} viewMode={viewMode} setViewMode={setViewMode} onAdd={onAddTask}/>
       <div style={{ flex: 1, overflow: 'auto', padding: 16, minHeight: 0 }}>
-        <div style={{ display: 'flex', gap: 10, height: '100%', minHeight: 520 }}>
-          {STATUSES.map(s => (
-            <Column key={s.id} status={s}
-              tasks={visible.filter(t => t.status === s.id)}
-              onDrop={onDrop}
-              onDragOver={setHoverCol}
-              dropTarget={hoverCol === s.id && dragId}
-              onCardDragStart={onCardDragStart}
-              onCardDragEnd={onCardDragEnd}
-              draggingId={dragId}
-              onCardClick={onOpenTask}
-              dense={dense}
-              onAddTask={onAddTask}
-            />
-          ))}
-        </div>
+        {viewMode === 'list' ? (
+          <div style={{ maxWidth: 1040, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--fg-primary)' }}>Priority List</div>
+              <span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)' }}>scroll, open, or move items up/down</span>
+              <span style={{ flex: 1 }}/>
+              <Button variant="primary" size="sm" icon={<Icons.Plus size={13}/>} onClick={()=>onAddTask('inbox')}>Add item</Button>
+            </div>
+            {orderedVisible.map((t, i) => {
+              const product = getProduct(t.product) || {};
+              const agent = t.agent ? getAgent(t.agent) : null;
+              const status = STATUSES.find(s => s.id === t.status);
+              return (
+                <div key={t.id} className="row-hover" onClick={()=>onOpenTask(t)} style={{ display: 'grid', gridTemplateColumns: '42px 1fr 110px 110px 120px 80px', gap: 10, alignItems: 'center', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 12px', cursor: 'pointer' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, -1); }} disabled={i===0} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===0?'not-allowed':'pointer' }}>↑</button>
+                    <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, 1); }} disabled={i===orderedVisible.length-1} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===orderedVisible.length-1?'not-allowed':'pointer' }}>↓</button>
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--fg-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{i + 1}. {t.title}</div>
+                    <div className="term" style={{ marginTop: 3, fontSize: 10.5, color: 'var(--fg-tertiary)' }}>{product.name || t.product} · {t.source} · imp {t.impact} · {t.complexity}</div>
+                  </div>
+                  <Pill tone={t.priority==='urgent'?'critical':t.priority==='high'?'brand':'neutral'} dot={false}>{t.priority}</Pill>
+                  <Pill tone={status?.tone || 'neutral'} dot={false}>{status?.label || t.status}</Pill>
+                  <div style={{ fontSize: 11.5, color: 'var(--fg-secondary)', fontWeight: 700 }}>{agent ? agent.name : 'unassigned'}</div>
+                  <div className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', textAlign: 'right' }}>{t.age || '0m'}</div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div style={{ display: 'flex', gap: 10, height: '100%', minHeight: 520 }}>
+            {STATUSES.map(s => (
+              <Column key={s.id} status={s}
+                tasks={visible.filter(t => t.status === s.id)}
+                onDrop={onDrop}
+                onDragOver={setHoverCol}
+                dropTarget={hoverCol === s.id && dragId}
+                onCardDragStart={onCardDragStart}
+                onCardDragEnd={onCardDragEnd}
+                draggingId={dragId}
+                onCardClick={onOpenTask}
+                dense={dense}
+                onAddTask={onAddTask}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
