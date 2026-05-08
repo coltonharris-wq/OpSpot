@@ -185,7 +185,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
   const [productFilter, setProductFilter] = uSt_Q('all');
   const [agentFilter, setAgentFilter] = uSt_Q('all');
   const [dense, setDense] = uSt_Q(false);
-  const [viewMode, setViewMode] = uSt_Q('kanban');
+  const [viewMode, setViewMode] = uSt_Q('list');
   const [dragId, setDragId] = uSt_Q(null);
   const [listDragId, setListDragId] = uSt_Q(null);
   const [listDropId, setListDropId] = uSt_Q(null);
