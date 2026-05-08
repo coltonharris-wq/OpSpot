@@ -23,6 +23,7 @@
   <script type="text/babel" src="ops.jsx?v=1778225644"></script>
   <script type="text/babel" src="action-catalog.jsx?v=1778241000"></script>
   <script type="text/babel" src="agent-builder.jsx?v=1778241600"></script>
+  <script type="text/babel" src="inbound.jsx?v=1778242200"></script>
   <script type="text/babel" src="crons.jsx?v=1778213025"></script>
   <script type="text/babel" src="command.jsx?v=1778213025"></script>
   <script type="text/babel" src="fleet.jsx?v=1778213025"></script>
@@ -128,6 +129,7 @@
         ops: 8,
         actions: 10,
         builder: 1,
+        inbound: (window.INBOUND_CATEGORIES ? 8 : 0),
       };
 
       const titles = {
@@ -194,7 +196,7 @@
                 {view === 'onboarding' && <ModulePlaceholderScreen id="onboarding" title="Onboarding" desc="Customer intake → audit → proposal → provision → live handoff."/>}
                 {view === 'audit' && <ModulePlaceholderScreen id="audit" title="Audit" desc="Preliminary ops audits, leaks, ROI math, and proof packets."/>}
                 {view === 'proposals' && <ModulePlaceholderScreen id="proposals" title="Proposals" desc="Proposal drafts, pricing, invoice drafts, and close packets."/>}
-                {view === 'inbound' && <ModulePlaceholderScreen id="inbound" title="Inbound" desc="Lead intake, replies, missed calls, website/forms, and triage."/>}
+                {view === 'inbound' && <InboundReplyHandlerScreen onOpenTask={setOpenTask}/>}
                 {view === 'outbound' && <OpsAutopilotScreen/>}
                 {view === 'support' && <ModulePlaceholderScreen id="support" title="Support" desc="Customer support agent queue, thread summaries, fixes, and escalations."/>}
                 {view === 'branding' && <ModulePlaceholderScreen id="branding" title="Branding" desc="Brand kit, profile kit, business cards, screenshots, and public trust assets."/>}

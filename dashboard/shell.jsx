@@ -77,7 +77,7 @@ function Sidebar({ active, onNav, counts }) {
         <SidebarItem id="onboarding" label="Onboarding" Icon={Icons.Stack} active={active==='onboarding'} onClick={()=>onNav('onboarding')}/>
         <SidebarItem id="audit" label="Audit" Icon={Icons.Search} active={active==='audit'} onClick={()=>onNav('audit')}/>
         <SidebarItem id="proposals" label="Proposals" Icon={Icons.Mail} active={active==='proposals'} onClick={()=>onNav('proposals')}/>
-        <SidebarItem id="inbound" label="Inbound" Icon={Icons.Phone} active={active==='inbound'} onClick={()=>onNav('inbound')}/>
+        <SidebarItem id="inbound" label="Inbound" Icon={Icons.Mail} badge={counts.inbound} badgeTone="success" active={active==='inbound'} onClick={()=>onNav('inbound')}/>
         <SidebarItem id="outbound" label="Outbound" Icon={Icons.Send} active={active==='outbound'} onClick={()=>onNav('outbound')}/>
         <SidebarItem id="support" label="Support" Icon={Icons.Bot} active={active==='support'} onClick={()=>onNav('support')}/>
         <SidebarItem id="branding" label="Branding" Icon={Icons.Wand} active={active==='branding'} onClick={()=>onNav('branding')}/>
