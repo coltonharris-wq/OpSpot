@@ -642,6 +642,92 @@ function seedColdCallLeads() {
   ];
 }
 
+
+function normalizeTouch(t) {
+  return {
+    channel: t.channel || t.type || 'system',
+    status: t.status || t.action || 'logged',
+    summary: t.summary || t.note || t.reason || 'Touch logged.',
+    at: t.at || t.timestamp || '',
+  };
+}
+
+function buildColdCallQueue(state) {
+  const sources = rankAuditLeads(state.leadSources || []);
+  const queue = Array.isArray(state.outboundQueue) && state.outboundQueue.length
+    ? state.outboundQueue
+    : generateOutboundQueue(sources, state.autopilotPolicy || {}).queue;
+  const existingById = new Map((state.coldCallLeads || []).map(l => [l.id, l]));
+  const byLeadId = new Map(sources.map(l => [l.id, l]));
+  const queueByLead = new Map();
+  for (const item of queue) {
+    if (!item.leadId) continue;
+    const arr = queueByLead.get(item.leadId) || [];
+    arr.push(item);
+    queueByLead.set(item.leadId, arr);
+  }
+  const candidates = sources.map(src => {
+    const items = queueByLead.get(src.id) || [];
+    const prev = existingById.get(`cold-${src.id}`) || existingById.get(src.id) || {};
+    const priorTouches = [
+      ...(src.touches || []).map(normalizeTouch),
+      ...(src.receipts || []).map(r => normalizeTouch({ channel: r.type || 'research', status: 'receipt', summary: r.path || r.summary || 'Lead machine receipt logged.' })),
+      ...items.map(item => normalizeTouch({ channel: item.channel, status: item.status || 'prepared-not-sent', summary: `${item.channel} draft prepared for ${item.contactStatus || 'contact pending'} · ${item.scheduledFor || 'unscheduled'}. No send executed.` })),
+      ...(prev.touches || []).filter(t => t.channel === 'call').map(normalizeTouch),
+    ];
+    const contactReady = items.some(i => i.contactStatus === 'ready') || Boolean(src.decisionMakerPhone || src.phone || src.decisionMakerEmail || src.email);
+    const warmthScore = Math.max(0, Math.min(100,
+      Number(src.auditScore || 0)
+      + (items.length ? 6 : 0)
+      + (contactReady ? 5 : 0)
+      + (String(src.status || '').includes('eligible') ? 4 : 0)
+      - (String(prev.lastOutcome || '').includes('no_answer') ? 5 : 0)
+    ));
+    const rankReason = `Rank #${src.auditRank || '?'} from lead machine: audit ${src.auditScore || 0}/100, ${items.length} outbound draft${items.length === 1 ? '' : 's'} prepared, Apollo ${src.apolloStatus || 'not_ranked'}.`;
+    const whyColtonShouldCall = src.whyColtonShouldCall || src.reasonWhy || src.angle || 'Strong local service-business fit; Colton can create trust faster than another generic outbound touch.';
+    const phone = src.decisionMakerPhone || src.ownerContact?.phone || src.phone || '';
+    const email = src.decisionMakerEmail || src.ownerContact?.email || src.email || '';
+    const opener = src.opener || `Hey, this is Colton with OpSpot. Quick one — are you the right person for ${src.business || 'the business'}'s missed calls, booking, and follow-up?`;
+    return {
+      ...prev,
+      id: `cold-${src.id}`,
+      leadSourceId: src.id,
+      business: src.business,
+      vertical: src.vertical,
+      city: src.city,
+      phone,
+      email,
+      score: warmthScore,
+      warmthScore,
+      auditScore: src.auditScore || 0,
+      auditRank: src.auditRank,
+      auditVersion: src.auditVersion,
+      rankReason,
+      stage: prev.stage || (items.length ? 'outbound_prepared' : src.status || 'audit_ranked'),
+      status: prev.status || 'ready_to_call',
+      lastTouch: prev.lastTouch || (priorTouches[priorTouches.length - 1]?.summary || 'Ranked by lead machine; no human call logged yet'),
+      nextAsk: src.nextAsk || (src.apolloEligible ? 'Approve Apollo enrichment or call owner/main line with audit angle' : 'Call main line / verify owner fit before Apollo spend'),
+      why: whyColtonShouldCall,
+      whyColtonShouldCall,
+      angle: src.angle || src.auditBackedAngle || 'Audit-first OpSpot angle.',
+      opener,
+      objections: src.objections || ['Already has someone answering phones', 'Not interested in AI', 'Call back later', 'Send info first'],
+      touches: priorTouches,
+      source: 'ranked-lead-machine/outbound-queue',
+      sourceLeadStatus: src.status,
+      contactStatus: contactReady ? 'ready_or_partial' : 'missing_contact_pending_enrichment',
+      apolloEligible: Boolean(src.apolloEligible),
+      apolloStatus: src.apolloStatus || 'not_ranked',
+      apolloReason: src.apolloReason || 'Not evaluated for Apollo yet.',
+      apolloCreditsEstimate: src.apolloCreditsEstimate || '0',
+      outboundDrafts: items.map(i => ({ id: i.id, channel: i.channel, status: i.status, contactStatus: i.contactStatus, scheduledFor: i.scheduledFor, draft: i.draft, guardrail: i.guardrail })),
+      updatedAt: prev.updatedAt || nowIso(),
+    };
+  }).filter(l => l.status !== 'closed_lost');
+  const ranked = candidates.sort((a, b) => (b.warmthScore || b.score || 0) - (a.warmthScore || a.score || 0));
+  return ranked.length ? ranked : seedColdCallLeads();
+}
+
 function ensureState() {
   fs.mkdirSync(STATE_DIR, { recursive: true });
   if (!fs.existsSync(STATE_FILE)) {
@@ -654,7 +740,7 @@ function ensureState() {
       ideas: seed.SEED_IDEAS || [],
       products: seed.SEED_PRODUCTS || [],
       agents: seed.SEED_AGENTS || [],
-      coldCallLeads: seedColdCallLeads(),
+      coldCallLeads: [],
       autopilotPolicy: seedAutopilotState().policy,
       automationRuns: seedAutopilotState().runs,
       outboundQueue: seedAutopilotState().queue,
@@ -670,10 +756,6 @@ function readMcState() {
   ensureState();
   const state = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
   let changed = false;
-  if (!state.coldCallLeads) {
-    state.coldCallLeads = seedColdCallLeads();
-    changed = true;
-  }
   const auto = seedAutopilotState();
   if (!state.autopilotPolicy) { state.autopilotPolicy = auto.policy; changed = true; }
   if (!state.automationRuns) { state.automationRuns = auto.runs; changed = true; }
@@ -721,6 +803,15 @@ function readMcState() {
     changed = true;
   }
   if (JSON.stringify(state.outboundQueue || []) !== JSON.stringify(outbound.queue)) { state.outboundQueue = outbound.queue; changed = true; }
+  const coldCallQueue = buildColdCallQueue(state);
+  if (JSON.stringify(state.coldCallLeads || []) !== JSON.stringify(coldCallQueue)) { state.coldCallLeads = coldCallQueue; changed = true; }
+  const coldRun = (state.automationRuns || []).find(r => r.id === 'run-cold-rank');
+  if (coldRun) {
+    coldRun.status = 'ready';
+    coldRun.summary = 'Ranks the one-lead-at-a-time cockpit from leadSources + prepared outboundQueue, including warmth, audit score, Apollo gate, prior touches, and call reason.';
+    coldRun.outputCount = state.coldCallLeads.length;
+    changed = true;
+  }
   if (changed) writeMcState(state);
   return state;
 }

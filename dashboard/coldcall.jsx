@@ -20,7 +20,7 @@ function ColdCallScreen() {
 
   uEf_CC(() => { load(); }, []);
 
-  const ordered = uMe_CC(() => leads.slice().sort((a,b)=>(b.score||0)-(a.score||0)), [leads]);
+  const ordered = uMe_CC(() => leads.slice().sort((a,b)=>(b.warmthScore||b.score||0)-(a.warmthScore||a.score||0)), [leads]);
   const lead = ordered[idx] || ordered[0];
   const log = receipts.filter(r => r.leadId === lead?.id || r.meta?.leadId === lead?.id).slice(-8).reverse();
 
@@ -45,23 +45,26 @@ function ColdCallScreen() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
               <div style={{ width: 46, height: 46, borderRadius: 14, background: 'var(--accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icons.Phone size={22}/></div>
               <div style={{ minWidth: 0, flex: 1 }}>
-                <div className="section-label">Best lead to call now</div>
+                <div className="section-label">Best lead to call now · ranked lead machine</div>
                 <div style={{ fontSize: 30, fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 1.05 }}>{lead.business}</div>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <div className="section-label">Score</div>
-                <div style={{ fontSize: 34, fontWeight: 900, color: 'var(--accent)' }}>{lead.score}</div>
+                <div className="section-label">Warmth</div>
+                <div style={{ fontSize: 34, fontWeight: 900, color: 'var(--accent)' }}>{lead.warmthScore || lead.score}</div>
               </div>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 18 }}>
               <InfoTile label="Phone" value={lead.phone || 'Needs number'} strong/>
-              <InfoTile label="Stage" value={lead.stage || 'researched'} />
+              <InfoTile label="Audit score" value={`${lead.auditScore ?? '—'}${lead.auditRank ? ` · rank #${lead.auditRank}` : ''}`} />
+              <InfoTile label="Apollo" value={`${lead.apolloStatus || 'not ranked'}${lead.apolloEligible ? ' · eligible' : ''}`} />
               <InfoTile label="Last touch" value={lead.lastTouch || 'No touch yet'} />
+              <InfoTile label="Stage" value={lead.stage || 'researched'} />
               <InfoTile label="Next ask" value={lead.nextAsk || 'Book a 15-min audit call'} />
             </div>
 
-            <BigBlock title="Why call" body={lead.why}/>
+            <BigBlock title="Why Colton should call" body={lead.whyColtonShouldCall || lead.why}/>
+            <BigBlock title="Warmth / rank reason" body={lead.rankReason}/>
             <BigBlock title="Angle to hit" body={lead.angle}/>
             <BigBlock title="Simple opener" body={lead.opener}/>
 
@@ -86,6 +89,11 @@ function ColdCallScreen() {
             {(lead.touches || []).map((t,i)=><Touch key={i} {...t}/>) }
             {(!lead.touches || !lead.touches.length) && <div style={{ color: 'var(--fg-tertiary)' }}>No outbound touches logged yet.</div>}
           </SidePanel>
+          <SidePanel title="Apollo gate">
+            <div style={{ fontSize: 13.5, lineHeight: 1.45, color: 'var(--fg-secondary)' }}>{lead.apolloReason || 'No Apollo reason logged yet.'}</div>
+            <div className="section-label" style={{ marginTop: 10 }}>Credits</div>
+            <div style={{ fontWeight: 850 }}>{lead.apolloCreditsEstimate || '0'}</div>
+          </SidePanel>
           <SidePanel title="Likely objections">
             {(lead.objections || []).map((o,i)=><div key={i} style={{ padding: '8px 0', borderBottom: '1px solid var(--border)', fontSize: 14 }}>{o}</div>)}
           </SidePanel>
@@ -104,7 +112,7 @@ function ColdCallScreen() {
 }
 
 function InfoTile({ label, value, strong }) {
-  return <div style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)', borderRadius: 14, padding: 14 }}><div className="section-label">{label}</div><div style={{ fontSize: strong ? 20 : 15, fontWeight: 850, marginTop: 4 }}>{value}</div></div>;
+  return <div style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border)', borderRadius: 14, padding: 14 }}><div className="section-label">{label}</div><div style={{ fontSize: strong ? 20 : 15, fontWeight: 850, marginTop: 4, overflowWrap: 'anywhere' }}>{value}</div></div>;
 }
 function BigBlock({ title, body }) {
   return <div style={{ borderTop: '1px solid var(--border)', paddingTop: 14, marginTop: 14 }}><div className="section-label" style={{ marginBottom: 6 }}>{title}</div><div style={{ fontSize: 17, lineHeight: 1.45, fontWeight: 650 }}>{body}</div></div>;
@@ -112,7 +120,7 @@ function BigBlock({ title, body }) {
 function SidePanel({ title, children }) {
   return <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 18, padding: 16 }}><div style={{ fontSize: 16, fontWeight: 900, marginBottom: 8 }}>{title}</div>{children}</div>;
 }
-function Touch({ channel, status, summary }) {
-  return <div style={{ padding: '8px 0', borderBottom: '1px solid var(--border)' }}><div style={{ fontWeight: 850, fontSize: 13 }}>{channel} · {status}</div><div style={{ color: 'var(--fg-secondary)', fontSize: 13 }}>{summary}</div></div>;
+function Touch({ channel, status, summary, at }) {
+  return <div style={{ padding: '8px 0', borderBottom: '1px solid var(--border)' }}><div style={{ fontWeight: 850, fontSize: 13 }}>{channel} · {status}</div><div style={{ color: 'var(--fg-secondary)', fontSize: 13 }}>{summary}</div>{at && <div className="section-label" style={{ marginTop: 3 }}>{at}</div>}</div>;
 }
 Object.assign(window, { ColdCallScreen });
