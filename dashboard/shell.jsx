@@ -46,6 +46,7 @@ function Sidebar({ active, onNav, counts }) {
     { id: 'actions', label: 'Action Catalog', Icon: Icons.Stack, badge: counts.actions, badgeTone: 'success' },
     { id: 'builder', label: 'Agent Builder', Icon: Icons.Brain, badge: counts.builder, badgeTone: 'success' },
     { id: 'content', label: 'Content Automation', Icon: Icons.Wand, badge: counts.content, badgeTone: 'success' },
+    { id: 'onboarding', label: 'Customer Intake', Icon: Icons.Box, badge: counts.customerIntake, badgeTone: 'success' },
     { id: 'crons', label: 'Crons', Icon: Icons.Refresh, badge: counts.crons },
     { id: 'fleet', label: 'Fleet', Icon: Icons.Bot, badge: counts.fleet, badgeTone: 'success' },
     { id: 'swipe', label: 'Swipe Deck', Icon: Icons.Cards, badge: counts.swipe, badgePulse: true },

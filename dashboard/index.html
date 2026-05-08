@@ -25,6 +25,7 @@
   <script type="text/babel" src="agent-builder.jsx?v=1778241600"></script>
   <script type="text/babel" src="content-automation.jsx?v=1778242800"></script>
   <script type="text/babel" src="inbound.jsx?v=1778242200"></script>
+  <script type="text/babel" src="customer-intake.jsx?v=1778247900"></script>
   <script type="text/babel" src="crons.jsx?v=1778213025"></script>
   <script type="text/babel" src="command.jsx?v=1778213025"></script>
   <script type="text/babel" src="fleet.jsx?v=1778213025"></script>
@@ -132,6 +133,7 @@
         builder: 1,
         content: 5,
         inbound: (window.INBOUND_CATEGORIES ? 8 : 0),
+        customerIntake: 3,
       };
 
       const titles = {
@@ -197,7 +199,7 @@
                 {view === 'salvage' && <SalvageScreen onNav={setView}/>}
                 {view === 'customers' && <ModulePlaceholderScreen id="customers" title="Customers" desc="Active accounts, setup state, agents, spend caps, and receipts."/>}
                 {view === 'approvals' && <ModulePlaceholderScreen id="approvals" title="Approvals" desc="Deep decision cards: context, thread summary, ROI, approve/reject/send back/snooze."/>}
-                {view === 'onboarding' && <ModulePlaceholderScreen id="onboarding" title="Onboarding" desc="Customer intake → audit → proposal → provision → live handoff."/>}
+                {view === 'onboarding' && <CustomerIntakeScreen/>}
                 {view === 'audit' && <ModulePlaceholderScreen id="audit" title="Audit" desc="Preliminary ops audits, leaks, ROI math, and proof packets."/>}
                 {view === 'proposals' && <ModulePlaceholderScreen id="proposals" title="Proposals" desc="Proposal drafts, pricing, invoice drafts, and close packets."/>}
                 {view === 'inbound' && <InboundReplyHandlerScreen onOpenTask={setOpenTask}/>}

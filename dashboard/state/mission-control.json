@@ -1,0 +1,2603 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-08T13:43:04.768Z",
+  "tasks": [
+    {
+      "id": "t10",
+      "title": "Twitch livestream",
+      "product": "p2",
+      "status": "inbox",
+      "agent": null,
+      "priority": "low",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 45,
+      "complexity": "M",
+      "age": "2d",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 240
+    },
+    {
+      "id": "t11",
+      "title": "Desk",
+      "product": "p2",
+      "status": "inbox",
+      "agent": null,
+      "priority": "low",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 30,
+      "complexity": "S",
+      "age": "2d",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 250
+    },
+    {
+      "id": "t12",
+      "title": "Whiteboard",
+      "product": "p2",
+      "status": "inbox",
+      "agent": null,
+      "priority": "low",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 30,
+      "complexity": "S",
+      "age": "2d",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 260
+    },
+    {
+      "id": "t16",
+      "title": "Ad video for hext.ai",
+      "product": "p2",
+      "status": "inbox",
+      "agent": null,
+      "priority": "normal",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 65,
+      "complexity": "M",
+      "age": "1d",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 220
+    },
+    {
+      "id": "t8",
+      "title": "Outbound automations",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 82,
+      "complexity": "L",
+      "age": "1h",
+      "progress": 12,
+      "pr": null,
+      "queueRank": 30,
+      "notes": "Merged from 'Outbound first-five target cards + approval queue': Draft-only until source/channel/sender approved."
+    },
+    {
+      "id": "t9",
+      "title": "Social DM automations",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "normal",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 68,
+      "complexity": "M",
+      "age": "1h",
+      "progress": 10,
+      "pr": null,
+      "queueRank": 210
+    },
+    {
+      "id": "t13",
+      "title": "Template building system",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "normal",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 70,
+      "complexity": "L",
+      "age": "1h",
+      "progress": 18,
+      "pr": null,
+      "queueRank": 200
+    },
+    {
+      "id": "t14",
+      "title": "True schedule that protects your energy",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 85,
+      "complexity": "M",
+      "age": "1h",
+      "progress": 15,
+      "pr": null,
+      "queueRank": 160
+    },
+    {
+      "id": "t19",
+      "title": "Inbound setup",
+      "product": "p2",
+      "status": "testing",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 81,
+      "complexity": "M",
+      "age": "45m",
+      "progress": 38,
+      "pr": null,
+      "queueRank": 55,
+      "notes": "Inbound/Reply Handler skeleton added: 8-way classification, escalation gates, approval-only reply drafts, placeholder-only local state."
+    },
+    {
+      "id": "t1",
+      "title": "Sydney's app",
+      "product": "p3",
+      "status": "assigned",
+      "agent": "a5",
+      "priority": "high",
+      "cost": 0.42,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 80,
+      "complexity": "L",
+      "age": "4h",
+      "progress": 35,
+      "pr": null,
+      "queueRank": 150
+    },
+    {
+      "id": "t6",
+      "title": "Proposal to Shannon",
+      "product": "p2",
+      "status": "assigned",
+      "agent": "a7",
+      "priority": "high",
+      "cost": 0.18,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 72,
+      "complexity": "S",
+      "age": "3h",
+      "progress": 30,
+      "pr": null,
+      "queueRank": 180
+    },
+    {
+      "id": "t15",
+      "title": "OpenAI + Google Studio API credits (buy)",
+      "product": "p2",
+      "status": "assigned",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 60,
+      "complexity": "S",
+      "age": "2h",
+      "progress": 20,
+      "pr": null,
+      "queueRank": 190
+    },
+    {
+      "id": "t17",
+      "title": "System for Digital Wave to send their lead list",
+      "product": "p2",
+      "status": "assigned",
+      "agent": "a5",
+      "priority": "high",
+      "cost": 0.22,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 75,
+      "complexity": "M",
+      "age": "2h",
+      "progress": 28,
+      "pr": null,
+      "queueRank": 110
+    },
+    {
+      "id": "t2",
+      "title": "Personal command center",
+      "product": "p2",
+      "status": "in_progress",
+      "agent": "a3",
+      "priority": "high",
+      "cost": 0.84,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 75,
+      "complexity": "L",
+      "age": "now",
+      "progress": 58,
+      "pr": null,
+      "queueRank": 130
+    },
+    {
+      "id": "t3",
+      "title": "FrankenClip",
+      "product": "p1",
+      "status": "in_progress",
+      "agent": "a1",
+      "priority": "high",
+      "cost": 4.21,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 80,
+      "complexity": "XL",
+      "age": "now",
+      "progress": 46,
+      "pr": null,
+      "queueRank": 140
+    },
+    {
+      "id": "t4",
+      "title": "Jarid's Paperclip company (built + trained)",
+      "product": "p2",
+      "status": "in_progress",
+      "agent": "a2",
+      "priority": "urgent",
+      "cost": 2.18,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 90,
+      "complexity": "M",
+      "age": "now",
+      "progress": 72,
+      "pr": null,
+      "queueRank": 80,
+      "notes": "Merged from 'Jarid — verify Telegram bot/group + save setup': Confirm bot/group works when mentioned; record full setup to Business OS."
+    },
+    {
+      "id": "t18",
+      "title": "Automated follow-up system",
+      "product": "p2",
+      "status": "in_progress",
+      "agent": "a7",
+      "priority": "high",
+      "cost": 0.71,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 80,
+      "complexity": "L",
+      "age": "now",
+      "progress": 40,
+      "pr": null,
+      "queueRank": 120
+    },
+    {
+      "id": "t5",
+      "title": "Digital Wave auditor + questionnaire (questionnaire first)",
+      "product": "p2",
+      "status": "testing",
+      "agent": "a5",
+      "priority": "high",
+      "cost": 1.92,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 78,
+      "complexity": "L",
+      "age": "1h",
+      "progress": 76,
+      "pr": null,
+      "queueRank": 70
+    },
+    {
+      "id": "t20",
+      "title": "Fix openclaw-control-ui message-drop bug (issue #1)",
+      "product": "p2",
+      "status": "testing",
+      "agent": "a3",
+      "priority": "urgent",
+      "cost": 0.84,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 75,
+      "complexity": "M",
+      "age": "1h",
+      "progress": 82,
+      "pr": null,
+      "queueRank": 170
+    },
+    {
+      "id": "t7",
+      "title": "Solar thing (send/build)",
+      "product": "p4",
+      "status": "review",
+      "agent": null,
+      "priority": "normal",
+      "cost": 0,
+      "estCost": 0,
+      "source": "manual",
+      "impact": 65,
+      "complexity": "M",
+      "age": "2h",
+      "progress": 90,
+      "pr": null,
+      "queueRank": 230
+    },
+    {
+      "id": "smoke-1778214772",
+      "title": "API smoke test — safe to ignore",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "low",
+      "cost": 0,
+      "estCost": 0,
+      "source": "system",
+      "impact": 1,
+      "complexity": "S",
+      "age": "0m",
+      "progress": 0,
+      "createdAt": "2026-05-08T04:32:52.923Z",
+      "lastAction": "defer",
+      "actionedAt": "2026-05-08T04:32:52.935Z",
+      "_deleted": true
+    },
+    {
+      "id": "auto-content-v1",
+      "title": "Content automation v1 — orchestrator-led specialist skeleton",
+      "product": "p2",
+      "status": "review",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "automation",
+      "impact": 85,
+      "complexity": "L",
+      "age": "0m",
+      "progress": 65,
+      "notes": "Mission Control content module added: idea intake → hooks/scripts → platform drafts/stream plans → approval/autopost placeholder → receipts. External publishing remains disabled pending Colton policy approval.",
+      "createdAt": "2026-05-08T04:33:46.067Z",
+      "queueRank": 35
+    },
+    {
+      "id": "auto-customer-setup-v1",
+      "title": "Customer setup automation v1 — Jarid template provisioning",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "urgent",
+      "cost": 0,
+      "estCost": 0,
+      "source": "automation",
+      "impact": 92,
+      "complexity": "L",
+      "age": "0m",
+      "progress": 0,
+      "notes": "Automation build track. Drafts/run outputs must land in queue; external sends/posts need approval.\n\nMerged from 'Customer onboarding visuals — welcome/checklist/worker/receipts': Customers need visual onboarding like Colton: clear status, checklist, first win.",
+      "createdAt": "2026-05-08T04:33:46.078Z",
+      "queueRank": 10
+    },
+    {
+      "id": "bo-llc-path",
+      "title": "LLC path — decide/file clean company setup",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 78,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 20,
+      "notes": "Business foundation P0. External filing/payment needs approval."
+    },
+    {
+      "id": "bo-data-room",
+      "title": "Build OpSpot data room + company docs",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 76,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 90,
+      "notes": "Make company real: docs, profile kit, receipts, finance/unit economics."
+    },
+    {
+      "id": "bo-finance-tracker",
+      "title": "Finance + unit economics tracker",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 80,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 100,
+      "notes": "Track customer/provider costs, plan caps, margin, Jarid economics."
+    },
+    {
+      "id": "bo-profile-kit",
+      "title": "Non-Google online presence/profile kit",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 82,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 40,
+      "notes": "Trust layer after landing page. No fake address/local claims.",
+      "_deleted": true,
+      "mergedInto": "bo-business-cards",
+      "mergedAt": "2026-05-08T05:33:29Z"
+    },
+    {
+      "id": "bo-business-cards",
+      "title": "Business cards/profile print kit",
+      "product": "p2",
+      "status": "assigned",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 82,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 40,
+      "notes": "Colton-owned visual trust asset; keep visible until handled.\n\nMerged from 'Non-Google online presence/profile kit': Trust layer after landing page. No fake address/local claims."
+    },
+    {
+      "id": "bo-jarid-telegram",
+      "title": "Jarid — verify Telegram bot/group + save setup",
+      "product": "p2",
+      "status": "assigned",
+      "agent": null,
+      "priority": "urgent",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 88,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 70,
+      "notes": "Confirm bot/group works when mentioned; record full setup to Business OS.",
+      "_deleted": true,
+      "mergedInto": "t4",
+      "mergedAt": "2026-05-08T05:33:29Z"
+    },
+    {
+      "id": "bo-customer-visual-onboarding",
+      "title": "Customer onboarding visuals — welcome/checklist/worker/receipts",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "urgent",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 90,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 80,
+      "notes": "Customers need visual onboarding like Colton: clear status, checklist, first win.",
+      "_deleted": true,
+      "mergedInto": "auto-customer-setup-v1",
+      "mergedAt": "2026-05-08T05:33:29Z"
+    },
+    {
+      "id": "bo-outbound-first-five",
+      "title": "Outbound first-five target cards + approval queue",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 79,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 10,
+      "notes": "Draft-only until source/channel/sender approved.",
+      "_deleted": true,
+      "mergedInto": "t8",
+      "mergedAt": "2026-05-08T05:33:29Z"
+    },
+    {
+      "id": "bo-inbound-support-feed",
+      "title": "Inbound/support feed → queue cards",
+      "product": "p2",
+      "status": "planning",
+      "agent": null,
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "business-os",
+      "impact": 81,
+      "complexity": "M",
+      "age": "0m",
+      "progress": 0,
+      "pr": null,
+      "queueRank": 20,
+      "notes": "Customer ops autopilot lane: watch threads, create/escalate cards.",
+      "_deleted": true,
+      "mergedInto": "t19",
+      "mergedAt": "2026-05-08T05:33:29Z"
+    },
+    {
+      "id": "t-sales-onboarding-flow-v1",
+      "title": "Sales → onboarding flow v1",
+      "product": "p2",
+      "status": "planning",
+      "agent": "mouse-ceo",
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "cron:b7aa4f19 overnight prep",
+      "impact": 88,
+      "complexity": "M",
+      "age": "now",
+      "progress": 65,
+      "pr": null,
+      "queueRank": 25,
+      "notes": "Lead reply → booked call → audit packet → proposal → onboarding → customer setup. Business OS spec ready; external sends still disabled until Colton enables policy/run."
+    },
+    {
+      "id": "brief-opspot-morning-2026-05-08",
+      "title": "Review OpSpot morning brief + choose launch mode",
+      "product": "p2",
+      "status": "review",
+      "agent": "adriana",
+      "priority": "urgent",
+      "cost": 0,
+      "estCost": 0,
+      "source": "brief",
+      "impact": 95,
+      "complexity": "S",
+      "age": "0m",
+      "progress": 100,
+      "pr": null,
+      "queueRank": 5,
+      "notes": "Morning brief artifact is ready in Business OS. Decision needed: conservative, manual first 10, or policy-live outbound; external sends remain disabled until approved.",
+      "artifact": "/Users/coltonharris/colton-brain-vault/Business-OS/Morning-Briefs/OPSPOT-MORNING-BRIEF-2026-05-08.md"
+    }
+  ],
+  "deals": [
+    {
+      "id": "d1",
+      "name": "Sue's Roofing Co.",
+      "owner": "Sue Patel",
+      "stage": "qualified",
+      "value": 497,
+      "mrr": true,
+      "source": "cold-call",
+      "next": "demo Tue 2pm",
+      "heat": "hot",
+      "lastTouch": "14m",
+      "agent": "a7",
+      "city": "Austin, TX"
+    },
+    {
+      "id": "d2",
+      "name": "Apex Plumbing",
+      "owner": "Marco Rivera",
+      "stage": "proposal",
+      "value": 197,
+      "mrr": true,
+      "source": "referral",
+      "next": "follow up — proposal sent",
+      "heat": "hot",
+      "lastTouch": "2h",
+      "agent": "a7",
+      "city": "Phoenix, AZ"
+    },
+    {
+      "id": "d3",
+      "name": "Brightway Solar Co.",
+      "owner": "Jen Kim",
+      "stage": "discovery",
+      "value": 397,
+      "mrr": true,
+      "source": "inbound",
+      "next": "discovery call Fri",
+      "heat": "warm",
+      "lastTouch": "1d",
+      "agent": null,
+      "city": "Denver, CO"
+    },
+    {
+      "id": "d4",
+      "name": "Northpoint Hardware",
+      "owner": "Rick D.",
+      "stage": "closed_won",
+      "value": 297,
+      "mrr": true,
+      "source": "cold-call",
+      "next": "kickoff scheduled",
+      "heat": "won",
+      "lastTouch": "3h",
+      "agent": "a7",
+      "city": "Boise, ID"
+    },
+    {
+      "id": "d5",
+      "name": "Lakeside Electrical",
+      "owner": "Casey M.",
+      "stage": "qualified",
+      "value": 197,
+      "mrr": true,
+      "source": "lead-finder",
+      "next": "send pricing",
+      "heat": "warm",
+      "lastTouch": "4h",
+      "agent": null,
+      "city": "Spokane, WA"
+    },
+    {
+      "id": "d6",
+      "name": "Iron Vine Coffee",
+      "owner": "Anita K.",
+      "stage": "discovery",
+      "value": 97,
+      "mrr": true,
+      "source": "lead-finder",
+      "next": "qualify need",
+      "heat": "cold",
+      "lastTouch": "2d",
+      "agent": null,
+      "city": "Portland, OR"
+    },
+    {
+      "id": "d7",
+      "name": "Summit HVAC",
+      "owner": "Dave T.",
+      "stage": "proposal",
+      "value": 497,
+      "mrr": true,
+      "source": "referral",
+      "next": "awaiting response",
+      "heat": "warm",
+      "lastTouch": "1d",
+      "agent": "a7",
+      "city": "Salt Lake City, UT"
+    },
+    {
+      "id": "d8",
+      "name": "Coastal Realty Group",
+      "owner": "Mira L.",
+      "stage": "closed_won",
+      "value": 397,
+      "mrr": true,
+      "source": "inbound",
+      "next": "onboarding active",
+      "heat": "won",
+      "lastTouch": "6h",
+      "agent": null,
+      "city": "San Diego, CA"
+    }
+  ],
+  "ideas": [
+    {
+      "id": "i1",
+      "product": "p1",
+      "title": "Add monthly digest email — show MoM growth %",
+      "desc": "Customer churn is high in months 2-3. A digest showing their numbers improving creates a \"loss aversion\" moment that retains 30%+ in similar SaaS plays.",
+      "category": "growth",
+      "impact": 86,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "retention",
+        "email",
+        "growth"
+      ],
+      "research": "Stripe blog · 2024 SaaS retention study",
+      "source": "research"
+    },
+    {
+      "id": "i2",
+      "product": "p1",
+      "title": "Inline error explainer — \"what does this mean for me?\"",
+      "desc": "Power users skip past technical errors. A one-line plain-language translation under each error reduces support tickets ~20%.",
+      "category": "ux",
+      "impact": 72,
+      "feasibility": 88,
+      "complexity": "S",
+      "tags": [
+        "errors",
+        "copy",
+        "support"
+      ],
+      "research": "Linear changelog · \"humanized errors\" pattern",
+      "source": "research"
+    },
+    {
+      "id": "i3",
+      "product": "p2",
+      "title": "Convoy mode: 3-agent parallel for big tasks",
+      "desc": "Large features stall single agents. Parallel decomposition with DAG dependency would cut wall-clock 60%.",
+      "category": "feature",
+      "impact": 94,
+      "feasibility": 64,
+      "complexity": "XL",
+      "tags": [
+        "agents",
+        "parallel",
+        "build"
+      ],
+      "research": "Karpathy AutoResearch · 2025 paper",
+      "source": "research"
+    },
+    {
+      "id": "i4",
+      "product": "p1",
+      "title": "Pricing page: stick the CTA on scroll",
+      "desc": "Competitors all stick. Frankenclip's pricing CTA is below the fold on mobile. Easy lift, measurable.",
+      "category": "growth",
+      "impact": 68,
+      "feasibility": 92,
+      "complexity": "S",
+      "tags": [
+        "cta",
+        "pricing",
+        "mobile"
+      ],
+      "research": "Stripe / Linear / Vercel pricing pages",
+      "source": "manual"
+    },
+    {
+      "id": "i5",
+      "product": "p4",
+      "title": "Auto-disqualify roofs <5yr old",
+      "desc": "Solar pitches on new roofs waste 40% of outreach. Aging detection from satellite already in pipeline; just gate on it.",
+      "category": "feature",
+      "impact": 79,
+      "feasibility": 71,
+      "complexity": "M",
+      "tags": [
+        "filter",
+        "roi",
+        "solar"
+      ],
+      "research": "Internal — last 90d outreach data",
+      "source": "research"
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "FrankenClip",
+      "desc": "1-click hosted Paperclip for SMBs",
+      "repo": "frankenclip/core",
+      "live": "frankenclip.app",
+      "icon": "F",
+      "tone": "brand",
+      "mrr": 8470,
+      "ideas": 23,
+      "building": 4,
+      "shipped": 31,
+      "health": 92,
+      "cycles": {
+        "research": "now",
+        "ideation": "2h"
+      },
+      "sparkline": [
+        12,
+        14,
+        18,
+        22,
+        19,
+        28,
+        34,
+        42,
+        38,
+        47,
+        55,
+        62
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Mouse",
+      "desc": "AI ops runtime · OpenClaw fork",
+      "repo": "mouse-platform",
+      "live": "mice.ink",
+      "icon": "M",
+      "tone": "info",
+      "mrr": 14210,
+      "ideas": 17,
+      "building": 6,
+      "shipped": 84,
+      "health": 88,
+      "cycles": {
+        "research": "6h",
+        "ideation": "12h"
+      },
+      "sparkline": [
+        38,
+        42,
+        49,
+        51,
+        57,
+        63,
+        68,
+        72,
+        79,
+        84,
+        89,
+        94
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Mio.ai",
+      "desc": "AI receptionist for trades",
+      "repo": "mio-ai-website",
+      "live": "mio.ai",
+      "icon": "M",
+      "tone": "success",
+      "mrr": 4120,
+      "ideas": 9,
+      "building": 1,
+      "shipped": 14,
+      "health": 76,
+      "cycles": {
+        "research": "1d",
+        "ideation": "4h"
+      },
+      "sparkline": [
+        4,
+        5,
+        5,
+        7,
+        9,
+        11,
+        12,
+        14,
+        15,
+        18,
+        21,
+        24
+      ]
+    },
+    {
+      "id": "p4",
+      "name": "Solar Autopilot",
+      "desc": "Aging-roof solar deal generator",
+      "repo": "solar-autopilot",
+      "live": "solar.crsh.dn",
+      "icon": "S",
+      "tone": "purple",
+      "mrr": 2890,
+      "ideas": 14,
+      "building": 2,
+      "shipped": 9,
+      "health": 81,
+      "cycles": {
+        "research": "3h",
+        "ideation": "8h"
+      },
+      "sparkline": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11,
+        14,
+        17,
+        21,
+        28
+      ]
+    },
+    {
+      "id": "p5",
+      "name": "Ghost Editor",
+      "desc": "Clip-worthy moments, scored",
+      "repo": "ghost-editor",
+      "live": "ghosted.live",
+      "icon": "G",
+      "tone": "pink",
+      "mrr": 1740,
+      "ideas": 11,
+      "building": 0,
+      "shipped": 6,
+      "health": 64,
+      "cycles": {
+        "research": "2d",
+        "ideation": "1d"
+      },
+      "sparkline": [
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        7,
+        7,
+        8,
+        9,
+        11
+      ]
+    },
+    {
+      "id": "p6",
+      "name": "Cat Signal",
+      "desc": "Multimodal cat communication",
+      "repo": "cat-signal",
+      "live": "catsignal.lol",
+      "icon": "C",
+      "tone": "cyan",
+      "mrr": 0,
+      "ideas": 6,
+      "building": 1,
+      "shipped": 2,
+      "health": 48,
+      "cycles": {
+        "research": "5d",
+        "ideation": "3d"
+      },
+      "sparkline": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "agents": [
+    {
+      "id": "a1",
+      "name": "Forge",
+      "role": "Builder",
+      "model": "sonnet-4.5",
+      "tone": "brand",
+      "health": "working",
+      "task": "t3",
+      "mood": "in flow",
+      "cpu": 78,
+      "cost": 4.21,
+      "tasksDone": 47
+    },
+    {
+      "id": "a2",
+      "name": "Anvil",
+      "role": "Builder",
+      "model": "sonnet-4.5",
+      "tone": "brand",
+      "health": "working",
+      "task": "t7",
+      "mood": "building",
+      "cpu": 64,
+      "cost": 2.18,
+      "tasksDone": 31
+    },
+    {
+      "id": "a3",
+      "name": "Sentinel",
+      "role": "Tester",
+      "model": "haiku-4.5",
+      "tone": "info",
+      "health": "working",
+      "task": "t2",
+      "mood": "running suite",
+      "cpu": 42,
+      "cost": 0.84,
+      "tasksDone": 89
+    },
+    {
+      "id": "a4",
+      "name": "Lens",
+      "role": "Reviewer",
+      "model": "sonnet-4.5",
+      "tone": "purple",
+      "health": "idle",
+      "task": null,
+      "mood": "standing by",
+      "cpu": 0,
+      "cost": 0,
+      "tasksDone": 62
+    },
+    {
+      "id": "a5",
+      "name": "Scout",
+      "role": "Researcher",
+      "model": "sonnet-4.5",
+      "tone": "success",
+      "health": "working",
+      "task": "t1",
+      "mood": "scanning competitors",
+      "cpu": 51,
+      "cost": 1.92,
+      "tasksDone": 124
+    },
+    {
+      "id": "a6",
+      "name": "Muse",
+      "role": "Ideator",
+      "model": "opus-4",
+      "tone": "pink",
+      "health": "working",
+      "task": "cyc-12",
+      "mood": "generating ideas",
+      "cpu": 88,
+      "cost": 6.4,
+      "tasksDone": 38
+    },
+    {
+      "id": "a7",
+      "name": "Closer",
+      "role": "Sales",
+      "model": "sonnet-4.5",
+      "tone": "cyan",
+      "health": "working",
+      "task": "d2",
+      "mood": "drafting proposal",
+      "cpu": 33,
+      "cost": 0.71,
+      "tasksDone": 19
+    },
+    {
+      "id": "a8",
+      "name": "Loom",
+      "role": "Learner",
+      "model": "haiku-4.5",
+      "tone": "neutral",
+      "health": "stalled",
+      "task": null,
+      "mood": "last seen 14m ago",
+      "cpu": 2,
+      "cost": 0.04,
+      "tasksDone": 211
+    }
+  ],
+  "coldCallLeads": [
+    {
+      "id": "cold-lead-source-wilmington-roofing-001",
+      "leadSourceId": "lead-source-wilmington-roofing-001",
+      "business": "Wilmington roofing contractor placeholder",
+      "vertical": "roofing",
+      "city": "Wilmington, NC",
+      "phone": "",
+      "email": "",
+      "score": 92,
+      "warmthScore": 92,
+      "auditScore": 82,
+      "auditRank": 1,
+      "auditVersion": "audit-score-v1",
+      "rankReason": "Rank #1 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo eligible_pending_approval.",
+      "stage": "outbound_prepared",
+      "status": "ready_to_call",
+      "lastTouch": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:00 AM ET. No send executed.",
+      "nextAsk": "Approve Apollo enrichment or call owner/main line with audit angle",
+      "why": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "whyColtonShouldCall": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington roofing contractor placeholder's missed calls, booking, and follow-up?",
+      "objections": [
+        "Already has someone answering phones",
+        "Not interested in AI",
+        "Call back later",
+        "Send info first"
+      ],
+      "touches": [
+        {
+          "channel": "lead-source.seeded",
+          "status": "receipt",
+          "summary": "dashboard/state/receipts.jsonl",
+          "at": ""
+        },
+        {
+          "channel": "email",
+          "status": "prepared-not-sent",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 9:53 AM ET. No send executed.",
+          "at": ""
+        }
+      ],
+      "source": "ranked-lead-machine/outbound-queue",
+      "sourceLeadStatus": "audit_ranked_apollo_eligible",
+      "contactStatus": "missing_contact_pending_enrichment",
+      "apolloEligible": true,
+      "apolloStatus": "eligible_pending_approval",
+      "apolloReason": "Top 2 audit-ranked seed lead with score 82; Apollo is allowed only after cheap research/audit ranking and still needs human approval before credits are spent.",
+      "apolloCreditsEstimate": "1-3 credits if approved",
+      "outboundDrafts": [
+        {
+          "id": "oq-outbound-queue-v1-lead-source-wilmington-roofing-001-email",
+          "channel": "email",
+          "status": "prepared-not-sent",
+          "contactStatus": "missing_contact_pending_enrichment",
+          "scheduledFor": "May 8, 9:53 AM ET",
+          "draft": {
+            "subject": "Quick roofing follow-up audit idea",
+            "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+          },
+          "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
+        }
+      ],
+      "updatedAt": "2026-05-08T10:22:03.300Z"
+    },
+    {
+      "id": "cold-lead-source-wilmington-hvac-001",
+      "leadSourceId": "lead-source-wilmington-hvac-001",
+      "business": "Wilmington HVAC company placeholder",
+      "vertical": "HVAC",
+      "city": "Wilmington, NC",
+      "phone": "",
+      "email": "",
+      "score": 92,
+      "warmthScore": 92,
+      "auditScore": 82,
+      "auditRank": 2,
+      "auditVersion": "audit-score-v1",
+      "rankReason": "Rank #2 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo eligible_pending_approval.",
+      "stage": "outbound_prepared",
+      "status": "ready_to_call",
+      "lastTouch": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 8:12 AM ET. No send executed.",
+      "nextAsk": "Approve Apollo enrichment or call owner/main line with audit angle",
+      "why": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "whyColtonShouldCall": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington HVAC company placeholder's missed calls, booking, and follow-up?",
+      "objections": [
+        "Already has someone answering phones",
+        "Not interested in AI",
+        "Call back later",
+        "Send info first"
+      ],
+      "touches": [
+        {
+          "channel": "lead-source.seeded",
+          "status": "receipt",
+          "summary": "dashboard/state/receipts.jsonl",
+          "at": ""
+        },
+        {
+          "channel": "iMessage",
+          "status": "prepared-not-sent",
+          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 10:05 AM ET. No send executed.",
+          "at": ""
+        }
+      ],
+      "source": "ranked-lead-machine/outbound-queue",
+      "sourceLeadStatus": "audit_ranked_apollo_eligible",
+      "contactStatus": "missing_contact_pending_enrichment",
+      "apolloEligible": true,
+      "apolloStatus": "eligible_pending_approval",
+      "apolloReason": "Top 2 audit-ranked seed lead with score 82; Apollo is allowed only after cheap research/audit ranking and still needs human approval before credits are spent.",
+      "apolloCreditsEstimate": "1-3 credits if approved",
+      "outboundDrafts": [
+        {
+          "id": "oq-outbound-queue-v1-lead-source-wilmington-hvac-001-imessage",
+          "channel": "iMessage",
+          "status": "prepared-not-sent",
+          "contactStatus": "missing_contact_pending_enrichment",
+          "scheduledFor": "May 8, 10:05 AM ET",
+          "draft": {
+            "subject": "",
+            "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
+          },
+          "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
+        }
+      ],
+      "updatedAt": "2026-05-08T10:22:03.300Z"
+    },
+    {
+      "id": "cold-lead-source-wilmington-plumbing-001",
+      "leadSourceId": "lead-source-wilmington-plumbing-001",
+      "business": "Wilmington plumbing company placeholder",
+      "vertical": "plumbing",
+      "city": "Wilmington, NC",
+      "phone": "",
+      "email": "",
+      "score": 88,
+      "warmthScore": 88,
+      "auditScore": 82,
+      "auditRank": 3,
+      "auditVersion": "audit-score-v1",
+      "rankReason": "Rank #3 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo hold_after_audit_rank.",
+      "stage": "outbound_prepared",
+      "status": "ready_to_call",
+      "lastTouch": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:24 AM ET. No send executed.",
+      "nextAsk": "Call main line / verify owner fit before Apollo spend",
+      "why": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "whyColtonShouldCall": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington plumbing company placeholder's missed calls, booking, and follow-up?",
+      "objections": [
+        "Already has someone answering phones",
+        "Not interested in AI",
+        "Call back later",
+        "Send info first"
+      ],
+      "touches": [
+        {
+          "channel": "lead-source.seeded",
+          "status": "receipt",
+          "summary": "dashboard/state/receipts.jsonl",
+          "at": ""
+        },
+        {
+          "channel": "email",
+          "status": "prepared-not-sent",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 10:17 AM ET. No send executed.",
+          "at": ""
+        }
+      ],
+      "source": "ranked-lead-machine/outbound-queue",
+      "sourceLeadStatus": "audit_ranked_hold",
+      "contactStatus": "missing_contact_pending_enrichment",
+      "apolloEligible": false,
+      "apolloStatus": "hold_after_audit_rank",
+      "apolloReason": "Score 82 passed the audit threshold, but only the top 2 seed leads are Apollo-eligible this pass.",
+      "apolloCreditsEstimate": "0",
+      "outboundDrafts": [
+        {
+          "id": "oq-outbound-queue-v1-lead-source-wilmington-plumbing-001-email",
+          "channel": "email",
+          "status": "prepared-not-sent",
+          "contactStatus": "missing_contact_pending_enrichment",
+          "scheduledFor": "May 8, 10:17 AM ET",
+          "draft": {
+            "subject": "Quick plumbing follow-up audit idea",
+            "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+          },
+          "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
+        }
+      ],
+      "updatedAt": "2026-05-08T10:22:03.300Z"
+    }
+  ],
+  "autopilotPolicy": {
+    "radius": "Wilmington, NC + 25 miles",
+    "verticals": [
+      "roofing",
+      "solar",
+      "construction",
+      "appliance",
+      "plumbing",
+      "HVAC",
+      "electrical",
+      "landscaping",
+      "remodeling"
+    ],
+    "senders": {
+      "email": "colton.harris@automioapp.com",
+      "imessage": "Colton personal iPhone / iMessage for now",
+      "future": "Dedicated business iPhone on M5 Max"
+    },
+    "dailyCaps": {
+      "email": {
+        "limit": 50,
+        "used": 0
+      },
+      "imessage": {
+        "limit": 50,
+        "used": 0
+      }
+    },
+    "quietHours": {
+      "start": 20,
+      "end": 8,
+      "tz": "America/New_York"
+    },
+    "coldCallTarget": "100–200/day",
+    "mode": "policy-approved-autopilot"
+  },
+  "automationRuns": [
+    {
+      "id": "run-research",
+      "name": "Lead research",
+      "status": "queued",
+      "summary": "Find construction/home-service businesses in Wilmington + 25 miles.",
+      "lastRun": "2026-05-08T07:34:48.960Z",
+      "nextRun": "8:05am ET",
+      "outputCount": 3,
+      "receiptPath": "dashboard/state/receipts.jsonl"
+    },
+    {
+      "id": "run-audit",
+      "name": "Audit Score v1",
+      "status": "complete",
+      "summary": "Ranks local leads by website presence, GBP/review placeholder, missed-call/follow-up fit, industry fit, reason, angle, and first-touch recommendation.",
+      "lastRun": "04:58 salvage verified",
+      "nextRun": "after research",
+      "outputCount": 3,
+      "receiptPath": "dashboard/state/receipts.jsonl"
+    },
+    {
+      "id": "run-enrich",
+      "name": "Apollo-last contact enrichment gate",
+      "status": "gated",
+      "summary": "Apollo runs only after cheap research/audit ranking. This UI marks eligible rows only; no Apollo call or credit spend happens here.",
+      "lastRun": "seeded",
+      "nextRun": "after audit + suppression check + human approval",
+      "outputCount": 2
+    },
+    {
+      "id": "run-email",
+      "name": "Outbound email",
+      "status": "prepared",
+      "summary": "Queue generator drafted email items only; no live send path enabled.",
+      "lastRun": "not run",
+      "nextRun": "after 8:00am ET + approval",
+      "outputCount": 2
+    },
+    {
+      "id": "run-imessage",
+      "name": "Outbound iMessage",
+      "status": "prepared",
+      "summary": "Queue generator drafted iMessage items only; no personal iPhone sends until runner is deliberately enabled.",
+      "lastRun": "not run",
+      "nextRun": "after 8:00am ET + approval",
+      "outputCount": 1
+    },
+    {
+      "id": "run-replies",
+      "name": "Reply handler",
+      "status": "idle",
+      "summary": "Classify replies, opt-outs, interest, angry replies, and escalation.",
+      "lastRun": "not run",
+      "nextRun": "after first sends",
+      "outputCount": 0
+    },
+    {
+      "id": "run-cold-rank",
+      "name": "Cold-call ranker",
+      "status": "ready",
+      "summary": "Ranks the one-lead-at-a-time cockpit from leadSources + prepared outboundQueue, including warmth, audit score, Apollo gate, prior touches, and call reason.",
+      "lastRun": "04:58 salvage",
+      "nextRun": "after first replies/touches",
+      "outputCount": 3
+    },
+    {
+      "id": "run-briefs",
+      "name": "Morning/evening briefs",
+      "status": "queued",
+      "summary": "Summarize overnight/day receipts, blockers, and next best moves.",
+      "lastRun": "seeded",
+      "nextRun": "next scheduled brief",
+      "outputCount": 0
+    },
+    {
+      "id": "run-sales-onboarding-flow-v1",
+      "name": "Sales → onboarding flow prep",
+      "status": "prepared",
+      "summary": "V1 path mapped: reply classification, booking prep, audit packet, proposal draft, onboarding checklist, customer setup receipt. No external sends/replies performed.",
+      "lastRun": "2026-05-08 06:50 ET overnight prep",
+      "nextRun": "Colton review after wake; enable only after send path + real leads + suppression confirmed",
+      "outputCount": 6
+    }
+  ],
+  "outboundQueue": [
+    {
+      "id": "oq-outbound-queue-v1-lead-source-wilmington-roofing-001-email",
+      "version": "outbound-queue-v1",
+      "leadId": "lead-source-wilmington-roofing-001",
+      "lead": "Wilmington roofing contractor placeholder",
+      "channel": "email",
+      "contact": "",
+      "contactStatus": "missing_contact_pending_enrichment",
+      "scheduledFor": "May 8, 9:53 AM ET",
+      "staggerMinutes": 12,
+      "status": "prepared-not-sent",
+      "sendEnabled": false,
+      "quietHoursSafe": true,
+      "auditScore": 82,
+      "auditRank": 1,
+      "auditVersion": "audit-score-v1",
+      "auditBackedAngle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "reasonWhy": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
+      "draft": {
+        "subject": "Quick roofing follow-up audit idea",
+        "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+      },
+      "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
+    },
+    {
+      "id": "oq-outbound-queue-v1-lead-source-wilmington-hvac-001-imessage",
+      "version": "outbound-queue-v1",
+      "leadId": "lead-source-wilmington-hvac-001",
+      "lead": "Wilmington HVAC company placeholder",
+      "channel": "iMessage",
+      "contact": "",
+      "contactStatus": "missing_contact_pending_enrichment",
+      "scheduledFor": "May 8, 10:05 AM ET",
+      "staggerMinutes": 12,
+      "status": "prepared-not-sent",
+      "sendEnabled": false,
+      "quietHoursSafe": true,
+      "auditScore": 82,
+      "auditRank": 2,
+      "auditVersion": "audit-score-v1",
+      "auditBackedAngle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "reasonWhy": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
+      "draft": {
+        "subject": "",
+        "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
+      },
+      "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
+    },
+    {
+      "id": "oq-outbound-queue-v1-lead-source-wilmington-plumbing-001-email",
+      "version": "outbound-queue-v1",
+      "leadId": "lead-source-wilmington-plumbing-001",
+      "lead": "Wilmington plumbing company placeholder",
+      "channel": "email",
+      "contact": "",
+      "contactStatus": "missing_contact_pending_enrichment",
+      "scheduledFor": "May 8, 10:17 AM ET",
+      "staggerMinutes": 12,
+      "status": "prepared-not-sent",
+      "sendEnabled": false,
+      "quietHoursSafe": true,
+      "auditScore": 82,
+      "auditRank": 3,
+      "auditVersion": "audit-score-v1",
+      "auditBackedAngle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "reasonWhy": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
+      "draft": {
+        "subject": "Quick plumbing follow-up audit idea",
+        "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
+      },
+      "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
+    }
+  ],
+  "leadSources": [
+    {
+      "id": "lead-source-wilmington-roofing-001",
+      "business": "Wilmington roofing contractor placeholder",
+      "vertical": "roofing",
+      "city": "Wilmington, NC",
+      "distance": "0–25 mi",
+      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
+      "website": "",
+      "phone": "",
+      "email": "",
+      "researchNotes": "Seed row for research-agent/lead-hunt output. Needs live source verification before enrichment or outreach.",
+      "auditScore": 82,
+      "apolloEligible": true,
+      "ownerContact": {
+        "name": "",
+        "title": "",
+        "phone": "",
+        "email": "",
+        "source": ""
+      },
+      "status": "audit_ranked_apollo_eligible",
+      "receipts": [
+        {
+          "type": "lead-source.seeded",
+          "path": "dashboard/state/receipts.jsonl"
+        }
+      ],
+      "websitePresent": false,
+      "reviewsGbpPlaceholder": "GBP/reviews not verified yet",
+      "missedCallFollowUpFit": 30,
+      "industryFit": 25,
+      "reasonWhy": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
+      "auditVersion": "audit-score-v1",
+      "auditRank": 1,
+      "apolloStatus": "eligible_pending_approval",
+      "apolloCreditsEstimate": "1-3 credits if approved",
+      "decisionMakerName": "",
+      "decisionMakerTitle": "",
+      "decisionMakerConfidence": "pending enrichment",
+      "apolloReason": "Top 2 audit-ranked seed lead with score 82; Apollo is allowed only after cheap research/audit ranking and still needs human approval before credits are spent.",
+      "decisionMakerEmail": "",
+      "decisionMakerPhone": ""
+    },
+    {
+      "id": "lead-source-wilmington-hvac-001",
+      "business": "Wilmington HVAC company placeholder",
+      "vertical": "HVAC",
+      "city": "Wilmington, NC",
+      "distance": "0–25 mi",
+      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
+      "website": "",
+      "phone": "",
+      "email": "",
+      "researchNotes": "Seed row for specialist sourcing. Prioritize service-area fit, missed-call pain, reviews, and appointment-booking leak.",
+      "auditScore": 82,
+      "apolloEligible": true,
+      "ownerContact": {
+        "name": "",
+        "title": "",
+        "phone": "",
+        "email": "",
+        "source": ""
+      },
+      "status": "audit_ranked_apollo_eligible",
+      "receipts": [
+        {
+          "type": "lead-source.seeded",
+          "path": "dashboard/state/receipts.jsonl"
+        }
+      ],
+      "websitePresent": false,
+      "reviewsGbpPlaceholder": "GBP/reviews not verified yet",
+      "missedCallFollowUpFit": 30,
+      "industryFit": 25,
+      "reasonWhy": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
+      "auditVersion": "audit-score-v1",
+      "auditRank": 2,
+      "apolloStatus": "eligible_pending_approval",
+      "apolloCreditsEstimate": "1-3 credits if approved",
+      "decisionMakerName": "",
+      "decisionMakerTitle": "",
+      "decisionMakerConfidence": "pending enrichment",
+      "apolloReason": "Top 2 audit-ranked seed lead with score 82; Apollo is allowed only after cheap research/audit ranking and still needs human approval before credits are spent.",
+      "decisionMakerEmail": "",
+      "decisionMakerPhone": ""
+    },
+    {
+      "id": "lead-source-wilmington-plumbing-001",
+      "business": "Wilmington plumbing company placeholder",
+      "vertical": "plumbing",
+      "city": "Wilmington, NC",
+      "distance": "0–25 mi",
+      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
+      "website": "",
+      "phone": "",
+      "email": "",
+      "researchNotes": "Seed row only. No outbound until source verified, audit scored, suppression checked, and Colton approval gate passes.",
+      "auditScore": 82,
+      "apolloEligible": false,
+      "ownerContact": {
+        "name": "",
+        "title": "",
+        "phone": "",
+        "email": "",
+        "source": ""
+      },
+      "status": "audit_ranked_hold",
+      "receipts": [
+        {
+          "type": "lead-source.seeded",
+          "path": "dashboard/state/receipts.jsonl"
+        }
+      ],
+      "websitePresent": false,
+      "reviewsGbpPlaceholder": "GBP/reviews not verified yet",
+      "missedCallFollowUpFit": 30,
+      "industryFit": 25,
+      "reasonWhy": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
+      "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
+      "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
+      "auditVersion": "audit-score-v1",
+      "auditRank": 3,
+      "apolloStatus": "hold_after_audit_rank",
+      "apolloCreditsEstimate": "0",
+      "decisionMakerName": "",
+      "decisionMakerTitle": "",
+      "decisionMakerConfidence": "pending enrichment",
+      "apolloReason": "Score 82 passed the audit threshold, but only the top 2 seed leads are Apollo-eligible this pass.",
+      "decisionMakerEmail": "",
+      "decisionMakerPhone": ""
+    }
+  ],
+  "workflowMetadata": [
+    {
+      "id": "lead-source-v1-wilmington",
+      "workflow": "Lead Source v1 — Wilmington construction/home-services",
+      "orchestratorRole": "parent orchestrator routes each stage; does not become a 50-tool mega-agent",
+      "specialistAgent": "research-agent-marley / lead-hunt specialist for sourcing; auditor specialist for scoring; lead-enrich specialist for contact data; outreach-compose specialist for drafts",
+      "requiredTools": [
+        "web/local source research",
+        "business listing source notes",
+        "website audit",
+        "contact enrichment",
+        "receipt writer"
+      ],
+      "requiredPlugins": [
+        "OpenClaw sessions/delegation",
+        "dashboard state API",
+        "receipts.jsonl"
+      ],
+      "approvalPolicy": "Local research/audit/enrich only overnight. External sends, replies, calls, customer-visible changes, private/financial access, and purchases require explicit human approval; quiet hours freeze 8pm–8am ET.",
+      "receiptPath": "dashboard/state/receipts.jsonl",
+      "status": "foundation_seeded"
+    },
+    {
+      "id": "sales-onboarding-flow-v1-2026-05-08",
+      "workflow": "Sales → Onboarding Flow v1 — lead reply to customer setup",
+      "orchestratorRole": "Parent orchestrator routes each handoff, writes receipts, and keeps external actions disabled unless Colton/policy explicitly enables the run.",
+      "specialistAgent": "reply handler → meeting-booker/notetaker → auditor → sales specialist → customer setup specialist → implementation specialist",
+      "requiredTools": [
+        "Mission Control state",
+        "Business OS spec/checklist",
+        "reply classifier",
+        "audit packet template",
+        "proposal draft template",
+        "customer setup note template",
+        "receipts.jsonl"
+      ],
+      "requiredPlugins": [
+        "OpenClaw sessions/delegation",
+        "message/email/iMessage send runners only after approval",
+        "dashboard state API"
+      ],
+      "approvalPolicy": "Local prep/drafts/receipts are allowed. External sends/replies/calls, calendar writes, pricing/contracts, account/private/financial access, purchases, and customer-visible setup changes need approval unless an explicit policy-run is enabled.",
+      "receiptPath": "dashboard/state/receipts.jsonl",
+      "status": "ready_for_colton_review",
+      "specPath": "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-SALES-ONBOARDING-FLOW-V1-2026-05-08.md"
+    }
+  ],
+  "agentActionCatalog": [
+    {
+      "id": "aac-google-maps-lead-puller",
+      "category": "source",
+      "icon": "maps",
+      "name": "Google Maps lead puller",
+      "status": "queued",
+      "summary": "Pulls candidate local businesses from Maps/listing sources, then writes raw leads for audit. No outreach.",
+      "specialistAgent": "lead-hunt specialist / research-agent-marley",
+      "tools": [
+        "Google Maps/Places source",
+        "web research",
+        "local state writer",
+        "receipt writer"
+      ],
+      "inputsNeeded": [
+        "target vertical",
+        "geo/radius",
+        "suppression list",
+        "daily caps",
+        "approved sender policy"
+      ],
+      "outputs": [
+        "leadSources[] raw candidates",
+        "source URLs/notes",
+        "dedupe keys"
+      ],
+      "outputCount": 3,
+      "lastRun": "seeded/local only",
+      "nextRun": "manual or scheduled sourcing window",
+      "costCreditRisk": "low",
+      "approvalShort": "research ok",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "lead source URLs per row"
+      ],
+      "escalationTriggers": [
+        "source blocked/CAPTCHA",
+        "duplicate-heavy pull",
+        "non-target vertical drift",
+        "private data requested"
+      ]
+    },
+    {
+      "id": "aac-website-gbp-auditor",
+      "category": "audit",
+      "icon": "audit",
+      "name": "Website / GBP auditor",
+      "status": "ready",
+      "summary": "Scores sourced leads for website presence, GBP/reviews, missed-call fit, follow-up fit, and first-touch angle.",
+      "specialistAgent": "website/GBP auditor specialist",
+      "tools": [
+        "website fetcher",
+        "GBP/review research",
+        "audit scoring rubric",
+        "receipt writer"
+      ],
+      "inputsNeeded": [
+        "leadSources[]",
+        "audit rubric",
+        "vertical fit rules"
+      ],
+      "outputs": [
+        "auditScore",
+        "auditRank",
+        "reasonWhy",
+        "angle",
+        "recommendedFirstTouch"
+      ],
+      "outputCount": 3,
+      "lastRun": "seeded/local only",
+      "nextRun": "after next lead pull",
+      "costCreditRisk": "low",
+      "approvalShort": "audit ok",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "audit fields on each leadSource"
+      ],
+      "escalationTriggers": [
+        "uncertain business identity",
+        "bad/missing website",
+        "regulated/unsafe vertical",
+        "low-confidence score"
+      ]
+    },
+    {
+      "id": "aac-contact-enricher",
+      "category": "enrich",
+      "icon": "enrich",
+      "name": "Contact enricher",
+      "status": "queued",
+      "summary": "Finds decision-maker hints from cheap/public sources before any paid enrichment gate.",
+      "specialistAgent": "lead-enrich specialist",
+      "tools": [
+        "public website/contact page",
+        "LinkedIn/manual source notes",
+        "local state writer"
+      ],
+      "inputsNeeded": [
+        "audit-ranked leads",
+        "company URL",
+        "business name/city",
+        "suppression list"
+      ],
+      "outputs": [
+        "decisionMakerName",
+        "title",
+        "email/phone if public",
+        "confidence/source"
+      ],
+      "outputCount": 0,
+      "lastRun": "not run",
+      "nextRun": "after audit rank >= threshold",
+      "costCreditRisk": "low",
+      "approvalShort": "public only",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "contact source notes"
+      ],
+      "escalationTriggers": [
+        "private/personal data boundary",
+        "confidence below threshold",
+        "contact source conflicts",
+        "opt-out/suppression hit"
+      ]
+    },
+    {
+      "id": "aac-apollo-last-gate",
+      "category": "enrich",
+      "icon": "enrich",
+      "name": "Apollo-last enrichment gate",
+      "status": "blocked",
+      "summary": "Only marks Apollo-eligible rows after cheap audit ranking. It never spends credits from the dashboard.",
+      "specialistAgent": "lead-enrich specialist + parent approval gate",
+      "tools": [
+        "Apollo plugin/API only after approval",
+        "credit estimator",
+        "suppression checker",
+        "receipt writer"
+      ],
+      "inputsNeeded": [
+        "top audit-ranked leads",
+        "cheap research complete",
+        "suppression check",
+        "human approval"
+      ],
+      "outputs": [
+        "apolloEligible",
+        "credit estimate",
+        "approved enrichment request"
+      ],
+      "outputCount": 2,
+      "lastRun": "eligibility marked only",
+      "nextRun": "after Colton approval",
+      "costCreditRisk": "high",
+      "approvalShort": "approval required",
+      "approvalPolicy": "Apollo spend/enrichment is never automatic. Colton must approve the exact batch, credit estimate, and reason before any Apollo call.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "Apollo eligibility fields"
+      ],
+      "escalationTriggers": [
+        "credit estimate > approved cap",
+        "suppression hit",
+        "unclear owner/contact",
+        "batch larger than approved"
+      ]
+    },
+    {
+      "id": "aac-email-queue-generator",
+      "category": "queue",
+      "icon": "email",
+      "name": "Email queue generator",
+      "status": "ready",
+      "summary": "Drafts audit-backed email queue items with schedule slots and guardrails. No live send integration.",
+      "specialistAgent": "outreach-compose specialist",
+      "tools": [
+        "template library",
+        "audit fields",
+        "local outboundQueue writer",
+        "receipt writer"
+      ],
+      "inputsNeeded": [
+        "audit-backed angle",
+        "contact email or pending enrichment",
+        "daily cap",
+        "quiet-hours policy"
+      ],
+      "outputs": [
+        "outboundQueue email drafts",
+        "subject/body",
+        "scheduledFor",
+        "sendEnabled=false"
+      ],
+      "outputCount": 2,
+      "lastRun": "generated from local leadSources",
+      "nextRun": "after audit/enrichment refresh",
+      "costCreditRisk": "low",
+      "approvalShort": "draft only",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "outboundQueue[] email items"
+      ],
+      "escalationTriggers": [
+        "send requested",
+        "missing contact",
+        "legal/medical/finance vertical",
+        "angry/opt-out history"
+      ]
+    },
+    {
+      "id": "aac-imessage-queue-generator",
+      "category": "queue",
+      "icon": "imessage",
+      "name": "iMessage queue generator",
+      "status": "ready",
+      "summary": "Drafts iMessage queue items for Colton’s approval, respecting quiet hours and daily caps.",
+      "specialistAgent": "outreach-compose specialist + iMessage queue specialist",
+      "tools": [
+        "template library",
+        "local outboundQueue writer",
+        "iMessage plugin only after approval"
+      ],
+      "inputsNeeded": [
+        "phone/contact status",
+        "audit angle",
+        "daily cap",
+        "quiet-hours policy"
+      ],
+      "outputs": [
+        "outboundQueue iMessage drafts",
+        "scheduledFor",
+        "sendEnabled=false"
+      ],
+      "outputCount": 1,
+      "lastRun": "generated from local leadSources",
+      "nextRun": "after audit/enrichment refresh",
+      "costCreditRisk": "medium",
+      "approvalShort": "draft only",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "outboundQueue[] iMessage items"
+      ],
+      "escalationTriggers": [
+        "send requested",
+        "personal-phone boundary",
+        "quiet-hours conflict",
+        "opt-out/angry reply"
+      ]
+    },
+    {
+      "id": "aac-reply-classifier",
+      "category": "inbound",
+      "icon": "reply",
+      "name": "Reply classifier",
+      "status": "queued",
+      "summary": "Classifies replies as interested, question, objection, opt-out, angry, support, or needs-human.",
+      "specialistAgent": "reply-classifier specialist",
+      "tools": [
+        "inbound thread reader after authorization",
+        "classification rubric",
+        "approval queue writer"
+      ],
+      "inputsNeeded": [
+        "authorized inbound source",
+        "thread text",
+        "known lead/deal context"
+      ],
+      "outputs": [
+        "reply class",
+        "recommended next action",
+        "approval card"
+      ],
+      "outputCount": 0,
+      "lastRun": "not run",
+      "nextRun": "after first approved sends/replies",
+      "costCreditRisk": "low",
+      "approvalShort": "classify ok",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "approval cards"
+      ],
+      "escalationTriggers": [
+        "angry/legal/opt-out",
+        "pricing/contract question",
+        "customer support issue",
+        "human identity ambiguity"
+      ]
+    },
+    {
+      "id": "aac-cold-call-ranker",
+      "category": "sales",
+      "icon": "call",
+      "name": "Cold-call ranker",
+      "status": "ready",
+      "summary": "Ranks the warmest calls from audit signal, outbound prep, Apollo gate, and prior touches.",
+      "specialistAgent": "cold-call ranker specialist",
+      "tools": [
+        "leadSources",
+        "outboundQueue",
+        "coldCallLeads builder",
+        "receipt writer"
+      ],
+      "inputsNeeded": [
+        "audit-ranked leads",
+        "prepared drafts",
+        "contact status",
+        "prior touch history"
+      ],
+      "outputs": [
+        "coldCallLeads[]",
+        "warmthScore",
+        "opener",
+        "why call now"
+      ],
+      "outputCount": 3,
+      "lastRun": "generated from local state",
+      "nextRun": "after queue/reply update",
+      "costCreditRisk": "low",
+      "approvalShort": "rank ok",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "coldCallLeads[]"
+      ],
+      "escalationTriggers": [
+        "call requested",
+        "contact missing",
+        "DNC/opt-out signal",
+        "low-confidence business fit"
+      ]
+    },
+    {
+      "id": "aac-content-generator",
+      "category": "content",
+      "icon": "content",
+      "name": "Content Automation v1",
+      "status": "ready",
+      "summary": "Parent orchestrator routes rough ideas to Instagram, YouTube, Twitch/streaming, clip/repurpose, and approval/publishing specialists for local drafts and receipts.",
+      "specialistAgent": "Parent content orchestrator + channel specialists",
+      "tools": [
+        "Mission Control content module",
+        "Tell Me What You Want builder",
+        "Business OS spec",
+        "Instagram/YouTube/Twitch plugin placeholders",
+        "receipts ledger"
+      ],
+      "inputsNeeded": [
+        "raw idea/reference/demo/clip",
+        "target channel",
+        "CTA",
+        "proof/receipt expectation"
+      ],
+      "outputs": [
+        "content brief",
+        "hook bank",
+        "platform draft packet",
+        "approval card",
+        "receipt log"
+      ],
+      "outputCount": 5,
+      "lastRun": "2026-05-08 09:22 ET",
+      "nextRun": "manual after Colton review",
+      "costCreditRisk": "low",
+      "approvalShort": "publish gated",
+      "approvalPolicy": "Draft locally only. External posts, account changes, DMs/comments, customer proof, boosts/spend, and autopost activation require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "Business-OS/OPSPOT-CONTENT-AUTOMATION-V1-SKELETON-2026-05-08.md"
+      ],
+      "escalationTriggers": [
+        "public post requested",
+        "unsupported customer claim",
+        "platform account connection",
+        "boost/spend requested"
+      ]
+    },
+    {
+      "id": "aac-morning-evening-brief",
+      "category": "brief",
+      "icon": "brief",
+      "name": "Morning / evening brief",
+      "status": "queued",
+      "summary": "Summarizes runs, output counts, cost/credit risks, blockers, and next 1–3 decisions for Colton.",
+      "specialistAgent": "briefing specialist / Adriana decision surface",
+      "tools": [
+        "local state reader",
+        "receipts reader",
+        "memory writer",
+        "visible artifact linker"
+      ],
+      "inputsNeeded": [
+        "mission-control.json",
+        "receipts.jsonl",
+        "open blockers",
+        "approval cards"
+      ],
+      "outputs": [
+        "brief card",
+        "decision list",
+        "memory receipt"
+      ],
+      "outputCount": 0,
+      "lastRun": "not run",
+      "nextRun": "morning/evening cron",
+      "costCreditRisk": "low",
+      "approvalShort": "brief ok",
+      "approvalPolicy": "Local research, analysis, ranking, drafting, and queue generation may run alone. External sends/replies/calls, customer-visible changes, Apollo spend, private/financial access, purchases, or destructive actions require explicit Colton approval.",
+      "receipts": [
+        "dashboard/state/receipts.jsonl",
+        "memory/YYYY-MM-DD.md"
+      ],
+      "escalationTriggers": [
+        "decision-worthy blocker",
+        "spend risk",
+        "send/call approval needed",
+        "system failure or stale data"
+      ]
+    }
+  ],
+  "tellMeWhatYouWantBuilder": {
+    "id": "intent-builder-v1",
+    "status": "ready_spec",
+    "principle": "rough intent → proposed workflow/policy → Colton steers/approves → specialist agents execute with receipts",
+    "fiveCommandDraft": [
+      "build this",
+      "show queue",
+      "approve/deny/defer",
+      "delegate to specialist",
+      "brief me"
+    ],
+    "proposalFields": [
+      "goal",
+      "target segment",
+      "specialist agents",
+      "tools/plugins needed",
+      "approval policy",
+      "cost/privacy/public-risk gates",
+      "outputs",
+      "receipts",
+      "kill switch",
+      "definition of done"
+    ],
+    "example": "“Find roofing leads around Wilmington and get me the best calls” becomes: source specialist → auditor → enrich gate → outbound queue → cold-call ranker → swipe deck approval."
+  },
+  "replyHandler": {
+    "status": "sales_onboarding_flow_ready",
+    "classes": [
+      "interested",
+      "question",
+      "objection",
+      "opt-out",
+      "angry",
+      "wrong person",
+      "booked",
+      "needs Colton"
+    ],
+    "escalations": [
+      "legal/private/financial/account access",
+      "angry reply",
+      "pricing negotiation",
+      "refund/cancellation",
+      "identity confusion"
+    ],
+    "nextActions": [
+      "draft answer",
+      "book call",
+      "send proof link",
+      "suppress contact",
+      "route to Colton",
+      "update CRM"
+    ],
+    "artifacts": [
+      "reply classification receipt",
+      "call prep card",
+      "audit packet",
+      "proposal draft",
+      "onboarding checklist",
+      "customer setup receipt"
+    ],
+    "guardrail": "External replies/sends remain disabled until Colton explicitly enables approved run/policy."
+  },
+  "salesOnboardingFlow": [
+    {
+      "stage": "lead reply",
+      "owner": "reply handler",
+      "input": "Inbound reply + lead record + prior touch",
+      "output": "classification + recommended next action + receipt",
+      "done": "Interested/question/objection/opt-out/angry/wrong-person/booked routed correctly; suppression/escalation status saved."
+    },
+    {
+      "stage": "booked call",
+      "owner": "meeting-booker + notetaker",
+      "input": "Interested reply or manual booking",
+      "output": "call prep card with opener, audit angle, recording/notes lane",
+      "done": "Colton can open one card and know who, why, what to ask, and what is blocked."
+    },
+    {
+      "stage": "audit packet",
+      "owner": "auditor specialist",
+      "input": "Website/GBP/public footprint + vertical playbook + reply context",
+      "output": "proof, pain, ROI, recommended AI employee, risks/unknowns",
+      "done": "Packet is screen-share/proposal ready without pretending certainty."
+    },
+    {
+      "stage": "proposal",
+      "owner": "sales specialist",
+      "input": "Call notes + audit packet",
+      "output": "draft offer, scope, price placeholder, start path, approval gates",
+      "done": "Internal draft ready; customer-visible send still needs Colton approval."
+    },
+    {
+      "stage": "onboarding",
+      "owner": "customer setup specialist",
+      "input": "Accepted proposal/verbal go-ahead",
+      "output": "access/intake checklist + first-session win plan",
+      "done": "Minimum setup inputs captured: owner, command channel, budget cap, memory/runtime lane, recording note."
+    },
+    {
+      "stage": "customer setup",
+      "owner": "implementation specialist",
+      "input": "Onboarding checklist",
+      "output": "working AI employee + Business OS customer setup receipt",
+      "done": "Customer can message agent, receives first useful output, next integration is clear."
+    }
+  ],
+  "customerIntakeAgent": {
+    "status": "skeleton_ready",
+    "flow": [
+      "upload/file placeholder",
+      "extract fields",
+      "store original/source link",
+      "update customer/lead record",
+      "write receipt"
+    ],
+    "fields": [
+      "company",
+      "contact",
+      "website",
+      "services",
+      "current tools",
+      "inbox/phone access needed",
+      "brand assets",
+      "offer/pricing",
+      "approval blockers"
+    ]
+  },
+  "contentPipelines": [
+    {
+      "id": "instagram",
+      "platform": "Instagram",
+      "specialistAgent": "Instagram content specialist",
+      "status": "swipe_deck_needed",
+      "hormoziSetup": [
+        "avatar",
+        "pain",
+        "dream outcome",
+        "proof",
+        "hook bank",
+        "CTA",
+        "format: reel/carousel/story",
+        "cadence"
+      ],
+      "needsFromColton": [
+        "confirm account/login path",
+        "brand voice",
+        "first 3 content topics",
+        "camera/mic test clip",
+        "approval to post/schedule",
+        "any spend/tools"
+      ],
+      "afterApproval": "generate scripts/captions → create post package → queue approval → publish only after explicit gate"
+    },
+    {
+      "id": "youtube",
+      "platform": "YouTube",
+      "specialistAgent": "YouTube video specialist",
+      "status": "swipe_deck_needed",
+      "hormoziSetup": [
+        "video promise",
+        "title/thumbnail angle",
+        "hook",
+        "script outline",
+        "proof/examples",
+        "CTA",
+        "shorts extraction",
+        "metadata"
+      ],
+      "needsFromColton": [
+        "channel/login path",
+        "video style",
+        "first topic",
+        "sample raw clip",
+        "thumbnail direction",
+        "upload approval"
+      ],
+      "afterApproval": "script/metadata package → clip/shorts plan → upload draft or publish only after gate"
+    },
+    {
+      "id": "twitch",
+      "platform": "Twitch",
+      "specialistAgent": "Twitch streaming specialist",
+      "status": "swipe_deck_needed",
+      "hormoziSetup": [
+        "stream transformation",
+        "topic/rundown",
+        "live hook",
+        "CTA",
+        "clip moments",
+        "repurpose plan"
+      ],
+      "needsFromColton": [
+        "Twitch login/path",
+        "OBS/scenes status",
+        "camera/mic confirmation",
+        "stream format",
+        "moderation rules",
+        "go-live approval"
+      ],
+      "afterApproval": "run-of-show → OBS checklist → stream card → no go-live without explicit click"
+    }
+  ],
+  "contextWallArchitecture": {
+    "status": "core_reference_logged",
+    "source": "https://www.youtube.com/watch?v=-Uk9gsFWBYw",
+    "title": "the most powerful AI tool.",
+    "principle": "Organize company workflows/data/tools into folder/markdown skill packs so the parent orchestrator can route to narrow specialist agents without becoming a mega-agent.",
+    "workflowPackShape": [
+      "SKILL.md/workflow instructions",
+      "policy.md approval gates",
+      "inputs.md missing info",
+      "tools.md allowed tools/plugins",
+      "data/ state pointers",
+      "scripts/ repeatable actions",
+      "receipts/ proof"
+    ],
+    "missionControlNeeds": [
+      "agent roster with permissions/tools",
+      "Tell Me What You Want builder",
+      "swipe deck for human gates",
+      "receipts ledger",
+      "failure/retry lane independent of fragile chat sessions"
+    ],
+    "updatedAt": "2026-05-08T09:32:25.777283+00:00"
+  },
+  "contentAutomationV1": {
+    "status": "ready_for_colton_review",
+    "policyMode": "placeholder_only_no_external_posts",
+    "criticalArchitecturePrinciple": "Content automation is orchestrator-led and specialist-agent executed, not one mega-agent.",
+    "workflow": [
+      "idea_intake",
+      "script_hooks",
+      "draft_assets",
+      "human_approval",
+      "publish_placeholder",
+      "receipts"
+    ],
+    "specialists": [
+      {
+        "id": "parent-orchestrator",
+        "name": "Parent content orchestrator",
+        "role": "Turns rough intent into policy, task graph, approval gates, and specialist handoffs.",
+        "tools": [
+          "Mission Control state",
+          "Tell Me What You Want builder",
+          "approval queue",
+          "receipts ledger"
+        ],
+        "canDo": [
+          "classify intent",
+          "ask clarifiers",
+          "route specialists",
+          "freeze local policy draft"
+        ],
+        "needsApproval": [
+          "publishing policy",
+          "external account/plugin connection"
+        ]
+      },
+      {
+        "id": "instagram",
+        "name": "Instagram specialist",
+        "role": "Drafts Reels/carousels/captions from approved hooks and visual direction.",
+        "tools": [
+          "hook bank",
+          "caption drafts",
+          "asset checklist",
+          "Instagram plugin placeholder"
+        ],
+        "canDo": [
+          "draft captions",
+          "draft Reel beats",
+          "suggest hashtags"
+        ],
+        "needsApproval": [
+          "post, DM, comment, account/profile changes"
+        ]
+      },
+      {
+        "id": "youtube",
+        "name": "YouTube specialist",
+        "role": "Drafts Shorts scripts, titles, descriptions, thumbnail notes, and long-form outlines.",
+        "tools": [
+          "YouTube reference log",
+          "Shorts template",
+          "title/description draft",
+          "YouTube plugin placeholder"
+        ],
+        "canDo": [
+          "draft Shorts",
+          "repurpose demos",
+          "title variants"
+        ],
+        "needsApproval": [
+          "upload, schedule, public metadata changes"
+        ]
+      },
+      {
+        "id": "twitch-streaming",
+        "name": "Twitch / streaming specialist",
+        "role": "Drafts stream plans, run-of-show, segments, clips-to-capture, and post-stream checklist.",
+        "tools": [
+          "stream runbook",
+          "OBS/Twitch placeholder",
+          "clip marker sheet"
+        ],
+        "canDo": [
+          "draft stream plan",
+          "prep talking points",
+          "mark clip opportunities"
+        ],
+        "needsApproval": [
+          "go live, account changes, public chat actions"
+        ]
+      },
+      {
+        "id": "clip-repurpose",
+        "name": "Clip / repurpose specialist",
+        "role": "Turns one recording or idea into platform-specific variants.",
+        "tools": [
+          "transcript/clip input",
+          "Hook-Meat-CTA template",
+          "caption formatter",
+          "asset export checklist"
+        ],
+        "canDo": [
+          "cutdown plan",
+          "caption variants",
+          "cross-platform package"
+        ],
+        "needsApproval": [
+          "publish/export to external tools with account access"
+        ]
+      },
+      {
+        "id": "approval-publishing",
+        "name": "Approval / publishing specialist",
+        "role": "Maintains human gates, autopost policy placeholder, receipts, and kill switch.",
+        "tools": [
+          "approval queue",
+          "policy ledger",
+          "receipts.jsonl",
+          "platform plugin placeholders"
+        ],
+        "canDo": [
+          "package approval cards",
+          "log decisions",
+          "prepare upload checklist"
+        ],
+        "needsApproval": [
+          "enable autopost, publish, spend/boost, use customer proof"
+        ]
+      }
+    ],
+    "queueCards": [
+      {
+        "id": "intake",
+        "label": "Idea intake",
+        "status": "ready",
+        "output": "structured content brief",
+        "owner": "Parent content orchestrator"
+      },
+      {
+        "id": "hooks",
+        "label": "Script + hooks",
+        "status": "ready",
+        "output": "5 hooks + Hook/Meat/CTA draft",
+        "owner": "YouTube or Instagram specialist"
+      },
+      {
+        "id": "drafts",
+        "label": "Draft captions/video/stream plan",
+        "status": "ready",
+        "output": "platform draft packet",
+        "owner": "channel specialist"
+      },
+      {
+        "id": "approval",
+        "label": "Approval / autopost policy placeholder",
+        "status": "human_gate",
+        "output": "approve/reject/send-back card",
+        "owner": "Approval / publishing specialist"
+      },
+      {
+        "id": "receipts",
+        "label": "Receipts",
+        "status": "ready",
+        "output": "local run log + artifact links",
+        "owner": "Receipt clerk"
+      }
+    ],
+    "intakeQuestions": [
+      "What rough idea, customer pain, demo, clip, or reference are we starting from?",
+      "Which channel matters first: Instagram, YouTube, Twitch/stream, or multi-platform?",
+      "What should the AI draft versus what must wait for Colton?",
+      "What proof/receipt should make this safe to publish?"
+    ],
+    "approvalPolicy": "Local intake, hooks, scripts, captions, stream plans, repurpose packets, checklists, and receipts may run alone. External posting, account connection, comments/DMs, boosts/spend, customer-visible claims, profile changes, or autopost policy activation require explicit Colton approval.",
+    "receipts": [
+      "dashboard/state/receipts.jsonl",
+      "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-CONTENT-AUTOMATION-V1-SKELETON-2026-05-08.md"
+    ],
+    "updatedAt": "2026-05-08T13:22:00Z"
+  },
+  "customerIntake": {
+    "version": 1,
+    "updatedAt": "2026-05-08T13:42:53.984134Z",
+    "mode": "local-placeholder-only",
+    "approvalPolicy": "draft_only_until_customer_consent_and_colton_approval",
+    "customers": [
+      {
+        "id": "jarid-paperclip",
+        "name": "Jarid / Paperclip",
+        "stage": "setup",
+        "priority": "urgent",
+        "consent": "pending",
+        "docs": [
+          "Telegram/OpenClaw agent goal",
+          "Memory/customer setup notes",
+          "Provider/infra cost watch"
+        ],
+        "missing": [
+          "Confirm second-month payment status",
+          "Pick first live dopamine-producing workflow",
+          "Approve account/plugin access path"
+        ],
+        "nextAgentAction": "Prepare customer setup checklist and access request packet; do not connect accounts or send messages."
+      },
+      {
+        "id": "digital-wave",
+        "name": "Digital Wave",
+        "stage": "brief-ready",
+        "priority": "high",
+        "consent": "not connected",
+        "docs": [
+          "DIGITAL-WAVE-MEETING-BRIEF-2026-05-07.md"
+        ],
+        "missing": [
+          "Confirm first automation wedge",
+          "Map approved tools/accounts",
+          "Define owner approval gates"
+        ],
+        "nextAgentAction": "Convert meeting brief into implementation checklist and proof packet skeleton."
+      },
+      {
+        "id": "opspot-internal",
+        "name": "OpSpot Internal Dogfood",
+        "stage": "active",
+        "priority": "high",
+        "consent": "owned",
+        "docs": [
+          "Mission Control queue",
+          "Outbound/content/inbound skeletons",
+          "Receipts ledger"
+        ],
+        "missing": [
+          "Replace placeholder lead data with approved source rows",
+          "Attach real artifacts to approval cards"
+        ],
+        "nextAgentAction": "Keep all automations local-only and surface approve/deny/defer cards before external action."
+      }
+    ],
+    "intakeQuestions": [
+      "What is the customer paying for first?",
+      "Which accounts/tools are explicitly approved to connect?",
+      "What must always come back to Colton before execution?",
+      "What evidence proves the setup worked?"
+    ],
+    "documentAgentSteps": [
+      "Collect approved notes/docs only",
+      "Extract customer goals, accounts, constraints, and approval gates",
+      "Generate setup checklist + missing info questions",
+      "Create queue cards for build/test/handoff",
+      "Write receipt packet; wait for approval before external actions"
+    ]
+  }
+}
