@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-08T13:43:04.768Z",
+  "updatedAt": "2026-05-08T13:57:39.503Z",
   "tasks": [
     {
       "id": "t10",
@@ -152,10 +152,10 @@
       "impact": 81,
       "complexity": "M",
       "age": "45m",
-      "progress": 38,
+      "progress": 46,
       "pr": null,
       "queueRank": 55,
-      "notes": "Inbound/Reply Handler skeleton added: 8-way classification, escalation gates, approval-only reply drafts, placeholder-only local state."
+      "notes": "Inbound/Reply Handler skeleton plus Customer Intake/Document Agent skeleton: local placeholder docs, field extraction, source links, record updates, receipts; no external sends/reads."
     },
     {
       "id": "t1",
@@ -1155,7 +1155,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 9:53 AM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 10:07 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1172,7 +1172,7 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 9:53 AM ET",
+          "scheduledFor": "May 8, 10:07 AM ET",
           "draft": {
             "subject": "Quick roofing follow-up audit idea",
             "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
@@ -1220,7 +1220,7 @@
         {
           "channel": "iMessage",
           "status": "prepared-not-sent",
-          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 10:05 AM ET. No send executed.",
+          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 10:19 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1237,7 +1237,7 @@
           "channel": "iMessage",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 10:05 AM ET",
+          "scheduledFor": "May 8, 10:19 AM ET",
           "draft": {
             "subject": "",
             "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
@@ -1285,7 +1285,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 10:17 AM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 10:31 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1302,7 +1302,7 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 10:17 AM ET",
+          "scheduledFor": "May 8, 10:31 AM ET",
           "draft": {
             "subject": "Quick plumbing follow-up audit idea",
             "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
@@ -1443,7 +1443,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 9:53 AM ET",
+      "scheduledFor": "May 8, 10:07 AM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -1469,7 +1469,7 @@
       "channel": "iMessage",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 10:05 AM ET",
+      "scheduledFor": "May 8, 10:19 AM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -1495,7 +1495,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 10:17 AM ET",
+      "scheduledFor": "May 8, 10:31 AM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -2231,7 +2231,8 @@
     }
   ],
   "customerIntakeAgent": {
-    "status": "skeleton_ready",
+    "status": "v1_skeleton_ready_local_only",
+    "inspiration": "invoice OCR style flow: file placeholder -> field extraction -> original/source link -> customer/lead update -> receipt",
     "flow": [
       "upload/file placeholder",
       "extract fields",
@@ -2240,16 +2241,18 @@
       "write receipt"
     ],
     "fields": [
-      "company",
-      "contact",
-      "website",
-      "services",
-      "current tools",
-      "inbox/phone access needed",
-      "brand assets",
-      "offer/pricing",
-      "approval blockers"
-    ]
+      "Company",
+      "Contact",
+      "Email",
+      "Phone",
+      "Website",
+      "Services",
+      "Current tools",
+      "Access needed",
+      "Offer / pricing",
+      "Approval blockers"
+    ],
+    "approvalPolicy": "Local drafting/extraction only. No external reads, account connects, sends, or customer-visible mutations without explicit approval."
   },
   "contentPipelines": [
     {
@@ -2529,8 +2532,8 @@
     "updatedAt": "2026-05-08T13:22:00Z"
   },
   "customerIntake": {
-    "version": 1,
-    "updatedAt": "2026-05-08T13:42:53.984134Z",
+    "version": 2,
+    "updatedAt": "2026-05-08T13:50:00.000Z",
     "mode": "local-placeholder-only",
     "approvalPolicy": "draft_only_until_customer_consent_and_colton_approval",
     "customers": [
@@ -2550,7 +2553,16 @@
           "Pick first live dopamine-producing workflow",
           "Approve account/plugin access path"
         ],
-        "nextAgentAction": "Prepare customer setup checklist and access request packet; do not connect accounts or send messages."
+        "nextAgentAction": "Prepare customer setup checklist and access request packet; do not connect accounts or send messages.",
+        "sourceLinks": [
+          "Telegram/OpenClaw agent goal",
+          "Memory/customer setup notes",
+          "Provider/infra cost watch"
+        ],
+        "extracted": {},
+        "receipts": [
+          "local-intake-seed-jarid-paperclip"
+        ]
       },
       {
         "id": "digital-wave",
@@ -2566,7 +2578,14 @@
           "Map approved tools/accounts",
           "Define owner approval gates"
         ],
-        "nextAgentAction": "Convert meeting brief into implementation checklist and proof packet skeleton."
+        "nextAgentAction": "Convert meeting brief into implementation checklist and proof packet skeleton.",
+        "sourceLinks": [
+          "DIGITAL-WAVE-MEETING-BRIEF-2026-05-07.md"
+        ],
+        "extracted": {},
+        "receipts": [
+          "local-intake-seed-digital-wave"
+        ]
       },
       {
         "id": "opspot-internal",
@@ -2583,21 +2602,95 @@
           "Replace placeholder lead data with approved source rows",
           "Attach real artifacts to approval cards"
         ],
-        "nextAgentAction": "Keep all automations local-only and surface approve/deny/defer cards before external action."
+        "nextAgentAction": "Keep all automations local-only and surface approve/deny/defer cards before external action.",
+        "sourceLinks": [
+          "Mission Control queue",
+          "Outbound/content/inbound skeletons",
+          "Receipts ledger"
+        ],
+        "extracted": {},
+        "receipts": [
+          "local-intake-seed-opspot-internal"
+        ]
       }
     ],
     "intakeQuestions": [
-      "What is the customer paying for first?",
+      "What is the customer paying for first: reply handling, missed-call recovery, content, onboarding, or ops cleanup?",
+      "Which document/source did this come from and can we keep a link to the original?",
       "Which accounts/tools are explicitly approved to connect?",
       "What must always come back to Colton before execution?",
       "What evidence proves the setup worked?"
     ],
     "documentAgentSteps": [
-      "Collect approved notes/docs only",
-      "Extract customer goals, accounts, constraints, and approval gates",
-      "Generate setup checklist + missing info questions",
-      "Create queue cards for build/test/handoff",
-      "Write receipt packet; wait for approval before external actions"
+      "Upload or paste an approved local file/note placeholder",
+      "Extract customer, contact, website, services, tools, access needs, offer/pricing, blockers",
+      "Store original file name/source link beside the extracted record",
+      "Update the selected customer/lead record locally",
+      "Write a receipt with before/after, missing fields, and next safe action"
+    ],
+    "fields": [
+      {
+        "key": "company",
+        "label": "Company"
+      },
+      {
+        "key": "contact",
+        "label": "Contact"
+      },
+      {
+        "key": "email",
+        "label": "Email"
+      },
+      {
+        "key": "phone",
+        "label": "Phone"
+      },
+      {
+        "key": "website",
+        "label": "Website"
+      },
+      {
+        "key": "services",
+        "label": "Services"
+      },
+      {
+        "key": "currentTools",
+        "label": "Current tools"
+      },
+      {
+        "key": "accessNeeded",
+        "label": "Access needed"
+      },
+      {
+        "key": "offerPricing",
+        "label": "Offer / pricing"
+      },
+      {
+        "key": "approvalBlockers",
+        "label": "Approval blockers"
+      }
+    ],
+    "documentQueue": [
+      {
+        "id": "sample-invoice-ocr-style",
+        "status": "extracted",
+        "sourceName": "Sample onboarding note / invoice-OCR pattern",
+        "sourceLink": "local://placeholder/customer-intake/sample-onboarding-note",
+        "customerId": "opspot-internal",
+        "extracted": {
+          "company": "OpSpot.ai",
+          "contact": "Colton Harris",
+          "website": "https://opspot.ai",
+          "services": "Customer onboarding automation, document intake, approval-gated AI employees",
+          "currentTools": "OpenClaw Mission Control, Business OS, receipts ledger",
+          "accessNeeded": "Only explicit customer-approved files/accounts",
+          "offerPricing": "Placeholder until proposal/invoice is approved",
+          "approvalBlockers": "No external sends, account connects, or customer-visible changes without Colton approval"
+        },
+        "confidence": 0.78,
+        "receipt": "receipt-local-2026-05-08-customer-intake-sample",
+        "createdAt": "2026-05-08T13:50:00.000Z"
+      }
     ]
   }
 }
