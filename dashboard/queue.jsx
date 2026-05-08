@@ -281,22 +281,38 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
                   onDragLeave={()=>setListDropId(prev => prev === t.id ? null : prev)}
                   onDrop={(e)=>{ e.preventDefault(); dropListItem(t.id); }}
                   onDragEnd={()=>{ setListDragId(null); setListDropId(null); }}
-                  className="row-hover"
+                  className="queue-list-row row-hover"
                   onClick={()=>onOpenTask(t)}
-                  style={{ display: 'grid', gridTemplateColumns: '62px 1fr 120px 120px 140px 90px', gap: 12, alignItems: 'center', background: listDropId===t.id ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${listDropId===t.id?'var(--accent)':'var(--border)'}`, borderRadius: 14, padding: '14px 16px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                    <span title="Drag to reorder" style={{ color: 'var(--fg-tertiary)', fontSize: 14, lineHeight: 1, cursor: 'grab', paddingRight: 2 }}>⋮⋮</span>
-                    <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, -1); }} disabled={i===0} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===0?'not-allowed':'pointer' }}>↑</button>
-                    <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, 1); }} disabled={i===orderedVisible.length-1} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===orderedVisible.length-1?'not-allowed':'pointer' }}>↓</button>
+                  style={{ display: 'grid', gridTemplateColumns: '46px minmax(0, 1fr) 210px', gap: 16, alignItems: 'center', background: listDropId===t.id ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${listDropId===t.id?'var(--accent)':'var(--border)'}`, borderRadius: 18, padding: '18px 20px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+                    <span title="Drag to reorder" style={{ color: 'var(--fg-disabled)', fontSize: 18, lineHeight: 1, cursor: 'grab', letterSpacing: -4 }}>⋮⋮</span>
+                    <div style={{ display: 'flex', gap: 4 }}>
+                      <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, -1); }} disabled={i===0} style={{ width: 22, height: 22, borderRadius: 999, border: '1px solid var(--border)', background: 'var(--surface-elevated)', color: 'var(--fg-tertiary)', cursor: i===0?'not-allowed':'pointer', fontSize: 12 }}>↑</button>
+                      <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, 1); }} disabled={i===orderedVisible.length-1} style={{ width: 22, height: 22, borderRadius: 999, border: '1px solid var(--border)', background: 'var(--surface-elevated)', color: 'var(--fg-tertiary)', cursor: i===orderedVisible.length-1?'not-allowed':'pointer', fontSize: 12 }}>↓</button>
+                    </div>
                   </div>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--fg-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{i + 1}. {t.title}</div>
-                    <div className="term" style={{ marginTop: 3, fontSize: 12.5, color: 'var(--fg-secondary)' }}>{product.name || t.product} · {t.source} · imp {t.impact} · {t.complexity}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                      <span className="mono-num" style={{ width: 28, height: 28, borderRadius: 999, background: 'var(--surface-elevated)', border: '1px solid var(--border)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--fg-tertiary)', fontSize: 12, fontWeight: 800, flexShrink: 0 }}>{i + 1}</span>
+                      <div style={{ fontSize: 20, fontWeight: 900, lineHeight: 1.16, color: 'var(--fg-primary)', letterSpacing: '-0.035em', overflow: 'hidden', textOverflow: 'ellipsis' }}>{t.title}</div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', paddingLeft: 38 }}>
+                      <span style={{ fontSize: 13, color: 'var(--fg-secondary)', fontWeight: 700 }}>{product.name || t.product}</span>
+                      <span style={{ color: 'var(--fg-disabled)' }}>•</span>
+                      <span style={{ fontSize: 13, color: 'var(--fg-tertiary)' }}>{agent ? agent.name : 'unassigned'}</span>
+                      <span style={{ color: 'var(--fg-disabled)' }}>•</span>
+                      <span style={{ fontSize: 13, color: 'var(--fg-tertiary)' }}>impact {t.impact}</span>
+                      <span style={{ color: 'var(--fg-disabled)' }}>•</span>
+                      <span style={{ fontSize: 13, color: 'var(--fg-tertiary)' }}>{t.source}</span>
+                    </div>
                   </div>
-                  <Pill tone={t.priority==='urgent'?'critical':t.priority==='high'?'brand':'neutral'} dot={false}>{t.priority}</Pill>
-                  <Pill tone={status?.tone || 'neutral'} dot={false}>{status?.label || t.status}</Pill>
-                  <div style={{ fontSize: 13, color: 'var(--fg-secondary)', fontWeight: 700 }}>{agent ? agent.name : 'unassigned'}</div>
-                  <div className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', textAlign: 'right' }}>{t.age || '0m'}</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+                    <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                      <Pill tone={t.priority==='urgent'?'critical':t.priority==='high'?'brand':'neutral'} dot={false}>{t.priority}</Pill>
+                      <Pill tone={status?.tone || 'neutral'} dot={false}>{status?.label || t.status}</Pill>
+                    </div>
+                    <div className="term" style={{ fontSize: 12, color: 'var(--fg-tertiary)', textAlign: 'right' }}>{t.age || '0m'} · {t.complexity}</div>
+                  </div>
                 </div>
               );
             })}

@@ -214,3 +214,12 @@ textarea {
   -webkit-user-select: none;
   user-select: none;
 }
+
+/* Frankenclip-inspired queue list readability */
+.queue-list-row {
+  box-shadow: 0 2px 8px rgba(42, 34, 23, 0.045), 0 18px 45px rgba(42, 34, 23, 0.035);
+}
+.queue-list-row:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(42, 34, 23, 0.075), 0 24px 60px rgba(42, 34, 23, 0.055);
+}
