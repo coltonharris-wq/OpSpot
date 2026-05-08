@@ -110,7 +110,8 @@ const MIME = {
 
 function serveFile(req, res) {
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
-  if (urlPath === '/') urlPath = '/index.html';
+  if (urlPath === '/' || urlPath === '/dashboard' || urlPath === '/dashboard/') urlPath = '/index.html';
+  if (urlPath.startsWith('/dashboard/')) urlPath = urlPath.slice('/dashboard'.length);
   const filePath = path.normalize(path.join(ROOT, urlPath));
   if (!filePath.startsWith(ROOT)) { res.writeHead(403).end(); return; }
   fs.stat(filePath, (err, st) => {
