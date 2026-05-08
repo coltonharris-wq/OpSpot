@@ -1,5 +1,5 @@
 // Mission Queue — the spine. Kanban + filters + drag-and-drop + live agents on cards.
-const { useState: uSt_Q, useEffect: uEf_Q, useMemo: uMe_Q } = React;
+const { useState: uSt_Q, useEffect: uEf_Q, useMemo: uMe_Q, useRef: uRef_Q } = React;
 
 // Persist user edits to task fields across refresh. Stored as
 // { [taskId]: { title?, priority?, status?, agent?, cost?, estCost?,
@@ -189,6 +189,8 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
   const [dragId, setDragId] = uSt_Q(null);
   const [listDragId, setListDragId] = uSt_Q(null);
   const [listDropId, setListDropId] = uSt_Q(null);
+  const [listDropSide, setListDropSide] = uSt_Q('before');
+  const listScrollRef = uRef_Q(null);
   const [hoverCol, setHoverCol] = uSt_Q(null);
 
   const visible = uMe_Q(() => tasks.filter(t => {
@@ -245,22 +247,39 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
     persistListOrder(reordered);
   };
 
+  const updateListDropTarget = (taskId, e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const side = e.clientY > rect.top + rect.height / 2 ? 'after' : 'before';
+    setListDropId(taskId);
+    setListDropSide(side);
+    const scroller = listScrollRef.current;
+    if (scroller) {
+      const srect = scroller.getBoundingClientRect();
+      const edge = 96;
+      const speed = 18;
+      if (e.clientY < srect.top + edge) scroller.scrollBy({ top: -speed, behavior: 'auto' });
+      else if (e.clientY > srect.bottom - edge) scroller.scrollBy({ top: speed, behavior: 'auto' });
+    }
+  };
+
   const dropListItem = (targetId) => {
     if (!listDragId || listDragId === targetId) { setListDragId(null); setListDropId(null); return; }
     const reordered = orderedVisible.slice();
     const from = reordered.findIndex(t => t.id === listDragId);
-    const to = reordered.findIndex(t => t.id === targetId);
+    let to = reordered.findIndex(t => t.id === targetId);
     if (from < 0 || to < 0) { setListDragId(null); setListDropId(null); return; }
     const [moved] = reordered.splice(from, 1);
-    reordered.splice(to, 0, moved);
+    if (from < to) to -= 1;
+    const insertAt = listDropSide === 'after' ? to + 1 : to;
+    reordered.splice(insertAt, 0, moved);
     persistListOrder(reordered);
-    setListDragId(null); setListDropId(null);
+    setListDragId(null); setListDropId(null); setListDropSide('before');
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
       <FiltersBar filter={filter} setFilter={setFilter} productFilter={productFilter} setProductFilter={setProductFilter} agentFilter={agentFilter} setAgentFilter={setAgentFilter} dense={dense} setDense={setDense} viewMode={viewMode} setViewMode={setViewMode} onAdd={onAddTask}/>
-      <div style={{ flex: 1, overflow: 'auto', padding: 16, minHeight: 0 }}>
+      <div ref={listScrollRef} style={{ flex: 1, overflow: 'auto', padding: 16, minHeight: 0, scrollBehavior: listDragId ? 'auto' : 'smooth' }}>
         {viewMode === 'list' ? (
           <div style={{ maxWidth: 1040, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
@@ -277,13 +296,20 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
                 <div key={t.id}
                   draggable
                   onDragStart={(e)=>{ setListDragId(t.id); e.dataTransfer.effectAllowed = 'move'; }}
-                  onDragOver={(e)=>{ e.preventDefault(); setListDropId(t.id); }}
+                  onDragOver={(e)=>{ e.preventDefault(); updateListDropTarget(t.id, e); }}
                   onDragLeave={()=>setListDropId(prev => prev === t.id ? null : prev)}
                   onDrop={(e)=>{ e.preventDefault(); dropListItem(t.id); }}
-                  onDragEnd={()=>{ setListDragId(null); setListDropId(null); }}
+                  onDragEnd={()=>{ setListDragId(null); setListDropId(null); setListDropSide('before'); }}
                   className="queue-list-row row-hover"
                   onClick={()=>onOpenTask(t)}
-                  style={{ display: 'grid', gridTemplateColumns: '46px minmax(0, 1fr) 210px', gap: 16, alignItems: 'center', background: listDropId===t.id ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${listDropId===t.id?'var(--accent)':'var(--border)'}`, borderRadius: 18, padding: '18px 20px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1 }}>
+                  style={{ display: 'grid', gridTemplateColumns: '46px minmax(0, 1fr) 210px', gap: 16, alignItems: 'center', background: listDropId===t.id ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${listDropId===t.id?'var(--accent)':'var(--border)'}`, borderRadius: 18, padding: '18px 20px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1, position: 'relative' }}>
+                  {listDropId===t.id && listDragId && listDragId!==t.id && (
+                    <div style={{ position: 'absolute', left: 18, right: 18, top: listDropSide==='before' ? -9 : 'auto', bottom: listDropSide==='after' ? -9 : 'auto', height: 18, display: 'flex', alignItems: 'center', gap: 10, pointerEvents: 'none', zIndex: 2 }}>
+                      <span style={{ width: 18, height: 18, borderRadius: 999, background: 'var(--accent)', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 900 }}>+</span>
+                      <span style={{ flex: 1, height: 3, borderRadius: 999, background: 'var(--accent)', boxShadow: '0 0 0 4px var(--accent-soft)' }}/>
+                      <span style={{ background: 'var(--accent)', color: '#fff', borderRadius: 999, padding: '3px 9px', fontSize: 11, fontWeight: 900, letterSpacing: '0.02em' }}>DROP HERE</span>
+                    </div>
+                  )}
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
                     <span title="Drag to reorder" style={{ color: 'var(--fg-disabled)', fontSize: 18, lineHeight: 1, cursor: 'grab', letterSpacing: -4 }}>⋮⋮</span>
                     <div style={{ display: 'flex', gap: 4 }}>

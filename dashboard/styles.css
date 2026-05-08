@@ -223,3 +223,6 @@ textarea {
   transform: translateY(-1px);
   box-shadow: 0 8px 24px rgba(42, 34, 23, 0.075), 0 24px 60px rgba(42, 34, 23, 0.055);
 }
+
+/* Drag reorder helpers */
+.queue-list-row { transition: transform 120ms var(--ease), box-shadow 120ms var(--ease), border-color 120ms var(--ease), background 120ms var(--ease); }
