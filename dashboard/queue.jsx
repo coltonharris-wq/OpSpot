@@ -187,6 +187,8 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
   const [dense, setDense] = uSt_Q(false);
   const [viewMode, setViewMode] = uSt_Q('kanban');
   const [dragId, setDragId] = uSt_Q(null);
+  const [listDragId, setListDragId] = uSt_Q(null);
+  const [listDropId, setListDropId] = uSt_Q(null);
   const [hoverCol, setHoverCol] = uSt_Q(null);
 
   const visible = uMe_Q(() => tasks.filter(t => {
@@ -227,6 +229,12 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
     return ar - br;
   }), [visible]);
 
+  const persistListOrder = (reordered) => {
+    const rankMap = new Map(reordered.map((t, i) => [t.id, (i + 1) * 10]));
+    setTasks(prev => prev.map(t => rankMap.has(t.id) ? { ...t, queueRank: rankMap.get(t.id) } : t));
+    for (const [id, rank] of rankMap) writeTaskPatch(id, 'queueRank', rank);
+  };
+
   const moveListItem = (taskId, dir) => {
     const ids = orderedVisible.map(t => t.id);
     const idx = ids.indexOf(taskId);
@@ -234,9 +242,19 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
     if (idx < 0 || nextIdx < 0 || nextIdx >= ids.length) return;
     const reordered = orderedVisible.slice();
     [reordered[idx], reordered[nextIdx]] = [reordered[nextIdx], reordered[idx]];
-    const rankMap = new Map(reordered.map((t, i) => [t.id, (i + 1) * 10]));
-    setTasks(prev => prev.map(t => rankMap.has(t.id) ? { ...t, queueRank: rankMap.get(t.id) } : t));
-    for (const [id, rank] of rankMap) writeTaskPatch(id, 'queueRank', rank);
+    persistListOrder(reordered);
+  };
+
+  const dropListItem = (targetId) => {
+    if (!listDragId || listDragId === targetId) { setListDragId(null); setListDropId(null); return; }
+    const reordered = orderedVisible.slice();
+    const from = reordered.findIndex(t => t.id === listDragId);
+    const to = reordered.findIndex(t => t.id === targetId);
+    if (from < 0 || to < 0) { setListDragId(null); setListDropId(null); return; }
+    const [moved] = reordered.splice(from, 1);
+    reordered.splice(to, 0, moved);
+    persistListOrder(reordered);
+    setListDragId(null); setListDropId(null);
   };
 
   return (
@@ -247,7 +265,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
           <div style={{ maxWidth: 1040, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
               <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--fg-primary)' }}>Priority List</div>
-              <span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)' }}>scroll, open, or move items up/down</span>
+              <span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)' }}>drag to reorder, use arrows as backup, click to open</span>
               <span style={{ flex: 1 }}/>
               <Button variant="primary" size="sm" icon={<Icons.Plus size={13}/>} onClick={()=>onAddTask('inbox')}>Add item</Button>
             </div>
@@ -256,8 +274,18 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
               const agent = t.agent ? getAgent(t.agent) : null;
               const status = STATUSES.find(s => s.id === t.status);
               return (
-                <div key={t.id} className="row-hover" onClick={()=>onOpenTask(t)} style={{ display: 'grid', gridTemplateColumns: '42px 1fr 110px 110px 120px 80px', gap: 10, alignItems: 'center', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 12px', cursor: 'pointer' }}>
+                <div key={t.id}
+                  draggable
+                  onDragStart={(e)=>{ setListDragId(t.id); e.dataTransfer.effectAllowed = 'move'; }}
+                  onDragOver={(e)=>{ e.preventDefault(); setListDropId(t.id); }}
+                  onDragLeave={()=>setListDropId(prev => prev === t.id ? null : prev)}
+                  onDrop={(e)=>{ e.preventDefault(); dropListItem(t.id); }}
+                  onDragEnd={()=>{ setListDragId(null); setListDropId(null); }}
+                  className="row-hover"
+                  onClick={()=>onOpenTask(t)}
+                  style={{ display: 'grid', gridTemplateColumns: '58px 1fr 110px 110px 120px 80px', gap: 10, alignItems: 'center', background: listDropId===t.id ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${listDropId===t.id?'var(--accent)':'var(--border)'}`, borderRadius: 10, padding: '10px 12px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <span title="Drag to reorder" style={{ color: 'var(--fg-tertiary)', fontSize: 14, lineHeight: 1, cursor: 'grab', paddingRight: 2 }}>⋮⋮</span>
                     <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, -1); }} disabled={i===0} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===0?'not-allowed':'pointer' }}>↑</button>
                     <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, 1); }} disabled={i===orderedVisible.length-1} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===orderedVisible.length-1?'not-allowed':'pointer' }}>↓</button>
                   </div>
