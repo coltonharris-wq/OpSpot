@@ -250,13 +250,13 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
   const updateListDropTarget = (taskId, e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const side = e.clientY > rect.top + rect.height / 2 ? 'after' : 'before';
-    setListDropId(taskId);
-    setListDropSide(side);
+    if (listDropId !== taskId) setListDropId(taskId);
+    if (listDropSide !== side) setListDropSide(side);
     const scroller = listScrollRef.current;
     if (scroller) {
       const srect = scroller.getBoundingClientRect();
-      const edge = 96;
-      const speed = 10;
+      const edge = 84;
+      const speed = 6;
       if (e.clientY < srect.top + edge) scroller.scrollBy({ top: -speed, behavior: 'auto' });
       else if (e.clientY > srect.bottom - edge) scroller.scrollBy({ top: speed, behavior: 'auto' });
     }
@@ -308,12 +308,11 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
                   draggable
                   onDragStart={(e)=>{ setListDragId(t.id); e.dataTransfer.effectAllowed = 'move'; }}
                   onDragOver={(e)=>{ e.preventDefault(); updateListDropTarget(t.id, e); }}
-                  onDragLeave={()=>setListDropId(prev => prev === t.id ? null : prev)}
                   onDrop={(e)=>{ e.preventDefault(); dropListItem(t.id); }}
                   onDragEnd={()=>{ setListDragId(null); setListDropId(null); setListDropSide('before'); }}
                   className="queue-list-row row-hover"
                   onClick={()=>onOpenTask(t)}
-                  style={{ display: 'grid', gridTemplateColumns: '46px minmax(0, 1fr) 210px', gap: 16, alignItems: 'center', background: (showBeforeSlot || showAfterSlot) ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${(showBeforeSlot || showAfterSlot)?'var(--accent)':'var(--border)'}`, borderRadius: 18, padding: '18px 20px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1, position: 'relative' }}>
+                  style={{ display: 'grid', gridTemplateColumns: '46px minmax(0, 1fr) 210px', gap: 16, alignItems: 'center', background: 'var(--surface)', border: `1px solid ${(showBeforeSlot || showAfterSlot)?'var(--accent)':'var(--border)'}`, borderRadius: 18, padding: '18px 20px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1, position: 'relative' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
                     <span title="Drag to reorder" style={{ color: 'var(--fg-disabled)', fontSize: 18, lineHeight: 1, cursor: 'grab', letterSpacing: -4 }}>⋮⋮</span>
                     <div style={{ display: 'flex', gap: 4 }}>

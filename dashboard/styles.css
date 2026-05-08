@@ -167,7 +167,7 @@ body {
 
 .term { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0; }
 .section-label {
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: 0.06em;
   color: var(--fg-tertiary);
 }
@@ -230,33 +230,28 @@ textarea {
 
 
 .queue-drop-mini-slot {
-  height: 24px;
-  margin: -2px 18px;
+  height: 18px;
+  margin: 0 18px;
   display: flex;
   align-items: center;
   gap: 10px;
   pointer-events: none;
-  animation: drop-slot-pop 120ms var(--ease) both;
 }
 .queue-drop-mini-line {
   flex: 1;
-  height: 5px;
+  height: 4px;
   border-radius: 999px;
   background: var(--accent);
-  box-shadow: 0 0 0 5px var(--accent-soft);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 .queue-drop-mini-label {
   background: var(--accent);
   color: white;
   border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 11px;
+  padding: 3px 9px;
+  font-size: 10.5px;
   font-weight: 900;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   box-shadow: 0 8px 16px rgba(217, 95, 23, 0.2);
-}
-@keyframes drop-slot-pop {
-  from { opacity: 0; transform: scaleY(0.55); }
-  to { opacity: 1; transform: scaleY(1); }
 }
