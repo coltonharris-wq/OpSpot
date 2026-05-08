@@ -22,6 +22,7 @@
   <script type="text/babel" src="coldcall.jsx?v=1778240400"></script>
   <script type="text/babel" src="ops.jsx?v=1778225644"></script>
   <script type="text/babel" src="action-catalog.jsx?v=1778241000"></script>
+  <script type="text/babel" src="agent-builder.jsx?v=1778241600"></script>
   <script type="text/babel" src="crons.jsx?v=1778213025"></script>
   <script type="text/babel" src="command.jsx?v=1778213025"></script>
   <script type="text/babel" src="fleet.jsx?v=1778213025"></script>
@@ -126,6 +127,7 @@
         coldcall: 1,
         ops: 8,
         actions: 10,
+        builder: 1,
       };
 
       const titles = {
@@ -135,6 +137,7 @@
         coldcall: { title: 'Cold Call', breadcrumb: 'Sales Flow' },
         ops: { title: 'Ops + Autopilot', breadcrumb: 'Mission Control' },
         actions: { title: 'Agent Action Catalog', breadcrumb: 'OpSpot' },
+        builder: { title: 'Agent Builder', breadcrumb: 'OpSpot' },
         crons: { title: 'Crons', breadcrumb: 'Mission Control' },
         fleet: { title: 'Fleet', breadcrumb: 'Mission Control' },
         swipe: { title: 'Swipe Deck', breadcrumb: 'Inbox' },
@@ -176,6 +179,7 @@
                 {view === 'coldcall' && <ColdCallScreen/>}
                 {view === 'ops' && <OpsAutopilotScreen/>}
                 {view === 'actions' && <AgentActionCatalogScreen/>}
+                {view === 'builder' && <AgentBuilderScreen/>}
                 {view === 'crons' && <CronsScreen tasks={tasks} onOpenTask={setOpenTask}/>}
                 {view === 'fleet' && <FleetScreen tasks={tasks} onOpenAgent={setOpenAgent}/>}
                 {view === 'swipe' && <SwipeDeck ideas={ideas} setIdeas={setIdeas} onPushTask={onPushIdeaToTask}/>}
