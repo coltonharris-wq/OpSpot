@@ -11,3 +11,6 @@ huly-*.png
 
 # Mission Control local runtime state
 dashboard/state/
+
+# Local agent handoffs
+.remember/
