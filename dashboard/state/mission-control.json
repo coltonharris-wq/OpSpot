@@ -1,7 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-08T22:43:07.938Z",
+  "updatedAt": "2026-05-08T23:10:00.000Z",
   "tasks": [
+    {
+      "id": "t-first-ops-onboarding-hire",
+      "title": "First hire: ops/onboarding QA operator",
+      "product": "p2",
+      "status": "planning",
+      "agent": "a3",
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "Colton / hiring strategy",
+      "impact": 88,
+      "complexity": "M",
+      "age": "now",
+      "progress": 35,
+      "pr": null,
+      "queueRank": 25,
+      "notes": "Scorecard, paid test task, compensation range, sourcing channels, and first outreach message are drafted. Next: pick 3–5 candidate sources and run paid test before trusting customer-facing work. Hire for trust + ops discipline, not looks/gender.",
+      "definitionOfDone": "Role scorecard, test task, sourcing channels, compensation range, and first 5 candidate outreach messages ready.",
+      "receipt": "docs/first-ops-onboarding-hire-scorecard.md"
+    },
     {
       "id": "t-tomorrow-close-onboarding",
       "title": "Tomorrow booked lead: close + onboard on the spot",
@@ -3578,6 +3598,25 @@
       "actions": [
         "open-checklist"
       ]
+    }
+  ],
+  "hiringQueue": [
+    {
+      "id": "first-ops-onboarding-operator",
+      "role": "Ops / Onboarding QA Operator",
+      "why": "Customers are about to flow in; agents can build most of the work, but a human needs to QA, chase info, approve handoffs, and keep customers calm.",
+      "comp": "$20–$30/hr contractor or $1.5k–$3k/mo part-time + $100–$300 per successful customer launch",
+      "mustHave": [
+        "polished customer communication",
+        "detail obsession",
+        "checklist discipline",
+        "AI curiosity",
+        "business maturity",
+        "calm when tech breaks"
+      ],
+      "testTask": "Given a messy customer onboarding form, turn it into a clean setup checklist and list what is missing.",
+      "status": "queued",
+      "createdAt": "2026-05-08T22:48:19.623146Z"
     }
   ]
 }
