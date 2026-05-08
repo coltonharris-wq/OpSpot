@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-08T14:50:00Z",
+  "updatedAt": "2026-05-08T15:26:13.204Z",
   "tasks": [
     {
       "id": "t10",
@@ -275,7 +275,7 @@
       "progress": 72,
       "pr": null,
       "queueRank": 80,
-      "notes": "Merged from 'Jarid \u2014 verify Telegram bot/group + save setup': Confirm bot/group works when mentioned; record full setup to Business OS."
+      "notes": "Merged from 'Jarid — verify Telegram bot/group + save setup': Confirm bot/group works when mentioned; record full setup to Business OS."
     },
     {
       "id": "t18",
@@ -347,7 +347,7 @@
     },
     {
       "id": "smoke-1778214772",
-      "title": "API smoke test \u2014 safe to ignore",
+      "title": "API smoke test — safe to ignore",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -366,7 +366,7 @@
     },
     {
       "id": "auto-content-v1",
-      "title": "Content automation v1 \u2014 orchestrator-led specialist skeleton",
+      "title": "Content automation v1 — orchestrator-led specialist skeleton",
       "product": "p2",
       "status": "review",
       "agent": null,
@@ -384,7 +384,7 @@
     },
     {
       "id": "auto-customer-setup-v1",
-      "title": "Customer setup automation v1 \u2014 Jarid template provisioning",
+      "title": "Customer setup automation v1 — Jarid template provisioning",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -396,13 +396,13 @@
       "complexity": "L",
       "age": "0m",
       "progress": 0,
-      "notes": "Automation build track. Drafts/run outputs must land in queue; external sends/posts need approval.\n\nMerged from 'Customer onboarding visuals \u2014 welcome/checklist/worker/receipts': Customers need visual onboarding like Colton: clear status, checklist, first win.",
+      "notes": "Automation build track. Drafts/run outputs must land in queue; external sends/posts need approval.\n\nMerged from 'Customer onboarding visuals — welcome/checklist/worker/receipts': Customers need visual onboarding like Colton: clear status, checklist, first win.",
       "createdAt": "2026-05-08T04:33:46.078Z",
       "queueRank": 10
     },
     {
       "id": "bo-llc-path",
-      "title": "LLC path \u2014 decide/file clean company setup",
+      "title": "LLC path — decide/file clean company setup",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -495,7 +495,7 @@
     },
     {
       "id": "bo-jarid-telegram",
-      "title": "Jarid \u2014 verify Telegram bot/group + save setup",
+      "title": "Jarid — verify Telegram bot/group + save setup",
       "product": "p2",
       "status": "assigned",
       "agent": null,
@@ -516,7 +516,7 @@
     },
     {
       "id": "bo-customer-visual-onboarding",
-      "title": "Customer onboarding visuals \u2014 welcome/checklist/worker/receipts",
+      "title": "Customer onboarding visuals — welcome/checklist/worker/receipts",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -558,7 +558,7 @@
     },
     {
       "id": "bo-inbound-support-feed",
-      "title": "Inbound/support feed \u2192 queue cards",
+      "title": "Inbound/support feed → queue cards",
       "product": "p2",
       "status": "planning",
       "agent": null,
@@ -579,7 +579,7 @@
     },
     {
       "id": "t-sales-onboarding-flow-v1",
-      "title": "Sales \u2192 onboarding flow v1",
+      "title": "Sales → onboarding flow v1",
       "product": "p2",
       "status": "planning",
       "agent": "mouse-ceo",
@@ -593,7 +593,7 @@
       "progress": 65,
       "pr": null,
       "queueRank": 25,
-      "notes": "Lead reply \u2192 booked call \u2192 audit packet \u2192 proposal \u2192 onboarding \u2192 customer setup. Business OS spec ready; external sends still disabled until Colton enables policy/run."
+      "notes": "Lead reply → booked call → audit packet → proposal → onboarding → customer setup. Business OS spec ready; external sends still disabled until Colton enables policy/run."
     },
     {
       "id": "brief-opspot-morning-2026-05-08",
@@ -616,7 +616,7 @@
     },
     {
       "id": "auto-instagram-hitl-v1",
-      "title": "Instagram HITL workflow \u2014 orchestrator \u2192 specialists",
+      "title": "Instagram HITL workflow — orchestrator → specialists",
       "product": "p2",
       "status": "planning",
       "agent": "parent-orchestrator",
@@ -634,7 +634,7 @@
     },
     {
       "id": "auto-youtube-hitl-v1",
-      "title": "YouTube HITL workflow \u2014 orchestrator \u2192 specialists",
+      "title": "YouTube HITL workflow — orchestrator → specialists",
       "product": "p2",
       "status": "review",
       "agent": "parent-orchestrator",
@@ -648,7 +648,7 @@
       "progress": 58,
       "pr": null,
       "queueRank": 32,
-      "notes": "Local-only YouTube workflow planned/wired: Tell Me What You Want intake \u2192 parent policy proposal \u2192 YouTube specialists for strategy, ideas, titles/thumbnails, hooks/scripts, recording, Shorts extraction, metadata/checklist \u2192 explicit upload gate. No live uploads/account changes/spend."
+      "notes": "Local-only YouTube workflow planned/wired: Tell Me What You Want intake → parent policy proposal → YouTube specialists for strategy, ideas, titles/thumbnails, hooks/scripts, recording, Shorts extraction, metadata/checklist → explicit upload gate. No live uploads/account changes/spend."
     }
   ],
   "deals": [
@@ -674,7 +674,7 @@
       "value": 197,
       "mrr": true,
       "source": "referral",
-      "next": "follow up \u2014 proposal sent",
+      "next": "follow up — proposal sent",
       "heat": "hot",
       "lastTouch": "2h",
       "agent": "a7",
@@ -766,6 +766,219 @@
     }
   ],
   "ideas": [
+    {
+      "id": "tw-card-lane",
+      "product": "p2",
+      "title": "Choose Twitch stream lane",
+      "desc": "Decide whether first Twitch streams run as OpSpot brand, Colton founder/build-in-public, or stay parked until lane is approved.",
+      "category": "decision",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "brand",
+        "account",
+        "approval"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-format",
+      "product": "p2",
+      "title": "Choose first stream format",
+      "desc": "Pick build-in-public, audit teardown, Q&A, workflow walkthrough, whiteboard, or clip-first mini stream.",
+      "category": "decision",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "format",
+        "rundown"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-pillars",
+      "product": "p2",
+      "title": "Approve Twitch content pillars",
+      "desc": "Proposed pillars: AI employees, dropped follow-up, CRM reality, document chase, owner bottlenecks, build receipts.",
+      "category": "twitch-hitl",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "pillars",
+        "hormozi"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-cadence",
+      "product": "p2",
+      "title": "Approve Twitch draft cadence",
+      "desc": "Proposal: draft stream plans locally; optional weekly/biweekly stream only after go-live/account/privacy policy approval.",
+      "category": "twitch-hitl",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "cadence",
+        "approval"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-login-obs",
+      "product": "p2",
+      "title": "Human click: Twitch login + OBS path",
+      "desc": "Need Twitch account/login path and OBS availability/scene collection. No account connection, settings change, or go-live without approval.",
+      "category": "access",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "twitch",
+        "login",
+        "obs",
+        "human-click"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-scenes",
+      "product": "p2",
+      "title": "Confirm OBS scene checklist",
+      "desc": "Confirm scenes: starting soon, talking head, screen share, whiteboard, BRB/privacy pause, ending/CTA.",
+      "category": "setup",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "twitch",
+        "obs",
+        "scenes",
+        "setup"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-camera-mic",
+      "product": "p2",
+      "title": "Confirm camera/mic + test recording",
+      "desc": "Confirm camera, mic, audio levels, lighting/background, and local test recording path before any go-live card.",
+      "category": "setup",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "camera",
+        "mic",
+        "test"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-privacy-permissions",
+      "product": "p2",
+      "title": "Approve privacy + permissions rules",
+      "desc": "Set rules for customer proof, screenshots, private data, screen-share boundaries, notifications, and customer/logo/result permissions.",
+      "category": "policy",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "privacy",
+        "permissions",
+        "proof"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-moderation",
+      "product": "p2",
+      "title": "Approve chat moderation policy",
+      "desc": "Choose chat rules, banned topics, mod owner, agent boundaries, escalation/kill switch. No public chat actions by agents without approval.",
+      "category": "policy",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "chat",
+        "moderation",
+        "safety"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-money",
+      "product": "p2",
+      "title": "Money gate: Twitch tools/mods/editors stay off",
+      "desc": "Approve/reject paid plugins, subscriptions, moderators, editors, ads/boosts. Default is $0 and local drafts only.",
+      "category": "money",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "money",
+        "spend",
+        "tools"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-clips-repurpose",
+      "product": "p2",
+      "title": "Approve clip + repurpose outputs",
+      "desc": "Choose post-stream outputs: Instagram Reels, YouTube Shorts, recap, captions, thumbnails, and CTA review. No publishing without platform gates.",
+      "category": "content",
+      "impact": 84,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "twitch",
+        "clips",
+        "instagram",
+        "youtube"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
+    {
+      "id": "tw-card-go-live",
+      "product": "p2",
+      "title": "Explicit Twitch go-live approval",
+      "desc": "Final hard gate: approve title/category/account, OBS scene, camera/mic, privacy checklist, moderation, and kill switch. No live stream without this.",
+      "category": "approval",
+      "impact": 90,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "twitch",
+        "go-live",
+        "human-gate",
+        "no-live-streams"
+      ],
+      "research": "2026-05-08 Twitch HITL workflow pass — swipe-deck blocker/approval card.",
+      "source": "automation"
+    },
     {
       "id": "yt-card-channel-lane",
       "product": "p2",
@@ -975,7 +1188,7 @@
         "instagram",
         "approval"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
@@ -992,7 +1205,7 @@
         "privacy",
         "approval"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
@@ -1009,7 +1222,7 @@
         "voice",
         "visuals"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
@@ -1026,7 +1239,7 @@
         "mic",
         "samples"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
@@ -1043,7 +1256,7 @@
         "approval",
         "tools"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
@@ -1060,7 +1273,7 @@
         "permission",
         "no-live-posts"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
@@ -1077,7 +1290,7 @@
         "hormozi",
         "pains"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
@@ -1094,13 +1307,13 @@
         "human-gate",
         "account"
       ],
-      "research": "2026-05-08 Instagram HITL workflow pass \u2014 tomorrow morning swipe-deck blocker card.",
+      "research": "2026-05-08 Instagram HITL workflow pass — tomorrow morning swipe-deck blocker card.",
       "source": "manual"
     },
     {
       "id": "i1",
       "product": "p1",
-      "title": "Add monthly digest email \u2014 show MoM growth %",
+      "title": "Add monthly digest email — show MoM growth %",
       "desc": "Customer churn is high in months 2-3. A digest showing their numbers improving creates a \"loss aversion\" moment that retains 30%+ in similar SaaS plays.",
       "category": "growth",
       "impact": 86,
@@ -1111,13 +1324,13 @@
         "email",
         "growth"
       ],
-      "research": "Stripe blog \u00b7 2024 SaaS retention study",
+      "research": "Stripe blog · 2024 SaaS retention study",
       "source": "research"
     },
     {
       "id": "i2",
       "product": "p1",
-      "title": "Inline error explainer \u2014 \"what does this mean for me?\"",
+      "title": "Inline error explainer — \"what does this mean for me?\"",
       "desc": "Power users skip past technical errors. A one-line plain-language translation under each error reduces support tickets ~20%.",
       "category": "ux",
       "impact": 72,
@@ -1128,7 +1341,7 @@
         "copy",
         "support"
       ],
-      "research": "Linear changelog \u00b7 \"humanized errors\" pattern",
+      "research": "Linear changelog · \"humanized errors\" pattern",
       "source": "research"
     },
     {
@@ -1145,7 +1358,7 @@
         "parallel",
         "build"
       ],
-      "research": "Karpathy AutoResearch \u00b7 2025 paper",
+      "research": "Karpathy AutoResearch · 2025 paper",
       "source": "research"
     },
     {
@@ -1179,7 +1392,7 @@
         "roi",
         "solar"
       ],
-      "research": "Internal \u2014 last 90d outreach data",
+      "research": "Internal — last 90d outreach data",
       "source": "research"
     }
   ],
@@ -1219,7 +1432,7 @@
     {
       "id": "p2",
       "name": "Mouse",
-      "desc": "AI ops runtime \u00b7 OpenClaw fork",
+      "desc": "AI ops runtime · OpenClaw fork",
       "repo": "mouse-platform",
       "live": "mice.ink",
       "icon": "M",
@@ -1500,12 +1713,12 @@
       "rankReason": "Rank #1 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo eligible_pending_approval.",
       "stage": "outbound_prepared",
       "status": "ready_to_call",
-      "lastTouch": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 8:00 AM ET. No send executed.",
+      "lastTouch": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:00 AM ET. No send executed.",
       "nextAsk": "Approve Apollo enrichment or call owner/main line with audit angle",
       "why": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "whyColtonShouldCall": "roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
-      "opener": "Hey, this is Colton with OpSpot. Quick one \u2014 are you the right person for Wilmington roofing contractor placeholder's missed calls, booking, and follow-up?",
+      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington roofing contractor placeholder's missed calls, booking, and follow-up?",
       "objections": [
         "Already has someone answering phones",
         "Not interested in AI",
@@ -1522,7 +1735,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 10:07 AM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 11:36 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1539,10 +1752,10 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 10:07 AM ET",
+          "scheduledFor": "May 8, 11:36 AM ET",
           "draft": {
             "subject": "Quick roofing follow-up audit idea",
-            "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
+            "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
           },
           "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
         }
@@ -1565,12 +1778,12 @@
       "rankReason": "Rank #2 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo eligible_pending_approval.",
       "stage": "outbound_prepared",
       "status": "ready_to_call",
-      "lastTouch": "iMessage draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 8:12 AM ET. No send executed.",
+      "lastTouch": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 8:12 AM ET. No send executed.",
       "nextAsk": "Approve Apollo enrichment or call owner/main line with audit angle",
       "why": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "whyColtonShouldCall": "HVAC fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
-      "opener": "Hey, this is Colton with OpSpot. Quick one \u2014 are you the right person for Wilmington HVAC company placeholder's missed calls, booking, and follow-up?",
+      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington HVAC company placeholder's missed calls, booking, and follow-up?",
       "objections": [
         "Already has someone answering phones",
         "Not interested in AI",
@@ -1587,7 +1800,7 @@
         {
           "channel": "iMessage",
           "status": "prepared-not-sent",
-          "summary": "iMessage draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 10:19 AM ET. No send executed.",
+          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 11:48 AM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1604,10 +1817,10 @@
           "channel": "iMessage",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 10:19 AM ET",
+          "scheduledFor": "May 8, 11:48 AM ET",
           "draft": {
             "subject": "",
-            "body": "Quick question \u2014 are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast \u2014 just wanted to see if it is worth showing you."
+            "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
           },
           "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
         }
@@ -1630,12 +1843,12 @@
       "rankReason": "Rank #3 from lead machine: audit 82/100, 1 outbound draft prepared, Apollo hold_after_audit_rank.",
       "stage": "outbound_prepared",
       "status": "ready_to_call",
-      "lastTouch": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 8:24 AM ET. No send executed.",
+      "lastTouch": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:24 AM ET. No send executed.",
       "nextAsk": "Call main line / verify owner fit before Apollo spend",
       "why": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "whyColtonShouldCall": "plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.",
       "angle": "AI receptionist + estimate follow-up for missed calls and after-hours leads.",
-      "opener": "Hey, this is Colton with OpSpot. Quick one \u2014 are you the right person for Wilmington plumbing company placeholder's missed calls, booking, and follow-up?",
+      "opener": "Hey, this is Colton with OpSpot. Quick one — are you the right person for Wilmington plumbing company placeholder's missed calls, booking, and follow-up?",
       "objections": [
         "Already has someone answering phones",
         "Not interested in AI",
@@ -1652,7 +1865,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment \u00b7 May 8, 10:31 AM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 12:00 PM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1669,10 +1882,10 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 10:31 AM ET",
+          "scheduledFor": "May 8, 12:00 PM ET",
           "draft": {
             "subject": "Quick plumbing follow-up audit idea",
-            "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
+            "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
           },
           "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
         }
@@ -1713,7 +1926,7 @@
       "end": 8,
       "tz": "America/New_York"
     },
-    "coldCallTarget": "100\u2013200/day",
+    "coldCallTarget": "100–200/day",
     "mode": "policy-approved-autopilot"
   },
   "automationRuns": [
@@ -1793,7 +2006,7 @@
     },
     {
       "id": "run-sales-onboarding-flow-v1",
-      "name": "Sales \u2192 onboarding flow prep",
+      "name": "Sales → onboarding flow prep",
       "status": "prepared",
       "summary": "V1 path mapped: reply classification, booking prep, audit packet, proposal draft, onboarding checklist, customer setup receipt. No external sends/replies performed.",
       "lastRun": "2026-05-08 06:50 ET overnight prep",
@@ -1810,7 +2023,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 10:07 AM ET",
+      "scheduledFor": "May 8, 11:36 AM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -1824,7 +2037,7 @@
       "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
       "draft": {
         "subject": "Quick roofing follow-up audit idea",
-        "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
+        "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
       },
       "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
     },
@@ -1836,7 +2049,7 @@
       "channel": "iMessage",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 10:19 AM ET",
+      "scheduledFor": "May 8, 11:48 AM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -1850,7 +2063,7 @@
       "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
       "draft": {
         "subject": "",
-        "body": "Quick question \u2014 are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast \u2014 just wanted to see if it is worth showing you."
+        "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
       },
       "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
     },
@@ -1862,7 +2075,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 10:31 AM ET",
+      "scheduledFor": "May 8, 12:00 PM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -1876,7 +2089,7 @@
       "recommendedFirstTouch": "Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.",
       "draft": {
         "subject": "Quick plumbing follow-up audit idea",
-        "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n\u2014 Colton"
+        "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
       },
       "guardrail": "Prepared locally only. No live send integration; human approval and send runner required."
     }
@@ -1887,8 +2100,8 @@
       "business": "Wilmington roofing contractor placeholder",
       "vertical": "roofing",
       "city": "Wilmington, NC",
-      "distance": "0\u201325 mi",
-      "source": "Lead Source v1 seed \u2014 Wilmington + 25mi construction/home-services",
+      "distance": "0–25 mi",
+      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
       "website": "",
       "phone": "",
       "email": "",
@@ -1932,8 +2145,8 @@
       "business": "Wilmington HVAC company placeholder",
       "vertical": "HVAC",
       "city": "Wilmington, NC",
-      "distance": "0\u201325 mi",
-      "source": "Lead Source v1 seed \u2014 Wilmington + 25mi construction/home-services",
+      "distance": "0–25 mi",
+      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
       "website": "",
       "phone": "",
       "email": "",
@@ -1977,8 +2190,8 @@
       "business": "Wilmington plumbing company placeholder",
       "vertical": "plumbing",
       "city": "Wilmington, NC",
-      "distance": "0\u201325 mi",
-      "source": "Lead Source v1 seed \u2014 Wilmington + 25mi construction/home-services",
+      "distance": "0–25 mi",
+      "source": "Lead Source v1 seed — Wilmington + 25mi construction/home-services",
       "website": "",
       "phone": "",
       "email": "",
@@ -2021,7 +2234,7 @@
   "workflowMetadata": [
     {
       "id": "lead-source-v1-wilmington",
-      "workflow": "Lead Source v1 \u2014 Wilmington construction/home-services",
+      "workflow": "Lead Source v1 — Wilmington construction/home-services",
       "orchestratorRole": "parent orchestrator routes each stage; does not become a 50-tool mega-agent",
       "specialistAgent": "research-agent-marley / lead-hunt specialist for sourcing; auditor specialist for scoring; lead-enrich specialist for contact data; outreach-compose specialist for drafts",
       "requiredTools": [
@@ -2036,15 +2249,15 @@
         "dashboard state API",
         "receipts.jsonl"
       ],
-      "approvalPolicy": "Local research/audit/enrich only overnight. External sends, replies, calls, customer-visible changes, private/financial access, and purchases require explicit human approval; quiet hours freeze 8pm\u20138am ET.",
+      "approvalPolicy": "Local research/audit/enrich only overnight. External sends, replies, calls, customer-visible changes, private/financial access, and purchases require explicit human approval; quiet hours freeze 8pm–8am ET.",
       "receiptPath": "dashboard/state/receipts.jsonl",
       "status": "foundation_seeded"
     },
     {
       "id": "sales-onboarding-flow-v1-2026-05-08",
-      "workflow": "Sales \u2192 Onboarding Flow v1 \u2014 lead reply to customer setup",
+      "workflow": "Sales → Onboarding Flow v1 — lead reply to customer setup",
       "orchestratorRole": "Parent orchestrator routes each handoff, writes receipts, and keeps external actions disabled unless Colton/policy explicitly enables the run.",
-      "specialistAgent": "reply handler \u2192 meeting-booker/notetaker \u2192 auditor \u2192 sales specialist \u2192 customer setup specialist \u2192 implementation specialist",
+      "specialistAgent": "reply handler → meeting-booker/notetaker → auditor → sales specialist → customer setup specialist → implementation specialist",
       "requiredTools": [
         "Mission Control state",
         "Business OS spec/checklist",
@@ -2285,7 +2498,7 @@
       "icon": "imessage",
       "name": "iMessage queue generator",
       "status": "ready",
-      "summary": "Drafts iMessage queue items for Colton\u2019s approval, respecting quiet hours and daily caps.",
+      "summary": "Drafts iMessage queue items for Colton’s approval, respecting quiet hours and daily caps.",
       "specialistAgent": "outreach-compose specialist + iMessage queue specialist",
       "tools": [
         "template library",
@@ -2454,7 +2667,7 @@
       "icon": "brief",
       "name": "Morning / evening brief",
       "status": "queued",
-      "summary": "Summarizes runs, output counts, cost/credit risks, blockers, and next 1\u20133 decisions for Colton.",
+      "summary": "Summarizes runs, output counts, cost/credit risks, blockers, and next 1–3 decisions for Colton.",
       "specialistAgent": "briefing specialist / Adriana decision surface",
       "tools": [
         "local state reader",
@@ -2494,7 +2707,7 @@
   "tellMeWhatYouWantBuilder": {
     "id": "intent-builder-v1",
     "status": "ready_spec",
-    "principle": "rough intent \u2192 proposed workflow/policy \u2192 Colton steers/approves \u2192 specialist agents execute with receipts",
+    "principle": "rough intent → proposed workflow/policy → Colton steers/approves → specialist agents execute with receipts",
     "fiveCommandDraft": [
       "build this",
       "show queue",
@@ -2514,7 +2727,7 @@
       "kill switch",
       "definition of done"
     ],
-    "example": "\u201cFind roofing leads around Wilmington and get me the best calls\u201d becomes: source specialist \u2192 auditor \u2192 enrich gate \u2192 outbound queue \u2192 cold-call ranker \u2192 swipe deck approval."
+    "example": "“Find roofing leads around Wilmington and get me the best calls” becomes: source specialist → auditor → enrich gate → outbound queue → cold-call ranker → swipe deck approval."
   },
   "replyHandler": {
     "status": "sales_onboarding_flow_ready",
@@ -2645,7 +2858,7 @@
         "approval to post/schedule",
         "any spend/tools"
       ],
-      "afterApproval": "generate scripts/captions \u2192 create post package \u2192 queue approval \u2192 publish only after explicit gate"
+      "afterApproval": "generate scripts/captions → create post package → queue approval → publish only after explicit gate"
     },
     {
       "id": "youtube",
@@ -2670,30 +2883,36 @@
         "thumbnail direction",
         "upload approval"
       ],
-      "afterApproval": "script/metadata package \u2192 clip/shorts plan \u2192 upload draft or publish only after gate"
+      "afterApproval": "script/metadata package → clip/shorts plan → upload draft or publish only after gate"
     },
     {
       "id": "twitch",
-      "platform": "Twitch",
-      "specialistAgent": "Twitch streaming specialist",
-      "status": "swipe_deck_needed",
+      "platform": "Twitch / live streaming",
+      "specialistAgent": "Parent content orchestrator → Twitch positioning, run-of-show, OBS/production, moderation/safety, clip marker, repurpose, approval/publishing, compliance specialists",
+      "status": "hitl_workflow_ready_for_colton_review",
       "hormoziSetup": [
         "stream transformation",
-        "topic/rundown",
+        "offer angle",
+        "audience/avatar",
         "live hook",
+        "topic/rundown",
+        "proof/receipts",
         "CTA",
         "clip moments",
-        "repurpose plan"
+        "repurpose plan",
+        "cadence"
       ],
       "needsFromColton": [
         "Twitch login/path",
         "OBS/scenes status",
         "camera/mic confirmation",
-        "stream format",
+        "stream format choice",
+        "privacy/screen-share rules",
         "moderation rules",
-        "go-live approval"
+        "go-live approval",
+        "money/tool approval if any"
       ],
-      "afterApproval": "run-of-show \u2192 OBS checklist \u2192 stream card \u2192 no go-live without explicit click"
+      "afterApproval": "parent proposes workflow/policy → Colton swipes decisions/clicks → positioning/run-of-show/OBS/moderation/clip/repurpose specialists continue automatically → go-live only after explicit final approval card"
     }
   ],
   "contextWallArchitecture": {
@@ -2720,41 +2939,39 @@
     "updatedAt": "2026-05-08T09:32:25.777283+00:00"
   },
   "contentAutomationV1": {
-    "status": "youtube_hitl_ready_for_colton_review",
-    "policyMode": "local_draft_only_no_uploads_no_account_changes_no_spend",
-    "criticalArchitecturePrinciple": "Parent orchestrator routes to YouTube/content specialists. No mega-agent with broad tools.",
+    "status": "twitch_hitl_ready_for_colton_review",
+    "policyMode": "local_draft_only_no_live_streams_no_account_changes_no_spend",
+    "criticalArchitecturePrinciple": "Parent orchestrator routes to Twitch/streaming/content specialists. No mega-agent with broad OBS/Twitch/moderation/publishing tools.",
     "workflow": [
       "tell_me_what_you_want_intake",
       "parent_workflow_policy_proposal",
       "colton_swipe_approval",
-      "youtube_strategy_packet",
-      "ideas_research_packet",
-      "title_thumbnail_packet",
-      "hooks_scripts_longform_packet",
-      "producer_recording_packet",
-      "shorts_extraction_packet",
-      "metadata_publishing_checklist",
-      "human_final_upload_gate",
+      "stream_positioning_packet",
+      "run_of_show_packet",
+      "obs_camera_mic_setup_packet",
+      "chat_moderation_safety_packet",
+      "clip_marker_packet",
+      "instagram_youtube_repurpose_packet",
+      "human_final_go_live_gate",
       "receipts"
     ],
     "hormoziFrame": {
-      "setup": "Audience problem \u2192 Hook + Meat + CTA \u2192 organic testing \u2192 winners become variations/ads later",
-      "ideas": "Use customer pains, OpSpot queue, demos, references, audits, and build receipts; do not start with features.",
-      "titlesThumbnails": "10 title variants + 3 thumbnail concepts per long-form; check promise clarity and unsupported claims.",
-      "hooks": "Name a costly belief/workflow leak; first 30 seconds must state why now and what the viewer gets.",
-      "scripts": "Shorts: hook \u2192 one example \u2192 AI worker action \u2192 CTA. Long-form: problem framing \u2192 examples \u2192 demo/proof \u2192 implementation path \u2192 CTA.",
-      "shortsExtraction": "Every approved long-form creates 3-7 Shorts candidates with captions and CTA variants.",
-      "proof": "Internal demos, mock examples labeled clearly, public-safe references, local build receipts; customer proof only with approval.",
-      "cta": "audit / website review / subscribe / book audit when booking path approved.",
-      "metadata": "description, tags, chapters, pinned comment, end-screen/card checklist, schedule placeholder.",
-      "cadence": "Draft 1-2 Shorts packets/day or one long-form section/day; weekly package target is 1 long-form + 3-5 Shorts, upload disabled until approved.",
-      "reviewGates": "Morning swipe decisions/clicks/samples; evening draft review when artifacts exist; final upload gate always explicit."
+      "setup": "Audience pain → live hook/transformation → stream meat/demo/proof → CTA → clip/repurpose loop; winners become future stream/short variations later.",
+      "ideas": "Use customer pains, OpSpot queue, demos, build receipts, audits, and public-safe references; do not start with generic AI features.",
+      "liveHook": "First 60 seconds names the workflow leak, promises the concrete outcome, and sets privacy boundaries.",
+      "rundown": "25–45 minute stream: cold open → problem → build/teach/demo → recap → CTA → clip marker review.",
+      "proof": "Internal demos, mock examples labeled clearly, safe build receipts, and privacy-checked screen shares only; customer proof requires approval.",
+      "cta": "audit / follow / checklist / book audit when path approved; DM/comment actions require separate approval.",
+      "clipsExtraction": "Every approved stream plan includes intentional clip moments, timestamp sheet, post-stream clip candidates, captions, and CTA variants.",
+      "repurpose": "Instagram Reels + YouTube Shorts + recap drafts are local-only until platform publish gates are approved.",
+      "cadence": "Draft stream plans locally; optional weekly/biweekly stream cadence only after account, OBS, privacy, moderation, and go-live policy approval.",
+      "reviewGates": "Morning swipe decisions/clicks/setup confirmations; final go-live card always explicit."
     },
     "specialists": [
       {
         "id": "parent-orchestrator",
         "name": "Parent content orchestrator",
-        "role": "Turns rough intent into a YouTube workflow/policy proposal, routes bounded specialists, tracks approvals/receipts, and escalates only true blockers.",
+        "role": "Turns rough stream intent into a Twitch workflow/policy proposal, routes bounded specialists, tracks approvals/receipts, and escalates true blockers.",
         "tools": [
           "Mission Control state",
           "Tell Me What You Want builder",
@@ -2766,11 +2983,11 @@
           "classify rough intent",
           "propose workflow/policy",
           "route specialists",
-          "continue work after approved info/clicks",
+          "continue after approved info/clicks",
           "log receipts"
         ],
         "needsApproval": [
-          "publishing policy",
+          "go-live policy",
           "account/plugin/API connection",
           "external mutation",
           "spend",
@@ -2778,187 +2995,186 @@
         ]
       },
       {
-        "id": "youtube-strategy",
-        "name": "YouTube strategy specialist",
-        "role": "Defines viewer, offer angle, content pillars, cadence, series lane, and review gates.",
+        "id": "stream-positioning",
+        "name": "Stream positioning specialist",
+        "role": "Defines audience, transformation, offer angle, stream promise, CTA, cadence, and format lane.",
         "tools": [
           "OpSpot profile kit",
           "Hormozi reference note",
-          "YouTube reference log",
-          "content pillar template"
+          "content pillar template",
+          "Business OS queue"
         ],
         "canDo": [
-          "draft viewer/pain/offer strategy",
+          "draft positioning",
           "suggest cadence",
-          "rank content pillars"
+          "rank stream formats"
         ],
         "needsApproval": [
-          "brand/channel lane",
+          "brand/account lane",
           "public positioning changes",
-          "cadence that implies live posting"
+          "cadence implying live streaming"
         ]
       },
       {
-        "id": "ideas-research",
-        "name": "Ideas / research specialist",
-        "role": "Mines Business OS, OpSpot queue, reference videos, demos, and safe public examples for topic packets.",
+        "id": "run-of-show",
+        "name": "Run-of-show specialist",
+        "role": "Creates title options, live hook, 3-5 segments, transitions, proof beats, chat prompts, and close/CTA.",
         "tools": [
-          "Business OS/vault search",
-          "YouTube reference log",
-          "repo/docs search",
-          "optional public web research"
+          "rundown template",
+          "hook bank",
+          "proof checker",
+          "CTA template"
         ],
         "canDo": [
-          "cluster ideas",
-          "draft topic backlog",
-          "identify proof/examples"
-        ],
-        "needsApproval": [
-          "private/customer proof",
-          "new external research accounts",
-          "claims without sources"
-        ]
-      },
-      {
-        "id": "title-thumbnail",
-        "name": "Title / thumbnail specialist",
-        "role": "Creates title variants, thumbnail concepts, promise clarity checks, and click-risk notes.",
-        "tools": [
-          "title variant template",
-          "thumbnail brief template",
-          "brand kit placeholder",
-          "swipe-deck card writer"
-        ],
-        "canDo": [
-          "draft 10 titles",
-          "draft thumbnail concepts",
-          "score clarity/curiosity"
-        ],
-        "needsApproval": [
-          "final public title/thumbnail",
-          "brand visual direction",
-          "misleading or high-claim promise"
-        ]
-      },
-      {
-        "id": "hook-script",
-        "name": "Hook / script specialist",
-        "role": "Builds Hormozi-style Hook + Meat + CTA, first 30 seconds, long-form outline, and Shorts scripts.",
-        "tools": [
-          "Hook/Meat/CTA template",
-          "script template",
-          "OpSpot proof checker",
-          "reference hook bank"
-        ],
-        "canDo": [
-          "draft hooks",
-          "draft long-form structure",
-          "draft Shorts scripts",
-          "write CTA options"
+          "draft rundown",
+          "draft talking points",
+          "mark intentional clip moments"
         ],
         "needsApproval": [
           "strong claims",
           "customer stories",
-          "final publish script"
+          "final live script"
         ]
       },
       {
-        "id": "producer-recording",
-        "name": "Producer / recording specialist",
-        "role": "Creates camera/mic checklist, shot list, screen recording prompts, b-roll/proof needs, and sample-video request cards.",
+        "id": "obs-production",
+        "name": "OBS / production specialist",
+        "role": "Owns scenes checklist, camera/mic checklist, screen-share privacy, local recording test, and go-live readiness checklist.",
         "tools": [
+          "OBS/Twitch placeholder disabled",
+          "scene checklist",
           "camera/mic checklist",
-          "screen-recording checklist",
-          "file intake placeholder"
+          "local recording test checklist"
         ],
         "canDo": [
-          "draft shot lists",
-          "request samples",
-          "prep recording prompts"
+          "draft setup checklist",
+          "request setup confirmations",
+          "prep test plan"
         ],
         "needsApproval": [
+          "Twitch/OBS connection",
           "camera/mic choice",
-          "raw clip access",
-          "human recording/clicks"
+          "go-live action",
+          "screen-share boundaries"
         ]
       },
       {
-        "id": "editor-shorts",
-        "name": "Editor / Shorts extraction specialist",
-        "role": "Maps long-form structure into chapters, cutdowns, Shorts candidates, captions, and subtitle/style notes.",
+        "id": "moderation-safety",
+        "name": "Chat moderation / safety specialist",
+        "role": "Drafts chat policy, banned topics, response boundaries, escalation rules, and kill switch.",
         "tools": [
-          "transcript/clip tooling placeholder",
-          "video-frames placeholder",
-          "shorts extraction template"
+          "chat policy template",
+          "privacy checklist",
+          "escalation rulebook"
         ],
         "canDo": [
-          "draft cutdown plan",
-          "write captions",
-          "mark chapters"
+          "draft moderation policy",
+          "flag risk",
+          "request human mod decision"
         ],
         "needsApproval": [
-          "external editor/tool use",
-          "export/upload",
+          "public chat actions",
+          "ban/delete/reply",
+          "moderator/tool connection"
+        ]
+      },
+      {
+        "id": "clip-marker",
+        "name": "Clip marker specialist",
+        "role": "Plans live clip moments, timestamp sheet, highlight labels, and post-stream extraction notes.",
+        "tools": [
+          "timestamp sheet",
+          "clip extraction checklist",
+          "transcript placeholder"
+        ],
+        "canDo": [
+          "draft clip plan",
+          "mark expected moments",
+          "write extraction notes"
+        ],
+        "needsApproval": [
+          "clip export to external tools",
           "private footage handling"
         ]
       },
       {
-        "id": "metadata-publishing",
-        "name": "Metadata / publishing specialist",
-        "role": "Prepares description, tags, chapters, pinned comment, end-screen checklist, schedule placeholder, and upload approval card.",
+        "id": "repurpose",
+        "name": "Instagram / YouTube repurpose specialist",
+        "role": "Turns stream plan/recording into Reels, Shorts, captions, titles, thumbnails, and recap drafts.",
         "tools": [
-          "YouTube metadata template",
-          "publishing checklist",
-          "approval card",
-          "YouTube plugin placeholder disabled"
+          "Instagram HITL spec",
+          "YouTube HITL spec",
+          "caption template",
+          "Shorts/Reels extraction template"
         ],
         "canDo": [
-          "draft metadata",
-          "prepare checklist",
-          "package final review card"
+          "draft repurpose packet",
+          "write captions/titles",
+          "prepare approval cards"
         ],
         "needsApproval": [
-          "upload/schedule",
+          "publish/upload/schedule",
           "public metadata changes",
-          "comments/replies",
-          "API/scheduler connection"
+          "customer proof use"
+        ]
+      },
+      {
+        "id": "approval-publishing",
+        "name": "Approval / publishing specialist",
+        "role": "Packages account/setup/privacy/moderation/money/go-live cards and logs receipts.",
+        "tools": [
+          "swipe-deck card writer",
+          "approval policy ledger",
+          "receipts.jsonl",
+          "Twitch plugin placeholder disabled"
+        ],
+        "canDo": [
+          "create approval cards",
+          "log decisions",
+          "prepare final go-live checklist"
+        ],
+        "needsApproval": [
+          "go live",
+          "account settings",
+          "plugin/API connection",
+          "spend"
         ]
       },
       {
         "id": "compliance-proof",
         "name": "Compliance / proof checker",
-        "role": "Checks claims, customer permissions, private data, channel/account changes, spend, and scope creep.",
+        "role": "Checks customer proof, private data, claims, permissions, unsupported metrics, and screen-share privacy.",
         "tools": [
-          "approval policy ledger",
-          "customer permission checklist",
-          "claim/source checklist"
+          "customer permission ledger",
+          "claim/source checklist",
+          "screen-share privacy checklist"
         ],
         "canDo": [
           "flag risk",
-          "mark claims as unsupported",
-          "request proof"
+          "mark claims unsupported",
+          "request proof/permission"
         ],
         "needsApproval": [
           "customer names/logos/results",
-          "private screenshots",
+          "private screenshots/data",
           "spend",
           "account changes"
         ]
       }
     ],
     "intakeQuestions": [
-      "What rough idea, customer pain, demo, clip, or reference are we starting from?",
-      "Should this become a Short, long-form, or both?",
-      "Which channel lane: OpSpot brand, Colton founder, client/project, or undecided?",
-      "What proof/receipt can we safely show?",
-      "What CTA should this drive: audit, comment, DM, book, subscribe, or no hard CTA?"
+      "What rough stream topic, business pain, demo, build, or reference are we starting from?",
+      "Which stream format: build-in-public, audit teardown, Q&A, workflow walkthrough, whiteboard, or clip-first mini stream?",
+      "Which lane: OpSpot brand, Colton founder, or parked?",
+      "What proof/receipt can we safely show on screen?",
+      "What CTA should this drive: audit, follow, checklist, book, or no hard CTA?"
     ],
     "queueCards": [
       {
         "id": "intake",
         "label": "Tell Me What You Want intake",
         "status": "ready",
-        "output": "structured rough-intent brief",
+        "output": "structured stream-intent brief",
         "owner": "Parent content orchestrator"
       },
       {
@@ -2969,46 +3185,60 @@
         "owner": "Parent content orchestrator"
       },
       {
-        "id": "strategy",
-        "label": "YouTube strategy packet",
+        "id": "positioning",
+        "label": "Stream positioning packet",
         "status": "ready",
-        "output": "viewer, pain, offer angle, cadence, pillars",
-        "owner": "YouTube strategy specialist"
+        "output": "audience, transformation, offer angle, CTA, cadence",
+        "owner": "Stream positioning specialist"
       },
       {
-        "id": "titles",
-        "label": "Titles + thumbnails",
+        "id": "rundown",
+        "label": "Run-of-show",
         "status": "ready",
-        "output": "10 titles + 3 thumbnail concepts + click-risk check",
-        "owner": "Title / thumbnail specialist"
+        "output": "live hook, segments, talking points, proof beats, close/CTA",
+        "owner": "Run-of-show specialist"
       },
       {
-        "id": "script",
-        "label": "Hooks + script",
-        "status": "ready",
-        "output": "hooks, first 30s, long-form outline, Shorts scripts, CTA",
-        "owner": "Hook / script specialist"
-      },
-      {
-        "id": "recording",
-        "label": "Recording inputs",
+        "id": "obs",
+        "label": "OBS + scenes setup",
         "status": "human_gate",
-        "output": "camera/mic, sample videos, screen-recording checklist",
-        "owner": "Producer / recording specialist"
+        "output": "scenes, screen-share privacy, local recording, setup blockers",
+        "owner": "OBS / production specialist"
       },
       {
-        "id": "shorts",
-        "label": "Shorts extraction",
-        "status": "ready",
-        "output": "3-7 cutdowns, captions, chapter map",
-        "owner": "Editor / Shorts extraction specialist"
-      },
-      {
-        "id": "metadata",
-        "label": "Metadata + publish checklist",
+        "id": "camera",
+        "label": "Camera/mic confirmation",
         "status": "human_gate",
-        "output": "description, tags, chapters, pinned comment, upload approval card",
-        "owner": "Metadata / publishing specialist"
+        "output": "device choices, audio levels, test recording, raw path",
+        "owner": "OBS / production specialist"
+      },
+      {
+        "id": "moderation",
+        "label": "Chat moderation + safety",
+        "status": "human_gate",
+        "output": "chat rules, banned topics, mod owner, kill switch",
+        "owner": "Moderation / safety specialist"
+      },
+      {
+        "id": "clips",
+        "label": "Clip marker sheet",
+        "status": "ready",
+        "output": "intentional clip moments, timestamp sheet, extraction notes",
+        "owner": "Clip marker specialist"
+      },
+      {
+        "id": "repurpose",
+        "label": "Instagram/YouTube repurpose",
+        "status": "ready",
+        "output": "Reels/Shorts candidates, captions, titles, CTA variants",
+        "owner": "Repurpose specialist"
+      },
+      {
+        "id": "golive",
+        "label": "Final go-live checklist",
+        "status": "human_gate",
+        "output": "title/category/account/OBS/privacy/moderation approval card",
+        "owner": "Approval / publishing specialist"
       },
       {
         "id": "receipts",
@@ -3024,60 +3254,64 @@
       "money",
       "logins",
       "permissions",
-      "brand/channel choices",
-      "sample videos",
+      "OBS/Twitch setup",
       "camera/mic confirmations",
-      "account/API steps",
-      "metadata review",
-      "publishing checklist"
+      "stream format choices",
+      "moderation rules",
+      "privacy/screen-share rules",
+      "clip/repurpose choices",
+      "go-live checklist"
     ],
     "approvalPolicy": {
       "canDoAlone": [
-        "draft ideas/titles/thumbnails/hooks/scripts/outlines/metadata/checklists locally",
+        "draft positioning/rundown/checklists/moderation policy/clip markers/repurpose packets locally",
         "create swipe cards",
         "route specialists",
         "continue after approved info/clicks",
         "log receipts"
       ],
       "draftNeedsApproval": [
-        "final title/thumbnail/metadata",
-        "strong claims or customer stories",
-        "upload/schedule plan",
-        "channel/account setup plan"
+        "stream title/category/tags",
+        "final run-of-show with claims/customer stories",
+        "OBS/account/setup checklist",
+        "chat/moderation policy",
+        "clip/repurpose package containing proof"
       ],
       "neverWithoutApproval": [
-        "upload/publish/schedule",
-        "change public metadata or channel settings",
-        "comment/reply publicly",
-        "connect YouTube API/scheduler",
-        "login/account/2FA",
-        "spend money or hire editor",
-        "use customer names/logos/results/private screenshots"
+        "go live/start stream/schedule stream",
+        "change Twitch channel/account settings",
+        "connect Twitch/OBS/plugin/API or use login/2FA",
+        "send/delete/ban/reply in public chat",
+        "screen-share private/customer data/secrets/inboxes/calendars/CRM/docs/messages/passwords",
+        "spend money or hire moderators/editors",
+        "publish repurposed clips/posts"
       ]
     },
     "receipts": [
       "dashboard/state/receipts.jsonl",
-      "Business-OS/OPSPOT-YOUTUBE-HITL-WORKFLOW-2026-05-08.md"
+      "Business-OS/OPSPOT-TWITCH-HITL-WORKFLOW-2026-05-08.md"
     ],
-    "nextAutomationStep": "After Colton approves/steers the YouTube swipe cards, parent orchestrator dispatches YouTube strategy \u2192 title/thumbnail \u2192 hook/script specialists automatically until a recording, proof, account, money, API, or final upload gate blocks.",
+    "nextAutomationStep": "After Colton approves/steers the Twitch swipe cards, parent orchestrator dispatches stream positioning → run-of-show → OBS/production → moderation/safety → clip marker → repurpose specialists automatically until an account, setup, privacy, money, chat, proof, or go-live gate blocks.",
     "blockers": [
-      "YouTube channel lane undecided",
-      "camera/mic and first sample videos not confirmed",
-      "YouTube login/API/scheduler not approved",
+      "Twitch lane/account/login path undecided",
+      "OBS scenes and local recording path not confirmed",
+      "camera/mic test not confirmed",
+      "privacy/screen-share rules not approved",
+      "moderation rules not approved",
       "customer proof permissions not approved",
-      "final upload/publishing policy not approved"
+      "final go-live policy not approved"
     ],
     "escalationTriggers": [
       "login/account/2FA/human click needed",
-      "live upload/schedule/comment/metadata/channel mutation requested",
-      "claim lacks proof",
-      "customer data/proof/brand involved",
-      "money/spend/tool subscription/editor cost required",
-      "brand/channel lane ambiguous",
-      "camera/mic/raw sample missing",
-      "thumbnail/title promise feels misleading",
+      "OBS/camera/mic setup unknown or failed",
+      "go-live/schedule/channel mutation/chat action requested",
+      "screen-share could expose private data, credentials, customer info, or notifications",
+      "claim lacks proof or uses customer story/results",
+      "money/spend/tool/mod/editor cost required",
+      "stream lane/format/CTA ambiguous",
+      "chat becomes abusive/risky/legal/medical/financial/customer-private",
       "specialist asks for broad tools outside scope",
-      "YouTube API/scheduler/account connection needed"
+      "post-stream publishing to Instagram/YouTube requested"
     ]
   },
   "customerIntake": {
