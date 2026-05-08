@@ -292,9 +292,19 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
               const product = getProduct(t.product) || {};
               const agent = t.agent ? getAgent(t.agent) : null;
               const status = STATUSES.find(s => s.id === t.status);
-              const showDropMarker = listDropId===t.id && listDragId && listDragId!==t.id;
+              const showBeforeSlot = listDropId===t.id && listDropSide==='before' && listDragId && listDragId!==t.id;
+              const showAfterSlot = listDropId===t.id && listDropSide==='after' && listDragId && listDragId!==t.id;
+              const DropSlot = () => (
+                <div className="queue-drop-mini-slot">
+                  <span className="queue-drop-mini-line"/>
+                  <span className="queue-drop-mini-label">lands here</span>
+                  <span className="queue-drop-mini-line"/>
+                </div>
+              );
               return (
-                <div key={t.id}
+                <React.Fragment key={t.id}>
+                {showBeforeSlot && <DropSlot/>}
+                <div
                   draggable
                   onDragStart={(e)=>{ setListDragId(t.id); e.dataTransfer.effectAllowed = 'move'; }}
                   onDragOver={(e)=>{ e.preventDefault(); updateListDropTarget(t.id, e); }}
@@ -303,12 +313,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
                   onDragEnd={()=>{ setListDragId(null); setListDropId(null); setListDropSide('before'); }}
                   className="queue-list-row row-hover"
                   onClick={()=>onOpenTask(t)}
-                  style={{ display: 'grid', gridTemplateColumns: '46px minmax(0, 1fr) 210px', gap: 16, alignItems: 'center', background: showDropMarker ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${showDropMarker?'var(--accent)':'var(--border)'}`, borderRadius: 18, padding: '18px 20px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1, position: 'relative' }}>
-                  {showDropMarker && (
-                    <div className={`queue-drop-marker ${listDropSide==='after'?'after':'before'}`}>
-                      <span className="queue-drop-label">DROP {listDropSide==='after'?'BELOW':'ABOVE'}</span>
-                    </div>
-                  )}
+                  style={{ display: 'grid', gridTemplateColumns: '46px minmax(0, 1fr) 210px', gap: 16, alignItems: 'center', background: (showBeforeSlot || showAfterSlot) ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${(showBeforeSlot || showAfterSlot)?'var(--accent)':'var(--border)'}`, borderRadius: 18, padding: '18px 20px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1, position: 'relative' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
                     <span title="Drag to reorder" style={{ color: 'var(--fg-disabled)', fontSize: 18, lineHeight: 1, cursor: 'grab', letterSpacing: -4 }}>⋮⋮</span>
                     <div style={{ display: 'flex', gap: 4 }}>
@@ -339,6 +344,8 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
                     <div className="term" style={{ fontSize: 12, color: 'var(--fg-tertiary)', textAlign: 'right' }}>{t.age || '0m'} · {t.complexity}</div>
                   </div>
                 </div>
+                {showAfterSlot && <DropSlot/>}
+                </React.Fragment>
               );
             })}
           </div>
