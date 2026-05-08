@@ -284,6 +284,43 @@ function readSeedState() {
 }
 
 
+
+function seedAutopilotState() {
+  return {
+    policy: {
+      radius: 'Wilmington, NC + 25 miles',
+      verticals: ['roofing', 'solar', 'construction', 'appliance', 'plumbing', 'HVAC', 'electrical', 'landscaping', 'remodeling'],
+      senders: {
+        email: 'colton.harris@automioapp.com',
+        imessage: 'Colton personal iPhone / iMessage for now',
+        future: 'Dedicated business iPhone on M5 Max',
+      },
+      dailyCaps: {
+        email: { limit: 50, used: 0 },
+        imessage: { limit: 50, used: 0 },
+      },
+      quietHours: { start: 20, end: 8, tz: 'America/New_York' },
+      coldCallTarget: '100–200/day',
+      mode: 'policy-approved-autopilot',
+    },
+    runs: [
+      { id: 'run-research', name: 'Lead research', status: 'queued', summary: 'Find construction/home-service businesses in Wilmington + 25 miles.', lastRun: 'seeded', nextRun: '8:05am ET', outputCount: 0 },
+      { id: 'run-audit', name: 'Website + GBP audit', status: 'queued', summary: 'Score missed-call, follow-up, review, and website leaks.', lastRun: 'seeded', nextRun: 'after research', outputCount: 0 },
+      { id: 'run-enrich', name: 'Contact enrichment', status: 'queued', summary: 'Find owner/contact, phone, email, website, and source notes.', lastRun: 'seeded', nextRun: 'after audit', outputCount: 0 },
+      { id: 'run-email', name: 'Outbound email', status: 'blocked', summary: 'Prepared only. Live send path not enabled tonight.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
+      { id: 'run-imessage', name: 'Outbound iMessage', status: 'blocked', summary: 'Prepared only. No personal iPhone sends until send runner is deliberately enabled.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
+      { id: 'run-replies', name: 'Reply handler', status: 'idle', summary: 'Classify replies, opt-outs, interest, angry replies, and escalation.', lastRun: 'not run', nextRun: 'after first sends', outputCount: 0 },
+      { id: 'run-cold-rank', name: 'Cold-call ranker', status: 'queued', summary: 'Rank warmest 100–200/day for Colton from outbound + audit signal.', lastRun: 'seeded', nextRun: 'after first replies/touches', outputCount: 3 },
+      { id: 'run-briefs', name: 'Morning/evening briefs', status: 'queued', summary: 'Summarize overnight/day receipts, blockers, and next best moves.', lastRun: 'seeded', nextRun: 'next scheduled brief', outputCount: 0 },
+    ],
+    queue: [
+      { id: 'q-email-roofer-1', lead: 'Sample Wilmington roofer', channel: 'email', angle: 'AI receptionist + estimate follow-up', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
+      { id: 'q-imsg-plumber-1', lead: 'Sample Wilmington plumber', channel: 'iMessage', angle: 'Missed calls + booked estimates', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
+      { id: 'q-email-appliance-1', lead: 'Sample appliance repair shop', channel: 'email', angle: 'Service reminders + follow-up employee', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
+    ],
+  };
+}
+
 function seedColdCallLeads() {
   return [
     {
@@ -347,6 +384,9 @@ function ensureState() {
       products: seed.SEED_PRODUCTS || [],
       agents: seed.SEED_AGENTS || [],
       coldCallLeads: seedColdCallLeads(),
+      autopilotPolicy: seedAutopilotState().policy,
+      automationRuns: seedAutopilotState().runs,
+      outboundQueue: seedAutopilotState().queue,
     };
     fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
   }
@@ -356,10 +396,16 @@ function ensureState() {
 function readMcState() {
   ensureState();
   const state = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+  let changed = false;
   if (!state.coldCallLeads) {
     state.coldCallLeads = seedColdCallLeads();
-    writeMcState(state);
+    changed = true;
   }
+  const auto = seedAutopilotState();
+  if (!state.autopilotPolicy) { state.autopilotPolicy = auto.policy; changed = true; }
+  if (!state.automationRuns) { state.automationRuns = auto.runs; changed = true; }
+  if (!state.outboundQueue) { state.outboundQueue = auto.queue; changed = true; }
+  if (changed) writeMcState(state);
   return state;
 }
 
@@ -421,6 +467,20 @@ const server = http.createServer(async (req, res) => {
       writeMcState(state);
       const receipt = appendReceipt({ type: 'task.create', taskId: task.id, task, meta: body.meta || {} });
       return sendJson(res, { ok: true, task, receipt });
+    } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
+  }
+  if (req.method === 'POST' && req.url === '/__mc/automation/log') {
+    try {
+      const body = await safeJsonBody(req);
+      const state = readMcState();
+      const runId = body.runId;
+      const idx = (state.automationRuns || []).findIndex(r => r.id === runId);
+      if (idx >= 0) {
+        state.automationRuns[idx] = { ...state.automationRuns[idx], ...(body.patch || {}), lastRun: nowIso() };
+        writeMcState(state);
+      }
+      const receipt = appendReceipt({ type: 'automation.log', runId, action: body.action || 'log', meta: body.meta || {}, patch: body.patch || {} });
+      return sendJson(res, { ok: true, run: idx >= 0 ? state.automationRuns[idx] : null, receipt });
     } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
   }
   if (req.method === 'POST' && req.url === '/__mc/coldcall/outcome') {

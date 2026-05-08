@@ -24,6 +24,11 @@
   });
   window.mcReceipts = () => json('/__mc/receipts');
 
+  window.mcAutomationLog = (runId, action, patch = {}, meta = {}) => json('/__mc/automation/log', {
+    method: 'POST',
+    body: JSON.stringify({ runId, action, patch, meta }),
+  });
+
   window.mcColdCallOutcome = (leadId, action, meta = {}) => json('/__mc/coldcall/outcome', {
     method: 'POST',
     body: JSON.stringify({ leadId, action, meta }),
