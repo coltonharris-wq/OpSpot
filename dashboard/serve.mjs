@@ -147,8 +147,12 @@ function readFrontmatter(text) {
 }
 
 import { spawn } from 'node:child_process';
+import vm from 'node:vm';
 
 const VAULT_LEADS_DIR = path.join(os.homedir(), 'colton-brain-vault/Leads');
+const STATE_DIR = path.join(ROOT, 'state');
+const STATE_FILE = path.join(STATE_DIR, 'mission-control.json');
+const RECEIPTS_FILE = path.join(STATE_DIR, 'receipts.jsonl');
 
 // Cache `gh repo list` for 5min — it shells out and we don't need it fresh.
 let repoCache = { ts: 0, data: null };
@@ -253,8 +257,128 @@ function writeLeadStatus(file, status) {
   return { ok: true };
 }
 
+
+function nowIso() { return new Date().toISOString(); }
+
+function safeJsonBody(req, max = 128 * 1024) {
+  return new Promise((resolve, reject) => {
+    let raw = '';
+    req.on('data', c => {
+      raw += c;
+      if (raw.length > max) reject(new Error('body too large'));
+    });
+    req.on('end', () => {
+      try { resolve(raw ? JSON.parse(raw) : {}); } catch (e) { reject(e); }
+    });
+    req.on('error', reject);
+  });
+}
+
+function readSeedState() {
+  const code = fs.readFileSync(path.join(ROOT, 'data.jsx'), 'utf8') + `\n;globalThis.__MC_SEED__ = { SEED_TASKS, SEED_DEALS, SEED_IDEAS, SEED_PRODUCTS, SEED_AGENTS };`;
+  const ctx = { globalThis: {} };
+  ctx.window = ctx.globalThis;
+  vm.createContext(ctx);
+  vm.runInContext(code, ctx, { filename: 'data.jsx' });
+  return ctx.globalThis.__MC_SEED__ || { SEED_TASKS: [], SEED_DEALS: [], SEED_IDEAS: [], SEED_PRODUCTS: [], SEED_AGENTS: [] };
+}
+
+function ensureState() {
+  fs.mkdirSync(STATE_DIR, { recursive: true });
+  if (!fs.existsSync(STATE_FILE)) {
+    const seed = readSeedState();
+    const state = {
+      version: 1,
+      updatedAt: nowIso(),
+      tasks: seed.SEED_TASKS || [],
+      deals: seed.SEED_DEALS || [],
+      ideas: seed.SEED_IDEAS || [],
+      products: seed.SEED_PRODUCTS || [],
+      agents: seed.SEED_AGENTS || [],
+    };
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
+  }
+  if (!fs.existsSync(RECEIPTS_FILE)) fs.writeFileSync(RECEIPTS_FILE, '', 'utf8');
+}
+
+function readMcState() {
+  ensureState();
+  return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+}
+
+function writeMcState(state) {
+  state.updatedAt = nowIso();
+  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
+}
+
+function appendReceipt(event) {
+  ensureState();
+  const receipt = { id: `r-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`, at: nowIso(), ...event };
+  fs.appendFileSync(RECEIPTS_FILE, JSON.stringify(receipt) + '\n', 'utf8');
+  return receipt;
+}
+
+function sendJson(res, obj, status = 200) {
+  res.writeHead(status, { 'content-type': 'application/json' });
+  res.end(JSON.stringify(obj));
+}
+
+function actionPatch(action) {
+  const byAction = {
+    approve: { status: 'done' },
+    deny: { status: 'review' },
+    defer: { status: 'planning' },
+  };
+  return { ...(byAction[action] || {}), lastAction: action, actionedAt: nowIso() };
+}
+
 const server = http.createServer(async (req, res) => {
   if (req.url === '/__boot.js') return serveBootstrap(req, res);
+  if (req.url === '/__mc/state') return sendJson(res, readMcState());
+  if (req.url === '/__mc/receipts') {
+    ensureState();
+    const receipts = fs.readFileSync(RECEIPTS_FILE, 'utf8').split('\n').filter(Boolean).slice(-200).map(line => JSON.parse(line));
+    return sendJson(res, { receipts });
+  }
+  if (req.method === 'POST' && req.url === '/__mc/task') {
+    try {
+      const body = await safeJsonBody(req);
+      const state = readMcState();
+      const idx = state.tasks.findIndex(t => t.id === body.id);
+      if (idx < 0) return sendJson(res, { ok: false, error: 'task not found' }, 404);
+      state.tasks[idx] = { ...state.tasks[idx], ...(body.patch || {}) };
+      writeMcState(state);
+      const receipt = appendReceipt({ type: 'task.patch', taskId: body.id, patch: body.patch || {}, meta: body.meta || {} });
+      return sendJson(res, { ok: true, task: state.tasks[idx], receipt });
+    } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
+  }
+  if (req.method === 'POST' && req.url === '/__mc/tasks') {
+    try {
+      const body = await safeJsonBody(req);
+      const state = readMcState();
+      const task = { ...(body.task || {}), id: body.task?.id || `t-${Date.now()}`, createdAt: nowIso() };
+      if (!task.title) return sendJson(res, { ok: false, error: 'title required' }, 400);
+      const idx = state.tasks.findIndex(t => t.id === task.id);
+      if (idx >= 0) state.tasks[idx] = { ...state.tasks[idx], ...task };
+      else state.tasks.push(task);
+      writeMcState(state);
+      const receipt = appendReceipt({ type: 'task.create', taskId: task.id, task, meta: body.meta || {} });
+      return sendJson(res, { ok: true, task, receipt });
+    } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
+  }
+  if (req.method === 'POST' && req.url === '/__mc/action') {
+    try {
+      const body = await safeJsonBody(req);
+      const state = readMcState();
+      const idx = state.tasks.findIndex(t => t.id === body.id);
+      if (idx < 0) return sendJson(res, { ok: false, error: 'task not found' }, 404);
+      const patch = actionPatch(body.action);
+      state.tasks[idx] = { ...state.tasks[idx], ...patch };
+      writeMcState(state);
+      const receipt = appendReceipt({ type: 'task.action', taskId: body.id, action: body.action, patch, meta: body.meta || {} });
+      return sendJson(res, { ok: true, task: state.tasks[idx], receipt });
+    } catch (e) { return sendJson(res, { ok: false, error: String(e.message || e) }, 400); }
+  }
   if (req.method === 'POST' && req.url === '/__vault/leads/status') {
     let raw = '';
     req.on('data', c => { raw += c; if (raw.length > 4096) req.destroy(); });

@@ -14,6 +14,7 @@ function writeTaskPatch(taskId, field, value) {
   const all = readTaskPatches();
   all[taskId] = { ...(all[taskId] || {}), [field]: value };
   try { localStorage.setItem(TASK_PATCH_KEY, JSON.stringify(all)); } catch {}
+  if (window.mcPatchTask) window.mcPatchTask(taskId, { [field]: value }, { actor: 'dashboard' }).catch(e => console.warn('mcPatchTask failed', e));
 }
 function readAddedTasks() {
   try { return JSON.parse(localStorage.getItem(TASK_ADDED_KEY) || '[]'); } catch { return []; }
@@ -22,6 +23,7 @@ function writeAddedTask(task) {
   const all = readAddedTasks();
   all.push(task);
   try { localStorage.setItem(TASK_ADDED_KEY, JSON.stringify(all)); } catch {}
+  if (window.mcAddTask) window.mcAddTask(task, { actor: 'dashboard' }).catch(e => console.warn('mcAddTask failed', e));
 }
 function applyTaskPatches(tasks) {
   const all = readTaskPatches();
@@ -267,6 +269,18 @@ function TaskDetail({ task, onClose, agents, tasks, setTasks }) {
     const isEnabled = task.cron?.enabled ?? task.priority !== 'low';
     try { await oc.call('cron.update', { id: task.cronId, patch: { enabled: !isEnabled } }); } catch (e) { console.warn('cron.update failed', e); }
   };
+  const localAction = async (action) => {
+    const statusByAction = { approve: 'done', deny: 'review', defer: 'planning' };
+    const patchBody = { lastAction: action, actionedAt: new Date().toISOString() };
+    if (statusByAction[action]) patchBody.status = statusByAction[action];
+    setTasks(prev => prev.map(t => t.id === task.id ? { ...t, ...patchBody } : t));
+    if (window.mcTaskAction) {
+      try { await window.mcTaskAction(task.id, action, { actor: 'dashboard', title: task.title }); }
+      catch (e) { console.warn('mcTaskAction failed', e); }
+    } else {
+      Object.entries(patchBody).forEach(([k, v]) => writeTaskPatch(task.id, k, v));
+    }
+  };
 
   // Pull this task's real activity from the live event rail, if any.
   const ocEvents = (oc?.events || []).filter(e => task.cronId && e.task === task.cronId).slice(0, 8);
@@ -383,6 +397,9 @@ function TaskDetail({ task, onClose, agents, tasks, setTasks }) {
             <DetailField label="Source"><div style={{ fontSize: 12, fontWeight: 500, color: 'var(--fg-secondary)' }}>{task.source}</div></DetailField>
             {task.pr && <DetailField label="PR"><div style={{ fontSize: 12, fontWeight: 700, color: task.pr.includes('merged')?'var(--success)':'var(--info)' }}>{task.pr}</div></DetailField>}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 4 }}>
+              <Button variant="primary" size="sm" icon={<Icons.Check size={13}/>} onClick={() => localAction('approve')}>Approve / ship</Button>
+              <Button variant="ghost" size="sm" icon={<Icons.Refresh size={13}/>} onClick={() => localAction('defer')}>Defer</Button>
+              <Button variant="ghost" size="sm" icon={<Icons.X size={13}/>} onClick={() => localAction('deny')}>Deny / needs edit</Button>
               <Button variant="primary" size="sm" icon={<Icons.Bolt size={13}/>} onClick={dispatch} disabled={!task.cronId} title={!task.cronId ? 'Only cron-backed tasks can be dispatched' : ''}>Dispatch now</Button>
               <Button variant="ghost" size="sm" icon={<Icons.Pause size={13}/>} onClick={pauseToggle} disabled={!task.cronId} title={!task.cronId ? 'Only cron-backed tasks can be paused' : ''}>Pause</Button>
               <Button variant="danger" size="sm" icon={<Icons.X size={13}/>} onClick={() => { if (confirm('Delete this task?')) { setTasks(prev => prev.filter(t => t.id !== task.id)); writeTaskPatch(task.id, '_deleted', true); onClose(); } }}>Delete task</Button>

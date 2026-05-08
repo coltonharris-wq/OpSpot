@@ -15,6 +15,7 @@
   <script src="/__boot.js"></script>
   <script type="text/babel" src="primitives.jsx?v=1778213025"></script>
   <script type="text/babel" src="data.jsx?v=1778213025"></script>
+  <script src="api-client.js?v=1778213900"></script>
   <script type="text/babel" src="live.jsx?v=1778213025"></script>
   <script type="text/babel" src="shell.jsx?v=1778213025"></script>
   <script type="text/babel" src="queue.jsx?v=1778213025"></script>
@@ -74,11 +75,24 @@
       const oc = (typeof useOpenClaw === 'function') ? useOpenClaw() : { live: false };
       const liveAppliedRef = React.useRef({ tasks: false, deals: false });
 
-      // Apply localStorage patches once on first mount.
+      // Load live local dashboard state from serve.mjs, falling back to seed+localStorage.
       useEffect(() => {
-        if (typeof applyTaskPatches === 'function') {
-          setTasks(prev => applyTaskPatches(prev).filter(t => !t._deleted));
-        }
+        let cancelled = false;
+        const load = async () => {
+          try {
+            if (window.mcLoadState) {
+              const state = await window.mcLoadState();
+              if (!cancelled && state?.tasks?.length) setTasks(state.tasks.filter(t => !t._deleted));
+              return;
+            }
+          } catch (e) { console.warn('mcLoadState failed; using seed fallback', e); }
+          if (!cancelled && typeof applyTaskPatches === 'function') {
+            setTasks(prev => applyTaskPatches(prev).filter(t => !t._deleted));
+          }
+        };
+        load();
+        const timer = setInterval(load, 15000);
+        return () => { cancelled = true; clearInterval(timer); };
       }, []);
 
       useEffect(() => {
