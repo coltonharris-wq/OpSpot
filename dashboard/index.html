@@ -21,6 +21,7 @@
   <script type="text/babel" src="queue.jsx?v=1778222008"></script>
   <script type="text/babel" src="coldcall.jsx?v=1778240400"></script>
   <script type="text/babel" src="ops.jsx?v=1778225644"></script>
+  <script type="text/babel" src="action-catalog.jsx?v=1778241000"></script>
   <script type="text/babel" src="crons.jsx?v=1778213025"></script>
   <script type="text/babel" src="command.jsx?v=1778213025"></script>
   <script type="text/babel" src="fleet.jsx?v=1778213025"></script>
@@ -124,6 +125,7 @@
         pipeline: deals.filter(d=>d.heat==='hot').length,
         coldcall: 1,
         ops: 8,
+        actions: 10,
       };
 
       const titles = {
@@ -132,6 +134,7 @@
         queue: { title: 'Mission Queue', breadcrumb: 'Mission Control' },
         coldcall: { title: 'Cold Call', breadcrumb: 'Sales Flow' },
         ops: { title: 'Ops + Autopilot', breadcrumb: 'Mission Control' },
+        actions: { title: 'Agent Action Catalog', breadcrumb: 'OpSpot' },
         crons: { title: 'Crons', breadcrumb: 'Mission Control' },
         fleet: { title: 'Fleet', breadcrumb: 'Mission Control' },
         swipe: { title: 'Swipe Deck', breadcrumb: 'Inbox' },
@@ -172,6 +175,7 @@
                 {view === 'queue' && <MissionQueueScreen tasks={tasks} setTasks={setTasks} onOpenTask={setOpenTask}/>}
                 {view === 'coldcall' && <ColdCallScreen/>}
                 {view === 'ops' && <OpsAutopilotScreen/>}
+                {view === 'actions' && <AgentActionCatalogScreen/>}
                 {view === 'crons' && <CronsScreen tasks={tasks} onOpenTask={setOpenTask}/>}
                 {view === 'fleet' && <FleetScreen tasks={tasks} onOpenAgent={setOpenAgent}/>}
                 {view === 'swipe' && <SwipeDeck ideas={ideas} setIdeas={setIdeas} onPushTask={onPushIdeaToTask}/>}
