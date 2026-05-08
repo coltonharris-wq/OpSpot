@@ -264,6 +264,7 @@ function nowIso() { return new Date().toISOString(); }
 const AUDIT_SCORE_VERSION = 'audit-score-v1';
 const AUDIT_APOLLO_MIN_SCORE = 80;
 const AUDIT_HIGH_RANK_LIMIT = 2;
+const AUDIT_APOLLO_CREDITS_ESTIMATE = '1-3 credits if approved';
 const AUDIT_INDUSTRY_FIT = new Set(['roofing', 'solar', 'construction', 'appliance', 'plumbing', 'hvac', 'electrical', 'landscaping', 'remodeling']);
 
 function auditScoreLead(lead) {
@@ -288,12 +289,32 @@ function auditScoreLead(lead) {
 function rankAuditLeads(leads = []) {
   return leads.map(auditScoreLead)
     .sort((a, b) => (b.auditScore || 0) - (a.auditScore || 0))
-    .map((lead, idx) => ({
-      ...lead,
-      auditRank: idx + 1,
-      apolloEligible: idx < AUDIT_HIGH_RANK_LIMIT && Number(lead.auditScore || 0) >= AUDIT_APOLLO_MIN_SCORE,
-      status: Number(lead.auditScore || 0) >= AUDIT_APOLLO_MIN_SCORE ? 'audit_ranked_high' : 'audit_ranked_hold',
-    }));
+    .map((lead, idx) => {
+      const auditRank = idx + 1;
+      const score = Number(lead.auditScore || 0);
+      const scoreQualified = score >= AUDIT_APOLLO_MIN_SCORE;
+      const topRankedSeed = auditRank <= AUDIT_HIGH_RANK_LIMIT;
+      const apolloEligible = topRankedSeed && scoreQualified;
+      const apolloReason = apolloEligible
+        ? `Top ${AUDIT_HIGH_RANK_LIMIT} audit-ranked seed lead with score ${score}; Apollo is allowed only after cheap research/audit ranking and still needs human approval before credits are spent.`
+        : scoreQualified
+          ? `Score ${score} passed the audit threshold, but only the top ${AUDIT_HIGH_RANK_LIMIT} seed leads are Apollo-eligible this pass.`
+          : `Score ${score} is below Apollo gate ${AUDIT_APOLLO_MIN_SCORE}; keep in cheap research/audit hold.`;
+      return {
+        ...lead,
+        auditRank,
+        apolloEligible,
+        apolloStatus: apolloEligible ? 'eligible_pending_approval' : 'hold_after_audit_rank',
+        apolloReason,
+        apolloCreditsEstimate: apolloEligible ? AUDIT_APOLLO_CREDITS_ESTIMATE : '0',
+        decisionMakerName: lead.decisionMakerName || lead.ownerContact?.name || '',
+        decisionMakerTitle: lead.decisionMakerTitle || lead.ownerContact?.title || '',
+        decisionMakerEmail: lead.decisionMakerEmail || lead.ownerContact?.email || '',
+        decisionMakerPhone: lead.decisionMakerPhone || lead.ownerContact?.phone || '',
+        decisionMakerConfidence: lead.decisionMakerConfidence || 'pending enrichment',
+        status: apolloEligible ? 'audit_ranked_apollo_eligible' : 'audit_ranked_hold',
+      };
+    });
 }
 
 function safeJsonBody(req, max = 128 * 1024) {
@@ -344,7 +365,7 @@ function seedAutopilotState() {
     runs: [
       { id: 'run-research', name: 'Lead research', status: 'queued', summary: 'Find construction/home-service businesses in Wilmington + 25 miles.', lastRun: 'seeded', nextRun: '8:05am ET', outputCount: leadSources.length, receiptPath: 'dashboard/state/receipts.jsonl' },
       { id: 'run-audit', name: 'Audit Score v1', status: 'complete', summary: 'Ranks local leads by website presence, GBP/review placeholder, missed-call/follow-up fit, industry fit, reason, angle, and first-touch recommendation.', lastRun: 'seeded', nextRun: 'refresh after verified research', outputCount: leadSources.length, receiptPath: 'dashboard/state/receipts.jsonl' },
-      { id: 'run-enrich', name: 'Contact enrichment', status: 'queued', summary: 'Apollo/enrichment stays last; only high-ranked audit leads become eligible.', lastRun: 'seeded', nextRun: 'after audit + suppression check', outputCount: apolloQueue.length },
+      { id: 'run-enrich', name: 'Apollo-last contact enrichment gate', status: 'queued', summary: 'Apollo runs only after cheap research/audit ranking. This UI marks eligible rows only; no Apollo call or credit spend happens here.', lastRun: 'seeded', nextRun: 'after audit + suppression check + human approval', outputCount: apolloQueue.length },
       { id: 'run-email', name: 'Outbound email', status: 'blocked', summary: 'Prepared only. Live send path not enabled tonight.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
       { id: 'run-imessage', name: 'Outbound iMessage', status: 'blocked', summary: 'Prepared only. No personal iPhone sends until send runner is deliberately enabled.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
       { id: 'run-replies', name: 'Reply handler', status: 'idle', summary: 'Classify replies, opt-outs, interest, angry replies, and escalation.', lastRun: 'not run', nextRun: 'after first sends', outputCount: 0 },
@@ -387,6 +408,14 @@ function seedLeadSourceState() {
       angle: 'AI receptionist + estimate follow-up for roof inspections and quote nudges.',
       recommendedFirstTouch: 'Draft a missed-call/estimate follow-up audit opener; hold all sends until approval.',
       apolloEligible: false,
+      apolloStatus: 'not_ranked',
+      apolloReason: 'Seed row has not passed cheap research/audit ranking yet; Apollo remains off.',
+      apolloCreditsEstimate: '0',
+      decisionMakerName: '',
+      decisionMakerTitle: '',
+      decisionMakerEmail: '',
+      decisionMakerPhone: '',
+      decisionMakerConfidence: 'pending enrichment',
       ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
       status: 'sourced_needs_research',
       receipts: [{ type: 'lead-source.seeded', path: baseReceipt }],
@@ -410,6 +439,14 @@ function seedLeadSourceState() {
       angle: 'After-hours call capture + booked service appointments + maintenance follow-up.',
       recommendedFirstTouch: 'Draft a “missed service calls after hours” audit opener; no send during quiet hours.',
       apolloEligible: false,
+      apolloStatus: 'not_ranked',
+      apolloReason: 'Seed row has not passed cheap research/audit ranking yet; Apollo remains off.',
+      apolloCreditsEstimate: '0',
+      decisionMakerName: '',
+      decisionMakerTitle: '',
+      decisionMakerEmail: '',
+      decisionMakerPhone: '',
+      decisionMakerConfidence: 'pending enrichment',
       ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
       status: 'sourced_needs_research',
       receipts: [{ type: 'lead-source.seeded', path: baseReceipt }],
@@ -433,6 +470,14 @@ function seedLeadSourceState() {
       angle: 'Emergency call capture + estimate scheduling + follow-up reminders.',
       recommendedFirstTouch: 'Draft a short audit-first opener around missed urgent calls; hold for approval.',
       apolloEligible: false,
+      apolloStatus: 'not_ranked',
+      apolloReason: 'Seed row has not passed cheap research/audit ranking yet; Apollo remains off.',
+      apolloCreditsEstimate: '0',
+      decisionMakerName: '',
+      decisionMakerTitle: '',
+      decisionMakerEmail: '',
+      decisionMakerPhone: '',
+      decisionMakerConfidence: 'pending enrichment',
       ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
       status: 'sourced_needs_research',
       receipts: [{ type: 'lead-source.seeded', path: baseReceipt }],
@@ -561,7 +606,9 @@ function readMcState() {
   const enrichRun = (state.automationRuns || []).find(r => r.id === 'run-enrich');
   const apolloQueue = state.leadSources.filter(l => l.apolloEligible);
   if (enrichRun) {
-    enrichRun.summary = 'Apollo/enrichment stays last; only high-ranked audit leads become eligible.';
+    enrichRun.name = 'Apollo-last contact enrichment gate';
+    enrichRun.summary = 'Apollo runs only after cheap research/audit ranking. This UI marks eligible rows only; no Apollo call or credit spend happens here.';
+    enrichRun.nextRun = 'after audit + suppression check + human approval';
     enrichRun.outputCount = apolloQueue.length;
     changed = true;
   }

@@ -31,11 +31,12 @@ function OpsAutopilotScreen() {
           <OpsPolicyCard policy={policy}/>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12 }}>
           <OpsMetric label="Email cap" value={`${policy?.dailyCaps?.email?.used || 0}/${policy?.dailyCaps?.email?.limit || 0}`} tone="info"/>
           <OpsMetric label="iMessage cap" value={`${policy?.dailyCaps?.imessage?.used || 0}/${policy?.dailyCaps?.imessage?.limit || 0}`} tone="success"/>
           <OpsMetric label="Queued sends" value={queue.length} tone="brand"/>
           <OpsMetric label="Lead source rows" value={leadSources.length} tone="purple"/>
+          <OpsMetric label="Apollo eligible" value={leadSources.filter(l => l.apolloEligible).length} tone="success"/>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 380px', gap: 16 }}>
@@ -47,6 +48,7 @@ function OpsAutopilotScreen() {
 
           <OpsPanel title="OpsGuardrails" icon={<Icons.Check size={15}/>}>
             <OpsGuardrail text="No live sends in v1 — this tab is visibility + queued prep." good/>
+            <OpsGuardrail text="Apollo runs only after cheap research/audit ranking; eligibility here never calls Apollo or spends credits." good/>
             <OpsGuardrail text="No outbound or prospect/customer replies 8pm–8am ET." good/>
             <OpsGuardrail text="Only Colton gets responses during quiet hours." good/>
             <OpsGuardrail text="Opt-outs, angry replies, legal/money/account issues escalate." good/>
@@ -125,7 +127,42 @@ function OpsPanel({ title, icon, children }) { return <div style={{ background: 
 function OpsMetric({ label, value, tone }) { const colors={info:'#3b82f6',success:'#22c55e',brand:'#f97316',purple:'#a855f7'}; return <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 18, padding: 16 }}><div className="section-label">{label}</div><div style={{ fontSize: 30, fontWeight: 950, color: colors[tone] || 'var(--accent)', marginTop: 3 }}>{value}</div></div>; }
 function OpsAutomationLane({ run }) { const c = run.status === 'blocked' ? '#ef4444' : run.status === 'running' ? '#3b82f6' : run.status === 'queued' ? '#f59e0b' : '#22c55e'; return <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 12, alignItems: 'center', background: 'var(--surface-elevated)', border: '1px solid var(--border)', borderRadius: 14, padding: 13 }}><div><div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><span style={{ width: 8, height: 8, borderRadius: 999, background: c }}/><div style={{ fontWeight: 900 }}>{run.name}</div></div><div style={{ color: 'var(--fg-secondary)', fontSize: 13, marginTop: 4 }}>{run.summary}</div><div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 5 }}>Last: {run.lastRun || 'not run'} · Next: {run.nextRun || 'manual'}</div></div><div style={{ textAlign: 'right' }}><div className="section-label">Output</div><div style={{ fontSize: 22, fontWeight: 900 }}>{run.outputCount ?? 0}</div></div></div>; }
 function OpsQueuedSend({ item }) { return <div style={{ border: '1px solid var(--border)', borderRadius: 14, padding: 13, background: 'var(--surface-elevated)' }}><div style={{ display: 'flex', justifyContent: 'space-between', gap: 10 }}><div style={{ fontWeight: 900 }}>{item.lead}</div><span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)' }}>{item.channel}</span></div><div style={{ color: 'var(--fg-secondary)', fontSize: 13, marginTop: 4 }}>{item.angle}</div><div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 6 }}>Scheduled: {item.scheduledFor} · Status: {item.status}</div></div>; }
-function OpsLeadSourceRow({ lead }) { return <div style={{ border: lead.apolloEligible ? '1px solid rgba(34,197,94,.45)' : '1px solid var(--border)', borderRadius: 14, padding: 13, background: 'var(--surface-elevated)' }}><div style={{ display: 'flex', justifyContent: 'space-between', gap: 10 }}><div><div style={{ fontWeight: 900 }}>{lead.auditRank ? `#${lead.auditRank} · ` : ''}{lead.business}</div><div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 3 }}>{lead.city} · {lead.distance || lead.source}</div></div><div style={{ textAlign: 'right' }}><span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)' }}>{lead.vertical}</span><div style={{ fontSize: 24, fontWeight: 950, color: lead.apolloEligible ? '#22c55e' : 'var(--accent)', marginTop: 3 }}>{lead.auditScore ?? '—'}</div></div></div><div style={{ color: 'var(--fg-secondary)', fontSize: 13, marginTop: 8 }}>{lead.reasonWhy || lead.researchNotes}</div><div style={{ color: 'var(--fg-secondary)', fontSize: 13, marginTop: 6 }}><b>Angle:</b> {lead.angle || 'pending'}</div><div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 6 }}><b>First touch:</b> {lead.recommendedFirstTouch || 'pending'}</div><div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 9 }}><OpsTag label={lead.websitePresent ? 'website present' : 'website missing/unverified'}/><OpsTag label={lead.reviewsGbpPlaceholder || 'GBP/reviews placeholder'}/><OpsTag label={`follow-up fit ${lead.missedCallFollowUpFit ?? '—'}`}/><OpsTag label={`industry fit ${lead.industryFit ?? '—'}`}/><OpsTag label={lead.apolloEligible ? 'Apollo eligible' : 'Apollo hold'}/><OpsTag label={lead.status}/></div></div>; }
+function OpsLeadSourceRow({ lead }) {
+  const eligible = Boolean(lead.apolloEligible);
+  const decisionMaker = [lead.decisionMakerName, lead.decisionMakerTitle].filter(Boolean).join(' · ') || 'Pending Apollo-approved enrichment';
+  return <div style={{ border: eligible ? '1px solid rgba(34,197,94,.45)' : '1px solid var(--border)', borderRadius: 14, padding: 13, background: 'var(--surface-elevated)' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10 }}>
+      <div>
+        <div style={{ fontWeight: 900 }}>{lead.auditRank ? `#${lead.auditRank} · ` : ''}{lead.business}</div>
+        <div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 3 }}>{lead.city} · {lead.distance || lead.source}</div>
+      </div>
+      <div style={{ textAlign: 'right' }}>
+        <span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)' }}>{lead.vertical}</span>
+        <div style={{ fontSize: 24, fontWeight: 950, color: eligible ? '#22c55e' : 'var(--accent)', marginTop: 3 }}>{lead.auditScore ?? '—'}</div>
+      </div>
+    </div>
+    <div style={{ color: 'var(--fg-secondary)', fontSize: 13, marginTop: 8 }}>{lead.reasonWhy || lead.researchNotes}</div>
+    <div style={{ color: 'var(--fg-secondary)', fontSize: 13, marginTop: 6 }}><b>Angle:</b> {lead.angle || 'pending'}</div>
+    <div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 6 }}><b>First touch:</b> {lead.recommendedFirstTouch || 'pending'}</div>
+    <div style={{ marginTop: 10, padding: 10, borderRadius: 12, border: eligible ? '1px solid rgba(34,197,94,.35)' : '1px solid var(--border)', background: eligible ? 'rgba(34,197,94,.07)' : 'rgba(148,163,184,.07)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center' }}>
+        <div style={{ fontWeight: 900 }}>Apollo-last gate</div>
+        <OpsTag label={lead.apolloStatus || (eligible ? 'eligible_pending_approval' : 'hold')}/>
+      </div>
+      <div style={{ color: 'var(--fg-secondary)', fontSize: 12.5, marginTop: 5 }}>Apollo runs only after cheap research/audit ranking. This row is a state marker only — no Apollo call, no credit spend.</div>
+      <div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 5 }}>{lead.apolloReason || 'Awaiting ranked audit decision.'}</div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 9 }}>
+        <OpsMiniRow label="Credits est." value={lead.apolloCreditsEstimate || '0'}/>
+        <OpsMiniRow label="Confidence" value={lead.decisionMakerConfidence || 'pending enrichment'}/>
+        <OpsMiniRow label="Decision maker" value={decisionMaker}/>
+        <OpsMiniRow label="Contact" value={[lead.decisionMakerEmail, lead.decisionMakerPhone].filter(Boolean).join(' · ') || 'Not enriched'}/>
+      </div>
+    </div>
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 9 }}>
+      <OpsTag label={lead.websitePresent ? 'website present' : 'website missing/unverified'}/><OpsTag label={lead.reviewsGbpPlaceholder || 'GBP/reviews placeholder'}/><OpsTag label={`follow-up fit ${lead.missedCallFollowUpFit ?? '—'}`}/><OpsTag label={`industry fit ${lead.industryFit ?? '—'}`}/><OpsTag label={eligible ? 'Apollo eligible' : 'Apollo hold'}/><OpsTag label={lead.status}/>
+    </div>
+  </div>;
+}
 function OpsWorkflowMetadata({ flow }) { return <div style={{ border: '1px solid var(--border)', borderRadius: 14, padding: 13, background: 'var(--surface-elevated)' }}><div style={{ fontWeight: 900 }}>{flow.workflow}</div><div style={{ color: 'var(--fg-secondary)', fontSize: 13, marginTop: 5 }}>{flow.orchestratorRole}</div><div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 7 }}>Specialists: {flow.specialistAgent}</div><div style={{ color: 'var(--fg-tertiary)', fontSize: 12, marginTop: 5 }}>Approval: {flow.approvalPolicy}</div><div className="term" style={{ color: 'var(--fg-tertiary)', fontSize: 11, marginTop: 7 }}>Receipts: {flow.receiptPath}</div></div>; }
 function OpsTag({ label }) { return <span className="term" style={{ border: '1px solid var(--border)', borderRadius: 999, padding: '3px 7px', fontSize: 10.5, color: 'var(--fg-secondary)' }}>{label}</span>; }
 function OpsReceiptLine({ r }) { return <div style={{ borderBottom: '1px solid var(--border)', padding: '7px 0' }}><div style={{ fontSize: 13, fontWeight: 850 }}>{r.type}</div><div style={{ color: 'var(--fg-tertiary)', fontSize: 12 }}>{r.at} {r.action ? `· ${r.action}` : ''}</div>{r.meta?.summary && <div style={{ color: 'var(--fg-secondary)', fontSize: 12, marginTop: 3 }}>{r.meta.summary}</div>}</div>; }
