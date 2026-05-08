@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=1440"/>
+  <title>OpenClaw · Mission Control</title>
+  <link rel="stylesheet" href="styles.css?v=1778213025"/>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="/__boot.js"></script>
+  <script type="text/babel" src="primitives.jsx?v=1778213025"></script>
+  <script type="text/babel" src="data.jsx?v=1778213025"></script>
+  <script type="text/babel" src="live.jsx?v=1778213025"></script>
+  <script type="text/babel" src="shell.jsx?v=1778213025"></script>
+  <script type="text/babel" src="queue.jsx?v=1778213025"></script>
+  <script type="text/babel" src="crons.jsx?v=1778213025"></script>
+  <script type="text/babel" src="command.jsx?v=1778213025"></script>
+  <script type="text/babel" src="fleet.jsx?v=1778213025"></script>
+  <script type="text/babel" src="swipe.jsx?v=1778213025"></script>
+  <script type="text/babel" src="pipeline.jsx?v=1778213025"></script>
+  <script type="text/babel" src="products.jsx?v=1778213025"></script>
+  <script type="text/babel" src="chat.jsx?v=1778213025"></script>
+  <script type="text/babel" src="salvage.jsx?v=1778213025"></script>
+  <script type="text/babel" src="tweaks-panel.jsx?v=1778213025"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "density": "cozy",
+      "showActivity": true,
+      "highlightAgent": "all",
+      "accentHue": 22
+    }/*EDITMODE-END*/;
+
+    function App() {
+      const [view, setView] = useState('queue');
+      const [tasks, setTasks] = useState(SEED_TASKS);
+      const [deals, setDeals] = useState(SEED_DEALS);
+      const [ideas, setIdeas] = useState(SEED_IDEAS);
+      const [openTask, setOpenTask] = useState(null);
+      const [openAgent, setOpenAgent] = useState(null);
+      const [openDeal, setOpenDeal] = useState(null);
+      const [openProduct, setOpenProduct] = useState(null);
+      const [cmdOpen, setCmdOpen] = useState(false);
+      const [tweaks, setTweak] = useTweaks ? useTweaks(TWEAK_DEFAULTS) : [TWEAK_DEFAULTS, ()=>{}];
+
+      useEffect(() => {
+        const onKey = (e) => {
+          if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setCmdOpen(o=>!o); }
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+      }, []);
+
+      // Tweak: accent hue override
+      useEffect(() => {
+        if (tweaks.accentHue != null) {
+          document.documentElement.style.setProperty('--accent', `oklch(0.72 0.18 ${tweaks.accentHue})`);
+          document.documentElement.style.setProperty('--accent-soft', `oklch(0.72 0.18 ${tweaks.accentHue} / 0.12)`);
+        }
+      }, [tweaks.accentHue]);
+
+      // OpenClaw live: when real agents/cron/leads arrive, swap them in.
+      // Seed data stays as fallback until the gateway and vault connect.
+      // User edits from the task modal land in localStorage as `mc.taskPatches`
+      // — applied on every tasks set so renames/status/etc. survive both
+      // refresh and the live-cron poll cycle.
+      const oc = (typeof useOpenClaw === 'function') ? useOpenClaw() : { live: false };
+      const liveAppliedRef = React.useRef({ tasks: false, deals: false });
+
+      // Apply localStorage patches once on first mount.
+      useEffect(() => {
+        if (typeof applyTaskPatches === 'function') {
+          setTasks(prev => applyTaskPatches(prev).filter(t => !t._deleted));
+        }
+      }, []);
+
+      useEffect(() => {
+        if (!oc?.live) return;
+        if (oc.agents) { SEED_AGENTS.length = 0; SEED_AGENTS.push(...oc.agents); }
+        if (oc.products && oc.products.length) { SEED_PRODUCTS.length = 0; SEED_PRODUCTS.push(...oc.products); }
+        if (oc.tasks && !liveAppliedRef.current.tasks) {
+          // Preserve manual/seed tasks; replace only the cron-sourced ones.
+          // Reapply patches so renames/agent/status edits survive the swap.
+          setTasks(prev => {
+            const merged = [...prev.filter(t => t.source !== 'cron'), ...oc.tasks];
+            return (typeof applyTaskPatches === 'function' ? applyTaskPatches(merged) : merged).filter(t => !t._deleted);
+          });
+          liveAppliedRef.current.tasks = true;
+        }
+        if (oc.deals && oc.deals.length && !liveAppliedRef.current.deals) {
+          setDeals(oc.deals);
+          liveAppliedRef.current.deals = true;
+        }
+      }, [oc?.live, oc?.agents, oc?.products, oc?.tasks, oc?.deals]);
+
+      const counts = {
+        queue: tasks.filter(t=>t.status!=='done' && t.source!=='cron').length,
+        crons: tasks.filter(t=>t.source==='cron').length,
+        fleet: SEED_AGENTS.filter(a=>a.health==='working').length,
+        swipe: ideas.length,
+        pipeline: deals.filter(d=>d.heat==='hot').length,
+      };
+
+      const titles = {
+        cmd: { title: 'Command', breadcrumb: 'Mission Control' },
+        chat: { title: 'Chat', breadcrumb: 'Mission Control' },
+        queue: { title: 'Mission Queue', breadcrumb: 'Mission Control' },
+        crons: { title: 'Crons', breadcrumb: 'Mission Control' },
+        fleet: { title: 'Fleet', breadcrumb: 'Mission Control' },
+        swipe: { title: 'Swipe Deck', breadcrumb: 'Inbox' },
+        pipeline: { title: 'Pipeline', breadcrumb: 'Reseller' },
+        products: { title: 'Products', breadcrumb: 'Workspace' },
+        leads: { title: 'Lead Finder', breadcrumb: 'Reseller' },
+        cash: { title: 'Cash & Caps', breadcrumb: 'Reseller' },
+        brand: { title: 'White-label', breadcrumb: 'Reseller' },
+        salvage: { title: 'HEXT Salvage Map', breadcrumb: 'OpSpot' },
+        customers: { title: 'Customers', breadcrumb: 'OpSpot' },
+        approvals: { title: 'Approvals', breadcrumb: 'OpSpot' },
+        onboarding: { title: 'Onboarding', breadcrumb: 'OpSpot' },
+        audit: { title: 'Audit', breadcrumb: 'OpSpot' },
+        proposals: { title: 'Proposals', breadcrumb: 'OpSpot' },
+        inbound: { title: 'Inbound', breadcrumb: 'OpSpot' },
+        outbound: { title: 'Outbound', breadcrumb: 'OpSpot' },
+        support: { title: 'Support', breadcrumb: 'OpSpot' },
+        branding: { title: 'Branding', breadcrumb: 'OpSpot' },
+        resources: { title: 'Resources', breadcrumb: 'OpSpot' },
+        settings: { title: 'Settings', breadcrumb: 'Workspace' },
+      };
+
+      const onPushIdeaToTask = (idea) => {
+        const id = 't' + Date.now();
+        setTasks(prev => [...prev, { id, title: idea.title, product: idea.product, status: 'planning', agent: null, priority: idea.impact>80?'high':'normal', cost: 0, estCost: idea.complexity==='S'?1.5:idea.complexity==='M'?4:8, source: 'idea', impact: idea.impact, complexity: idea.complexity, age: '0m', progress: 0, pr: null }]);
+        setIdeas(prev => prev.filter(i => i.id !== idea.id));
+      };
+
+      return (
+        <LiveProvider>
+          <div style={{ display: 'flex', height: '100vh', minWidth: 1280, overflow: 'hidden', background: 'var(--canvas)' }}>
+            <Sidebar active={view==='leads'||view==='cash'||view==='brand'?view:view} onNav={setView} counts={counts}/>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, minHeight: 0 }}>
+              <Topbar title={titles[view]?.title} breadcrumb={titles[view]?.breadcrumb} onCmdK={()=>setCmdOpen(true)}/>
+              <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+                {view === 'cmd' && <CommandCenter tasks={tasks} onNav={setView} onOpenTask={setOpenTask}/>}
+                {view === 'chat' && <ChatScreen/>}
+                {view === 'queue' && <MissionQueueScreen tasks={tasks} setTasks={setTasks} onOpenTask={setOpenTask}/>}
+                {view === 'crons' && <CronsScreen tasks={tasks} onOpenTask={setOpenTask}/>}
+                {view === 'fleet' && <FleetScreen tasks={tasks} onOpenAgent={setOpenAgent}/>}
+                {view === 'swipe' && <SwipeDeck ideas={ideas} setIdeas={setIdeas} onPushTask={onPushIdeaToTask}/>}
+                {view === 'pipeline' && <PipelineScreen deals={deals} setDeals={setDeals} onOpenDeal={setOpenDeal}/>}
+                {view === 'products' && <ProductsScreen tasks={tasks} onOpenProduct={setOpenProduct}/>}
+                {view === 'leads' && <LeadFinder/>}
+                {view === 'cash' && <CashLedger/>}
+                {view === 'brand' && <PlaceholderScreen title="White-label" desc="Reseller branding · per-customer skinning · domain mapping"/>}
+                {view === 'salvage' && <SalvageScreen onNav={setView}/>}
+                {view === 'customers' && <ModulePlaceholderScreen id="customers" title="Customers" desc="Active accounts, setup state, agents, spend caps, and receipts."/>}
+                {view === 'approvals' && <ModulePlaceholderScreen id="approvals" title="Approvals" desc="Deep decision cards: context, thread summary, ROI, approve/reject/send back/snooze."/>}
+                {view === 'onboarding' && <ModulePlaceholderScreen id="onboarding" title="Onboarding" desc="Customer intake → audit → proposal → provision → live handoff."/>}
+                {view === 'audit' && <ModulePlaceholderScreen id="audit" title="Audit" desc="Preliminary ops audits, leaks, ROI math, and proof packets."/>}
+                {view === 'proposals' && <ModulePlaceholderScreen id="proposals" title="Proposals" desc="Proposal drafts, pricing, invoice drafts, and close packets."/>}
+                {view === 'inbound' && <ModulePlaceholderScreen id="inbound" title="Inbound" desc="Lead intake, replies, missed calls, website/forms, and triage."/>}
+                {view === 'outbound' && <ModulePlaceholderScreen id="outbound" title="Outbound" desc="Draft-only outreach queues, approvals, suppression, and receipts."/>}
+                {view === 'support' && <ModulePlaceholderScreen id="support" title="Support" desc="Customer support agent queue, thread summaries, fixes, and escalations."/>}
+                {view === 'branding' && <ModulePlaceholderScreen id="branding" title="Branding" desc="Brand kit, profile kit, business cards, screenshots, and public trust assets."/>}
+                {view === 'resources' && <ModulePlaceholderScreen id="resources" title="Resources" desc="Templates, scripts, SOPs, customer setup docs, and reusable assets."/>}
+                {view === 'settings' && <PlaceholderScreen title="Settings" desc="API keys · model preferences · notification rules"/>}
+              </div>
+            </div>
+          </div>
+
+          <CommandPalette open={cmdOpen} onClose={()=>setCmdOpen(false)} onNav={setView}/>
+          <TaskDetail task={openTask} onClose={()=>setOpenTask(null)} agents={SEED_AGENTS} tasks={tasks} setTasks={setTasks}/>
+          <AgentDetail agent={openAgent} task={openAgent ? tasks.find(t=>t.id===openAgent.task) : null} onClose={()=>setOpenAgent(null)}/>
+          <DealDetail deal={openDeal} onClose={()=>setOpenDeal(null)}/>
+          <ProductDetail product={openProduct} tasks={tasks} onClose={()=>setOpenProduct(null)} onOpenTask={(t)=>{ setOpenProduct(null); setOpenTask(t); }}/>
+
+          {window.TweaksPanel && (
+            <TweaksPanel>
+              <TweakSection label="Accent"/>
+              <TweakSlider label="Hue" min={0} max={360} step={1} value={tweaks.accentHue} unit="°" onChange={v=>setTweak('accentHue', v)}/>
+              <TweakSection label="Layout"/>
+              <TweakRadio label="Density" value={tweaks.density} options={['cozy','dense']} onChange={v=>setTweak('density', v)}/>
+              <TweakToggle label="Live activity" value={tweaks.showActivity} onChange={v=>setTweak('showActivity', v)}/>
+              <TweakSection label="Focus"/>
+              <TweakSelect label="Highlight" value={tweaks.highlightAgent} options={[{value:'all',label:'All agents'}, ...SEED_AGENTS.map(a=>({value:a.id,label:`${a.name} · ${a.role}`}))]} onChange={v=>setTweak('highlightAgent', v)}/>
+            </TweaksPanel>
+          )}
+        </LiveProvider>
+      );
+    }
+
+    function PlaceholderScreen({ title, desc }) {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--fg-tertiary)', textAlign: 'center', padding: 20 }}>
+          <div style={{ width: 56, height: 56, borderRadius: 14, background: 'var(--surface)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
+            <Icons.Box size={24} style={{ color: 'var(--accent)' }}/>
+          </div>
+          <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--fg-primary)', marginBottom: 6 }}>{title}</div>
+          <div style={{ fontSize: 13 }}>{desc}</div>
+        </div>
+      );
+    }
+
+    const Root = window.OpenClawProvider
+      ? () => <OpenClawProvider><App/></OpenClawProvider>
+      : App;
+    ReactDOM.createRoot(document.getElementById('root')).render(<Root/>);
+  </script>
+</body>
+</html>

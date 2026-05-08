@@ -1,0 +1,125 @@
+@import url('tokens.css');
+
+:root {
+  /* Cockpit overrides */
+  --grid-line: rgba(255,255,255,0.025);
+  --pulse-brand: rgba(249,115,22,0.5);
+  --pulse-success: rgba(34,197,94,0.45);
+  --pulse-info: rgba(59,130,246,0.45);
+  --accent: var(--brand);
+  --accent-hover: var(--brand-hover);
+  --accent-soft: rgba(249,115,22,0.12);
+  --row-h: 40px;
+}
+
+html, body { height: 100%; overflow: hidden; }
+body { font-feature-settings: 'cv11', 'ss01', 'ss03', 'tnum'; min-width: 1280px; }
+#root { min-width: 1280px; height: 100vh; overflow: auto; }
+
+button { font-family: inherit; }
+button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; border: 2px solid var(--canvas); }
+*::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+/* Background grid for cockpit feel */
+.cockpit-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.mono-num { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; letter-spacing: -0.01em; }
+
+/* Pulse */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 var(--pulse); }
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.pulse-dot {
+  --pulse: var(--pulse-brand);
+  display: inline-block; width: 8px; height: 8px; border-radius: 999px;
+  background: var(--accent); animation: pulse-ring 1.8s var(--ease) infinite;
+}
+.pulse-dot.ok { --pulse: var(--pulse-success); background: var(--success); }
+.pulse-dot.info { --pulse: var(--pulse-info); background: var(--info); }
+
+@keyframes blink-cursor { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+.blink { animation: blink-cursor 1.05s steps(1) infinite; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up var(--dur-slow) var(--ease) both; }
+
+@keyframes typing-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+.tdot { display: inline-block; width: 4px; height: 4px; border-radius: 999px; background: currentColor; margin: 0 1px; animation: typing-dot 1.2s ease infinite; }
+.tdot:nth-child(2) { animation-delay: 0.15s; }
+.tdot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes scan-bar {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.scan { position: relative; overflow: hidden; }
+.scan::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(249,115,22,0.18), transparent);
+  animation: scan-bar 2.4s linear infinite;
+  pointer-events: none;
+}
+
+/* Drag styles */
+.dragging { opacity: 0.4; }
+.drop-target { background: var(--accent-soft) !important; outline: 1px dashed var(--accent); outline-offset: -4px; }
+
+/* Hover row */
+.row-hover:hover { background: var(--surface-hover); }
+.btn-h:hover { background: var(--surface-hover); }
+
+/* Card hover */
+.card-h { transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease); }
+.card-h:hover { border-color: var(--border-strong); }
+
+/* Section labels */
+.section-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--fg-tertiary);
+}
+
+/* Health bar */
+.bar-track { height: 4px; background: var(--surface-elevated); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); transition: width var(--dur-slow) var(--ease); }
+
+/* Tab */
+.tab-active { color: var(--fg-primary); border-bottom-color: var(--accent); }
+
+/* Sparkline gradient stops set inline */
+
+/* Subtle terminal feel */
+.term { font-family: var(--font-mono); font-size: 12px; }
+
+/* Shimmer for live numbers */
+@keyframes flash {
+  0% { color: var(--success); }
+  100% { color: var(--fg-primary); }
+}
+.flash { animation: flash 1.4s ease; }
+
+/* Modal / overlay */
+.backdrop {
+  position: fixed; inset: 0; background: rgba(10,10,11,0.7);
+  backdrop-filter: blur(8px); z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  animation: fade-up var(--dur-base) var(--ease);
+}
