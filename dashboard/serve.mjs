@@ -260,6 +260,42 @@ function writeLeadStatus(file, status) {
 
 function nowIso() { return new Date().toISOString(); }
 
+
+const AUDIT_SCORE_VERSION = 'audit-score-v1';
+const AUDIT_APOLLO_MIN_SCORE = 80;
+const AUDIT_HIGH_RANK_LIMIT = 2;
+const AUDIT_INDUSTRY_FIT = new Set(['roofing', 'solar', 'construction', 'appliance', 'plumbing', 'hvac', 'electrical', 'landscaping', 'remodeling']);
+
+function auditScoreLead(lead) {
+  const vertical = String(lead.vertical || '').toLowerCase();
+  const websitePresent = Boolean(String(lead.website || '').trim());
+  const reviewsGbpPlaceholder = lead.reviewsGbpPlaceholder ?? (lead.gbpReviews ? String(lead.gbpReviews) : 'GBP/reviews not verified yet');
+  const industryFit = AUDIT_INDUSTRY_FIT.has(vertical) ? 25 : 10;
+  const missedCallFollowUpFit = Number.isFinite(Number(lead.missedCallFollowUpFit))
+    ? Number(lead.missedCallFollowUpFit)
+    : ['roofing', 'hvac', 'plumbing', 'electrical', 'appliance'].includes(vertical) ? 30 : 22;
+  const websiteScore = websitePresent ? 15 : 4;
+  const reviewsScore = String(reviewsGbpPlaceholder).toLowerCase().includes('not verified') ? 8 : 15;
+  const auditScore = Math.max(0, Math.min(100, industryFit + missedCallFollowUpFit + websiteScore + reviewsScore + 15));
+  const reasonWhy = lead.reasonWhy || `${lead.vertical || 'Local service'} fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks${websitePresent ? '; website exists for audit context' : '; website still needs verification'}.`;
+  const angle = lead.angle || (['roofing', 'hvac', 'plumbing', 'electrical'].includes(vertical)
+    ? 'AI receptionist + estimate follow-up for missed calls and after-hours leads.'
+    : 'AI follow-up employee for booking, reminders, and customer communication.');
+  const recommendedFirstTouch = lead.recommendedFirstTouch || 'Draft-only opener: quick audit around missed calls, response time, reviews/GBP, and follow-up leaks; do not send without approval.';
+  return { ...lead, websitePresent, reviewsGbpPlaceholder, missedCallFollowUpFit, industryFit, auditScore, reasonWhy, angle, recommendedFirstTouch, auditVersion: AUDIT_SCORE_VERSION };
+}
+
+function rankAuditLeads(leads = []) {
+  return leads.map(auditScoreLead)
+    .sort((a, b) => (b.auditScore || 0) - (a.auditScore || 0))
+    .map((lead, idx) => ({
+      ...lead,
+      auditRank: idx + 1,
+      apolloEligible: idx < AUDIT_HIGH_RANK_LIMIT && Number(lead.auditScore || 0) >= AUDIT_APOLLO_MIN_SCORE,
+      status: Number(lead.auditScore || 0) >= AUDIT_APOLLO_MIN_SCORE ? 'audit_ranked_high' : 'audit_ranked_hold',
+    }));
+}
+
 function safeJsonBody(req, max = 128 * 1024) {
   return new Promise((resolve, reject) => {
     let raw = '';
@@ -286,7 +322,8 @@ function readSeedState() {
 
 
 function seedAutopilotState() {
-  const leadSources = seedLeadSourceState();
+  const leadSources = rankAuditLeads(seedLeadSourceState());
+  const apolloQueue = leadSources.filter(l => l.apolloEligible);
   return {
     policy: {
       radius: 'Wilmington, NC + 25 miles',
@@ -306,19 +343,23 @@ function seedAutopilotState() {
     },
     runs: [
       { id: 'run-research', name: 'Lead research', status: 'queued', summary: 'Find construction/home-service businesses in Wilmington + 25 miles.', lastRun: 'seeded', nextRun: '8:05am ET', outputCount: leadSources.length, receiptPath: 'dashboard/state/receipts.jsonl' },
-      { id: 'run-audit', name: 'Website + GBP audit', status: 'queued', summary: 'Score missed-call, follow-up, review, and website leaks.', lastRun: 'seeded', nextRun: 'after research', outputCount: 0 },
-      { id: 'run-enrich', name: 'Contact enrichment', status: 'queued', summary: 'Find owner/contact, phone, email, website, and source notes.', lastRun: 'seeded', nextRun: 'after audit', outputCount: 0 },
+      { id: 'run-audit', name: 'Audit Score v1', status: 'complete', summary: 'Ranks local leads by website presence, GBP/review placeholder, missed-call/follow-up fit, industry fit, reason, angle, and first-touch recommendation.', lastRun: 'seeded', nextRun: 'refresh after verified research', outputCount: leadSources.length, receiptPath: 'dashboard/state/receipts.jsonl' },
+      { id: 'run-enrich', name: 'Contact enrichment', status: 'queued', summary: 'Apollo/enrichment stays last; only high-ranked audit leads become eligible.', lastRun: 'seeded', nextRun: 'after audit + suppression check', outputCount: apolloQueue.length },
       { id: 'run-email', name: 'Outbound email', status: 'blocked', summary: 'Prepared only. Live send path not enabled tonight.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
       { id: 'run-imessage', name: 'Outbound iMessage', status: 'blocked', summary: 'Prepared only. No personal iPhone sends until send runner is deliberately enabled.', lastRun: 'not run', nextRun: 'tomorrow send window', outputCount: 0 },
       { id: 'run-replies', name: 'Reply handler', status: 'idle', summary: 'Classify replies, opt-outs, interest, angry replies, and escalation.', lastRun: 'not run', nextRun: 'after first sends', outputCount: 0 },
       { id: 'run-cold-rank', name: 'Cold-call ranker', status: 'queued', summary: 'Rank warmest 100–200/day for Colton from outbound + audit signal.', lastRun: 'seeded', nextRun: 'after first replies/touches', outputCount: 3 },
       { id: 'run-briefs', name: 'Morning/evening briefs', status: 'queued', summary: 'Summarize overnight/day receipts, blockers, and next best moves.', lastRun: 'seeded', nextRun: 'next scheduled brief', outputCount: 0 },
     ],
-    queue: [
-      { id: 'q-email-roofer-1', lead: 'Sample Wilmington roofer', channel: 'email', angle: 'AI receptionist + estimate follow-up', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
-      { id: 'q-imsg-plumber-1', lead: 'Sample Wilmington plumber', channel: 'iMessage', angle: 'Missed calls + booked estimates', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
-      { id: 'q-email-appliance-1', lead: 'Sample appliance repair shop', channel: 'email', angle: 'Service reminders + follow-up employee', scheduledFor: 'tomorrow after 8:00am ET', status: 'prepared-not-sent' },
-    ],
+    queue: apolloQueue.map(lead => ({
+      id: `q-audit-${lead.id}`,
+      lead: lead.business,
+      channel: 'draft-only',
+      angle: lead.angle,
+      scheduledFor: 'after 8:00am ET + human approval',
+      status: 'audit-ranked-prepared-not-sent',
+      auditScore: lead.auditScore,
+    })),
     leadSources,
     workflowMetadata: seedWorkflowMetadata(),
   };
@@ -335,10 +376,16 @@ function seedLeadSourceState() {
       distance: '0–25 mi',
       source: 'Lead Source v1 seed — Wilmington + 25mi construction/home-services',
       website: '',
+      websitePresent: false,
+      reviewsGbpPlaceholder: 'GBP/reviews not verified yet',
       phone: '',
       email: '',
       researchNotes: 'Seed row for research-agent/lead-hunt output. Needs live source verification before enrichment or outreach.',
+      missedCallFollowUpFit: 30,
       auditScore: null,
+      reasonWhy: 'Roofing is a strong OpSpot wedge: high-intent calls, estimate booking, after-hours misses, and follow-up leakage.',
+      angle: 'AI receptionist + estimate follow-up for roof inspections and quote nudges.',
+      recommendedFirstTouch: 'Draft a missed-call/estimate follow-up audit opener; hold all sends until approval.',
       apolloEligible: false,
       ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
       status: 'sourced_needs_research',
@@ -352,10 +399,16 @@ function seedLeadSourceState() {
       distance: '0–25 mi',
       source: 'Lead Source v1 seed — Wilmington + 25mi construction/home-services',
       website: '',
+      websitePresent: false,
+      reviewsGbpPlaceholder: 'GBP/reviews not verified yet',
       phone: '',
       email: '',
       researchNotes: 'Seed row for specialist sourcing. Prioritize service-area fit, missed-call pain, reviews, and appointment-booking leak.',
+      missedCallFollowUpFit: 30,
       auditScore: null,
+      reasonWhy: 'HVAC has urgent call demand, appointment booking, seasonal spikes, and service follow-up that maps cleanly to an AI employee.',
+      angle: 'After-hours call capture + booked service appointments + maintenance follow-up.',
+      recommendedFirstTouch: 'Draft a “missed service calls after hours” audit opener; no send during quiet hours.',
       apolloEligible: false,
       ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
       status: 'sourced_needs_research',
@@ -369,10 +422,16 @@ function seedLeadSourceState() {
       distance: '0–25 mi',
       source: 'Lead Source v1 seed — Wilmington + 25mi construction/home-services',
       website: '',
+      websitePresent: false,
+      reviewsGbpPlaceholder: 'GBP/reviews not verified yet',
       phone: '',
       email: '',
       researchNotes: 'Seed row only. No outbound until source verified, audit scored, suppression checked, and Colton approval gate passes.',
+      missedCallFollowUpFit: 30,
       auditScore: null,
+      reasonWhy: 'Plumbing has urgent lead intent and obvious missed-call/booking leakage, but still needs source verification before enrichment.',
+      angle: 'Emergency call capture + estimate scheduling + follow-up reminders.',
+      recommendedFirstTouch: 'Draft a short audit-first opener around missed urgent calls; hold for approval.',
       apolloEligible: false,
       ownerContact: { name: '', title: '', phone: '', email: '', source: '' },
       status: 'sourced_needs_research',
@@ -488,6 +547,34 @@ function readMcState() {
   const researchRun = (state.automationRuns || []).find(r => r.id === 'run-research');
   if (researchRun && !researchRun.receiptPath) { researchRun.receiptPath = 'dashboard/state/receipts.jsonl'; changed = true; }
   if (researchRun && Number(researchRun.outputCount || 0) < (state.leadSources || []).length) { researchRun.outputCount = (state.leadSources || []).length; changed = true; }
+  const ranked = rankAuditLeads(state.leadSources || []);
+  if (JSON.stringify(ranked) !== JSON.stringify(state.leadSources || [])) { state.leadSources = ranked; changed = true; }
+  const auditRun = (state.automationRuns || []).find(r => r.id === 'run-audit');
+  if (auditRun) {
+    auditRun.name = 'Audit Score v1';
+    auditRun.status = 'complete';
+    auditRun.outputCount = state.leadSources.length;
+    auditRun.receiptPath = 'dashboard/state/receipts.jsonl';
+    auditRun.summary = 'Ranks local leads by website presence, GBP/review placeholder, missed-call/follow-up fit, industry fit, reason, angle, and first-touch recommendation.';
+    changed = true;
+  }
+  const enrichRun = (state.automationRuns || []).find(r => r.id === 'run-enrich');
+  const apolloQueue = state.leadSources.filter(l => l.apolloEligible);
+  if (enrichRun) {
+    enrichRun.summary = 'Apollo/enrichment stays last; only high-ranked audit leads become eligible.';
+    enrichRun.outputCount = apolloQueue.length;
+    changed = true;
+  }
+  const auditQueue = apolloQueue.map(lead => ({
+    id: `q-audit-${lead.id}`,
+    lead: lead.business,
+    channel: 'draft-only',
+    angle: lead.angle,
+    scheduledFor: 'after 8:00am ET + human approval',
+    status: 'audit-ranked-prepared-not-sent',
+    auditScore: lead.auditScore,
+  }));
+  if (JSON.stringify(state.outboundQueue || []) !== JSON.stringify(auditQueue)) { state.outboundQueue = auditQueue; changed = true; }
   if (changed) writeMcState(state);
   return state;
 }
