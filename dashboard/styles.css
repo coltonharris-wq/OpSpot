@@ -227,14 +227,41 @@ textarea {
 /* Drag reorder helpers */
 .queue-list-row { transition: transform 120ms var(--ease), box-shadow 120ms var(--ease), border-color 120ms var(--ease), background 120ms var(--ease); }
 
-.queue-drop-slot {
-  height: 48px;
-  border: 2px dashed var(--accent);
-  background: var(--accent-soft);
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 18px;
-  box-shadow: inset 0 0 0 4px rgba(217, 95, 23, 0.08), 0 10px 24px rgba(217, 95, 23, 0.12);
+
+.queue-drop-marker {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  height: 0;
+  pointer-events: none;
+  z-index: 5;
 }
+.queue-drop-marker.before { top: -2px; }
+.queue-drop-marker.after { bottom: -2px; }
+.queue-drop-marker::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft), 0 8px 18px rgba(217, 95, 23, 0.25);
+}
+.queue-drop-marker.before::before { top: -3px; }
+.queue-drop-marker.after::before { bottom: -3px; }
+.queue-drop-label {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  background: var(--accent);
+  color: white;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  box-shadow: 0 6px 14px rgba(217, 95, 23, 0.22);
+}
+.queue-drop-marker.before .queue-drop-label { top: -3px; }
+.queue-drop-marker.after .queue-drop-label { bottom: -24px; }
