@@ -60,15 +60,15 @@ function TaskCard({ task, onDragStart, onDragEnd, onClick, dragging, ghost, dens
       onClick={onClick}
       className={`card-h ${dragging ? 'dragging' : ''} ${task.status==='in_progress'?'':''}`}
       style={{
-        background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10,
-        padding: dense ? 10 : 12, cursor: 'grab', display: 'flex', flexDirection: 'column', gap: 8,
+        background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14,
+        padding: dense ? 12 : 16, cursor: 'grab', display: 'flex', flexDirection: 'column', gap: dense ? 8 : 10,
         position: 'relative', overflow: 'hidden',
       }}
     >
       {task.status === 'in_progress' && agent && <div className="scan" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', borderRadius: 10 }}/>}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
         <span style={{ width: 18, height: 18, borderRadius: 5, background: `rgba(${product.tone==='brand'?'249,115,22':product.tone==='info'?'59,130,246':product.tone==='success'?'34,197,94':product.tone==='purple'?'168,85,247':product.tone==='pink'?'236,72,153':product.tone==='cyan'?'34,211,238':'160,160,168'},0.18)`, color: `var(--${product.tone==='neutral'?'fg-secondary':''})`, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10.5, fontWeight: 700, flexShrink: 0, fontFamily: 'var(--font-mono)' }}>{product.icon}</span>
-        <div style={{ flex: 1, fontSize: 12.5, fontWeight: 700, lineHeight: 1.35, color: 'var(--fg-primary)', minWidth: 0 }}>{task.title}</div>
+        <div style={{ flex: 1, fontSize: dense ? 13.5 : 15, fontWeight: 800, lineHeight: 1.3, color: 'var(--fg-primary)', minWidth: 0 }}>{task.title}</div>
         {task.priority === 'urgent' && <Pill tone="critical" dot={false}><Icons.Bolt size={10}/></Pill>}
       </div>
       {task.status === 'in_progress' && (
@@ -81,7 +81,7 @@ function TaskCard({ task, onDragStart, onDragEnd, onClick, dragging, ghost, dens
         </div>
       )}
       {task.status !== 'in_progress' && (
-        <div className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+        <div className="term" style={{ fontSize: 12, color: 'var(--fg-secondary)', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>{sourceIcon}{task.source}</span>
           <span>·</span>
           <span className="mono-num">imp {task.impact}</span>
@@ -98,11 +98,11 @@ function TaskCard({ task, onDragStart, onDragEnd, onClick, dragging, ghost, dens
             {task.status==='in_progress' && <span style={{ color: 'var(--accent)' }}><span className="tdot"/><span className="tdot"/><span className="tdot"/></span>}
           </div>
         ) : (
-          <span className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', padding: '2px 7px', borderRadius: 999, border: '1px dashed var(--border-strong)' }}>unassigned</span>
+          <span className="term" style={{ fontSize: 12, color: 'var(--fg-secondary)', padding: '3px 8px', borderRadius: 999, border: '1px dashed var(--border-strong)' }}>unassigned</span>
         )}
         {task.convoy && <Pill tone="purple" dot={false}><Icons.Layers size={10}/> convoy</Pill>}
         <span style={{ flex: 1 }}/>
-        <span className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)' }}>{task.age}</span>
+        <span className="term" style={{ fontSize: 11.5, color: 'var(--fg-tertiary)' }}>{task.age}</span>
       </div>
     </div>
   );
@@ -116,11 +116,11 @@ function Column({ status, tasks, onDrop, onDragOver, dropTarget, onCardDragStart
       onDragOver={(e)=>{ e.preventDefault(); onDragOver(status.id); }}
       onDrop={(e)=>{ e.preventDefault(); onDrop(status.id); }}
       className={dropTarget ? 'drop-target' : ''}
-      style={{ width: 280, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 8, padding: 8, borderRadius: 10, background: 'var(--surface)', border: '1px solid var(--border)', minHeight: 0 }}
+      style={{ width: 320, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 10, padding: 10, borderRadius: 16, background: 'var(--surface-elevated)', border: '1px solid var(--border)', minHeight: 0 }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 6px 6px', borderBottom: '1px solid var(--border)' }}>
         <span style={{ width: 7, height: 7, borderRadius: 999, background: status.tone==='success'?'#22c55e':status.tone==='warning'?'#f59e0b':status.tone==='brand'?'var(--accent)':status.tone==='info'?'#3b82f6':status.tone==='purple'?'#a855f7':'var(--fg-tertiary)' }}/>
-        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fg-primary)', flex: 1 }}>{status.label}</div>
+        <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--fg-primary)', flex: 1 }}>{status.label}</div>
         <span className="term mono-num" style={{ fontSize: 11, color: 'var(--fg-tertiary)', fontWeight: 700 }}>{tasks.length}</span>
         {totalCost > 0 && <span className="term mono-num" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', borderLeft: '1px solid var(--border)', paddingLeft: 6 }}>${totalCost.toFixed(2)}</span>}
         <button onClick={()=>onAddTask(status.id)} className="btn-h" style={{ width: 18, height: 18, borderRadius: 4, background: 'transparent', border: '1px solid var(--border)', color: 'var(--fg-tertiary)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}>
@@ -264,7 +264,7 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
         {viewMode === 'list' ? (
           <div style={{ maxWidth: 1040, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-              <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--fg-primary)' }}>Priority List</div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--fg-primary)' }}>Priority List</div>
               <span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)' }}>drag to reorder, use arrows as backup, click to open</span>
               <span style={{ flex: 1 }}/>
               <Button variant="primary" size="sm" icon={<Icons.Plus size={13}/>} onClick={()=>onAddTask('inbox')}>Add item</Button>
@@ -283,19 +283,19 @@ function MissionQueueScreen({ tasks, setTasks, onOpenTask }) {
                   onDragEnd={()=>{ setListDragId(null); setListDropId(null); }}
                   className="row-hover"
                   onClick={()=>onOpenTask(t)}
-                  style={{ display: 'grid', gridTemplateColumns: '58px 1fr 110px 110px 120px 80px', gap: 10, alignItems: 'center', background: listDropId===t.id ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${listDropId===t.id?'var(--accent)':'var(--border)'}`, borderRadius: 10, padding: '10px 12px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1 }}>
+                  style={{ display: 'grid', gridTemplateColumns: '62px 1fr 120px 120px 140px 90px', gap: 12, alignItems: 'center', background: listDropId===t.id ? 'var(--accent-soft)' : 'var(--surface)', border: `1px solid ${listDropId===t.id?'var(--accent)':'var(--border)'}`, borderRadius: 14, padding: '14px 16px', cursor: listDragId===t.id ? 'grabbing' : 'grab', opacity: listDragId===t.id ? 0.45 : 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <span title="Drag to reorder" style={{ color: 'var(--fg-tertiary)', fontSize: 14, lineHeight: 1, cursor: 'grab', paddingRight: 2 }}>⋮⋮</span>
                     <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, -1); }} disabled={i===0} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===0?'not-allowed':'pointer' }}>↑</button>
                     <button onClick={(e)=>{ e.stopPropagation(); moveListItem(t.id, 1); }} disabled={i===orderedVisible.length-1} style={{ width: 18, height: 18, borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg-secondary)', cursor: i===orderedVisible.length-1?'not-allowed':'pointer' }}>↓</button>
                   </div>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--fg-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{i + 1}. {t.title}</div>
-                    <div className="term" style={{ marginTop: 3, fontSize: 10.5, color: 'var(--fg-tertiary)' }}>{product.name || t.product} · {t.source} · imp {t.impact} · {t.complexity}</div>
+                    <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--fg-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{i + 1}. {t.title}</div>
+                    <div className="term" style={{ marginTop: 3, fontSize: 12.5, color: 'var(--fg-secondary)' }}>{product.name || t.product} · {t.source} · imp {t.impact} · {t.complexity}</div>
                   </div>
                   <Pill tone={t.priority==='urgent'?'critical':t.priority==='high'?'brand':'neutral'} dot={false}>{t.priority}</Pill>
                   <Pill tone={status?.tone || 'neutral'} dot={false}>{status?.label || t.status}</Pill>
-                  <div style={{ fontSize: 11.5, color: 'var(--fg-secondary)', fontWeight: 700 }}>{agent ? agent.name : 'unassigned'}</div>
+                  <div style={{ fontSize: 13, color: 'var(--fg-secondary)', fontWeight: 700 }}>{agent ? agent.name : 'unassigned'}</div>
                   <div className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', textAlign: 'right' }}>{t.age || '0m'}</div>
                 </div>
               );

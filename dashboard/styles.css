@@ -123,3 +123,94 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
   display: flex; align-items: center; justify-content: center;
   animation: fade-up var(--dur-base) var(--ease);
 }
+
+/* ============================================================
+   OpSpot readability pass — calmer business cockpit
+   ============================================================ */
+:root {
+  --canvas: #f5f3ee;
+  --surface: #ffffff;
+  --surface-elevated: #fbfaf7;
+  --surface-hover: #f1eee7;
+  --border: #ddd7cb;
+  --border-strong: #c8beaf;
+  --fg-primary: #171511;
+  --fg-secondary: #514a40;
+  --fg-tertiary: #7a7165;
+  --fg-disabled: #a49a8d;
+  --brand: #d95f17;
+  --brand-hover: #b94e12;
+  --brand-soft: #fff0e5;
+  --brand-muted: #8f3f12;
+  --success: #16803c;
+  --success-soft: #e8f5ec;
+  --warning: #a86600;
+  --warning-soft: #fff3d8;
+  --critical: #ba2e2e;
+  --critical-soft: #fde8e8;
+  --info: #2466b8;
+  --info-soft: #e8f1ff;
+  --accent: var(--brand);
+  --accent-hover: var(--brand-hover);
+  --accent-soft: #fff0e5;
+  --shadow-popover: 0 18px 50px rgba(55, 43, 28, 0.18);
+}
+
+body {
+  background: var(--canvas);
+  color: var(--fg-primary);
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.cockpit-grid { background-image: none; }
+
+.term { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0; }
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--fg-tertiary);
+}
+
+.card-h,
+.row-hover,
+.btn-h,
+select,
+input,
+textarea {
+  color: var(--fg-primary) !important;
+}
+
+.card-h {
+  box-shadow: 0 1px 2px rgba(37, 30, 20, 0.04);
+}
+.card-h:hover {
+  border-color: var(--brand) !important;
+  box-shadow: 0 8px 22px rgba(37, 30, 20, 0.08);
+}
+.row-hover:hover {
+  background: var(--surface-hover) !important;
+}
+.btn-h:hover {
+  background: var(--surface-hover) !important;
+}
+
+.bar-track { background: #eee8de; height: 6px; }
+.bar-fill { background: var(--brand); }
+
+.backdrop {
+  background: rgba(30, 25, 18, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #cfc6b8;
+  border: 2px solid var(--canvas);
+}
+*::-webkit-scrollbar-thumb:hover { background: #b9ad9d; }
+
+/* Make the queue breathe. */
+[draggable="true"] {
+  -webkit-user-select: none;
+  user-select: none;
+}

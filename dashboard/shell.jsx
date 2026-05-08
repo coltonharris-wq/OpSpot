@@ -49,7 +49,7 @@ function Sidebar({ active, onNav, counts }) {
   ];
   return (
     <aside style={{
-      width: 220, flexShrink: 0, background: 'var(--surface)', borderRight: '1px solid var(--border)',
+      width: 252, flexShrink: 0, background: 'var(--surface)', borderRight: '1px solid var(--border)',
       height: '100vh', display: 'flex', flexDirection: 'column', position: 'sticky', top: 0,
     }}>
       <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -57,7 +57,7 @@ function Sidebar({ active, onNav, counts }) {
           <Icons.Radar size={16} style={{ color: '#1a0a02' }}/>
         </div>
         <div style={{ lineHeight: 1.1, minWidth: 0 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em' }}>OpenClaw</div>
+          <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: '-0.02em' }}>OpSpot</div>
           <div className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', fontWeight: 700, letterSpacing: '0.04em' }}>MISSION CONTROL</div>
         </div>
       </div>
@@ -89,7 +89,7 @@ function Sidebar({ active, onNav, counts }) {
           <Avatar name="Colton Harris" size={26} tone="brand"/>
           <div style={{ minWidth: 0, flex: 1 }}>
             <div style={{ fontSize: 12.5, fontWeight: 700 }}>Colton Harris</div>
-            <div style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', fontWeight: 700, letterSpacing: '0.03em' }}>HEXT.AI · OPERATOR</div>
+            <div style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', fontWeight: 700, letterSpacing: '0.03em' }}>OPSPOT · OPERATOR</div>
           </div>
         </div>
       </div>
@@ -131,12 +131,12 @@ function Topbar({ title, breadcrumb, onCmdK }) {
   const live = useLive();
   return (
     <div style={{
-      height: 50, borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center',
+      height: 60, borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center',
       padding: '0 18px', gap: 14, background: 'var(--canvas)', position: 'sticky', top: 0, zIndex: 20,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
         {breadcrumb && <><span className="term" style={{ fontSize: 11, color: 'var(--fg-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{breadcrumb}</span><span style={{ color: 'var(--fg-disabled)' }}>›</span></>}
-        <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em' }}>{title}</span>
+        <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.01em' }}>{title}</span>
       </div>
       <button onClick={onCmdK} className="btn-h" style={{
         marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8,
