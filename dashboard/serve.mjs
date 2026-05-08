@@ -594,6 +594,33 @@ function seedWorkflowMetadata() {
 }
 
 
+function seedContentAutomationState() {
+  return {
+    status: 'ready_for_colton_review',
+    policyMode: 'placeholder_only_no_external_posts',
+    criticalArchitecturePrinciple: 'Content automation is orchestrator-led and specialist-agent executed, not one mega-agent.',
+    workflow: ['idea_intake', 'script_hooks', 'draft_assets', 'human_approval', 'publish_placeholder', 'receipts'],
+    specialists: [
+      { id: 'parent-orchestrator', name: 'Parent content orchestrator', role: 'Turns rough intent into policy, task graph, approval gates, and specialist handoffs.', tools: ['Mission Control state', 'Tell Me What You Want builder', 'approval queue', 'receipts ledger'], canDo: ['classify intent', 'ask clarifiers', 'route specialists', 'freeze local policy draft'], needsApproval: ['publishing policy', 'external account/plugin connection'] },
+      { id: 'instagram', name: 'Instagram specialist', role: 'Drafts Reels/carousels/captions from approved hooks and visual direction.', tools: ['hook bank', 'caption drafts', 'asset checklist', 'Instagram plugin placeholder'], canDo: ['draft captions', 'draft Reel beats', 'suggest hashtags'], needsApproval: ['post, DM, comment, account/profile changes'] },
+      { id: 'youtube', name: 'YouTube specialist', role: 'Drafts Shorts scripts, titles, descriptions, thumbnail notes, and long-form outlines.', tools: ['YouTube reference log', 'Shorts template', 'title/description draft', 'YouTube plugin placeholder'], canDo: ['draft Shorts', 'repurpose demos', 'title variants'], needsApproval: ['upload, schedule, public metadata changes'] },
+      { id: 'twitch-streaming', name: 'Twitch / streaming specialist', role: 'Drafts stream plans, run-of-show, segments, clips-to-capture, and post-stream checklist.', tools: ['stream runbook', 'OBS/Twitch placeholder', 'clip marker sheet'], canDo: ['draft stream plan', 'prep talking points', 'mark clip opportunities'], needsApproval: ['go live, account changes, public chat actions'] },
+      { id: 'clip-repurpose', name: 'Clip / repurpose specialist', role: 'Turns one recording or idea into platform-specific variants.', tools: ['transcript/clip input', 'Hook-Meat-CTA template', 'caption formatter', 'asset export checklist'], canDo: ['cutdown plan', 'caption variants', 'cross-platform package'], needsApproval: ['publish/export to external tools with account access'] },
+      { id: 'approval-publishing', name: 'Approval / publishing specialist', role: 'Maintains human gates, autopost policy placeholder, receipts, and kill switch.', tools: ['approval queue', 'policy ledger', 'receipts.jsonl', 'platform plugin placeholders'], canDo: ['package approval cards', 'log decisions', 'prepare upload checklist'], needsApproval: ['enable autopost, publish, spend/boost, use customer proof'] },
+    ],
+    queueCards: [
+      { id: 'intake', label: 'Idea intake', status: 'ready', output: 'structured content brief', owner: 'Parent content orchestrator' },
+      { id: 'hooks', label: 'Script + hooks', status: 'ready', output: '5 hooks + Hook/Meat/CTA draft', owner: 'YouTube or Instagram specialist' },
+      { id: 'drafts', label: 'Draft captions/video/stream plan', status: 'ready', output: 'platform draft packet', owner: 'channel specialist' },
+      { id: 'approval', label: 'Approval / autopost policy placeholder', status: 'human_gate', output: 'approve/reject/send-back card', owner: 'Approval / publishing specialist' },
+      { id: 'receipts', label: 'Receipts', status: 'ready', output: 'local run log + artifact links', owner: 'Receipt clerk' },
+    ],
+    approvalPolicy: 'Local intake, hooks, scripts, captions, stream plans, repurpose packets, checklists, and receipts may run alone. External posting, account connection, comments/DMs, boosts/spend, customer-visible claims, profile changes, or autopost policy activation require explicit Colton approval.',
+    receipts: ['dashboard/state/receipts.jsonl', '/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-CONTENT-AUTOMATION-V1-SKELETON-2026-05-08.md'],
+    updatedAt: nowIso(),
+  };
+}
+
 function seedAgentActionCatalog(state = {}) {
   const policy = state.autopilotPolicy || seedAutopilotState().policy;
   const leads = rankAuditLeads(state.leadSources || seedAutopilotState().leadSources || []);
@@ -790,6 +817,7 @@ function readMcState() {
   if (!state.outboundQueue) { state.outboundQueue = auto.queue; changed = true; }
   if (!state.leadSources) { state.leadSources = auto.leadSources; changed = true; }
   if (!state.workflowMetadata) { state.workflowMetadata = auto.workflowMetadata; changed = true; }
+  if (!state.contentAutomationV1) { state.contentAutomationV1 = seedContentAutomationState(); changed = true; }
   const researchRun = (state.automationRuns || []).find(r => r.id === 'run-research');
   if (researchRun && !researchRun.receiptPath) { researchRun.receiptPath = 'dashboard/state/receipts.jsonl'; changed = true; }
   if (researchRun && Number(researchRun.outputCount || 0) < (state.leadSources || []).length) { researchRun.outputCount = (state.leadSources || []).length; changed = true; }
