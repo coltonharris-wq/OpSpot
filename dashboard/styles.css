@@ -226,3 +226,15 @@ textarea {
 
 /* Drag reorder helpers */
 .queue-list-row { transition: transform 120ms var(--ease), box-shadow 120ms var(--ease), border-color 120ms var(--ease), background 120ms var(--ease); }
+
+.queue-drop-slot {
+  height: 48px;
+  border: 2px dashed var(--accent);
+  background: var(--accent-soft);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  box-shadow: inset 0 0 0 4px rgba(217, 95, 23, 0.08), 0 10px 24px rgba(217, 95, 23, 0.12);
+}
