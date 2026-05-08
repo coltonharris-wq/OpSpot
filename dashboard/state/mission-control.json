@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-08T14:20:00Z",
+  "updatedAt": "2026-05-08T14:50:00Z",
   "tasks": [
     {
       "id": "t10",
@@ -377,8 +377,8 @@
       "impact": 85,
       "complexity": "L",
       "age": "0m",
-      "progress": 65,
-      "notes": "Mission Control content module added: idea intake \u2192 hooks/scripts \u2192 platform drafts/stream plans \u2192 approval/autopost placeholder \u2192 receipts. External publishing remains disabled pending Colton policy approval.",
+      "progress": 72,
+      "notes": "Mission Control content module now includes YouTube HITL workflow: parent orchestrator routes bounded specialists; swipe cards cover decisions/clicks/money/logins/permissions/brand/samples/camera/API/publishing; external publishing remains disabled.",
       "createdAt": "2026-05-08T04:33:46.067Z",
       "queueRank": 35
     },
@@ -631,6 +631,24 @@
       "pr": null,
       "queueRank": 135,
       "notes": "Local-only plan/state wiring. No live posts/account changes/spend. After Colton approves swipe cards, specialists continue automatically until next human gate."
+    },
+    {
+      "id": "auto-youtube-hitl-v1",
+      "title": "YouTube HITL workflow \u2014 orchestrator \u2192 specialists",
+      "product": "p2",
+      "status": "review",
+      "agent": "parent-orchestrator",
+      "priority": "high",
+      "cost": 0,
+      "estCost": 0,
+      "source": "automation",
+      "impact": 89,
+      "complexity": "L",
+      "age": "0m",
+      "progress": 58,
+      "pr": null,
+      "queueRank": 32,
+      "notes": "Local-only YouTube workflow planned/wired: Tell Me What You Want intake \u2192 parent policy proposal \u2192 YouTube specialists for strategy, ideas, titles/thumbnails, hooks/scripts, recording, Shorts extraction, metadata/checklist \u2192 explicit upload gate. No live uploads/account changes/spend."
     }
   ],
   "deals": [
@@ -748,6 +766,201 @@
     }
   ],
   "ideas": [
+    {
+      "id": "yt-card-channel-lane",
+      "product": "p2",
+      "title": "Choose YouTube channel lane",
+      "desc": "Decide whether first videos ship under OpSpot brand, Colton founder, client/project, or stay parked until channel direction is approved.",
+      "category": "youtube-hitl",
+      "impact": 88,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "channel",
+        "brand",
+        "approval"
+      ],
+      "research": "Decision gate before public posting or channel setup.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-brand-style",
+      "product": "p2",
+      "title": "Approve YouTube brand + thumbnail style",
+      "desc": "Choose handle/name/about/banner/avatar and thumbnail style direction before any public channel changes or final thumbnails.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "brand",
+        "thumbnail",
+        "visuals"
+      ],
+      "research": "Human taste gate; specialists can draft variants locally.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-pillars",
+      "product": "p2",
+      "title": "Approve first YouTube content pillars",
+      "desc": "Proposed pillars: audit wedge, AI employees, CRM reality, dropped-work map, build-in-public receipts.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "pillars",
+        "hormozi"
+      ],
+      "research": "Locks what strategy/title/script specialists should optimize around.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-cadence",
+      "product": "p2",
+      "title": "Approve YouTube draft cadence",
+      "desc": "Proposal: 1-2 Shorts packets/day or one long-form section/day; weekly package = 1 long-form + 3-5 Shorts. Upload cadence disabled until final policy approval.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "cadence",
+        "approval"
+      ],
+      "research": "Draft cadence only, no uploads.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-samples",
+      "product": "p2",
+      "title": "Provide sample videos / proof inputs",
+      "desc": "Need 1-3 raw clips, screen recordings, voice notes, demos, or customer-safe examples to turn scripts into real production packets.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "samples",
+        "proof"
+      ],
+      "research": "Specialists continue automatically after samples are provided.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-camera-mic",
+      "product": "p2",
+      "title": "Confirm camera/mic setup",
+      "desc": "Confirm recording setup and constraints: talking-head, screen recording, whiteboard, mic choice, and where raw files land.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "camera",
+        "mic",
+        "human-click"
+      ],
+      "research": "Producer/recording specialist blocked until confirmed.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-permissions",
+      "product": "p2",
+      "title": "Approve proof + permissions policy",
+      "desc": "Decide whether customer names/logos/results/private screenshots are forbidden, allowed by case, or require written permission per asset.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "youtube",
+        "permissions",
+        "privacy",
+        "proof"
+      ],
+      "research": "Default: no customer proof without explicit approval.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-login-api",
+      "product": "p2",
+      "title": "Human click: YouTube login/API/scheduler path",
+      "desc": "Decide if/when to connect YouTube account, API, or scheduler. Default remains placeholder-only with no account changes.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "login",
+        "api",
+        "permission"
+      ],
+      "research": "External account/plugin connection gate.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-money",
+      "product": "p2",
+      "title": "Money gate: editors/tools/ads stay off",
+      "desc": "Approve or reject any paid editor, thumbnail tool, subscription, API, ad/boost, or outsourcing spend. Default: $0.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "S",
+      "tags": [
+        "youtube",
+        "spend",
+        "approval",
+        "tools"
+      ],
+      "research": "No money movement without explicit approval.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-metadata-review",
+      "product": "p2",
+      "title": "Final metadata review gate",
+      "desc": "Before upload, approve title, thumbnail, description, chapters, pinned comment, end screen/cards, schedule, and risk flags.",
+      "category": "youtube-hitl",
+      "impact": 82,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "metadata",
+        "publishing",
+        "approval"
+      ],
+      "research": "Final human review before any public mutation.",
+      "source": "automation"
+    },
+    {
+      "id": "yt-card-upload-checklist",
+      "product": "p2",
+      "title": "Explicit upload/schedule approval",
+      "desc": "Final card for upload or schedule. Approve/revise/defer. No live upload without this explicit approval.",
+      "category": "youtube-hitl",
+      "impact": 88,
+      "feasibility": 78,
+      "complexity": "M",
+      "tags": [
+        "youtube",
+        "upload",
+        "human-gate",
+        "no-live-posts"
+      ],
+      "research": "Hard stop gate for publishing specialist.",
+      "source": "automation"
+    },
     {
       "id": "ig-card-cadence",
       "product": "p2",
@@ -2507,310 +2720,364 @@
     "updatedAt": "2026-05-08T09:32:25.777283+00:00"
   },
   "contentAutomationV1": {
-    "status": "instagram_hitl_ready_for_colton_review",
-    "policyMode": "local_draft_only_no_live_posts_no_account_changes_no_spend",
-    "criticalArchitecturePrinciple": "Parent orchestrator routes to Instagram/content specialists. No mega-agent with broad tools.",
+    "status": "youtube_hitl_ready_for_colton_review",
+    "policyMode": "local_draft_only_no_uploads_no_account_changes_no_spend",
+    "criticalArchitecturePrinciple": "Parent orchestrator routes to YouTube/content specialists. No mega-agent with broad tools.",
     "workflow": [
       "tell_me_what_you_want_intake",
       "parent_workflow_policy_proposal",
       "colton_swipe_approval",
-      "instagram_strategy_packet",
-      "hooks_scripts_packet",
-      "recording_inputs",
-      "editing_repurpose_packet",
-      "approval_publishing_placeholder",
+      "youtube_strategy_packet",
+      "ideas_research_packet",
+      "title_thumbnail_packet",
+      "hooks_scripts_longform_packet",
+      "producer_recording_packet",
+      "shorts_extraction_packet",
+      "metadata_publishing_checklist",
+      "human_final_upload_gate",
       "receipts"
     ],
+    "hormoziFrame": {
+      "setup": "Audience problem \u2192 Hook + Meat + CTA \u2192 organic testing \u2192 winners become variations/ads later",
+      "ideas": "Use customer pains, OpSpot queue, demos, references, audits, and build receipts; do not start with features.",
+      "titlesThumbnails": "10 title variants + 3 thumbnail concepts per long-form; check promise clarity and unsupported claims.",
+      "hooks": "Name a costly belief/workflow leak; first 30 seconds must state why now and what the viewer gets.",
+      "scripts": "Shorts: hook \u2192 one example \u2192 AI worker action \u2192 CTA. Long-form: problem framing \u2192 examples \u2192 demo/proof \u2192 implementation path \u2192 CTA.",
+      "shortsExtraction": "Every approved long-form creates 3-7 Shorts candidates with captions and CTA variants.",
+      "proof": "Internal demos, mock examples labeled clearly, public-safe references, local build receipts; customer proof only with approval.",
+      "cta": "audit / website review / subscribe / book audit when booking path approved.",
+      "metadata": "description, tags, chapters, pinned comment, end-screen/card checklist, schedule placeholder.",
+      "cadence": "Draft 1-2 Shorts packets/day or one long-form section/day; weekly package target is 1 long-form + 3-5 Shorts, upload disabled until approved.",
+      "reviewGates": "Morning swipe decisions/clicks/samples; evening draft review when artifacts exist; final upload gate always explicit."
+    },
     "specialists": [
       {
         "id": "parent-orchestrator",
         "name": "Parent content orchestrator",
-        "role": "Turns rough intent into policy, task graph, approval gates, receipts, and specialist handoffs. Does not draft/publish everything itself.",
+        "role": "Turns rough intent into a YouTube workflow/policy proposal, routes bounded specialists, tracks approvals/receipts, and escalates only true blockers.",
         "tools": [
           "Mission Control state",
-          "Business OS/vault",
           "Tell Me What You Want builder",
-          "swipe deck",
           "approval queue",
-          "receipts ledger",
-          "OpenClaw session routing"
+          "Business OS/vault",
+          "receipts ledger"
         ],
         "canDo": [
-          "classify intent",
+          "classify rough intent",
           "propose workflow/policy",
-          "route bounded specialists",
-          "track blockers",
+          "route specialists",
+          "continue work after approved info/clicks",
           "log receipts"
         ],
         "needsApproval": [
           "publishing policy",
-          "account/plugin connection",
-          "specialist scope expansion"
+          "account/plugin/API connection",
+          "external mutation",
+          "spend",
+          "customer proof use"
         ]
       },
       {
-        "id": "instagram-strategy",
-        "name": "Instagram strategy specialist",
-        "role": "Defines Hormozi-style offer/avatar/pains/proof/CTA/cadence before production.",
+        "id": "youtube-strategy",
+        "name": "YouTube strategy specialist",
+        "role": "Defines viewer, offer angle, content pillars, cadence, series lane, and review gates.",
         "tools": [
-          "OPSPOT-PROFILE-KIT",
-          "content socials spec",
+          "OpSpot profile kit",
           "Hormozi reference note",
-          "avatar/pain bank",
-          "brand guide"
+          "YouTube reference log",
+          "content pillar template"
         ],
         "canDo": [
-          "draft content pillars",
-          "select pain/offer angle",
-          "propose cadence",
-          "write CTA bank"
+          "draft viewer/pain/offer strategy",
+          "suggest cadence",
+          "rank content pillars"
         ],
         "needsApproval": [
-          "brand positioning change",
-          "booking/public CTA",
-          "customer proof"
+          "brand/channel lane",
+          "public positioning changes",
+          "cadence that implies live posting"
+        ]
+      },
+      {
+        "id": "ideas-research",
+        "name": "Ideas / research specialist",
+        "role": "Mines Business OS, OpSpot queue, reference videos, demos, and safe public examples for topic packets.",
+        "tools": [
+          "Business OS/vault search",
+          "YouTube reference log",
+          "repo/docs search",
+          "optional public web research"
+        ],
+        "canDo": [
+          "cluster ideas",
+          "draft topic backlog",
+          "identify proof/examples"
+        ],
+        "needsApproval": [
+          "private/customer proof",
+          "new external research accounts",
+          "claims without sources"
+        ]
+      },
+      {
+        "id": "title-thumbnail",
+        "name": "Title / thumbnail specialist",
+        "role": "Creates title variants, thumbnail concepts, promise clarity checks, and click-risk notes.",
+        "tools": [
+          "title variant template",
+          "thumbnail brief template",
+          "brand kit placeholder",
+          "swipe-deck card writer"
+        ],
+        "canDo": [
+          "draft 10 titles",
+          "draft thumbnail concepts",
+          "score clarity/curiosity"
+        ],
+        "needsApproval": [
+          "final public title/thumbnail",
+          "brand visual direction",
+          "misleading or high-claim promise"
         ]
       },
       {
         "id": "hook-script",
-        "name": "Hook + script specialist",
-        "role": "Creates hooks, Reel scripts, captions, and carousel outlines from approved strategy.",
+        "name": "Hook / script specialist",
+        "role": "Builds Hormozi-style Hook + Meat + CTA, first 30 seconds, long-form outline, and Shorts scripts.",
         "tools": [
-          "hook bank",
-          "copy-review",
-          "non-ai-slop checklist",
-          "reference transcript/extractor placeholder"
+          "Hook/Meat/CTA template",
+          "script template",
+          "OpSpot proof checker",
+          "reference hook bank"
         ],
         "canDo": [
           "draft hooks",
-          "draft scripts",
-          "draft captions",
-          "rewrite generic copy"
+          "draft long-form structure",
+          "draft Shorts scripts",
+          "write CTA options"
         ],
         "needsApproval": [
-          "claims",
-          "customer specifics",
-          "final public caption"
+          "strong claims",
+          "customer stories",
+          "final publish script"
         ]
       },
       {
-        "id": "recording-producer",
-        "name": "Recording / producer specialist",
-        "role": "Creates shot lists, camera/mic prompts, sample requests, and recording checklists.",
+        "id": "producer-recording",
+        "name": "Producer / recording specialist",
+        "role": "Creates camera/mic checklist, shot list, screen recording prompts, b-roll/proof needs, and sample-video request cards.",
         "tools": [
           "camera/mic checklist",
-          "local media folder",
-          "screenshot/Peekaboo/browser placeholder"
+          "screen-recording checklist",
+          "file intake placeholder"
         ],
         "canDo": [
-          "draft shot list",
-          "request raw clips",
-          "define b-roll/screenshots"
+          "draft shot lists",
+          "request samples",
+          "prep recording prompts"
         ],
         "needsApproval": [
-          "human recording setup decisions",
-          "use of private/customer screens"
+          "camera/mic choice",
+          "raw clip access",
+          "human recording/clicks"
         ]
       },
       {
-        "id": "editor-repurpose",
-        "name": "Editor / repurpose specialist",
-        "role": "Turns raw clips/scripts into Reel beat sheets, captions, carousel and cross-post variants.",
+        "id": "editor-shorts",
+        "name": "Editor / Shorts extraction specialist",
+        "role": "Maps long-form structure into chapters, cutdowns, Shorts candidates, captions, and subtitle/style notes.",
         "tools": [
-          "video frames/extraction",
-          "transcript tool",
-          "caption formatter",
-          "local export folder"
+          "transcript/clip tooling placeholder",
+          "video-frames placeholder",
+          "shorts extraction template"
         ],
         "canDo": [
-          "prepare edit plan",
-          "draft captions/subtitles",
-          "make repurpose map"
+          "draft cutdown plan",
+          "write captions",
+          "mark chapters"
         ],
         "needsApproval": [
-          "external editor/tool spend",
-          "publishing exports to connected accounts"
+          "external editor/tool use",
+          "export/upload",
+          "private footage handling"
         ]
       },
       {
-        "id": "approval-publishing",
-        "name": "Approval / publishing specialist",
-        "role": "Creates approval cards, tracks policy, prepares schedule placeholders, and enforces kill switch.",
+        "id": "metadata-publishing",
+        "name": "Metadata / publishing specialist",
+        "role": "Prepares description, tags, chapters, pinned comment, end-screen checklist, schedule placeholder, and upload approval card.",
         "tools": [
-          "approval queue",
-          "policy ledger",
-          "receipts.jsonl",
-          "Instagram plugin placeholder"
+          "YouTube metadata template",
+          "publishing checklist",
+          "approval card",
+          "YouTube plugin placeholder disabled"
         ],
         "canDo": [
-          "package approval cards",
-          "log decisions",
-          "prepare upload/schedule checklist"
+          "draft metadata",
+          "prepare checklist",
+          "package final review card"
         ],
         "needsApproval": [
-          "post/schedule/go-live",
-          "account/profile changes",
-          "spend/boosts",
-          "comments/DMs"
+          "upload/schedule",
+          "public metadata changes",
+          "comments/replies",
+          "API/scheduler connection"
         ]
       },
       {
         "id": "compliance-proof",
         "name": "Compliance / proof checker",
-        "role": "Checks claims, customer permissions, privacy, and sourced proof before approval cards.",
+        "role": "Checks claims, customer permissions, private data, channel/account changes, spend, and scope creep.",
         "tools": [
-          "source file lookup",
-          "customer permission ledger placeholder",
-          "claim checklist"
+          "approval policy ledger",
+          "customer permission checklist",
+          "claim/source checklist"
         ],
         "canDo": [
-          "flag unsupported claims",
-          "sanitize examples",
-          "label mock workflows"
+          "flag risk",
+          "mark claims as unsupported",
+          "request proof"
         ],
         "needsApproval": [
           "customer names/logos/results",
-          "private data use"
+          "private screenshots",
+          "spend",
+          "account changes"
         ]
-      }
-    ],
-    "queueCards": [
-      {
-        "id": "ig-lane",
-        "label": "Choose Instagram lane",
-        "status": "human_gate",
-        "output": "OpSpot brand vs Colton founder vs parked",
-        "owner": "Colton"
-      },
-      {
-        "id": "ig-pillars",
-        "label": "Approve first pillars",
-        "status": "human_gate",
-        "output": "offer/avatar/pains/hooks/CTA locked for batch 1",
-        "owner": "Instagram strategy specialist"
-      },
-      {
-        "id": "ig-login-tool",
-        "label": "Login/tool path",
-        "status": "human_gate",
-        "output": "account/login/plugin/scheduler decision; no connection until approved",
-        "owner": "Approval / publishing specialist"
-      },
-      {
-        "id": "ig-recording",
-        "label": "Camera/mic + samples",
-        "status": "human_gate",
-        "output": "setup confirmed + 1-3 raw clips/screens/voice notes",
-        "owner": "Recording / producer specialist"
-      },
-      {
-        "id": "ig-drafts",
-        "label": "Draft first post packets",
-        "status": "ready_after_approval",
-        "output": "3 Reels + 1 carousel local-only draft package",
-        "owner": "Hook + script + editor specialists"
-      },
-      {
-        "id": "ig-receipts",
-        "label": "Receipts + continuation",
-        "status": "ready",
-        "output": "specialists/tools/gates/blockers logged; continue after approvals",
-        "owner": "Parent content orchestrator"
       }
     ],
     "intakeQuestions": [
       "What rough idea, customer pain, demo, clip, or reference are we starting from?",
-      "Which channel matters first: Instagram, YouTube, Twitch/stream, or multi-platform?",
-      "What should the AI draft versus what must wait for Colton?",
-      "What proof/receipt should make this safe to publish?"
+      "Should this become a Short, long-form, or both?",
+      "Which channel lane: OpSpot brand, Colton founder, client/project, or undecided?",
+      "What proof/receipt can we safely show?",
+      "What CTA should this drive: audit, comment, DM, book, subscribe, or no hard CTA?"
+    ],
+    "queueCards": [
+      {
+        "id": "intake",
+        "label": "Tell Me What You Want intake",
+        "status": "ready",
+        "output": "structured rough-intent brief",
+        "owner": "Parent content orchestrator"
+      },
+      {
+        "id": "policy",
+        "label": "Workflow + policy proposal",
+        "status": "human_gate",
+        "output": "specialists, tools, approvals, risks, next automation step",
+        "owner": "Parent content orchestrator"
+      },
+      {
+        "id": "strategy",
+        "label": "YouTube strategy packet",
+        "status": "ready",
+        "output": "viewer, pain, offer angle, cadence, pillars",
+        "owner": "YouTube strategy specialist"
+      },
+      {
+        "id": "titles",
+        "label": "Titles + thumbnails",
+        "status": "ready",
+        "output": "10 titles + 3 thumbnail concepts + click-risk check",
+        "owner": "Title / thumbnail specialist"
+      },
+      {
+        "id": "script",
+        "label": "Hooks + script",
+        "status": "ready",
+        "output": "hooks, first 30s, long-form outline, Shorts scripts, CTA",
+        "owner": "Hook / script specialist"
+      },
+      {
+        "id": "recording",
+        "label": "Recording inputs",
+        "status": "human_gate",
+        "output": "camera/mic, sample videos, screen-recording checklist",
+        "owner": "Producer / recording specialist"
+      },
+      {
+        "id": "shorts",
+        "label": "Shorts extraction",
+        "status": "ready",
+        "output": "3-7 cutdowns, captions, chapter map",
+        "owner": "Editor / Shorts extraction specialist"
+      },
+      {
+        "id": "metadata",
+        "label": "Metadata + publish checklist",
+        "status": "human_gate",
+        "output": "description, tags, chapters, pinned comment, upload approval card",
+        "owner": "Metadata / publishing specialist"
+      },
+      {
+        "id": "receipts",
+        "label": "Receipts",
+        "status": "ready",
+        "output": "files changed, artifacts, blockers, next automation step",
+        "owner": "Receipt clerk"
+      }
+    ],
+    "swipeCardRequirements": [
+      "decisions",
+      "human clicks",
+      "money",
+      "logins",
+      "permissions",
+      "brand/channel choices",
+      "sample videos",
+      "camera/mic confirmations",
+      "account/API steps",
+      "metadata review",
+      "publishing checklist"
     ],
     "approvalPolicy": {
       "canDoAlone": [
-        "draft strategy/hooks/scripts/captions/carousel outlines",
-        "create recording prompts/checklists",
-        "prepare local post packets and approval cards",
-        "log receipts",
-        "continue from approved prior decisions until gated"
+        "draft ideas/titles/thumbnails/hooks/scripts/outlines/metadata/checklists locally",
+        "create swipe cards",
+        "route specialists",
+        "continue after approved info/clicks",
+        "log receipts"
       ],
-      "needsApproval": [
-        "public posts/stories/reels",
-        "profile/account changes",
-        "posting calendar/schedule",
-        "tool/plugin account connection",
-        "customer proof",
-        "comments/DMs",
-        "booking CTA path"
+      "draftNeedsApproval": [
+        "final title/thumbnail/metadata",
+        "strong claims or customer stories",
+        "upload/schedule plan",
+        "channel/account setup plan"
       ],
-      "neverWithoutExplicitApproval": [
-        "live posts/sends/comments/DMs/follows",
-        "account creation/login mutation",
-        "spend/boosts/billing/paid tools",
-        "private/customer data exposure",
-        "irreversible destructive actions"
+      "neverWithoutApproval": [
+        "upload/publish/schedule",
+        "change public metadata or channel settings",
+        "comment/reply publicly",
+        "connect YouTube API/scheduler",
+        "login/account/2FA",
+        "spend money or hire editor",
+        "use customer names/logos/results/private screenshots"
       ]
     },
     "receipts": [
       "dashboard/state/receipts.jsonl",
-      "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-CONTENT-AUTOMATION-V1-SKELETON-2026-05-08.md",
-      "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-INSTAGRAM-HITL-WORKFLOW-2026-05-08.md",
-      "/Users/coltonharris/colton-brain-vault/Business-OS/Specs/Canonical-Command-Center/OPSPOT-CONTENT-SYSTEM-SWIPE-DECK-NEEDS-2026-05-08.md"
+      "Business-OS/OPSPOT-YOUTUBE-HITL-WORKFLOW-2026-05-08.md"
     ],
-    "updatedAt": "2026-05-08T14:20:00Z",
-    "instagramHITLSpec": "/Users/coltonharris/colton-brain-vault/Business-OS/OPSPOT-INSTAGRAM-HITL-WORKFLOW-2026-05-08.md",
-    "tellMeWhatYouWantFlow": {
-      "input": "Colton gives rough intent, clip, voice note, reference, demo, screenshot, or pain.",
-      "parentOutput": "Workflow + policy proposal with specialists, tools/plugins, gates, receipts, public/private/spend risk, artifacts, and next blocked decision.",
-      "humanSteering": "Colton approves, revises, defers, or chooses assumptions from swipe-deck cards.",
-      "automationContinuation": "After approval/info/clicks, specialist agents continue automatically until the next human gate."
-    },
-    "instagramHormoziSetup": {
-      "offer": "AI employees that do dropped business work: follow-up, intake, docs, CRM updates, customer updates, and ops receipts.",
-      "avatar": "Local SMB owners/operators who know work is slipping but do not know what AI should actually own first.",
-      "pains": [
-        "missed follow-ups",
-        "slow lead response",
-        "CRM lies because it is updated late",
-        "customer docs scattered across inbox/text/drive",
-        "owner bottleneck",
-        "AI tools that never become operations"
-      ],
-      "hooks": [
-        "You do not need another dashboard. You need the follow-up sent before the lead forgets you.",
-        "Most businesses do not have an AI problem. They have a dropped-work problem.",
-        "If your CRM only gets updated after you remember, it is already lying to you.",
-        "The first AI employee I would install for a local business is not a chatbot.",
-        "The point of AI is not fewer people. It is fewer dropped balls."
-      ],
-      "proofRules": [
-        "screen/demo receipts allowed",
-        "mock workflows must be labeled examples",
-        "customer names/logos/results require explicit permission",
-        "no revenue/time-saved claims without source"
-      ],
-      "ctaOptions": [
-        "Comment audit and I will show what I would automate first.",
-        "DM AI employee if your follow-up is leaking.",
-        "Follow for real examples of AI employees inside small businesses.",
-        "Book an OpSpot audit after booking path approval."
-      ],
-      "formats": [
-        "talking-head Reel",
-        "screen/demo Reel",
-        "carousel",
-        "proof/receipt post"
-      ],
-      "cadenceProposal": "Draft 1-3 local Instagram packages/day; publish proposal 3 Reels/week + 1 carousel/week only after approval."
-    },
+    "nextAutomationStep": "After Colton approves/steers the YouTube swipe cards, parent orchestrator dispatches YouTube strategy \u2192 title/thumbnail \u2192 hook/script specialists automatically until a recording, proof, account, money, API, or final upload gate blocks.",
+    "blockers": [
+      "YouTube channel lane undecided",
+      "camera/mic and first sample videos not confirmed",
+      "YouTube login/API/scheduler not approved",
+      "customer proof permissions not approved",
+      "final upload/publishing policy not approved"
+    ],
     "escalationTriggers": [
       "login/account/2FA/human click needed",
-      "live post/schedule/DM/comment/profile mutation requested",
+      "live upload/schedule/comment/metadata/channel mutation requested",
       "claim lacks proof",
       "customer data/proof/brand involved",
-      "money/spend/tool subscription required",
-      "brand voice/visual direction ambiguous",
+      "money/spend/tool subscription/editor cost required",
+      "brand/channel lane ambiguous",
       "camera/mic/raw sample missing",
-      "brand vs founder account undecided",
-      "specialist asks for broad tools outside scope"
+      "thumbnail/title promise feels misleading",
+      "specialist asks for broad tools outside scope",
+      "YouTube API/scheduler/account connection needed"
     ]
   },
   "customerIntake": {
