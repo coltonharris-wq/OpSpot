@@ -140,21 +140,26 @@
         }
         return 'info';
       };
+      const isMajorActivity = ({ jobName, action, status, msg = '' }) => {
+        const text = `${jobName || ''} ${action || ''} ${status || ''} ${msg}`.toLowerCase();
+        if (/failed|error|stalled|blocked|approval|needs you|customer|onboard|lead|inbound|proposal|cash|paid|closed|shipped|built|deployed|apple|lunaro|digital wave|1mc|watchdog/.test(text)) return true;
+        if (/started|heartbeat|session|chat|message|summary|wake|poll|status|receipt-only|routine|health every/.test(text)) return false;
+        return false;
+      };
       const eventToActivity = (ev) => {
         if (ev.event !== 'cron') return null;
         const p = ev.payload || {};
         const fromJobs = jobsRef.current.get(p.jobId) || {};
+        const job = p.jobName || fromJobs.name || (p.jobId || '').slice(0, 8);
+        if (!isMajorActivity({ jobName: job, action: p.action, status: p.status })) return null;
         const agentId = p.sessionKey?.split(':')?.[1] || fromJobs.agentId || null;
         const agentName = agentsRef.current.find(a => a.id === agentId)?.name || agentId || 'gateway';
-        const tok = p.usage?.total_tokens ? ` · ${(p.usage.total_tokens/1000).toFixed(1)}k tok` : '';
         const dur = p.durationMs ? ` · ${(p.durationMs/1000).toFixed(1)}s` : '';
-        const model = p.model ? ` · ${p.model}` : '';
-        const job = p.jobName || fromJobs.name || (p.jobId || '').slice(0, 8);
         return {
           id: `oc-live-${p.jobId}-${p.runAtMs || Date.now()}-${Math.random().toString(36).slice(2,6)}`,
           t: fmtT(p.runAtMs),
           agent: agentId, task: p.jobId,
-          msg: `${agentName} · ${job} ${p.action}${dur}${tok}${model}`,
+          msg: `${agentName} · ${job} ${p.action}${dur}`,
           tone: toneFor(ev),
         };
       };
@@ -293,21 +298,22 @@
             return [d.getHours(), d.getMinutes(), d.getSeconds()].map(n => String(n).padStart(2,'0')).join(':');
           };
           const toneFromStatus = (s) => s === 'ok' ? 'success' : (s === 'failed' || s === 'error') ? 'critical' : 'info';
-          const events = (runsRaw?.entries || []).slice(0, 30).map((r, i) => {
-            const agentId = r.sessionKey?.split(':')?.[1] || null;
-            const agentName = agents.find(a => a.id === agentId)?.name || agentId || 'gateway';
-            const tok = r.usage?.total_tokens ? ` · ${(r.usage.total_tokens/1000).toFixed(1)}k tok` : '';
-            const dur = r.durationMs ? ` · ${(r.durationMs/1000).toFixed(1)}s` : '';
-            const model = r.model ? ` · ${r.model}` : '';
-            return {
-              id: `oc-run-${r.jobId}-${r.runAtMs || r.ts}-${i}`,
-              t: fmtT(r.runAtMs || r.ts),
-              agent: agentId,
-              task: r.jobId,
-              msg: `${agentName} · ${r.jobName} ${r.action}${dur}${tok}${model}`,
-              tone: toneFromStatus(r.status),
-            };
-          });
+          const events = (runsRaw?.entries || [])
+            .filter(r => isMajorActivity({ jobName: r.jobName, action: r.action, status: r.status }))
+            .slice(0, 18)
+            .map((r, i) => {
+              const agentId = r.sessionKey?.split(':')?.[1] || null;
+              const agentName = agents.find(a => a.id === agentId)?.name || agentId || 'gateway';
+              const dur = r.durationMs ? ` · ${(r.durationMs/1000).toFixed(1)}s` : '';
+              return {
+                id: `oc-run-${r.jobId}-${r.runAtMs || r.ts}-${i}`,
+                t: fmtT(r.runAtMs || r.ts),
+                agent: agentId,
+                task: r.jobId,
+                msg: `${agentName} · ${r.jobName} ${r.action}${dur}`,
+                tone: toneFromStatus(r.status),
+              };
+            });
 
           // Vault leads → deal kanban cards. Best-effort mapping from
           // free-form frontmatter (status / deal_size_monthly / next_action)

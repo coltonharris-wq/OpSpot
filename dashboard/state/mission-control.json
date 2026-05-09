@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-08T23:42:46.609Z",
+  "updatedAt": "2026-05-09T00:12:17.809Z",
   "tasks": [
     {
       "id": "overnight-salvage-close-packet-2026-05-08",
@@ -1792,7 +1792,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 7:52 PM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:22 PM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1809,7 +1809,7 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 7:52 PM ET",
+          "scheduledFor": "May 8, 8:22 PM ET",
           "draft": {
             "subject": "Quick roofing follow-up audit idea",
             "body": "Hey there,\n\nI was looking at Wilmington roofing contractor placeholder and noticed a likely OpSpot fit: roofing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
@@ -1857,7 +1857,7 @@
         {
           "channel": "iMessage",
           "status": "prepared-not-sent",
-          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 8:04 PM ET. No send executed.",
+          "summary": "iMessage draft prepared for missing_contact_pending_enrichment · May 8, 8:34 PM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1874,7 +1874,7 @@
           "channel": "iMessage",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 8:04 PM ET",
+          "scheduledFor": "May 8, 8:34 PM ET",
           "draft": {
             "subject": "",
             "body": "Quick question — are missed calls or estimate follow-up still a headache at Wilmington HVAC company placeholder? I found a couple likely leaks and drafted a quick OpSpot audit angle. No pitch blast — just wanted to see if it is worth showing you."
@@ -1922,7 +1922,7 @@
         {
           "channel": "email",
           "status": "prepared-not-sent",
-          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:16 PM ET. No send executed.",
+          "summary": "email draft prepared for missing_contact_pending_enrichment · May 8, 8:46 PM ET. No send executed.",
           "at": ""
         }
       ],
@@ -1939,7 +1939,7 @@
           "channel": "email",
           "status": "prepared-not-sent",
           "contactStatus": "missing_contact_pending_enrichment",
-          "scheduledFor": "May 8, 8:16 PM ET",
+          "scheduledFor": "May 8, 8:46 PM ET",
           "draft": {
             "subject": "Quick plumbing follow-up audit idea",
             "body": "Hey there,\n\nI was looking at Wilmington plumbing company placeholder and noticed a likely OpSpot fit: plumbing fit: missed calls, estimate booking, and slow follow-up are likely revenue leaks; website still needs verification.\n\nThe angle I would test is simple: AI receptionist + estimate follow-up for missed calls and after-hours leads.\n\nIf useful, I can show you how an AI employee would answer missed/after-hours calls, book estimates, and send follow-ups without adding another hire.\n\nWorth a quick look?\n\n— Colton"
@@ -2090,7 +2090,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 7:52 PM ET",
+      "scheduledFor": "May 8, 8:22 PM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -2116,7 +2116,7 @@
       "channel": "iMessage",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 8:04 PM ET",
+      "scheduledFor": "May 8, 8:34 PM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,
@@ -2142,7 +2142,7 @@
       "channel": "email",
       "contact": "",
       "contactStatus": "missing_contact_pending_enrichment",
-      "scheduledFor": "May 8, 8:16 PM ET",
+      "scheduledFor": "May 8, 8:46 PM ET",
       "staggerMinutes": 12,
       "status": "prepared-not-sent",
       "sendEnabled": false,

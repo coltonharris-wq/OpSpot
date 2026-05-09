@@ -170,25 +170,80 @@ function ActivityRail({ height = '100%' }) {
   const live = useLive();
   const oc = (typeof useOpenClaw === 'function') ? useOpenClaw() : null;
   // Prefer real OpenClaw cron events if any have streamed in.
-  const items = (oc?.events && oc.events.length) ? oc.events : live.activity;
+  const rawItems = (oc?.events && oc.events.length) ? oc.events : live.activity;
+  const items = rawItems.map(enrichActivityItem).filter(ev => ev.major !== false);
+  const groups = [
+    { id: 'needs', label: 'Needs you', desc: 'Approvals, blockers, failures', tone: 'warning' },
+    { id: 'sales', label: 'Sales + leads', desc: 'Inbound, booked calls, cash', tone: 'success' },
+    { id: 'build', label: 'Build + onboarding', desc: 'Customer setup, PRs, shipped work', tone: 'brand' },
+    { id: 'content', label: 'Content', desc: 'Ideas, posts, scripts, channels', tone: 'purple' },
+    { id: 'ops', label: 'Ops + system', desc: 'Crons, watchdogs, health', tone: 'info' },
+  ].map(g => ({ ...g, items: items.filter(i => i.group === g.id).slice(0, g.id === 'needs' ? 8 : 6) })).filter(g => g.items.length);
+  const toneColor = (tone) => tone==='success'?'#22c55e':tone==='warning'?'#f59e0b':tone==='info'?'#3b82f6':tone==='brand'?'#f97316':tone==='purple'?'#a855f7':tone==='pink'?'#ec4899':tone==='critical'?'#ef4444':'var(--fg-tertiary)';
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height, minHeight: 0 }}>
-      <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <Icons.Activity size={14} style={{ color: 'var(--fg-secondary)' }}/>
-        <div className="section-label" style={{ flex: 1 }}>Live activity {oc?.events?.length ? '· OpenClaw' : ''}</div>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', maxHeight: '100%', minHeight: 0, overflow: 'hidden' }}>
+      <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <Icons.Activity size={14} style={{ color: 'var(--accent)' }}/>
+        <div style={{ flex: 1 }}>
+          <div className="section-label">Live activity {oc?.events?.length ? '· OpenClaw' : ''}</div>
+          <div className="term" style={{ fontSize: 10.5, color: 'var(--fg-tertiary)', marginTop: 2 }}>Major events only · live + 5s safety refresh.</div>
+        </div>
         <span className={live.paused?'':'pulse-dot ok'} style={{ width: 6, height: 6, borderRadius: 999, background: live.paused?'var(--fg-tertiary)':'#22c55e' }}/>
       </div>
-      <div style={{ flex: 1, overflow: 'auto', padding: '4px 0' }}>
-        {items.map((ev, i) => (
-          <div key={ev.id} className="fade-up" style={{ display: 'flex', gap: 10, padding: '8px 14px', borderBottom: '1px solid var(--border)', alignItems: 'flex-start' }}>
-            <span className="term" style={{ fontSize: 10.5, color: 'var(--fg-disabled)', whiteSpace: 'nowrap', paddingTop: 1, fontWeight: 700, letterSpacing: '0.02em' }}>{ev.t}</span>
-            <span style={{ width: 4, height: 4, borderRadius: 999, marginTop: 6, flexShrink: 0, background: ev.tone==='success'?'#22c55e':ev.tone==='warning'?'#f59e0b':ev.tone==='info'?'#3b82f6':ev.tone==='brand'?'#f97316':ev.tone==='purple'?'#a855f7':ev.tone==='pink'?'#ec4899':'var(--fg-tertiary)' }}/>
-            <div style={{ flex: 1, minWidth: 0, fontSize: 12.5, lineHeight: 1.4, color: 'var(--fg-primary)' }}>{ev.msg}</div>
+      <div style={{ flex: '1 1 auto', minHeight: 0, overflowY: 'auto', overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch', padding: '10px 10px 18px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {!groups.length && (
+          <div style={{ border: '1px dashed var(--border)', borderRadius: 12, padding: 14, color: 'var(--fg-secondary)', fontSize: 12.5, lineHeight: 1.4 }}>
+            <div style={{ fontWeight: 900, color: 'var(--fg-primary)', marginBottom: 4 }}>Quiet right now</div>
+            <div className="term" style={{ fontSize: 10.5 }}>Waiting for a major lead, onboarding, build, approval, watchdog, or failure event.</div>
+          </div>
+        )}
+        {groups.map(group => (
+          <div key={group.id} style={{ border: '1px solid var(--border)', borderRadius: 12, background: 'var(--canvas)', overflow: 'hidden' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 10px', borderBottom: '1px solid var(--border)', background: 'var(--surface)' }}>
+              <span style={{ width: 7, height: 7, borderRadius: 999, background: toneColor(group.tone), flexShrink: 0 }}/>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 12, fontWeight: 900, letterSpacing: '-.01em' }}>{group.label}</div>
+                <div className="term" style={{ fontSize: 10, color: 'var(--fg-tertiary)', marginTop: 1 }}>{group.desc}</div>
+              </div>
+              <Pill tone={group.tone} dot={false} mono>{group.items.length}</Pill>
+            </div>
+            {group.items.map(ev => (
+              <div key={ev.id} className="fade-up" style={{ display: 'grid', gridTemplateColumns: '44px 1fr', gap: 9, padding: '9px 10px', borderBottom: '1px solid var(--border)', alignItems: 'start' }}>
+                <span className="term mono-num" style={{ fontSize: 10.5, color: 'var(--fg-disabled)', whiteSpace: 'nowrap', paddingTop: 2, fontWeight: 800, letterSpacing: '0.02em' }}>{ev.t}</span>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
+                    <span style={{ width: 5, height: 5, borderRadius: 999, flexShrink: 0, background: toneColor(ev.tone) }}/>
+                    <span className="term" style={{ fontSize: 10, color: toneColor(ev.tone), fontWeight: 900, letterSpacing: '.07em' }}>{ev.label}</span>
+                  </div>
+                  <div style={{ fontSize: 12.5, lineHeight: 1.35, color: 'var(--fg-primary)' }}>{ev.cleanMsg}</div>
+                </div>
+              </div>
+            ))}
           </div>
         ))}
       </div>
     </div>
   );
+}
+
+function enrichActivityItem(ev) {
+  const msg = String(ev.msg || '');
+  const lower = msg.toLowerCase();
+  const major = !/heartbeat|session|chat|message|poll|routine|started/.test(lower) || /failed|error|blocked|approval|customer|onboard|lead|cash|proposal|shipped|built|deployed|watchdog/.test(lower);
+  let group = 'ops';
+  let label = 'SYSTEM';
+  if (/fail|failed|error|stalled|blocked|denied|missing|needs you|approval|review/.test(lower) || ev.tone === 'warning' || ev.tone === 'critical') {
+    group = 'needs'; label = /approval|review/.test(lower) ? 'APPROVAL' : 'CHECK';
+  } else if (/lead|reply|demo|book|call|cash|paid|proposal|subscription|inbound|outbound/.test(lower)) {
+    group = 'sales'; label = /cash|paid|subscription/.test(lower) ? 'CASH' : /lead|reply|book|demo/.test(lower) ? 'LEAD' : 'SALES';
+  } else if (/content|instagram|youtube|twitch|post|script|hook|idea/.test(lower)) {
+    group = 'content'; label = /idea/.test(lower) ? 'IDEA' : 'CONTENT';
+  } else if (/build|built|ship|shipped|pr opened|merged|onboard|customer|setup|tests passing/.test(lower)) {
+    group = 'build'; label = /onboard|customer|setup/.test(lower) ? 'ONBOARD' : /test/.test(lower) ? 'QA' : 'BUILD';
+  } else if (/cron|watchdog|gateway|agent|health|tokens|cost|compute|research/.test(lower)) {
+    group = 'ops'; label = /watchdog|cron/.test(lower) ? 'WATCHDOG' : /cost|compute|token/.test(lower) ? 'COST' : 'OPS';
+  }
+  return { ...ev, major, group, label, cleanMsg: msg.replace(/^([^·]+) · /, '').trim() };
 }
 
 // ---------------- Command Palette ----------------
